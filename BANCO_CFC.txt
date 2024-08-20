@@ -1,0 +1,92 @@
+CREATE DATABASE BANCO_CFC;
+USE BANCO_CFC;
+
+CREATE TABLE Funcionario (
+    nome VARCHAR(100),
+    cpf VARCHAR(14) PRIMARY KEY,
+    senha VARCHAR(50),
+    foto BLOB
+);
+
+CREATE TABLE Aluno (
+    email VARCHAR(100),
+    celular VARCHAR(14),
+    cpf VARCHAR(14) PRIMARY KEY,
+    nome VARCHAR(100),
+    senha VARCHAR(50),
+    foto BLOB
+);
+
+CREATE TABLE Instrutor (
+    nome VARCHAR(100),
+    cpf VARCHAR(14) PRIMARY KEY,
+    sexo CHAR(1)
+);
+
+CREATE TABLE Veiculo (
+    sigla_Categoria CHAR(1),
+    adaptado BOOLEAN,
+    placa VARCHAR(7) PRIMARY KEY,
+    modelo VARCHAR(100),
+    ano INTEGER
+);
+
+CREATE TABLE Etapa (
+    nome VARCHAR(100),
+    id CHAR(1) PRIMARY KEY
+);
+
+CREATE TABLE Curso (
+    sigla CHAR(1) PRIMARY KEY,
+    descricao VARCHAR(100),
+    categoria CHAR(1)
+);
+
+CREATE TABLE Processo (
+    curso CHAR(1),
+    cpf_aluno VARCHAR(14),
+    etapa CHAR(1),
+    data_inicio DATE,
+    id_processo INT PRIMARY KEY,
+    
+    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf),
+    FOREIGN KEY (curso) REFERENCES Curso(sigla),
+    FOREIGN KEY (etapa) REFERENCES Etapa(id)
+);
+
+CREATE TABLE Etapa_Curso (
+    etapa CHAR(1),
+    curso CHAR(1),
+    ordem_curso INT,
+    id_etapa_curso INT PRIMARY KEY,
+    
+    FOREIGN KEY (etapa) REFERENCES Etapa(id),
+    FOREIGN KEY (curso) REFERENCES Curso(sigla)
+);
+
+CREATE TABLE Curso_Instrutor (
+    cpf_instrutor VARCHAR(14),
+    sigla_curso CHAR(1),
+    id_curso_instrutor INT PRIMARY KEY,
+    dias_semana VARCHAR(7),
+    
+    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
+    FOREIGN KEY (sigla_curso) REFERENCES Curso(sigla)
+);
+
+CREATE TABLE AulaPratica (
+    cpf_instrutor VARCHAR(14),
+    cpf_aluno VARCHAR(14),
+    id_processo INT,
+    placa VARCHAR(7),
+    data_aula DATE,
+    hora TIME,
+    status_detran INT,
+    id INT PRIMARY KEY,
+    obrigatoria BOOLEAN,
+    
+    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
+    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf),
+    FOREIGN KEY (placa) REFERENCES Veiculo(placa),
+    FOREIGN KEY (id_processo) REFERENCES Processo(id_processo)
+);
