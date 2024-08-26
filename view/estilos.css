@@ -137,7 +137,7 @@ a:hover{
     display: flex;
     align-items: center;
 
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 
 nav{
@@ -178,7 +178,9 @@ nav{
     align-items: center;
 }
 
-/* .seta-divbar{
-    width: 50px;
-    height: auto;
-} */
+.seta-divbar{
+    /* padding-bottom: 20px; */
+    color: var(--Branco-azulado);
+    flex-direction: row;
+    padding: 0 10px 0 10px;
+}

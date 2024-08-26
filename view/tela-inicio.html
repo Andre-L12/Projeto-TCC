@@ -9,55 +9,51 @@
 </head>
 <body class="fundo-branco-azulado">
     <div style="display: flex;">
-    <header>
+      <header>
         <nav>
-            <div class="cabecalho-navbar">
-                <a class="logo-navbar" href="/"><img class="logo-icon-navbar" src="../img/AutoCFC.svg" alt="Logotipo AutoCFC">AutoCFC</a>
-                <div class="seta-divbar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                    </svg> 
-                </div>
+          <div class="cabecalho-navbar">
+            <a class="logo-navbar" href="/"><img class="logo-icon-navbar" src="../img/AutoCFC.svg" alt="Logotipo AutoCFC">AutoCFC</a>
+            <div class="seta-divbar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+              </svg> 
             </div>
-            <ul class="lista-navbar">
-                <li><a href="/">MENU</a></li>
-                <li><a href="/">CALENDÁRIO</a></li>
-                <li><a href="">ALUNOS</a></li>
-                <li><a href="">INSTRUTORES</a></li>
-                <li><a href="">AULAS PRÁTICAS</a></li>
-                <li><a href="">VEÍCULOS</a></li>
-                <li><a href="">PROCESSOS</a></li>
-                <li><a href="">CURSOS</a></li>
-            </ul>
+          </div>
+          <ul class="lista-navbar">
+            <li><a href="/">MENU</a></li>
+            <li><a href="/">CALENDÁRIO</a></li>
+            <li><a href="">ALUNOS</a></li>
+            <li><a href="">INSTRUTORES</a></li>
+            <li><a href="">AULAS PRÁTICAS</a></li>
+            <li><a href="">VEÍCULOS</a></li>
+            <li><a href="">PROCESSOS</a></li>
+            <li><a href="">CURSOS</a></li>
+          </ul>
         </nav>
-    </header>
-    <section style="margin: 20px;"> <button id="open-modal1" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
-        Cadastrar Instrutor
-      </button>
-      <button id="open-modal2" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
-        Cadastrar Aluno
-      </button>
-      <button id="open-modal3" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
-        Cadastrar Veículo
-      </button>
-      <button id="open-modal4" class="btn btn-primary" data-toggle="modal" data-target="#modal4">
-        Aula Prática
-      </button></section>
-    </div>
-    <!-- Button to open the modal -->
+      </header>
     
-        <!-- The Modal instrutor -->
+    <main>
+      <section style="margin: 20px;">
+        <button id="open-modal1" class="btn btn-primary" data-toggle="modal" data-target="#modal1" style="background-color: var(--Azul-Claro);">Cadastrar Instrutor</button>
+        <button id="open-modal2" class="btn btn-primary" data-toggle="modal" data-target="#modal2" style="background-color: var(--Azul-Claro);">Cadastrar Aluno</button>
+        <button id="open-modal3" class="btn btn-primary" data-toggle="modal" data-target="#modal3" style="background-color: var(--Azul-Claro);">Cadastrar Veículo</button>
+        <button id="open-modal4" class="btn btn-primary" data-toggle="modal" data-target="#modal4" style="background-color: var(--Azul-Claro);">Aula Prática</button>
+      </section>
+
+      <!-- Button to open the modal -->
+    
+        <!-- O modal de cadastro de Instrutor -->
         <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1" style="color: #007bff">Cadastro de Instrutor</h5>
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: var(--Azul-Claro)">Cadastro de Instrutor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form>
+                <form action="../control/cadastrarFuncionario.php">
                   <div class="form-group">
                     <label for="name">Nome Completo:</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -68,13 +64,13 @@
                   </div>
                   <div class="form-group">
                     <label for="sexo">Sexo:</label>
-                    <div style="display: flex; justify-items:flex-start;">
+                    <div style="display:flex; justify-items:flex-start; align-items: center;">
                       <input type="radio" id="homem" name="sexo" value="M">
-                      <label for="homem">Masculino</label>
+                      <label for="homem" style="margin: 0; padding-left: 5px;">Masculino</label> 
                     </div>
-                    <div style="display: flex; justify-items:flex-start;">
+                    <div style="display:flex; justify-items:flex-start; align-items: center;">
                       <input type="radio" id="mulher" name="sexo" value="F">
-                      <label for="mulher">Feminino</label>
+                      <label for="mulher" style="margin: 0; padding-left: 5px">Feminino</label>
                     </div>
                   </div>
                   <div class="form-group">
@@ -95,13 +91,15 @@
                   </div>
                 </form>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #007bff; color: #ffffff;">Close</button>
-                <button type="button" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Salvar</button>
+              <div class="modal-footer"> 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: var(--Cinza); color: var(--Preto-azulado); border: 0px solid var(--Cinza);">Cancelar</button>
+                <button type="input" class="btn btn-primary" style="background-color: var(--Azul-Claro); color: var(--Branco);">Salvar</button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Verificado até aqui pela Anna -->
         
         <!-- The Modal aluno -->
         <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -251,6 +249,7 @@
             </div>
           </div>
         </div>
+    </main>
 
 <!-- Bootstrap and jQuery JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
