@@ -9,7 +9,16 @@
     --Laranja: #FF9233;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 *{
+    margin: 0;
+    padding: 0;
+}
+
+p{
     margin: 0;
     padding: 0;
 }
@@ -154,12 +163,15 @@ nav{
     height: 100vh;
     flex-direction: column;
 
+    /* transform: translateX(-75%); */
+
 }
 
 .lista-navbar{
     list-style: none;
     display: flex;
     flex-direction: column;
+    padding-left: 20px;
 }
 
 .lista-navbar li{
@@ -176,11 +188,77 @@ nav{
 .cabecalho-navbar{
     display: flex;
     align-items: center;
+
+    padding-left: 20px;
 }
 
 .seta-divbar{
     /* padding-bottom: 20px; */
     color: var(--Branco-azulado);
     flex-direction: row;
-    padding: 0 10px 0 10px;
+    padding: 0 30px 0 30px;
+}
+
+.usuario-navbar{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 30px 20px 30px 20px;
+    
+}
+
+.foto-usuario{
+    display: flex;
+    width: 70px; 
+    height: 70px;
+    min-width: 70px;
+    min-height: 70px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    border: 2px solid var(--Branco-azulado); 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.foto-usuario img {
+    width: 100%;
+    height: auto;
+}
+
+.informacoes-usuario{
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 5px;
+}
+
+.nome-usuario{
+    display: flex;
+    color: var(--Branco-azulado);
+    line-height: 1;
+    align-items: start;
+}
+
+.cpf-usuario{
+    display: flex;
+    color: var(--Branco-azulado);
+    font-weight: lighter;
+    align-items: end;
+}
+.sair-usuario{
+    display: flex;
+    color: var(--Branco-azulado);
+    
+    width: 20px;
+    height: auto;
+}
+
+.botao-sair-usuario{
+    display: flex;
+    justify-content: flex-end;
+
 }
