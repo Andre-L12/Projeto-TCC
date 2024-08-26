@@ -12,6 +12,7 @@
         <div class="quadro-azul">
             <img class="logo-quadro-azul" src="../img/AutoCFC.svg" alt="Logotipo AutoCFC">
         </div>
+<!--comentario aleatorio-->
         <form action="../control/login.php" method="POST">
             <div class="formulario-login">
                 <h1 class="titulo-formulario">ENTRAR</h1>
