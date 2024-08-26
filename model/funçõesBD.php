@@ -2,7 +2,7 @@
 require "conexãoBD.php";
 static $conexão;
 function cadastrarAluno($nome,$cpf,$telefone,$email,){
-    $conect=conectarbd();
+    $conect=conectarBD();
     $query1="SELECT cpf FROM aluno WHERE cpf='$cpf'";
     $select1=mysqli_query($conect,$query1);  
     $qtd=mysqli_num_rows($select1);
@@ -22,7 +22,7 @@ function cadastrarAluno($nome,$cpf,$telefone,$email,){
     return $mensagem;
 }
 function deletarAluno($cpf){
-    $conect=conectarbd();
+    $conect=conectarBD();
     $query="DELETE FROM `novobanco_cfc`.`aluno` WHERE (`cpf` = '$cpf ');";
     $select=mysqli_query($conect,$query);
     if($select){
@@ -34,7 +34,7 @@ function deletarAluno($cpf){
     return $mensagem;
 }
 function exibirAluno($cpf){
-    $conect=conectarbd();
+    $conect=conectarBD();
     $query="SELECT * FROM `novobanco_cfc`.`aluno` WHERE (`cpf` = '$cpf ');";
     $select=mysqli_query($conect,$query);
     $resultado=mysqli_fetch_array($select);
@@ -52,7 +52,7 @@ function exibirAluno($cpf){
     return $mensagem;
 }
 function AtualizarAluno($nome1,$nome,$telefone,$email){
-    $conect=conectarbd();
+    $conect=conectarBD();
     if(($nome !="")&&($telefone !="")&&($email !="")){
         $query1="UPDATE `novobanco_cfc`.`aluno` SET nome ='$nome', telefone ='$telefone', email ='$email'  WHERE (cpf = '$nome1');";
 /*if($nome !=""){

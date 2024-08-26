@@ -1,6 +1,6 @@
 
 <?php
-function conectarbd(){
+function conectarBD(){
     $host="127.0.0.1:3306";
     $user="root";
     $senha="";
