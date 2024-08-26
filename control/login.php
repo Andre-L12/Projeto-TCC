@@ -20,7 +20,7 @@
         $qtd = mysqli_num_rows($select);
 
         if (($qtd == 1)&&($usuario==$senha)){
-            header("Location:../view/tela-inicio.html");
+            header("Location:../view/tela-inicioAluno.html");
         } else {
             $mensagem="Deu errado! Usuário ou senha incorretos";
             header("Location:../view/tela-login.php?msg=$mensagem");
@@ -31,8 +31,9 @@
         $query = "SELECT senha FROM funcionario WHERE cpf='$usuario'";
         $select = mysqli_query($conect,$query);
         $resultado = mysqli_fetch_assoc($select);
+        $password=$resultado["senha"];
 
-        if ($resultado == $senha){
+        if ($senha==$password){
             header("Location:../view/tela-inicio.html");
         } else {
             $mensagem="Deu errado! Usuário ou senha incorretos";
