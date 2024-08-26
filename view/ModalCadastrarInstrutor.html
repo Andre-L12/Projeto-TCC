@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal com Bootstrap</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Button to open the modal -->
+<button id="open-modal" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+  Cadastrar Instrutor
+</button>
+<button id="open-modal" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+  Cadastrar Aluno
+</button>
+<button id="open-modal" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
+  Cadastrar veículo
+</button>
+	
+<!-- The Modal instrutor -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #007bff">Cadastro de instrutor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Name completo:</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="text">CPF:</label>
+            <input type="text" class="form-control" id="cpf" name="cpf">
+          </div>
+          <div class="form-group">
+            <label for="sexo">sexo:</label>
+            <div style="display: flex; justify-items:flex-start;">
+              <input type="radio" class="form-control"  name="homem" value="F"><label for="homem">Masculino</label></div>
+            <div style="display: flex; justify-items:flex-start;">
+              <input type="radio" class="form-control"  name="mulher" value="M"><label for="mulher">Feminino</label></div>
+          </div>
+          <div class="form-group">
+            <label for="Curso">Curso:</label>
+            <select>
+              <option value="A habdaijbdfiabsgkbjsaf"></option>
+              <option value="Bsabdfjbashdfbhdsf"></option>
+              <option value="C asdfjasbdfjklasbfjbsd"></option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"  style="background-color: #007bff; color: #ffffff;">Close</button>
+        <button type="button" class="btn btn-primary"  style="background-color: #007bff; color: #ffffff;">c</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal aluno -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #007bff">Cadastro de aluno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Name completo:</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <div class="form-group">
+            <label for="text">CPF:</label>
+            <input type="text" class="form-control" id="message" name="message">
+          </div>
+          <div class="form-group">
+            <label for="text">Celular:</label>
+            <input type="text" class="form-control" id="message" name="message">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"  style="background-color: #007bff; color: #ffffff;">Close</button>
+        <button type="button" class="btn btn-primary"  style="background-color: #007bff; color: #ffffff;">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal veículo -->
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #007bff">Cadastro de veículo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="placa">Placa:</label>
+            <input type="text" class="form-control" id="placa" name="placa">
+          </div>
+          <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input type="text" class="form-control" id="modelo" name="modelo">
+          </div>
+          <label>Categoria:</label>
+          <select name="categoria" id="categoria"><option value="saas"></option>
+          <option value="sdasd"></option>
+          <option value="sdadsa"></option>
+          </select>
+          <label>Modificado:</label>
+          <input type="radio" value="sim">
+          <input type="radio" value="não">
+          <div class="form-group">
+            <label for="ano">Ano:</label>
+            <input type="number" class="form-control" id="ano" name="ano">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"  style="background-color: #007bff; color: #ffffff;">Close</button>
+        <button type="button" class="btn btn-primary"  style="background-color: #007bff; color: #ffffff;">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- jQuery, Popper.js, and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
