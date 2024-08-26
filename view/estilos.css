@@ -262,3 +262,18 @@ nav{
     justify-content: flex-end;
 
 }
+
+.texto-cabecalho-pagina{
+    color: var(--Azul-Claro);
+    font-weight: bold;
+}
+
+.cabecalho-pagina{
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid var(--Cinza);
+}
+
+main{
+    width: 100%;
+}
