@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoCFC - Tela início</title>
-
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body class="fundo-branco-azulado">
+    <div style="display: flex;">
     <header>
         <nav>
             <div class="cabecalho-navbar">
@@ -30,6 +31,229 @@
             </ul>
         </nav>
     </header>
-    <main></main>
+    <section style="margin: 20px;"> <button id="open-modal1" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+        Cadastrar Instrutor
+      </button>
+      <button id="open-modal2" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+        Cadastrar Aluno
+      </button>
+      <button id="open-modal3" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
+        Cadastrar Veículo
+      </button>
+      <button id="open-modal4" class="btn btn-primary" data-toggle="modal" data-target="#modal4">
+        Aula Prática
+      </button></section>
+    </div>
+    <!-- Button to open the modal -->
+    
+        <!-- The Modal instrutor -->
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: #007bff">Cadastro de Instrutor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf">
+                  </div>
+                  <div class="form-group">
+                    <label for="sexo">Sexo:</label>
+                    <div style="display: flex; justify-items:flex-start;">
+                      <input type="radio" id="homem" name="sexo" value="M">
+                      <label for="homem">Masculino</label>
+                    </div>
+                    <div style="display: flex; justify-items:flex-start;">
+                      <input type="radio" id="mulher" name="sexo" value="F">
+                      <label for="mulher">Feminino</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="curso">Curso:</label>
+                    <select id="curso" class="form-control">
+                      <option value="curso1">Curso 1</option>
+                      <option value="curso2">Curso 2</option>
+                      <option value="curso3">Curso 3</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="veiculos">Veículos:</label>
+                    <select id="veiculos" class="form-control">
+                      <option value="veiculo1">Veículo 1</option>
+                      <option value="veiculo2">Veículo 2</option>
+                      <option value="veiculo3">Veículo 3</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #007bff; color: #ffffff;">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- The Modal aluno -->
+        <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2" style="color: #007bff">Cadastro de Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf">
+                  </div>
+                  <div class="form-group">
+                    <label for="celular">Celular:</label>
+                    <input type="text" class="form-control" id="celular" name="celular">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #007bff; color: #ffffff;">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- The Modal veículo -->
+        <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel3" style="color: #007bff">Cadastro de Veículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="placa">Placa:</label>
+                    <input type="text" class="form-control" id="placa" name="placa">
+                  </div>
+                  <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo">
+                  </div>
+                  <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" class="form-control">
+                      <option value="categoria1">Categoria 1</option>
+                      <option value="categoria2">Categoria 2</option>
+                      <option value="categoria3">Categoria 3</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Modificado:</label>
+                    <div style="display: flex; justify-items:flex-start;">
+                      <input type="radio" id="modificado_sim" name="modificado" value="sim">
+                      <label for="modificado_sim">Sim</label>
+                    </div>
+                    <div style="display: flex; justify-items:flex-start;">
+                      <input type="radio" id="modificado_nao" name="modificado" value="não">
+                      <label for="modificado_nao">Não</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="ano">Ano:</label>
+                    <input type="number" class="form-control" id="ano" name="ano">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #007bff; color: #ffffff;">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- The Modal aula prática -->
+        <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel4" style="color: #007bff">Aula Prática</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="aluno">Aluno:</label>
+                    <select id="aluno" class="form-control">
+                      <option value="aluno1">Aluno 1</option>
+                      <option value="aluno2">Aluno 2</option>
+                      <option value="aluno3">Aluno 3</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="instrutor">Instrutor:</label>
+                    <select id="instrutor" class="form-control">
+                      <option value="instrutor1">Instrutor 1</option>
+                      <option value="instrutor2">Instrutor 2</option>
+                      <option value="instrutor3">Instrutor 3</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" class="form-control" id="data" name="data">
+                  </div>
+                  <div class="form-group">
+                    <label for="horario">Horário:</label>
+                    <input type="time" class="form-control" id="horario" name="horario">
+                  </div>
+                  <div class="form-group">
+                    <label for="duracao">Duração:</label>
+                    <input type="text" class="form-control" id="duracao" name="duracao">
+                  </div>
+                  <div class="form-group">
+                    <label for="veiculo">Veículo:</label>
+                    <select id="veiculo" class="form-control">
+                      <option value="veiculo1">Veículo 1</option>
+                      <option value="veiculo2">Veículo 2</option>
+                      <option value="veiculo3">Veículo 3</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #007bff; color: #ffffff;">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- Bootstrap and jQuery JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
