@@ -1,9 +1,9 @@
 <?php
-    require "../model/funçõesBD";
-    require "../model/conexaoBD.php";
+    require "../model/funcoesBD.php";
+    require_once "../model/conexaoBD.php";
     require "funçoesUteis.php";
 
-    $nome = $_POST["name"];
+    $nome = $_POST["nome"];
     $cpf = $_POST["cpf"];
     $sexo = $_POST["sexo"];
     $curso = $_POST["curso"];
@@ -18,8 +18,10 @@
         $id = criarInstrutor($nome, $cpf, $sexo);
 
         //Devolvendo mensagem
-        echo json_encode(["status" => "sucesso"]);
+        $retorna = ["status" => false];
     } else {
-        echo json_encode(["status" => "erro", "mensagem" => $msg]);
+        $retorna = ["erro" => true, "mensagem" => "<div class='alert alert-danger' role='alert'> $msg"];
     }
+
+    echo json_encode($retorna);
 ?>

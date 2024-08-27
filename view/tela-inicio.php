@@ -58,8 +58,6 @@
       <div class="cabecalho-pagina">
         <a class="texto-cabecalho-pagina" href="/">MENU</a>
       </div>
-        
-
       
       <section style="margin: 20px;">
         <button id="open-modal1" class="btn btn-primary" data-toggle="modal" data-target="#modal1" style="background-color: var(--Azul-Claro);">Cadastrar Instrutor</button>
@@ -70,40 +68,46 @@
 
       <!-- Button to open the modal -->
     
-        <!-- O modal de cadastro de Instrutor -->
-        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <!-- Modal de cadastro de Instrutor -->
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1ModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1" style="color: var(--Azul-Claro)">Cadastro de Instrutor</h5>
+                <h5 class="modal-title" id="modal1ModalLabel" style="color: var(--Azul-Claro)">Cadastro de Instrutor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form action="../control/cadastrarInstrutor.php" method="POST">
+                <form id="cadastrarInstrutorForm" action="../control/cadastrarInstrutor.php" method="POST">
+
+                  <span id="msgErroCadastrarInstrutor"></span>
+
                   <div class="form-group">
-                    <label for="name">Nome Completo:</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
                   </div>
+
                   <div class="form-group">
                     <label for="cpf">CPF:</label>
-                    <input type="text" class="form-control" id="cpf" name="cpf">
+                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF">
                   </div>
+
                   <div class="form-group">
-                    <label for="sexo">Sexo:</label>
+                    <label>Sexo:</label>
                     <div style="display:flex; justify-items:flex-start; align-items: center;">
-                      <input type="radio" id="homem" name="sexo" value="M">
-                      <label for="homem" style="margin: 0; padding-left: 5px;">Masculino</label> 
+                      <input type="radio" id="masculino" name="sexo" value="M">
+                      <label for="masculino" style="margin: 0; padding-left: 5px;">Masculino</label> 
                     </div>
                     <div style="display:flex; justify-items:flex-start; align-items: center;">
-                      <input type="radio" id="mulher" name="sexo" value="F">
-                      <label for="mulher" style="margin: 0; padding-left: 5px">Feminino</label>
+                      <input type="radio" id="feminino" name="sexo" value="F">
+                      <label for="feminino" style="margin: 0; padding-left: 5px">Feminino</label>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="curso">Curso:</label>
-                    <select id="curso" class="form-control">
+                    <select name="curso" id="curso" class="form-control">
                       <option value="curso0"></option>
                       <option value="curso1">Curso 1</option>
                       <option value="curso2">Curso 2</option>
@@ -119,42 +123,21 @@
                       <option value="veiculo3">Veículo 3</option>
                     </select>
                   </div> -->
+
+                  <div id="erroMensagem" class="text-danger"></div>
+                
+                  <div class="modal-footer"> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: var(--Cinza); color: var(--Preto-azulado); border: 0px solid var(--Cinza);">Cancelar</button>
+                    <button type="submit" class="btn btn-outline-success bt-sm" style="background-color: var(--Azul-Claro); color: var(--Branco);" id="cadastrarInstrutorBotao" value="Cadastrar">Salvar</button>
+                  </div>
                 </form>
-              </div>
-              <div class="modal-footer"> 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: var(--Cinza); color: var(--Preto-azulado); border: 0px solid var(--Cinza);">Cancelar</button>
-                <button type="submit" class="btn btn-primary" style="background-color: var(--Azul-Claro); color: var(--Branco);">Salvar</button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Código JS para retornar mensagem -->
-          <!-- <script>
-            $(document).ready(function() {
-              $("#cadastroForm").on("submit", function(event) {
-                  event.preventDefault(); // Impede o envio padrão do formulário
-
-                  $.ajax({
-                      type: "POST",
-                      url: $(this).attr("action"),
-                      data: $(this).serialize(),
-                      dataType: "json",
-                      success: function(response) {
-                          if (response.status === "sucesso") {
-                              // Ocultar o modal
-                              $('#cadastroModal').modal('hide');
-                              // Exibir a notificação de sucesso
-                              $("#notificacaoSucesso").fadeIn().delay(3000).fadeOut();
-                          } else if (response.status === "erro") {
-                              // Exibir erros no modal
-                              $("#erroMensagem").html(response.mensagens.join("<br>"));
-                          }
-                      }
-                  });
-              });
-            });
-          </script> -->
-
+        <div id="notificacaoSucesso" class="alert alert-success" style="display: none;" role="alert">
+          Cadastro realizado com sucesso!
         </div>
 
         <!-- Verificado até aqui pela Anna -->
@@ -309,8 +292,42 @@
         </div>
     </main>
 
-<!-- Bootstrap and jQuery JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Código JS para retornar mensagem
+  <script>
+    $(document).ready(function() {
+      $("#cadastrarInstrutorForm").on("submit", function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        $.ajax({
+              type: "POST",
+              url: $(this).attr("action"),
+              data: $(this).serialize(),
+              dataType: "json",
+              success: function(response) {
+                  if (response.status === "sucesso") {
+                      // Ocultar o modal
+                      $('#modal1').modal('hide');
+                      // Exibir a notificação de sucesso
+                      $("#notificacaoSucesso").fadeIn().delay(3000).fadeOut();
+                  } else if (response.status === "erro") {
+                      // Exibir erros no modal
+                      $("#erroMensagem").html(response.mensagens.join("<br>"));
+                      $('#modal1').modal('show'); // Garantir que o modal permaneça visível
+                  }
+              }
+          },
+          error: function(xhr, status, error) {
+                // Mostrar erro de requisição se algo der errado
+                console.error("Erro na requisição AJAX:", status, error);
+          }
+          
+          );
+      });
+    });
+  </script> -->
+
+      <!-- Bootstrap and jQuery JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

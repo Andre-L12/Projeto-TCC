@@ -1,5 +1,5 @@
 <?php
-require "conexãoBD.php";
+require "conexaoBD.php";
 static $conexão;
 function cadastrarAluno($nome,$cpf,$telefone,$email,){
     $conect=conectarBD();
