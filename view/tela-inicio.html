@@ -103,11 +103,12 @@
                   </div>
                   <div class="form-group">
                     <label for="curso">Curso:</label>
-                    <select id="curso" class="form-control">
-                      <option value="curso0"></option>
-                      <option value="curso1">Curso 1</option>
-                      <option value="curso2">Curso 2</option>
-                      <option value="curso3">Curso 3</option>
+                    <select name="curso" class="form-control">
+                      <?php
+                        require "../model/funcoesBD.php";
+                        $options = ComboBoxCurso();              
+                        echo $options;
+                      ?>
                     </select>
                   </div>
                   <!-- <div class="form-group">
@@ -220,9 +221,11 @@
                   <div class="form-group">
                     <label for="categoria">Categoria:</label>
                     <select id="categoria" class="form-control">
-                      <option value="categoria1">Categoria 1</option>
-                      <option value="categoria2">Categoria 2</option>
-                      <option value="categoria3">Categoria 3</option>
+                      <option value="categoria1">A</option>
+                      <option value="categoria2">B</option>
+                      <option value="categoria3">C</option>
+                      <option value="categoria3">D</option>
+                      <option value="categoria3">E</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -264,18 +267,22 @@
                 <form>
                   <div class="form-group">
                     <label for="aluno">Aluno:</label>
-                    <select id="aluno" class="form-control">
-                      <option value="aluno1">Aluno 1</option>
-                      <option value="aluno2">Aluno 2</option>
-                      <option value="aluno3">Aluno 3</option>
+                    <select name="aluno" class="form-control">
+                      <?php
+                        require "../model/funcoesBD.php";
+                        $options = ComboBoxAluno();              
+                        echo $options;
+                      ?>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="instrutor">Instrutor:</label>
-                    <select id="instrutor" class="form-control">
-                      <option value="instrutor1">Instrutor 1</option>
-                      <option value="instrutor2">Instrutor 2</option>
-                      <option value="instrutor3">Instrutor 3</option>
+                    <select name="cpf_instrutor" class="form-control">
+                      <?php
+                        require "../model/funcoesBD.php";
+                        $options = ComboBoxInstrutor();              
+                        echo $options;
+                      ?>
                     </select>
                   </div>
                   <div class="form-group">
@@ -292,10 +299,12 @@
                   </div>
                   <div class="form-group">
                     <label for="veiculo">Veículo:</label>
-                    <select id="veiculo" class="form-control">
-                      <option value="veiculo1">Veículo 1</option>
-                      <option value="veiculo2">Veículo 2</option>
-                      <option value="veiculo3">Veículo 3</option>
+                    <select name="placa" class="form-control">
+                      <?php
+                        require "../model/funcoesBD.php";
+                        $options = ComboBoxVeiculo();              
+                        echo $options;
+                      ?>
                     </select>
                   </div>
                 </form>

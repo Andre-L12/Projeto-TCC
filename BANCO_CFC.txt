@@ -37,13 +37,13 @@ CREATE TABLE Etapa (
 );
 
 CREATE TABLE Curso (
-    sigla CHAR(1) PRIMARY KEY,
+    sigla VARCHAR(5) PRIMARY KEY,
     descricao VARCHAR(100),
-    categoria CHAR(1)
+    categoria CHAR(2)
 );
 
 CREATE TABLE Processo (
-    curso CHAR(1),
+    curso VARCHAR(5),
     cpf_aluno VARCHAR(14),
     etapa CHAR(1),
     data_inicio DATE,
@@ -90,3 +90,19 @@ CREATE TABLE AulaPratica (
     FOREIGN KEY (placa) REFERENCES Veiculo(placa),
     FOREIGN KEY (id_processo) REFERENCES Processo(id_processo)
 );
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação Categoria A', 'A');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHB', 'Primeira Habilitação Categoria B', 'B');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHAB', 'Primeira Habilitação Categoria AB', 'AB');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RA', 'Reciclagem Categoria A', 'A');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RB', 'Reciclagem Categoria B', 'B');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RAB', 'Reciclagem AB', 'AB');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RC', 'Reciclagem C', 'C');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RD', 'Reciclagem Categoria D', 'D');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RE', 'Reciclagem Categoria E', 'E');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADA', 'Adição Categoria A', 'A');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADB', 'Adição Categoria B', 'B');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADC', 'Adição Categoria C', 'C');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('MD', 'Mudança Categoria D', 'D');
+INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ME', 'Mudança Categoria E', 'E');
+
+
