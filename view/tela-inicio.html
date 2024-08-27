@@ -81,7 +81,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="../control/cadastrarFuncionario.php">
+                <form action="../control/cadastrarInstrutor.php" method="POST">
                   <div class="form-group">
                     <label for="name">Nome Completo:</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -104,27 +104,57 @@
                   <div class="form-group">
                     <label for="curso">Curso:</label>
                     <select id="curso" class="form-control">
+                      <option value="curso0"></option>
                       <option value="curso1">Curso 1</option>
                       <option value="curso2">Curso 2</option>
                       <option value="curso3">Curso 3</option>
                     </select>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="veiculos">Veículos:</label>
                     <select id="veiculos" class="form-control">
+                      <option value="veiculo0"></option>
                       <option value="veiculo1">Veículo 1</option>
                       <option value="veiculo2">Veículo 2</option>
                       <option value="veiculo3">Veículo 3</option>
                     </select>
-                  </div>
+                  </div> -->
                 </form>
               </div>
               <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: var(--Cinza); color: var(--Preto-azulado); border: 0px solid var(--Cinza);">Cancelar</button>
-                <button type="input" class="btn btn-primary" style="background-color: var(--Azul-Claro); color: var(--Branco);">Salvar</button>
+                <button type="submit" class="btn btn-primary" style="background-color: var(--Azul-Claro); color: var(--Branco);">Salvar</button>
               </div>
             </div>
           </div>
+
+          <!-- Código JS para retornar mensagem -->
+          <!-- <script>
+            $(document).ready(function() {
+              $("#cadastroForm").on("submit", function(event) {
+                  event.preventDefault(); // Impede o envio padrão do formulário
+
+                  $.ajax({
+                      type: "POST",
+                      url: $(this).attr("action"),
+                      data: $(this).serialize(),
+                      dataType: "json",
+                      success: function(response) {
+                          if (response.status === "sucesso") {
+                              // Ocultar o modal
+                              $('#cadastroModal').modal('hide');
+                              // Exibir a notificação de sucesso
+                              $("#notificacaoSucesso").fadeIn().delay(3000).fadeOut();
+                          } else if (response.status === "erro") {
+                              // Exibir erros no modal
+                              $("#erroMensagem").html(response.mensagens.join("<br>"));
+                          }
+                      }
+                  });
+              });
+            });
+          </script> -->
+
         </div>
 
         <!-- Verificado até aqui pela Anna -->

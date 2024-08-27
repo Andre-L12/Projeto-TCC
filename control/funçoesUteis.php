@@ -1,0 +1,91 @@
+<?php
+    function validarInstrutor($nome, $cpf, $sexo){
+        $msgErro = "";
+
+        $msgErro = $msgErro . validarNome($nome);
+
+        $msgErro = $msgErro . validarCPF($nome);
+
+        if (empty($sexo)){
+            $msgErro = $msgErro . "Selecione o sexo. <br>";
+        }
+
+        return $msgErro;
+    }
+
+    function validarNome($nome) {
+        
+        // Verificar se NOME está preenchido:
+        if (empty($nome)){
+            return "Informe o nome.<br>";
+        } else {
+            // Verificar o comprimento do nome:
+            $minLength = 6; //Para garantir que tenha nome e sobrenome
+            $maxLength = 50;
+            if (strlen($nome) < $minLength || strlen($nome) > $maxLength) {
+                return "O nome deve ter entre $minLength e $maxLength caracteres.<br>";
+            } 
+            
+            // Verificar se tem mais de um nome:
+            else if (!strpos($nome, " ")) {
+                return "Digite o nome completo.<br>";
+            }
+        
+            // Verificar caracteres válidos:
+            else if (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕçÇñÑ' -]+$/u", $nome)) {
+                return "O nome contém caracteres inválidos.<br>";
+            } 
+            // Nome validado
+            else {
+                return ""; 
+            }
+            
+        }
+
+    }
+    function tratarNome($nome){
+        // - Remover espaços antes e depois do nome:
+        $nome = trim($nome);
+        // - Remover múltiplos espaços consecutivos de nome:
+        $nome = preg_replace('/\s+/', ' ', $nome);
+
+        return $nome;
+    }
+
+    function validarCPF($cpf){
+        
+        // Verificar se CPF está preenchido:
+        if (empty($cpf)){
+            return "Informe o CPF.<br>";
+        } else {
+            // Remover caracteres não numéricos:
+            $cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+            // Verificar se o CPF possui 11 dígitos
+            if (strlen($cpf) != 11) {
+                return "Informe um CPF válido.<br>";
+            }
+
+            // Verificar se todos os dígitos são iguais (ex: 111.111.111-11)
+            if (preg_match('/(\d)\1{10}/', $cpf)) {
+                return "Informe um CPF válido.<br>";
+            }
+
+            // Calcular os dígitos verificadores
+            for ($t = 9; $t < 11; $t++) {
+                $d = 0;
+                for ($c = 0; $c < $t; $c++) {
+                    $d += $cpf[$c] * (($t + 1) - $c);
+                }
+                $d = ((10 * $d) % 11) % 10;
+                if ($cpf[$c] != $d) {
+                    return "Informe um CPF válido.<br>";
+                }
+            }
+        }
+
+        // CPF validado
+        return "";
+
+    }
+?>
