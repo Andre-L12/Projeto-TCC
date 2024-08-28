@@ -3,8 +3,9 @@ USE BANCO_CFC;
 
 CREATE TABLE Funcionario (
     nome VARCHAR(100),
-    cpf VARCHAR(14) PRIMARY KEY,
+    cpf VARCHAR(14),
     senha VARCHAR(50),
+    matricula varchar(7) PRIMARY KEY,
     foto BLOB
 );
 
@@ -29,6 +30,13 @@ CREATE TABLE Veiculo (
     placa VARCHAR(7) PRIMARY KEY,
     modelo VARCHAR(100),
     ano INTEGER
+);
+CREATE TABLE veiculo_instrutor (
+	cpf_instrutor varchar(11),
+    placa_veiculo varchar(7),
+    
+    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
+    FOREIGN KEY (placa_veiculo) REFERENCES Veiculo(placa)
 );
 
 CREATE TABLE Etapa (
