@@ -1,7 +1,7 @@
 <?php 
 require "conexãoBD.php";
 static $conexão;
-function ComboBoxCurso() {
+function comboBoxCurso() {
     $sql = "SELECT * FROM curso";
     $conexao = conectarBD();    
     $resultado = mysqli_query($conexao, $sql );
