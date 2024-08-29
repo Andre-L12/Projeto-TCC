@@ -81,8 +81,6 @@
               <div class="modal-body">
                 <form id="cadastrarInstrutorForm" action="../control/cadastrarInstrutor.php" method="POST">
 
-                  <span id="msgErroCadastrarInstrutor"></span>
-
                   <div class="form-group">
                     <label for="nome">Nome Completo:</label>
                     <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
@@ -107,20 +105,12 @@
 
                   <div class="form-group">
                     <label for="curso">Curso:</label>
-<<<<<<< HEAD:view/tela-inicio.php
-                    <select name="curso" id="curso" class="form-control">
-                      <option value="curso0"></option>
-                      <option value="curso1">Curso 1</option>
-                      <option value="curso2">Curso 2</option>
-                      <option value="curso3">Curso 3</option>
-=======
                     <select name="curso" class="form-control">
                       <?php
                         require "../model/funcoesBD.php";
                         $options = ComboBoxCurso();              
                         echo $options;
                       ?>
->>>>>>> 11c04632a22f7583898c38a433efe0b8ca367bad:view/tela-inicio.html
                     </select>
                   </div>
                   <!-- <div class="form-group">
@@ -308,40 +298,6 @@
           </div>
         </div>
     </main>
-
-  <!-- Código JS para retornar mensagem
-  <script>
-    $(document).ready(function() {
-      $("#cadastrarInstrutorForm").on("submit", function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
-
-        $.ajax({
-              type: "POST",
-              url: $(this).attr("action"),
-              data: $(this).serialize(),
-              dataType: "json",
-              success: function(response) {
-                  if (response.status === "sucesso") {
-                      // Ocultar o modal
-                      $('#modal1').modal('hide');
-                      // Exibir a notificação de sucesso
-                      $("#notificacaoSucesso").fadeIn().delay(3000).fadeOut();
-                  } else if (response.status === "erro") {
-                      // Exibir erros no modal
-                      $("#erroMensagem").html(response.mensagens.join("<br>"));
-                      $('#modal1').modal('show'); // Garantir que o modal permaneça visível
-                  }
-              }
-          },
-          error: function(xhr, status, error) {
-                // Mostrar erro de requisição se algo der errado
-                console.error("Erro na requisição AJAX:", status, error);
-          }
-          
-          );
-      });
-    });
-  </script> -->
 
       <!-- Bootstrap and jQuery JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
