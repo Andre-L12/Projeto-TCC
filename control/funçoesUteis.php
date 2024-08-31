@@ -4,7 +4,7 @@
 
         $msgErro = $msgErro . validarNome($nome);
 
-        $msgErro = $msgErro . validarCPF($nome);
+        $msgErro = $msgErro . validarCPF($cpf);
 
         if (empty($sexo)){
             $msgErro = $msgErro . "Selecione o sexo. <br>";
@@ -63,12 +63,12 @@
 
             // Verificar se o CPF possui 11 dígitos
             if (strlen($cpf) != 11) {
-                return "Informe um CPF válido.<br>";
+                return "Informe um CPF válido 1. '$cpf' <br>";
             }
 
             // Verificar se todos os dígitos são iguais (ex: 111.111.111-11)
             if (preg_match('/(\d)\1{10}/', $cpf)) {
-                return "Informe um CPF válido.<br>";
+                return "Informe um CPF válido 2.<br>";
             }
 
             // Calcular os dígitos verificadores
@@ -79,7 +79,7 @@
                 }
                 $d = ((10 * $d) % 11) % 10;
                 if ($cpf[$c] != $d) {
-                    return "Informe um CPF válido.<br>";
+                    return "Informe um CPF válido 3.<br>";
                 }
             }
         }

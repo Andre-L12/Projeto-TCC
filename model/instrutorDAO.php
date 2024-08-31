@@ -6,9 +6,22 @@
 
         mysqli_query($conexao, $sql);
 
-        $id = mysqli_insert_id($conexao);
+        return $nome; 
+    }
 
-        return $id; 
+    function instrutorExiste($cpf){
+        $conexao = conectarBD();
+        $sql = "SELECT * FROM `instrutor` WHERE cpf='$cpf';";
+
+        $selecao = mysqli_query($conexao,$sql);
+        $resultado = mysqli_fetch_assoc($selecao);
+        $qtd = (int) mysqli_num_rows($selecao);
+
+        if ($qtd !== 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // function excluirInstutor{

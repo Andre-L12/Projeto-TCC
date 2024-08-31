@@ -1,13 +1,20 @@
 <?php
-    require "../model/funcoesBD.php";
-    require_once "../model/conexaoBD.php";
     require "funçoesUteis.php";
+    require "../model/instrutorDAO.php";
 
     $nome = $_POST["txtNome"];
     $cpf = $_POST["txtCPF"];
     $sexo = $_POST["sexo"];
 
-    $msg = validarInstrutor($nome, $cpf, $sexo);
+    $msg = "";
+
+    $instrutorExiste = instrutorExiste($cpf);
+
+    if (!$instrutorExiste){
+        $msg = validarInstrutor($nome, $cpf, $sexo);
+    } else {
+        $msg = "Esse instrutor já está cadastrado.";
+    }
 
     if(empty($msg)){
         //Tratando dados
@@ -19,7 +26,7 @@
         //Devolvendo mensagem
         header("Location:../view/base/cadastrar-instrutor.php?msg=Cadastro de instrutor $id realizado com sucesso.");
     } else {
-        header("Location:../view/base/cadastrar-instrutor.php?msg=$msgErro");
+        header("Location:../view/base/cadastrar-instrutor.php?msg=$msg");
     }
 
 ?>
