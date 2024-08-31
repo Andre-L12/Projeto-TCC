@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Instrutor</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bibliotecas usadas para máscara no campo CPF -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 </head>
 <body>
     <div>
@@ -49,6 +52,7 @@
                     </select>
                     <button type="button" id="selecionarCurso">Selecionar</button>
                 </div> -->
+
                 <div>
                     <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
                 </div>
@@ -56,6 +60,13 @@
             </div>
         </form>
     </div>
+
+    <script>
+        // Máscara para CPF
+        $(document).ready(function(){
+            $('#cpf').mask('000.000.000-00');
+        });
+    </script>
 
     <?php
         // Exibir a mensagem de ERRO caso ocorra
@@ -65,32 +76,6 @@
             echo "<FONT color=red>$mensagem</FONT>";
         }
     ?>
-
-    <!-- <script>
-        $(document).ready(function(){
-            $('#curso').on('keyup', function(){ //keyup = função é acionada ao digitar no campo
-                var textoCampo = $(this).val().replace(/\s/g, '');
-                if (textoCampo !== ""){
-                    $.ajax({
-                        url:'../../control/cadastrarInstrutor.php',
-                        type: 'POST',
-                        data: {textoCampo: textoCampo},
-                        dataType: 'json',
-                        success: function(data){
-                            //Encontrou cursos
-                            $('#cursosOpcoes').html(data.cursosOpcoes);
-                        },
-                        error:function(){
-                            //Não encontrou cursos
-                            $('#cursosOpcoes').html("");
-                        }
-                    })
-                }
-            });
-        });
-    </script> -->
-
-
 
 </body>
 </html>
