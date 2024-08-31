@@ -98,19 +98,19 @@ CREATE TABLE AulaPratica (
     FOREIGN KEY (placa) REFERENCES Veiculo(placa),
     FOREIGN KEY (id_processo) REFERENCES Processo(id_processo)
 );
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação Categoria A', 'A');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHB', 'Primeira Habilitação Categoria B', 'B');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHAB', 'Primeira Habilitação Categoria AB', 'AB');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RA', 'Reciclagem Categoria A', 'A');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RB', 'Reciclagem Categoria B', 'B');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RAB', 'Reciclagem AB', 'AB');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RC', 'Reciclagem C', 'C');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RD', 'Reciclagem Categoria D', 'D');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RE', 'Reciclagem Categoria E', 'E');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADA', 'Adição Categoria A', 'A');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADB', 'Adição Categoria B', 'B');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADC', 'Adição Categoria C', 'C');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('MD', 'Mudança Categoria D', 'D');
-INSERT INTO `novobanco_cfc`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ME', 'Mudança Categoria E', 'E');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação A', 'A');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHB', 'Primeira Habilitação B', 'B');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHAB', 'Primeira Habilitação AB', 'AB');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RA', 'Reciclagem A', 'A');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RB', 'Reciclagem B', 'B');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RAB', 'Reciclagem AB', 'AB');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RC', 'Reciclagem C', 'C');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RD', 'Reciclagem D', 'D');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('RE', 'Reciclagem E', 'E');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADA', 'Adição de Categoria A', 'A');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADB', 'Adição de Categoria B', 'B');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADC', 'Adição de Categoria C', 'C');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('MD', 'Mudança de Categoria D', 'D');
+INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ME', 'Mudança de Categoria E', 'E');
 
 

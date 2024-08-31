@@ -43,22 +43,28 @@
                 </div>
 
                 <!-- Selecionar Curso -->
-                <div>
+                <!-- <div>
                     <label for="curso">Atua nos cursos:</label>
-                    <select name="curso">
-                        <?php
-                            require "../../model/cursoDAO.php";
-                            $options = comboBoxCursos();
-                            echo $options;
-                        ?>
+                    <select name="curso" id="opcoesCurso">
                     </select>
-                    <button type="button">Selecionar</button>
+                    <button type="button" id="selecionarCurso">Selecionar</button>
+                </div> -->
+                <div>
+                    <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
                 </div>
+                
             </div>
         </form>
     </div>
 
-
+    <?php
+        // Exibir a mensagem de ERRO caso ocorra
+        
+        if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
+            $mensagem = $_GET["msg"]; 
+            echo "<FONT color=red>$mensagem</FONT>";
+        }
+    ?>
 
     <!-- <script>
         $(document).ready(function(){

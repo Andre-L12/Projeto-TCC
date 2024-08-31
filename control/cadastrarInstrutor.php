@@ -3,10 +3,9 @@
     require_once "../model/conexaoBD.php";
     require "funçoesUteis.php";
 
-    $nome = $_POST["nome"];
-    $cpf = $_POST["cpf"];
+    $nome = $_POST["txtNome"];
+    $cpf = $_POST["txtCPF"];
     $sexo = $_POST["sexo"];
-    $curso = $_POST["curso"];
 
     $msg = validarInstrutor($nome, $cpf, $sexo);
 
@@ -18,10 +17,9 @@
         $id = criarInstrutor($nome, $cpf, $sexo);
 
         //Devolvendo mensagem
-        $retorna = ["status" => false];
+        header("Location:../view/base/cadastrar-instrutor.php?msg=Cadastro de instrutor $id realizado com sucesso.");
     } else {
-        $retorna = ["erro" => true, "mensagem" => "<div class='alert alert-danger' role='alert'> $msg"];
+        header("Location:../view/base/cadastrar-instrutor.php?msg=$msgErro");
     }
 
-    echo json_encode($retorna);
 ?>
