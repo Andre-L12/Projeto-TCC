@@ -25,11 +25,12 @@ CREATE TABLE Instrutor (
 );
 
 CREATE TABLE Veiculo (
-    sigla_Categoria CHAR(1),
+    sigla_categoria CHAR(3),
     adaptado BOOLEAN,
     placa VARCHAR(7) PRIMARY KEY,
-    modelo VARCHAR(100),
-    ano INTEGER
+    marca VARCHAR(30)
+    modelo VARCHAR(30),
+    ano YEAR(4)
 );
 CREATE TABLE veiculo_instrutor (
 	cpf_instrutor varchar(11),

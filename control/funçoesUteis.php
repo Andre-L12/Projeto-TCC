@@ -13,6 +13,74 @@
         return $msgErro;
     }
 
+    function validarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano){
+        
+        $msgErro = "";
+
+        // Verificar se CATEGORIA está preenchida:
+        if (empty($sigla)){
+            $msgErro = "Informe a categoria do veículo.<br>";
+        }
+
+        // Verificar se o radio ADAPTADO foi marcado:
+        if (empty($adaptado)){
+            $msgErro = $msgErro . "Informe se o veículo é adaptado.<br>";
+        }
+
+        // Verificar se PLACA é válida:
+        $msgErro = $msgErro . validarPlaca($placa);
+
+        // Verificar se MARCA está preenchida:
+        if (empty($marca)){
+            $msgErro = $msgErro . "Informe a marca do veículo.<br>";
+        }
+
+        // Verificar se MODELO está preenchido:
+        if (empty($modelo)){
+            $msgErro = $msgErro . "Informe o modelo do veículo.<br>";
+        }
+
+        // Verificar se ANO é válido:
+        $msgErro = $msgErro . verificarAno($ano);
+
+        return $msgErro;
+
+    }
+
+    function verificarAno($ano){
+        // Verifica se ANO está preenchido:
+        if (empty($ano)){
+            return "Informe o ano de fabricação do veículo.<br>";
+        } else {
+            // Verifica se ANO está entre 1900 e o ano atual:
+            if ($ano < 1900 || $ano > date("Y")){
+                return "Informe um ano de fabricação válido";
+            } else {
+                return "";
+            }
+        }
+
+    }
+
+
+    function validarPlaca($placa){
+
+        // Verifica se PLACA está preenchido:
+        if(empty($placa)){
+            return "Informe a placa do veículo.<br>";
+        }
+
+        // Remover possíveis espaços em branco antes e depois da placa:
+        $placa = trim($placa);
+
+        // Verificar se a placa corresponde ao formato Mercosul
+        if (preg_match('/^[A-Z]{3}\d[A-Z]\d{2}$/', $placa)) {
+            return "";
+        } else {
+            return "A placa informada não corresponde ao formato Mercosul.<br>";
+        }
+    }
+
     function validarNome($nome) {
         
         // Verificar se NOME está preenchido:
@@ -63,12 +131,12 @@
 
             // Verificar se o CPF possui 11 dígitos
             if (strlen($cpf) != 11) {
-                return "Informe um CPF válido 1. '$cpf' <br>";
+                return "Informe um CPF válido. '$cpf' <br>";
             }
 
             // Verificar se todos os dígitos são iguais (ex: 111.111.111-11)
             if (preg_match('/(\d)\1{10}/', $cpf)) {
-                return "Informe um CPF válido 2.<br>";
+                return "Informe um CPF válido.<br>";
             }
 
             // Calcular os dígitos verificadores
@@ -79,7 +147,7 @@
                 }
                 $d = ((10 * $d) % 11) % 10;
                 if ($cpf[$c] != $d) {
-                    return "Informe um CPF válido 3.<br>";
+                    return "Informe um CPF válido.<br>";
                 }
             }
         }

@@ -24,9 +24,9 @@
         $id = criarInstrutor($nome, $cpf, $sexo);
 
         //Devolvendo mensagem
-        header("Location:../view/base/cadastrar-instrutor.php?msg=Cadastro de instrutor $id realizado com sucesso.");
+        header("Location:../view/base/form-cadastrar-instrutor.php?msg=Cadastro de instrutor $id realizado com sucesso.");
     } else {
-        header("Location:../view/base/cadastrar-instrutor.php?msg=$msg");
+        header("Location:../view/base/form-cadastrar-instrutor.php?msg=$msg");
     }
 
 ?>
