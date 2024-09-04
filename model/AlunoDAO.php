@@ -1,13 +1,18 @@
 <?php
 require "conexaoBD.php";
 static $conexão;
-function cadastrarAluno($nome,$cpf,$telefone,$email,){
+function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     $conect=conectarBD();
+
+    $tamanhoImg = $foto["size"]; 
+    $arqAberto = fopen ( $foto["tmp_name"], "r" );
+    $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
+
     $query1="SELECT cpf FROM aluno WHERE cpf='$cpf'";
     $select1=mysqli_query($conect,$query1);  
     $qtd=mysqli_num_rows($select1);
     if($qtd == 0){
-        $query2="INSERT INTO `novobanco_cfc`.`aluno` (`nome`, `cpf`, `telefone`, `email`) VALUES ('$nome', '$cpf', '$telefone', '$email');";
+        $query2="INSERT INTO `banco_cfc`.`aluno` (`email`, `celular`, `cpf`, `nome`,`foto`) VALUES ('$email', '$celular', '$cpf', '$nome', '$midia');";
         $select2=mysqli_query($conect,$query2);
         if($select2){
             $mensagem="aluno inserido com sucesso!";

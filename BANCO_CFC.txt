@@ -14,7 +14,6 @@ CREATE TABLE Aluno (
     celular VARCHAR(14),
     cpf VARCHAR(14) PRIMARY KEY,
     nome VARCHAR(100),
-    senha VARCHAR(50),
     foto BLOB
 );
 
@@ -54,13 +53,11 @@ CREATE TABLE Curso (
 CREATE TABLE Processo (
     curso VARCHAR(5),
     cpf_aluno VARCHAR(14),
-    etapa CHAR(1),
     data_inicio DATE,
-    id_processo INT PRIMARY KEY,
+    id_processo INT PRIMARY KEY auto_increment,
     
     FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf),
-    FOREIGN KEY (curso) REFERENCES Curso(sigla),
-    FOREIGN KEY (etapa) REFERENCES Etapa(id)
+    FOREIGN KEY (curso) REFERENCES Curso(sigla)
 );
 
 CREATE TABLE Etapa_Curso (

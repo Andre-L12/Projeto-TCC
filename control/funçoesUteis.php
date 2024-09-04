@@ -46,6 +46,64 @@
         return $msgErro;
 
     }
+    function validarAluno($nome, $cpf,$foto){
+        $msgErro = "";
+    if ( empty($nome) ) {
+        $msgErro = $msgErro . "Informe o nome.<br>";        
+    }        
+    
+    if ( validarCPF2($cpf) == false) {
+        $msgErro = $msgErro . "CPF inválido.<br>";
+    }
+
+    if ( $foto["error"] != 0 ) {
+        $msgErro = $msgErro . "ERRO no upload do arquivo!";
+    }
+ 
+    if ( $foto["size"] > 100000   ) {
+            $msgErro = $msgErro . "Arquivo muito grande!";
+    } 
+    if ( ( $foto["type"] != "image/gif" ) &&
+    	( $foto["type"] != "image/jpeg" ) &&
+        ( $foto["type"] != "image/pjpeg" ) &&
+        ( $foto["type"] != "image/png" ) &&
+        ( $foto["type"] != "image/x-png" ) &&
+        ( $foto["type"] != "image/bmp" )  ) {
+
+       $msgErro = $msgErro . "Tipo não permitido!";
+    }
+
+    return $msgErro;
+    }
+    
+function validarCPF2($cpf) {
+ 
+    // Extrai somente os números
+    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+     
+    // Verifica se foi informado todos os digitos corretamente
+    if (strlen($cpf) != 11) {
+        return false;
+    }
+
+    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+    if (preg_match('/(\d)\1{10}/', $cpf)) {
+        return false;
+    }
+
+    // Faz o calculo para validar o CPF
+    for ($t = 9; $t < 11; $t++) {
+        for ($d = 0, $c = 0; $c < $t; $c++) {
+            $d += $cpf[$c] * (($t + 1) - $c);
+        }
+        $d = ((10 * $d) % 11) % 10;
+        if ($cpf[$c] != $d) {
+            return false;
+        }
+    }
+    return true;
+
+}
 
     function verificarAno($ano){
         // Verifica se ANO está preenchido:

@@ -1,6 +1,6 @@
 <?php 
-require "conexaoBD.php";
-static $conexão;
+require_once "conexaoBD.php";
+static $conexao;
 function comboBoxCurso() {
     $sql = "SELECT * FROM curso";
     $conexao = conectarBD();    
@@ -17,9 +17,9 @@ function comboBoxCurso() {
 
     return $options;
 }
-function ComboBoxAluno() {
+function comboBoxAluno() {
     $sql = "SELECT * FROM aluno";
-    $conexao = conectarBD();    
+    $conexao = conectarBD();
     $resultado = mysqli_query($conexao, $sql );
 
     $options = "";
@@ -30,10 +30,9 @@ function ComboBoxAluno() {
 
         $options = $options . "<OPTION value='$cpf'>$nome</OPTION>";
     }
-
     return $options;
 }
-function ComboBoxInstrutor() {
+function comboBoxInstrutor() {
     $sql = "SELECT * FROM instrutor";
     $conexao = conectarBD();    
     $resultado = mysqli_query($conexao, $sql );
@@ -49,7 +48,7 @@ function ComboBoxInstrutor() {
 
     return $options;
 }
-function ComboBoxVeiculo() {
+function comboBoxVeiculo() {
     $sql = "SELECT * FROM veiculo";
     $conexao = conectarBD();    
     $resultado = mysqli_query($conexao, $sql );
