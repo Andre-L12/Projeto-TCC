@@ -46,12 +46,28 @@
                 </div>
 
                 <!-- Selecionar Curso -->
-                <!-- <div>
+                <div>
                     <label for="curso">Atua nos cursos:</label>
                     <select name="curso" id="opcoesCurso">
+                        <?php
+                            require "../../model/cursoDAO.php";
+                            $options = comboBoxCursos();              
+                            echo $options;
+                        ?>
                     </select>
-                    <button type="button" id="selecionarCurso">Selecionar</button>
-                </div> -->
+                </div>
+
+                <!-- Selecionar Veículo -->
+                <div>
+                <label for="veiculo">Veículo utilizado:</label>
+                    <select name="veiculo" id="opcoesVeiculo">
+                        <?php
+                            require "../../model/veiculoDAO.php";
+                            $options = comboBoxVeiculo();              
+                            echo $options;
+                        ?>
+                    </select>
+                </div>
 
                 <div>
                     <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
