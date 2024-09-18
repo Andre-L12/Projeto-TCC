@@ -16,9 +16,6 @@ const INNER_SUB_MENUS_BTN = document.querySelectorAll(
 
 class PopperObject {
 
-
-
-
   constructor(reference, popperTarget) {_defineProperty(this, "instance", null);_defineProperty(this, "reference", null);_defineProperty(this, "popperTarget", null);
     this.init(reference, popperTarget);
   }
