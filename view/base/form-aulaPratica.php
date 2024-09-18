@@ -12,7 +12,7 @@
 <body>
     <div>
         <h1>Cadastrar Prática</h1>
-        <form action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
+        < action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
             <div style="
                 display: flex;
                 gap: 10px;
