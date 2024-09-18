@@ -14,8 +14,9 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     if($qtd == 0){
         $query2="INSERT INTO `banco_cfc`.`aluno` (`email`, `celular`, `cpf`, `nome`,`foto`) VALUES ('$email', '$celular', '$cpf', '$nome', '$midia');";
         $select2=mysqli_query($conect,$query2);
+        $id = mysqli_insert_id($conect);  
         if($select2){
-            $mensagem="aluno inserido com sucesso!";
+            $mensagem="aluno $id inserido com sucesso!";
         }
         else{
             $mensagem="nao foi possivel realizar o cadastro!";
@@ -26,7 +27,81 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     }
     return $mensagem;
 }
-function deletarAluno($cpf){
+
+function alterarAluno ($id, $nome, $cpf, $email,$celular,$foto) {
+
+    $conexao = conectarBD();   
+    
+   
+    // Transformar a imagem
+    $tamanhoImg = $foto["size"]; 
+    $arqAberto = fopen ( $foto["tmp_name"], "r" );
+    $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
+
+    // Montar SQL
+    $sql = "UPDATE aluno SET "
+    . "nome = '$nome', "
+    . "cpf = '$cpf', "
+    . "email = '$email', "
+    . "celular = '$celular', "
+    . "imagem = '$midia'"
+    . "WHERE idCliente = $id";
+
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco
+    
+    return $id;
+}
+
+function excluirAluno ( $id ) {
+    $sql = "DELETE FROM aluno WHERE id = $id";
+
+    $conexao = conectarBD();  
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+
+}
+function pesquisarAluno($pesq) {
+    $conexao = conectarBD(); 
+    $sql = "SELECT * FROM Aluno WHERE nome LIKE '%$pesq%' ";
+    $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    return $res;
+    
+}
+function pesquisar ($pesq, $tipo) {
+
+    $conexao = conectarBD(); 
+
+    $sql = "SELECT * FROM aluno WHERE ";
+    switch ($tipo) {
+        case 1: // Por nome
+                $sql = $sql . "nome LIKE '$pesq%' ";
+                break;
+        case 2: // Por CPF
+                $sql = $sql . "cpf = '$pesq' ";
+                break;
+        case 3: // Por ID
+            $sql = $sql . "id = '$pesq' ";
+    }
+
+    $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    return $res;
+}
+
+function pesquisarAlunoPorNome ($pesq) {
+    return pesquisar($pesq,1);
+}
+
+//function pesquisarClientePorEstado ($pesq) {
+   // return pesquisar($pesq,2);}
+
+function pesquisarAlunoPorCPF ($pesq) {
+    return pesquisar($pesq,2);
+}
+
+function pesquisarAlunoPorID ($pesq) {
+    return pesquisar($pesq,3);
+}
+
+/*function deletarAluno($cpf){
     $conect=conectarBD();
     $query="DELETE FROM `novobanco_cfc`.`aluno` WHERE (`cpf` = '$cpf ');";
     $select=mysqli_query($conect,$query);
@@ -69,7 +144,7 @@ if($telefone!=""){
 if($email != ""){
     $query1=$query1."email ='$email'";
 }
-    $query1=$query1." WHERE (`cpf` = '$nome1');";*/
+    $query1=$query1." WHERE (`cpf` = '$nome1');";
         $select1=mysqli_query($conect,$query1);
         if($select1){
             $mensagem="Atuzação concluida";
@@ -85,4 +160,4 @@ if($email != ""){
         header("Location:atuAluno.php?msg=$mensagem");
     }
 
-}
+}*/
