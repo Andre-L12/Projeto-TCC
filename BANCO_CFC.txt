@@ -12,24 +12,25 @@ CREATE TABLE Funcionario (
 CREATE TABLE Aluno (
     email VARCHAR(100),
     celular VARCHAR(14),
-    cpf VARCHAR(14) PRIMARY KEY,
+    cpf VARCHAR(14) unique,
     nome VARCHAR(100),
+    id INT PRIMARY KEY auto_increment,
     foto BLOB
 );
 
 CREATE TABLE Instrutor (
     nome VARCHAR(100),
-    cpf VARCHAR(14) PRIMARY KEY,
-    sexo CHAR(1)
+    cpf VARCHAR(14) unique,
+    sexo CHAR(1),
+    id_instrutor int PRIMARY KEY auto_increment
 );
 
 CREATE TABLE Veiculo (
     sigla_categoria CHAR(3),
     adaptado BOOLEAN,
     placa VARCHAR(7) PRIMARY KEY,
-    marca VARCHAR(30)
-    modelo VARCHAR(30),
-    ano YEAR(4)
+    marca VARCHAR(30),
+    modelo VARCHAR(30)
 );
 CREATE TABLE Veiculo_Instrutor (
 	cpf_instrutor varchar(14),
