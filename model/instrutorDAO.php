@@ -23,7 +23,71 @@
             return false;
         }
     }
+    function alterarInstrutor ($nome, $cpf, $sexo,$id_instrutor) {
 
+        $conexao = conectarBD();   
+        
+
+        // Montar SQL
+        $sql = "UPDATE instrutor SET "
+        . "nome = '$nome', "
+        . "cpf = '$cpf', "
+        . "sexo = '$sexo', "
+        . "WHERE id_instrutor = $id_instrutor";
+    
+        mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco
+        
+        return $id_instrutor;
+    }
+    
+    function excluirInstrutor ( $id ) {
+        $sql = "DELETE FROM instrutor WHERE id = $id";
+    
+        $conexao = conectarBD();  
+        mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    
+    }
+    function pesquisarInstrutor($pesq) {
+        $conexao = conectarBD(); 
+        $sql = "SELECT * FROM instrutor WHERE nome LIKE '%$pesq%' ";
+        $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+        return $res;
+        
+    }
+    function pesquisar ($pesq, $tipo) {
+    
+        $conexao = conectarBD(); 
+    
+        $sql = "SELECT * FROM instrutor WHERE ";
+        switch ($tipo) {
+            case 1: // Por nome
+                    $sql = $sql . "nome LIKE '$pesq%' ";
+                    break;
+            case 2: // Por CPF
+                    $sql = $sql . "cpf = '$pesq' ";
+                    break;
+            case 3: // Por ID
+                $sql = $sql . "id = '$pesq' ";
+        }
+    
+        $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+        return $res;
+    }
+    
+    function pesquisarInstrutorPorNome ($pesq) {
+        return pesquisar($pesq,1);
+    }
+    
+    //function pesquisarClientePorEstado ($pesq) {
+       // return pesquisar($pesq,2);}
+    
+    function pesquisarInstrutorPorCPF ($pesq) {
+        return pesquisar($pesq,2);
+    }
+    
+    function pesquisarInstrutorPorID ($pesq) {
+        return pesquisar($pesq,3);
+    }
     // function excluirInstutor{
 
     // }
