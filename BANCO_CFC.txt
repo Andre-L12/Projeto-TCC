@@ -32,8 +32,8 @@ CREATE TABLE Veiculo (
     marca VARCHAR(30),
     modelo VARCHAR(30)
 );
-CREATE TABLE veiculo_instrutor (
-	cpf_instrutor varchar(11),
+CREATE TABLE Veiculo_Instrutor (
+	cpf_instrutor varchar(14),
     placa_veiculo varchar(7),
     
     FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
@@ -49,6 +49,14 @@ CREATE TABLE Curso (
     sigla VARCHAR(5) PRIMARY KEY,
     descricao VARCHAR(100),
     categoria CHAR(2)
+);
+
+CREATE TABLE Curso_Instrutor (
+    sigla_curso VARCHAR(5),
+    cpf_instrutor varchar(14),
+
+    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
+    FOREIGN KEY (sigla_curso) REFERENCES Curso(sigla)
 );
 
 CREATE TABLE Processo (
