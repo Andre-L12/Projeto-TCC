@@ -4,6 +4,7 @@
   --color-text: #F4FAFF;
   --cor-navbar: #216EC0;
   --color-text-body: #08090A;
+  --cinza: #E0E0E0;
 }
 
 .layout {
@@ -15,7 +16,8 @@
   padding: 20px;
 }
 .layout .content {
-  padding: 12px 50px;
+  /* Padding do texto main */
+  padding: 12px 20px;
   display: flex;
   flex-direction: column;
 }
@@ -34,7 +36,6 @@
 .sidebar::-webkit-scrollbar-thumb {
   border-radius: 4px;
 }
-
 
 .sidebar:hover::-webkit-scrollbar-thumb {
   /* cor do scroll navbar */
@@ -121,11 +122,13 @@
     transform: rotate(-5deg);
   }
 }
+
 .layout .sidebar .menu ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 .layout .sidebar .menu .menu-header {
   font-weight: 600;
   padding: 10px 25px;
@@ -134,6 +137,7 @@
   transition: opacity 0.3s;
   opacity: 0.5;
 }
+
 .layout .sidebar .menu .menu-item a {
   display: flex;
   align-items: center;
@@ -142,6 +146,7 @@
   /* cor dos textos */
   color: var(--color-text);
 }
+
 .layout .sidebar .menu .menu-item a .menu-icon {
   font-size: 1.2rem;
   width: 35px;
@@ -154,6 +159,7 @@
   border-radius: 2px;
   transition: color 0.3s;
 }
+
 .layout .sidebar .menu .menu-item a .menu-icon i {
   display: inline-block;
 }
@@ -302,6 +308,21 @@
   box-sizing: border-box;
 }
 
+header {
+  padding: 15px 0 15px 20px;
+  border-bottom: var(--cinza) solid 1.5px;
+}
+
+.header-icon {
+  color: var(--cor-navbar);
+  padding-right: 5px;
+}
+
+.header-title{
+  color: var(--cor-navbar);
+  font-weight: bold;
+} 
+
 body {
   margin: 0;
   height: 100vh;
@@ -422,6 +443,7 @@ a {
 .badge.primary {
   background-color: #ab2dff;
 }
+
 .badge.secondary {
   background-color: #079b0b;
 }
@@ -437,4 +459,6 @@ a {
   color: #3f4750;
 }
 
-/* Definir estilo do header do main */
+.formulario {
+  
+}

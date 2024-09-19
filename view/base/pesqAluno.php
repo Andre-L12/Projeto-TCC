@@ -102,8 +102,8 @@ function pesquisar(pesq) {
                 mostrar += "<h4 class='margin'>" + obj.nome + "</h4>";
                 mostrar += "<h4 class='margin'>" + obj.cpf + "</h4>";
                 mostrar += "<h4 class='margin'>" + obj.email + "</h4>";
-                mostrar += "<h5 class='margin'>R$ " + obj.celular + "</h5>";
-                mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
+                mostrar += "<h5 class='margin'>" + obj.celular + "</h5>";
+                // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                 mostrar += "</div>";
 			});
 
