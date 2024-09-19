@@ -71,7 +71,7 @@
                 <div>
                     <button type="input">Cadastrar</button>
                 </div>
-                
+                <div><a href="pesqAluno.php">Voltar</Link></div>
             </div>
         </form>
     </div>
