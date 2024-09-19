@@ -57,7 +57,7 @@
                 <div>
                     <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
                 </div> 
-                <div><a href="pesqAluno.php">Voltar</Link></div>
+                <div><a href="../navbar.html">Voltar</Link></div>
                 
             </div>
         </form>

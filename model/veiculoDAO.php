@@ -27,23 +27,6 @@
             return false;
         }
     }
-
-    function comboBoxVeiculo() {
-        $sql = "SELECT * FROM veiculo";
-        $conexao = conectarBD();    
-        $resultado = mysqli_query($conexao, $sql );
-    
-        $options = "";
-        while (  $registro = mysqli_fetch_assoc($resultado)  ) {
-            // Pegar os campos do REGISTRO
-            $placa = $registro["placa"];
-            $modelo = $registro["modelo"];
-    
-            $options = $options . "<OPTION value='$placa'>$modelo</OPTION>";
-        }
-    
-        return $options;
-    }
     function alterarVeiculo ($sigla_categoria,$adaptado,$placa,$marca,$modelo) {
 
         $conexao = conectarBD();   

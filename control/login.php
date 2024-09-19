@@ -8,7 +8,7 @@
     $senha = $_POST["senha"];
     
     //Verificando se o CPF é de um funcionário:
-    $query = "SELECT cpf FROM funcionario WHERE cpf='$usuario'";
+    $query = "SELECT matricula FROM funcionario WHERE matricula='$usuario'";
     $select = mysqli_query($conect,$query);
     $resultado = mysqli_fetch_assoc($select);
     
@@ -28,13 +28,13 @@
 
     } else {
         //O CPF é de um funcionário
-        $query = "SELECT senha FROM funcionario WHERE cpf='$usuario'";
+        $query = "SELECT senha FROM funcionario WHERE matricula='$usuario'";
         $select = mysqli_query($conect,$query);
         $resultado = mysqli_fetch_assoc($select);
         $password=$resultado["senha"];
 
         if ($senha==$password){
-            header("Location:../view/tela-inicio.html");
+            header("Location:../view/navbar.html");
         } else {
             $mensagem="Deu errado! Usuário ou senha incorretos";
             header("Location:../view/tela-login.php?msg=$mensagem");

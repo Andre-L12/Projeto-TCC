@@ -50,7 +50,7 @@
                     <label for="curso">Atua nos cursos:</label>
                     <select name="curso" id="opcoesCurso">
                         <?php
-                            require "../../model/cursoDAO.php";
+                            require_once "../../model/cursoDAO.php";
                             $options = comboBoxCursos();              
                             echo $options;
                         ?>
@@ -62,7 +62,7 @@
                 <label for="veiculo">Veículo utilizado:</label>
                     <select name="veiculo" id="opcoesVeiculo">
                         <?php
-                            require "../../model/veiculoDAO.php";
+                            require_once "../../model/funcoesBD.php";
                             $options = comboBoxVeiculo();              
                             echo $options;
                         ?>
@@ -72,7 +72,7 @@
                 <div>
                     <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
                 </div>
-                <div><a href="pesqAluno.php">Voltar</Link></div>
+                <div><a href="../navbar.html">Voltar</Link></div>
             </div>
         </form>
     </div>

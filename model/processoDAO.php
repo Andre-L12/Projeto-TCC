@@ -1,5 +1,5 @@
 <?php
-require "conexaoBD.php";
+require_once "conexaoBD.php";
 static $conexão;
 function iniciarProcesso($curso,$aluno,$data_inicio){
     $conect=conectarBD();
@@ -21,4 +21,14 @@ function iniciarProcesso($curso,$aluno,$data_inicio){
         $mensagem="Esse processo ja essiste!";
     }
     return $mensagem;
+}
+function pegaIDProcesso($cpf){
+    $conect=conectarBD();
+    $query1="SELECT * FROM processo WHERE cpf_aluno='$cpf';";
+    $select1=mysqli_query($conect,$query1); 
+    $registro = mysqli_fetch_assoc($select1);
+        // Pegar os campos do REGISTRO
+        $id_processo = $registro["id_processo"];
+    return $id_processo;
+
 }

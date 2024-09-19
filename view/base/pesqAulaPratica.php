@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pesquisar Aluno</title>
+  <title>Pesquisar Aulas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -13,7 +13,6 @@
       margin-bottom: 50px;
       border-radius: 0;
       background-color: #216EC0;
-
     }
     /* Remove the jumbotron's default bottom margin */
      .jumbotron {
@@ -41,6 +40,7 @@
  <div class="container-fluid bg-3 text-center">
     <div style="margin-bottom: 100px; margin-top: -30px">
         <!-- PESQUISAR -->
+         <h1>Pesquisar Aulas</h1>
         <form method="POST" >
             <input type="text" id="txtPesquisa" name="txtPesquisa" >
             <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="btn btn-success" style="background-color: #216EC0; border-color:#216EC0 ;">
@@ -74,7 +74,7 @@ function pesquisar(pesq) {
     // Chamar o PHP do servidor com AJAX
 
     $.ajax({
-    url: '../../control/pesquisarAluno_JSON.php',
+    url: '../../control/PesquisarAulaPratica_JSON.php',
     type: 'POST',
     data: { pesq: pesq },       // Envio do texto de pesquisa
     dataType: 'json',
@@ -88,21 +88,24 @@ function pesquisar(pesq) {
         if ( data.erro == "" )  {    
             // Se NÃO tiver erros
 
-            if ( data.alunos.length == 1) {
-                mostrar += "<h4>Foi encontrado 1 aluno.</h4>";
+            if ( data.aulas.length == 1) {
+                mostrar += "<h4>Foi encontrado 1 aula.</h4>";
             } else {
-                mostrar += "<h4>Foram encontrados " + data.alunos.length + " aluno.</h4>";
+                mostrar += "<h4>Foram encontrados " + data.aulas.length + " aulas.</h4>";
             }
 
             // Percorre todos os produtos do array "produtos", 
             //    onde i é o índice e obj são os dados do produto
-            data.alunos.forEach(function(obj,i) {                  
+            data.aulas.forEach(function(obj,i) {                  
                 mostrar += "<div class='col-sm-4'>";
-                mostrar += "<img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'>";
-                mostrar += "<h4 class='margin'>" + obj.nome + "</h4>";
-                mostrar += "<h4 class='margin'>" + obj.cpf + "</h4>";
-                mostrar += "<h4 class='margin'>" + obj.email + "</h4>";
-                mostrar += "<h5 class='margin'>R$ " + obj.celular + "</h5>";
+                mostrar += "<h4 class='margin'>" + obj.cpf_aluno + "</h4>";
+                mostrar += "<h4 class='margin'>" + obj.cpf_instrutor + "</h4>";
+                mostrar += "<h4 class='margin'>" + obj.data + "</h4>";
+                mostrar += "<h5 class='margin'>R$ " + obj.hora + "</h5>";
+                mostrar += "<h5 class='margin'>R$ " + obj.placa + "</h5>";
+                mostrar += "<h5 class='margin'>R$ " + obj.id_processo + "</h5>";
+                mostrar += "<h5 class='margin'>R$ " + obj.status + "</h5>";
+                mostrar += "<h5 class='margin'>R$ " + obj.obrigatoria + "</h5>";
                 mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                 mostrar += "</div>";
 			});

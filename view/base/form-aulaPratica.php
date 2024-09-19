@@ -11,8 +11,8 @@
 </head>
 <body>
     <div>
-        <h1>Cadastrar Prática</h1>
-        < action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
+        <h1>Cadastrar Aula Prática</h1>
+        <form action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
             <div style="
                 display: flex;
                 gap: 10px;
@@ -39,6 +39,17 @@
                       ?>
                     </select>
                 </div>
+                <!-- Selecionar Veículo -->
+                <div>
+                <label for="veiculo">Veículo utilizado:</label>
+                    <select name="veiculo" id="opcoesVeiculo">
+                        <?php
+                            require_once "../../model/funcoesBD.php";
+                            $options = comboBoxVeiculo();              
+                            echo $options;
+                        ?>
+                    </select>
+                </div>
                 <!-- Campo data -->
                 <div>
                     <label for="data">Data:</label>
@@ -47,7 +58,7 @@
 
                 <!-- Campo Hora -->
                 <div>
-                    <label for="Hora">Hora:</label>
+                    <label for="hora">Hora:</label>
                     <input type="time" name="hora" id="hora" >
                 </div>
                 <!-- Campo Obrigatoriedade -->
@@ -62,11 +73,23 @@
                         <label for="não">NÃO</label>
                     </div>
                 </div>
+                <!-- Campo status detran -->
+                <div>
+                    <label for="obrigatoria">Status:</label>
+                    <div style="display: flex; align-items: center;">
+                        <input type="radio" name="status_detran" value="1" id="sim">
+                        <label for="sim">cadastrada</label>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="radio" name="status_detran" value="0" id="não">
+                        <label for="não">não cadastrada</label>
+                    </div>
+                </div>
 
                 <div>
                     <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
                 </div>
-                
+                <div><a href="../navbar.html">Voltar</Link></div>
             </div>
         </form>
     </div>

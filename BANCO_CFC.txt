@@ -30,7 +30,8 @@ CREATE TABLE Veiculo (
     adaptado BOOLEAN,
     placa VARCHAR(7) PRIMARY KEY,
     marca VARCHAR(30),
-    modelo VARCHAR(30)
+    modelo VARCHAR(30),
+    ano YEAR(4)
 );
 CREATE TABLE Veiculo_Instrutor (
 	cpf_instrutor varchar(14),
@@ -96,8 +97,8 @@ CREATE TABLE AulaPratica (
     placa VARCHAR(7),
     data_aula DATE,
     hora TIME,
-    status_detran INT,
-    id INT PRIMARY KEY,
+    status_detran BOOLEAN,
+    id  auto_increment PRIMARY KEY,
     obrigatoria BOOLEAN,
     
     FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
