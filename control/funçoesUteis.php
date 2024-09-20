@@ -57,20 +57,20 @@
     }
 
     if ( $foto["error"] != 0 ) {
-        $msgErro = $msgErro . "ERRO no upload do arquivo!";
-    }
- 
-    if ( $foto["size"] > 100000   ) {
-            $msgErro = $msgErro . "Arquivo muito grande!";
+        $msgErro = $msgErro . "ERRO no upload do arquivo.<br>";
     } 
-    if ( ( $foto["type"] != "image/gif" ) &&
+ 
+    else if ( $foto["size"] > 1000000   ) {
+            $msgErro = $msgErro . "Arquivo muito grande.<br>";
+    } 
+    else if ( ( $foto["type"] != "image/gif" ) &&
     	( $foto["type"] != "image/jpeg" ) &&
         ( $foto["type"] != "image/pjpeg" ) &&
         ( $foto["type"] != "image/png" ) &&
         ( $foto["type"] != "image/x-png" ) &&
         ( $foto["type"] != "image/bmp" )  ) {
 
-       $msgErro = $msgErro . "Tipo não permitido!";
+       $msgErro = $msgErro . "Tipo de arquivo não permitido.<br>";
     }
 
     return $msgErro;

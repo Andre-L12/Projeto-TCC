@@ -52,14 +52,6 @@ CREATE TABLE Curso (
     categoria CHAR(2)
 );
 
-CREATE TABLE Curso_Instrutor (
-    sigla_curso VARCHAR(5),
-    cpf_instrutor varchar(14),
-
-    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
-    FOREIGN KEY (sigla_curso) REFERENCES Curso(sigla)
-);
-
 CREATE TABLE Processo (
     curso VARCHAR(5),
     cpf_aluno VARCHAR(14),

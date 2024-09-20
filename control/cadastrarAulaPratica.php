@@ -12,10 +12,9 @@
 
     require_once "../model/processoDAO.php";
     $id_processo =pegaIDProcesso($cpf_aluno);
-
     
     //Inserindo dados no banco
     $id = cadastrarAulaPratica($cpf_aluno,$cpf_instrutor,$placa,$id_processo,$data,$hora,$obrigatoria,$status);
     //Devolvendo mensagem
-    header("Location:../view/base/form-aulaPratica.php?msg=$id.");
+    header("Location:../view/aulaPratica.php?msg=$id.");
 ?>
