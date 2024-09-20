@@ -28,8 +28,8 @@
         $id = criarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
 
         //Devolvendo mensagem
-        header("Location:../view/base/form-cadastrar-veiculo.php?msg=Cadastro de veículo $id realizado com sucesso.");
+        header("Location:../view/cadastrar-veiculo.php?msg=Cadastro de veículo $id realizado com sucesso.");
     } else {
-        header("Location:../view/base/form-cadastrar-veiculo.php?msg=$msg");
+        header("Location:../view/cadastrar-veiculo.php?msg=$msg");
     }
 ?>

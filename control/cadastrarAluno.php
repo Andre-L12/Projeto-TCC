@@ -24,9 +24,9 @@
         $id = cadastrarAluno($nome, $cpf, $email,$celular,$foto);
 
         //Devolvendo mensagem
-        header("Location:../view/base/form-cadastrar-aluno.php?msg=$id.");
+        header("Location:../view/cadastrar-aluno.php?msg=$id.");
     } else {
-        header("Location:../view/base/form-cadastrar-aluno.php?msg=$msg");
+        header("Location:../view/cadastrar-aluno.php?msg=$msg");
     }
 
 ?>

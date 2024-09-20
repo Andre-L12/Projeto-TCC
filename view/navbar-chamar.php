@@ -27,7 +27,7 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-icon'>";
         $navbar .= "<i class='ri-calendar-fill'></i>";
         $navbar .= "</span>";
@@ -57,7 +57,7 @@
         $navbar .= "</div>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item sub-menu'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-icon'>";
         $navbar .= "<i class='bi bi-person-lines-fill'></i>";
         $navbar .= "</span>";
@@ -66,12 +66,12 @@
         $navbar .= "<div class='sub-menu-list'>";
         $navbar .= "<ul>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='cadastrar-instrutor.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Cadastrar Instrutor</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Instrutor</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -79,7 +79,7 @@
         $navbar .= "</div>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item sub-menu'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-icon'>";
         $navbar .= "<i class='bi bi-cone-striped'></i>";
         $navbar .= "</span>";
@@ -88,12 +88,12 @@
         $navbar .= "<div class='sub-menu-list'>";
         $navbar .= "<ul>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='cadastrar-aula.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Agendar Aula</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Aula</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -101,7 +101,7 @@
         $navbar .= "</div>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item sub-menu'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-icon'>";
         $navbar .= "<i class='bi bi-car-front-fill'></i>";
         $navbar .= "</span>";
@@ -110,12 +110,12 @@
         $navbar .= "<div class='sub-menu-list'>";
         $navbar .= "<ul>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='cadastrar-veiculo.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Cadastrar Veículo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Veículo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -123,7 +123,7 @@
         $navbar .= "</div>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item sub-menu'>";
-        $navbar .= "<a href='#'>";
+        $navbar .= "<a href='#'>"; // Colocar link
         $navbar .= "<span class='menu-icon'>";
         $navbar .= "<i class='bi bi-clipboard2-fill'></i>";
         $navbar .= "</span>";
@@ -132,13 +132,13 @@
         $navbar .= "<div class='sub-menu-list'>";
         $navbar .= "<ul>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
-        $navbar .= "<span class='menu-title'>Cadastrar Processo</span>";
+        $navbar .= "<a href='cadastrar-processo.php'>"; // Colocar link
+        $navbar .= "<span class='menu-title'>Iniciar Processo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>";
-        $navbar .= "<span class='menu-title'>Consultar</span>";
+        $navbar .= "<a href='#'>"; // Colocar link
+        $navbar .= "<span class='menu-title'>Consultar Processo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "</ul>";

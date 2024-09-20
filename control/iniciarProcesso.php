@@ -10,5 +10,5 @@
         $id = iniciarProcesso($curso,$aluno,$data_inicio);
 
         //Devolvendo mensagem
-        header("Location:../view/base/form-cadastrar-processo.php?msg= $id");
+        header("Location:../view/cadastrar-processo.php?msg= $id");
 ?>

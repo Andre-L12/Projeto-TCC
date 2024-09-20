@@ -59,8 +59,6 @@
         </form>
     </div>
 
-
-
     <?php
         // Exibir a mensagem de ERRO caso ocorra
         if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
