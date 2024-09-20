@@ -46,11 +46,9 @@
             <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="btn btn-success" style="background-color: #216EC0; border-color:#216EC0 ;">
         </form>
     </div>
-    <div id="resultado" class="row text-center" >                        
-        
+    <div id="resultado" class="row text-center" >   
         <!-- O resultado do JSON vai ficar aqui -->
         <!-- A chamada do JSON está no final do arquivo -->
-       
     </div>
  </div>
        
@@ -88,24 +86,20 @@ function pesquisar(pesq) {
         if ( data.erro == "" )  {    
             // Se NÃO tiver erros
 
-            if ( data.alunos.length == 1) {
-                mostrar += "<h4>Foi encontrado 1 aluno.</h4>";
-            } else {
-                mostrar += "<h4>Foram encontrados " + data.alunos.length + " aluno.</h4>";
-            }
+            
+            mostrar +="<div style='margin-left: 10%;'><table border='1' style='background-color:#216EC0 ; color: white;'><tr><th style='width: 50ch;'>Nome</th><th style='width: 20ch; '>CPF</th><th style='width: 40ch;'>Email</th><th style='width: 20ch;'>Celular</th></tr></table>";
+            
 
             // Percorre todos os produtos do array "produtos", 
             //    onde i é o índice e obj são os dados do produto
-            data.alunos.forEach(function(obj,i) {                  
-                mostrar += "<div class='col-sm-4'>";
-                mostrar += "<img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'>";
-                mostrar += "<h4 class='margin'>" + obj.nome + "</h4>";
-                mostrar += "<h4 class='margin'>" + obj.cpf + "</h4>";
-                mostrar += "<h4 class='margin'>" + obj.email + "</h4>";
-                mostrar += "<h5 class='margin'>" + obj.celular + "</h5>";
+            data.alunos.forEach(function(obj,i) {     
+
+                mostrar += "<table border='1'><tr><td style='width: 50ch;'><h4 class='margin'>" + obj.nome + "</h4></td>";
+                mostrar += "<td style='width: 20ch;'><h4 class='margin'>" + obj.cpf + "</h4></td>";
+                mostrar += "<td style='width: 40ch;'><h4 class='margin'>" + obj.email + "</h4></td>";
+                mostrar += "<td style='width: 20ch;'><h4 class='margin'>" + obj.celular + "</h4></td></tr></table>";
                 // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
-                mostrar += "</div>";
-			});
+            });
 
 
         } else {
