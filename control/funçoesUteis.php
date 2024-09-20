@@ -60,7 +60,7 @@
         $msgErro = $msgErro . "ERRO no upload do arquivo.<br>";
     } 
  
-    else if ( $foto["size"] > 100000   ) {
+    else if ( $foto["size"] > 1000000   ) {
             $msgErro = $msgErro . "Arquivo muito grande.<br>";
     } 
     else if ( ( $foto["type"] != "image/gif" ) &&

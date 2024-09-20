@@ -49,8 +49,8 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>"; // Colocar link
-        $navbar .= "<span class='menu-title'>Consultar Aluno</span>";
+        $navbar .= "<a href='pesquisar-aluno.php'>"; // Colocar link
+        $navbar .= "<span class='menu-title'>Pesquisar Aluno</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "</ul>";

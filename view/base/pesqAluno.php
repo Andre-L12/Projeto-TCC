@@ -74,7 +74,7 @@ function pesquisar(pesq) {
     // Chamar o PHP do servidor com AJAX
 
     $.ajax({
-    url: '../../control/pesquisarAluno_JSON.php',
+    url: '../control/pesquisarAluno_JSON.php',
     type: 'POST',
     data: { pesq: pesq },       // Envio do texto de pesquisa
     dataType: 'json',
