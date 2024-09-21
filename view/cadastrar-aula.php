@@ -41,14 +41,14 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Veículo -->
-                <div>
-                    <h1>Agendar Aula Prática</h1>
+                <div class="form-container">
+                    <h1 class="form-titulo">Agendar Aula Prática</h1>
                     <form action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
                         <div>
                             <!-- Campo Instrutor -->
-                            <div>
-                                <label for="instrutor">Instrutor:</label>
-                                <select name="instrutor" class="form-control">
+                            <div class="form-campo">
+                                <label for="instrutor" class="form-subtitulo">Instrutor:</label>
+                                <select name="instrutor" class="form-input">
                                     <?php
                                         require_once "../model/funcoesBD.php";
                                         $options = comboBoxInstrutor();              
@@ -57,9 +57,9 @@
                                 </select>
                             </div>
                             <!-- Campo Aluno -->
-                            <div>
-                                <label for="Aluno">Aluno:</label>
-                                <select name="aluno" class="form-control">
+                            <div class="form-campo">
+                                <label for="aluno" class="form-subtitulo">Aluno:</label>
+                                <select name="aluno" class="form-input">
                                 <?php
                                     $options = comboBoxAluno();              
                                     echo $options;
@@ -67,9 +67,9 @@
                                 </select>
                             </div>
                             <!-- Selecionar Veículo -->
-                            <div>
-                                <label for="veiculo">Veículo utilizado:</label>
-                                <select name="veiculo" id="opcoesVeiculo">
+                            <div class="form-campo">
+                                <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
+                                <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
                                         require_once "../model/funcoesBD.php";
                                         $options = comboBoxVeiculo();              
@@ -78,31 +78,31 @@
                                 </select>
                             </div>
                             <!-- Campo data -->
-                            <div>
-                                <label for="data">Data:</label>
-                                <input type="date" name="data" id="data" >
+                            <div class="form-campo">
+                                <label for="data" class="form-subtitulo">Data:</label>
+                                <input type="date" name="data" id="data" class="form-input">
                             </div>
 
                             <!-- Campo Hora -->
-                            <div>
-                                <label for="hora">Hora:</label>
-                                <input type="time" name="hora" id="hora" >
+                            <div class="form-campo">
+                                <label for="hora" class="form-subtitulo">Hora:</label>
+                                <input type="time" name="hora" id="hora" class="form-input">
                             </div>
                             <!-- Campo Obrigatoriedade -->
-                            <div>
-                                <label for="obrigatoria">Obrigatoria:</label>
+                            <div class="form-campo">
+                                <label for="obrigatoria" class="form-subtitulo">Obrigatoria:</label>
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="obrigatoria" value="1" id="sim">
-                                    <label for="sim">SIM</label>
+                                    <label for="sim">Sim</label>
                                 </div>
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="obrigatoria" value="0" id="não">
-                                    <label for="não">NÃO</label>
+                                    <label for="não">Não</label>
                                 </div>
                             </div>
                             <!-- Campo status detran -->
-                            <div>
-                                <label for="obrigatoria">Status:</label>
+                            <div class="form-campo">
+                                <label for="obrigatoria" class="form-subtitulo">Status:</label>
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="status_detran" value="1" id="sim">
                                     <label for="sim">Registrada</label>
@@ -114,7 +114,7 @@
                             </div>
 
                             <div>
-                                <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
                             </div>
 
                             <?php

@@ -5,9 +5,9 @@
         $navbar .= "<aside id='sidebar' class='sidebar break-point-sm has-bg-image'>";
         $navbar .= "<a id='btn-collapse' class='sidebar-collapser'>";
         $navbar .= "<i class='ri-arrow-left-s-line'></i></a>";
-        $navbar .= "<div class='image-wrapper'>";
-        $navbar .= "<img src='assets/images/sidebar-bg.jpg' alt='sidebar background' />";
-        $navbar .= "</div>";
+        // $navbar .= "<div class='image-wrapper'>";
+        // $navbar .= "<img src='assets/images/sidebar-bg.jpg' alt='sidebar background' />";
+        // $navbar .= "</div>";
         $navbar .= "<div class='sidebar-layout'>";
         $navbar .= "<div class='sidebar-header'>";
         $navbar .= "<div class='pro-sidebar-logo'>";
