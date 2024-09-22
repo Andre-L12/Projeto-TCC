@@ -39,14 +39,13 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Veículo -->
-                <div>
-                    <h1>Cadastrar Veículo</h1>
+                <div class="form-container">
+                    <h1 class="form-titulo">Cadastrar Veículo</h1>
                     <form action="../control/cadastrarVeiculo.php" method="POST" name="formCadastroVeiculo">
-                        <div>
                             <!-- ComboBox Categoria do veículo -->
-                            <div>
-                                <label for="categoria">Categoria:</label>
-                                <select name="categoria" id="categoria">
+                            <div class="form-campo">
+                                <label for="categoria" class="form-subtitulo">Categoria:</label>
+                                <select name="categoria" id="categoria" class="form-input">
                                     <option value=""></option>
                                     <option value="ACC">ACC</option>
                                     <option value="A">A</option>
@@ -58,8 +57,8 @@
                             </div>
 
                             <!-- Radio: Veículo adaptado? -->
-                            <div>
-                                <label>Veículo adaptado?</label>
+                            <div class="form-campo">
+                                <label class="form-subtitulo">Veículo adaptado?</label>
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="adaptado" value="true" id="sim">
                                     <label for="sim">Sim</label>
@@ -71,31 +70,31 @@
                             </div>
 
                             <!-- Campo Placa -->
-                            <div>
-                                <label for="placa">Placa:</label>
-                                <input type="text" name="txtPlaca" id="placa" placeholder="ex.: QTP5F71" maxlength="7">
+                            <div class="form-campo">
+                                <label for="placa" class="form-subtitulo">Placa:</label>
+                                <input type="text" name="txtPlaca" id="placa" placeholder="ex.: QTP5F71" maxlength="7" class="form-input">
                             </div>
 
                             <!-- Campo Marca -->
-                            <div>
-                                <label for="marca">Marca:</label>
-                                <input type="text" name="txtMarca" id="marca" placeholder="ex.: Fiat">
+                            <div class="form-campo">
+                                <label for="marca" class="form-subtitulo">Marca:</label>
+                                <input type="text" name="txtMarca" id="marca" placeholder="ex.: Fiat" class="form-input">
                             </div>
                             
                             <!-- Campo Modelo -->
-                            <div>
-                                <label for="modelo">Modelo</label>
-                                <input type="text" name="txtModelo" id="modelo" placeholder="ex.: Uno">
+                            <div class="form-campo">
+                                <label for="modelo" class="form-subtitulo">Modelo</label>
+                                <input type="text" name="txtModelo" id="modelo" placeholder="ex.: Uno" class="form-input">
                             </div>
                             
                             <!-- Campo Ano -->
-                            <div>
-                                <label for="ano">Ano de fabricação:</label>
-                                <input type="number" name="ano" id="ano" placeholder="ex.: 2013">
+                            <div class="form-campo">
+                                <label for="ano" class="form-subtitulo">Ano de fabricação:</label>
+                                <input type="number" name="ano" id="ano" placeholder="ex.: 2013" class="form-input">
                             </div>
 
                             <div>
-                                <button type="input">Cadastrar</button>
+                                <button type="input" class="form-btn">Cadastrar</button>
                             </div>
 
                             <?php
@@ -106,7 +105,6 @@
                                 }
                             ?>
 
-                        </div>
                     </form>
                 </div>
             </main>

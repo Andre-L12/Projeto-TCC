@@ -41,14 +41,13 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Veículo -->
-                <div>
-                    <h1>Iniciar Processo</h1>
+                <div class="form-container">
+                    <h1 class="form-titulo">Iniciar Processo</h1>
                     <form action="../control/iniciarProcesso.php" method="POST" name="formCadastroProcesso">
-                        <div>
                             <!-- Campo CPF -->
-                            <div>
-                                <label for="aluno">Aluno:</label>
-                                <select name="aluno" class="form-control">
+                            <div class="form-campo">
+                                <label for="aluno" class="form-subtitulo">Aluno:</label>
+                                <select name="aluno" class="form-input">
                                     <?php
                                     require_once "../model/funcoesBD.php";
                                     $options = comboBoxAluno();
@@ -58,9 +57,9 @@
                             </div>
 
                             <!-- Campo CURSO -->
-                            <div>
-                                <label for="curso">Curso:</label>
-                                <select name="curso" class="form-control">
+                            <div class="form-campo">
+                                <label for="curso" class="form-subtitulo">Curso:</label>
+                                <select name="curso" class="form-input">
                                     <?php
                                     $options = comboBoxCurso();
                                     echo $options;
@@ -69,13 +68,13 @@
                             </div>
 
                             <!-- Campo DATA -->
-                            <div>
-                                <label for="data_inicio">Data de inicio:</label>
-                                <input type="date" name="data_inicio" id="data_inicio">
+                            <div class="form-campo">
+                                <label for="data_inicio" class="form-subtitulo">Data de inicio:</label>
+                                <input type="date" name="data_inicio" id="data_inicio" class="form-input">
                             </div>
 
                             <div>
-                                <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
                             </div>
 
                             <?php
@@ -85,8 +84,6 @@
                                 echo "<FONT color=red>$mensagem</FONT>";
                             }
                             ?>
-
-                        </div>
                     </form>
                 </div>
             </main>

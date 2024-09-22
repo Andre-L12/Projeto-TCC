@@ -42,8 +42,9 @@ function comboBoxVeiculo() {
         // Pegar os campos do REGISTRO
         $placa = $registro["placa"];
         $modelo = $registro["modelo"];
+        $marca = $registro["marca"];
 
-        $options = $options . "<OPTION value='$placa'>$modelo</OPTION>";
+        $options = $options . "<OPTION value='$placa'>$marca $modelo - $placa</OPTION>";
     }
 
     return $options;

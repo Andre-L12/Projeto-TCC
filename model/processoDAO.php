@@ -10,8 +10,10 @@ function iniciarProcesso($curso,$aluno,$data_inicio){
     if($qtd == 0){
         $query2="INSERT INTO `banco_cfc`.`processo` (`curso`, `cpf_aluno`, `data_inicio`) VALUES ('$curso', '$aluno', '$data_inicio');";
         $select2=mysqli_query($conect,$query2);
+        $id = mysqli_insert_id($conect);
+        
         if($select2){
-            $mensagem="Processo iniciado!";
+            $mensagem="Processo $id iniciado!";
         }
         else{
             $mensagem="Não foi possivel iniciar o processo!";

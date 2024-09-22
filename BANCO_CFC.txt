@@ -90,7 +90,7 @@ CREATE TABLE AulaPratica (
     data_aula DATE,
     hora TIME,
     status_detran BOOLEAN,
-    id  auto_increment PRIMARY KEY,
+    id INT PRIMARY KEY auto_increment,
     obrigatoria BOOLEAN,
     
     FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),

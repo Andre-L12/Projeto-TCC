@@ -14,6 +14,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 </head>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
@@ -39,25 +42,24 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Instrutor -->
-                <div>
-                    <h1>Cadastrar Instrutor</h1>
+                <div class="form-container">
+                    <h1 class="form-titulo">Cadastrar Instrutor</h1>
                     <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor">
-                        <div>
                             <!-- Campo nome -->
-                            <div>
-                                <label for="nome">Nome completo:</label>
-                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui">
+                            <div class="form-campo">
+                                <label for="nome" class="form-subtitulo">Nome completo:</label>
+                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui" class="form-input">
                             </div>
 
                             <!-- Campo CPF -->
-                            <div>
-                                <label for="cpf">CPF:</label>
-                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00">
+                            <div class="form-campo">
+                                <label for="cpf" class="form-subtitulo">CPF:</label>
+                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00" class="form-input">
                             </div>
 
                             <!-- Radio Sexo -->
-                            <div>
-                                <label>Sexo:</label>
+                            <div class="form-campo">
+                                <label class="form-subtitulo">Sexo:</label>
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="sexo" value="M" id="masc">
                                     <label for="masc">Masculino</label>
@@ -69,21 +71,21 @@
                             </div>
 
                             <!-- Selecionar Curso -->
-                            <div>
-                                <label for="curso">Atua nos cursos:</label>
-                                <select name="curso" id="opcoesCurso">
+                            <div class="form-campo">
+                                <label for="curso" class="form-subtitulo">Atua nos cursos:</label>
+                                <select name="curso" id="opcoesCurso" class="form-input">
                                     <?php
-                                        require_once "../model/cursoDAO.php";
-                                        $options = comboBoxCursos();              
+                                        require_once "../model/funcoesBD.php";
+                                        $options = comboBoxCurso();              
                                         echo $options;
                                     ?>
                                 </select>
                             </div>
 
                             <!-- Selecionar Veículo -->
-                            <div>
-                            <label for="veiculo">Veículo utilizado:</label>
-                                <select name="veiculo" id="opcoesVeiculo">
+                            <div class="form-campo">
+                            <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
+                                <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
                                         require_once "../model/funcoesBD.php";
                                         $options = comboBoxVeiculo();              
@@ -93,7 +95,7 @@
                             </div>
 
                             <div>
-                                <button type="submit" name="btnCadastrar" value="Cadastrar">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
                             </div>
 
                             <?php
@@ -103,8 +105,6 @@
                                     echo "<FONT color=red>$mensagem</FONT>";
                                 }
                             ?>
-
-                        </div>
                     </form>
                 </div>
             </main>
@@ -117,19 +117,6 @@
         $(document).ready(function(){
             $('#cpf').mask('000.000.000-00');
         });
-        // Máscara para Celular
-         const handlePhone = (event) => {
-        let input = event.target
-        input.value = phoneMask(input.value)
-        }
-
-        const phoneMask = (value) => {
-        if (!value) return ""
-        value = value.replace(/\D/g,'')
-        value = value.replace(/(\d{2})(\d)/,"($1) $2")
-        value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-        return value
-        }   
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
