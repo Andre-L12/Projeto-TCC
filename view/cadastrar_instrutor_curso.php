@@ -8,14 +8,11 @@
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-    <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'> -->
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script> -->
 
 </head>
 <body>
@@ -43,37 +40,22 @@
                 </div>
                 <!-- Form Cadastrar Instrutor -->
                 <div class="form-container">
-                    <h1 class="form-titulo">Cadastrar Instrutor</h1>
+                    <h2 class="form-titulo">Curso em que Instrutor atua</h2>
                     <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor" >
-                            <!-- Campo nome -->
+                            <!-- Selecionar Instrutor -->
                             <div class="form-campo">
-                                <label for="nome" class="form-subtitulo">Nome completo:</label>
-                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui" class="form-input">
+                                <label for="nome" class="form-subtitulo">Instrutor: </label>
+                                <select name="curso" id="opcoesCurso" class="form-input">
+                                    <?php
+                                        require_once "../model/funcoesBD.php";
+                                        $options = comboBoxInstrutor();              
+                                        echo $options;
+                                    ?>
+                                </select>
                             </div>
-
-                            <!-- Campo CPF -->
-                            <div class="form-campo">
-                                <label for="cpf" class="form-subtitulo">CPF:</label>
-                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00" class="form-input">
-                            </div>
-
-                            <!-- Radio Sexo -->
-                            <div class="form-campo">
-                                <label class="form-subtitulo">Sexo:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="M" id="masc">
-                                    <label for="masc">Masculino</label>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="F" id="fem">
-                                    <label for="fem">Feminino</label>
-                                </div>
-                            </div>
-
-                            <!-- <h2 class="form-titulo-2">Vincular a curso</h2> -->
 
                             <!-- Selecionar Curso -->
-                            <!-- <div class="form-campo">
+                            <div class="form-campo">
                                 <label for="curso" class="form-subtitulo">Atua no curso:</label>
                                 <select name="curso" id="opcoesCurso" class="form-input">
                                     <?php
@@ -82,19 +64,53 @@
                                         // echo $options;
                                     ?>
                                 </select>
-                            </div> -->
+                            </div>
+
+                            <!-- Checkbox Dias da semana-->
+                            <div class="form-campo">
+                                <label class="form-subtitulo">Dias da semana que atua nesse curso:</label>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="segunda" name="segunda">
+                                    <label for="segunda">Segunda-feira</label>  
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="terca" name="segunda">
+                                    <label for="terca">Terça-feira</label>  
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="quarta" name="segunda">
+                                    <label for="quarta">Quarta-feira</label>  
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="quinta" name="segunda">
+                                    <label for="quinta">Quinta-feira</label>  
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="sexta" name="segunda">
+                                    <label for="sexta">Sexta-feira</label>  
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="sabado" name="segunda">
+                                    <label for="sabado">Sabado</label>
+                                </div>
+                                <div class="form-campo-checkbox">
+                                    <input type="checkbox" id="domingo" name="segunda">
+                                    <label for="domingo">Domingo</label>  
+                                </div>
+                                 
+                            </div>
 
                             <!-- Selecionar Veículo -->
-                            <!-- <div class="form-campo">
+                            <div class="form-campo">
                             <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
                                 <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
-                                        // require_once "../model/funcoesBD.php";
-                                        // $options = comboBoxVeiculo();              
-                                        // echo $options;
+                                        require_once "../model/funcoesBD.php";
+                                        $options = comboBoxVeiculo();              
+                                        echo $options;
                                     ?>
                                 </select>
-                            </div> -->
+                            </div>
 
                             <div class="form-div-btn">
                                 <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
@@ -114,13 +130,6 @@
             <div class="overlay"></div>
         </div>
     </div>
-
-    <script>
-        // Máscara para CPF
-        $(document).ready(function(){
-            $('#cpf').mask('000.000.000-00');
-        });
-    </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>

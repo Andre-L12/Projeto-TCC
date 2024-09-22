@@ -470,6 +470,10 @@ a {
   color: var(--cor-navbar);
 }
 
+.form-titulo-2{
+  color: var(--cor-navbar);
+}
+
 .form-campo{
   display: flex;
   margin-bottom: 15px;
@@ -478,6 +482,7 @@ a {
 
 .form-subtitulo{
   font-weight: bold;
+  margin-bottom: 5px; 
 }
 
 .form-input {
@@ -489,6 +494,11 @@ a {
   /* min-width: 300px; */
 }
 
+.form-div-btn{
+  display: flex;
+  justify-content: end;
+}
+
 .form-btn{
   background-color: var(--cor-navbar);
   color: var(--color-text); 
@@ -497,3 +507,12 @@ a {
   border-radius: 4px; 
   cursor: pointer;
 }
+
+.form-campo-checkbox{
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+
+
