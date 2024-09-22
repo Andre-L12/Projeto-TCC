@@ -14,6 +14,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 </head>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
@@ -114,19 +117,6 @@
         $(document).ready(function(){
             $('#cpf').mask('000.000.000-00');
         });
-        // Máscara para Celular
-         const handlePhone = (event) => {
-        let input = event.target
-        input.value = phoneMask(input.value)
-        }
-
-        const phoneMask = (value) => {
-        if (!value) return ""
-        value = value.replace(/\D/g,'')
-        value = value.replace(/(\d{2})(\d)/,"($1) $2")
-        value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-        return value
-        }   
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>

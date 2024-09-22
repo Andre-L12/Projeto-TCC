@@ -13,6 +13,24 @@
         return $msgErro;
     }
 
+    function validarPreocesso($curso, $aluno, $data_inicio){
+        $msgErro = "";
+
+        if (empty($aluno)){
+            $msgErro .= "Selecione um aluno. <br>";
+        }
+
+        if (empty($curso)){
+            $msgErro .= "Selecione um curso. <br>";
+        }
+
+        if (empty($data_inicio)){
+            $msgErro .= "Defina uma data de início. <br>";
+        }
+
+        return $msgErro;
+    }
+
     function validarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano){
         
         $msgErro = "";

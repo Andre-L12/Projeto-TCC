@@ -16,14 +16,14 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
         $select2=mysqli_query($conect,$query2);
         $id = mysqli_insert_id($conect);  
         if($select2){
-            $mensagem="aluno $id inserido com sucesso!";
+            $mensagem="Aluno $id inserido com sucesso.";
         }
         else{
-            $mensagem="nao foi possivel realizar o cadastro!";
+            $mensagem="Não foi possível realizar o cadastro.";
         }
     }
     else{
-        $mensagem="Esse aluno ja essiste!";
+        $mensagem="Esse aluno já existe.";
     }
     return $mensagem;
 }
