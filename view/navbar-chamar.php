@@ -75,6 +75,11 @@
         $navbar .= "<span class='menu-title'>Consultar Instrutor</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
+        $navbar .= "<li class='menu-item'>";
+        $navbar .= "<a href='cadastrar-instrutor-curso.php'>"; // Colocar link
+        $navbar .= "<span class='menu-title'>Vincular a um curso</span>";
+        $navbar .= "</a>";
+        $navbar .= "</li>";
         $navbar .= "</ul>";
         $navbar .= "</div>";
         $navbar .= "</li>";

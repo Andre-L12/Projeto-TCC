@@ -11,7 +11,7 @@ CREATE TABLE Funcionario (
 
 CREATE TABLE Aluno (
     email VARCHAR(100),
-    celular VARCHAR(14),
+    celular VARCHAR(15),
     cpf VARCHAR(14) unique,
     nome VARCHAR(100),
     id INT PRIMARY KEY auto_increment,
@@ -66,17 +66,18 @@ CREATE TABLE Etapa_Curso (
     etapa CHAR(1),
     curso CHAR(1),
     ordem_curso INT,
-    id_etapa_curso INT PRIMARY KEY,
+    id_etapa_curso INT PRIMARY KEY, 
     
     FOREIGN KEY (etapa) REFERENCES Etapa(id),
     FOREIGN KEY (curso) REFERENCES Curso(sigla)
 );
 
 CREATE TABLE Curso_Instrutor (
+    id_curso_instrutor INT PRIMARY KEY auto_increment,
     cpf_instrutor VARCHAR(14),
     sigla_curso CHAR(1),
-    id_curso_instrutor INT PRIMARY KEY,
     dias_semana VARCHAR(7),
+    /* Excluir tabela Veiculo_Instrutor e criar um atributo veiculo aqui*/
     
     FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
     FOREIGN KEY (sigla_curso) REFERENCES Curso(sigla)
@@ -84,20 +85,23 @@ CREATE TABLE Curso_Instrutor (
 
 CREATE TABLE AulaPratica (
     cpf_instrutor VARCHAR(14),
-    cpf_aluno VARCHAR(14),
+    cpf_aluno VARCHAR(14), /*Tirar*/
     id_processo INT,
-    placa VARCHAR(7),
+    placa VARCHAR(7), /*Tirar*/
     data_aula DATE,
     hora TIME,
     status_detran BOOLEAN,
     id INT PRIMARY KEY auto_increment,
     obrigatoria BOOLEAN,
+    /*Criar: status_aula VARCHAR(20), */
     
     FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
-    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf),
-    FOREIGN KEY (placa) REFERENCES Veiculo(placa),
+    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf), /*Tirar*/
+    FOREIGN KEY (placa) REFERENCES Veiculo(placa), /*Tirar*/
     FOREIGN KEY (id_processo) REFERENCES Processo(id_processo)
 );
+
+/* Inserindo Cursos */
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação A', 'A');
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHB', 'Primeira Habilitação B', 'B');
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHAB', 'Primeira Habilitação AB', 'AB');
@@ -113,4 +117,15 @@ INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ADC
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('MD', 'Mudança de Categoria D', 'D');
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ME', 'Mudança de Categoria E', 'E');
 
+/* Inserindo Instrutores */
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Adilson Santana', '001.290.090-75', 'M');
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Maria Rosa', '302.228.210-94', 'F');
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Carlos Brito', '910.580.110-90', 'M');
 
+/* Inserindo Alunos */
+INSERT INTO `BANCO_CFC`.`aluno` (`email`, `celular`, `cpf`, `nome`) VALUES ('liliaalvarenga@gmail.com', '(27) 99872-1321','040.592.730-40', 'Lilia Alvarenga');
+INSERT INTO `BANCO_CFC`.`aluno` (`email`, `celular`, `cpf`, `nome`) VALUES ('Daniellebrun@gmail.com', '(27) 99841-1919','412.207.470-33', 'Danielle Brun');
+
+/* Inserindo Veículos */
+INSERT INTO `BANCO_CFC`.`veiculo` (`sigla_categoria`, `adaptado`, `placa`, `marca`, `modelo`, `ano`) VALUES ('A', '0','XIS3J98', 'Honda', 'CG 160', '2015');
+INSERT INTO `BANCO_CFC`.`veiculo` (`sigla_categoria`, `adaptado`, `placa`, `marca`, `modelo`, `ano`) VALUES ('B', '0','JJS3B28', 'Fiat', 'Uno', '2005');
