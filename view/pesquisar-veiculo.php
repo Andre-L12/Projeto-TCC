@@ -124,10 +124,9 @@
                         mostrar += "<tr>    <td data-label='Marca'>"+obj.marca +"</td>";
                         mostrar += "    <td data-label='Modelo'>" + obj.modelo + "</td>";
                         mostrar += "<td data-label='Ano'>" + obj.ano + "</td>";
-                        mostrar += "<td data-label='Placa'>" + obj.placa + "</td>";
+                        mostrar += "<td data-label='Placa'><a href='consultar-veiculo.php?id=" +obj.placa+ "'>" + obj.placa + "</a></td>";
                         mostrar += "<td data-label='Sigla-Categoria'>" + obj.sigla_categoria + "</td>";
                         mostrar += "<td data-label='Adaptado'>" + x + "</td></tr>";
-                        // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
                     mostrar += "</tbody></table>";  
 

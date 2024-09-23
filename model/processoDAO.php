@@ -26,6 +26,24 @@ function iniciarProcesso($curso,$aluno,$data_inicio){
     }
     return $mensagem;
 }
+function comboBoxProcessoAluno($cpf){
+        
+    $conexao = conectarBD();
+
+    $sql = "SELECT * FROM processo where cpf_aluno='$cpf'";
+    $resultado = mysqli_query($conexao, $sql );
+
+    $options = "";
+    while (  $registro = mysqli_fetch_assoc($resultado)  ) {
+        // Pegar os campos do REGISTRO
+        $id_processo = $registro["id_processo"];
+        $curso = $registro["curso"];
+        $data = $registro["data_inicio"];
+        $options = $options . "<br> <strong>Processo_ID:</strong> $id_processo <br> <strong>curso:</strong> $curso <br> <strong> Data de Início:</strong> $data<br>";
+    }
+
+    return $options;
+}
 function pegaIDProcesso($cpf){
     $conect = conectarBD();
     $query1 = "SELECT * FROM processo WHERE cpf_aluno='$cpf';";
@@ -35,7 +53,7 @@ function pegaIDProcesso($cpf){
         $id_processo = $registro["id_processo"];
     return $id_processo;
 }
-function pesquisar ($pesq, $tipo) {
+function pesquisarProcessos ($pesq, $tipo) {
 
     $conexao = conectarBD(); 
 
@@ -56,18 +74,18 @@ function pesquisar ($pesq, $tipo) {
 }
 
 function pesquisarProcessoPorCPFAluno ($pesq) {
-    return pesquisar($pesq,1);
+    return pesquisarProcessos($pesq,1);
 }
 
 //function pesquisarClientePorEstado ($pesq) {
    // return pesquisar($pesq,2);}
 
 function pesquisarProcessoPorCurso ($pesq) {
-    return pesquisar($pesq,2);
+    return pesquisarProcessos($pesq,2);
 }
 
 function pesquisarProcessoPorID ($pesq) {
-    return pesquisar($pesq,3);
+    return pesquisarProcessos($pesq,3);
 }
 
 function excluirProcesso($id){

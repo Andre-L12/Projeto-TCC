@@ -82,7 +82,7 @@
         function pesquisar(pesq) {
             // Chamar o PHP do servidor com AJAX
             $.ajax({
-            url: '../control/pesquisarProcesso_JSON.php',
+            url: '../control/pesquisarAluno_JSON.php',
             type: 'POST',
             data: { pesq: pesq },       // Envio do texto de pesquisa
             dataType: 'json',
@@ -93,37 +93,34 @@
                 var mostrar = '';
                 if ( data.erro == "" )  {       
                     // Se NÃO tiver erros
-                    if ( data.processos.length == 1) {
-                        mostrar += "<h4>Foi encontrado 1 processo.</h4>";
+                    if ( data.alunos.length == 1) {
+                        mostrar += "<h4>Foi encontrado 1 aluno.</h4>";
                     } else {
-                        mostrar += "<h4>Foram encontrados " + data.processos.length + " processos.</h4>";
+                        mostrar += "<h4>Foram encontrados " + data.alunos.length + " alunos.</h4>";
                     }
                     // Percorre todos os produtos do array "produtos", 
                     //    onde i é o índice e obj são os dados do produto
                     
-                    mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
-                    mostrar +="<thead>     <tr>    <th>Aluno</th><th>Curso</th><th>Data_Inicio</th><th>Id_Processo</th></tr><thead>";
-                    mostrar+="<tbody>   ";                  
-                    data.processos.forEach(function(obj,i) {  
+                        mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
+                        mostrar +="<thead>     <tr>    <th>Foto</th><th>Nome</th><th>CPF</th><th>Email</th><th>Celular</th></tr><thead>";
+                        mostrar+="<tbody>   ";                  
+                    data.alunos.forEach(function(obj,i) {  
                         
-                        //$resultado1= pesquisarAlunoPorCPF(obj.cpf_aluno);
-                        //var row = mysqli_fetch_assoc(resultado1);
-                       // var nome =row["nome"];
-                       //$resultado2=pesquisarCursoPorSigla(obj.curso);
-                       // var row2 = mysqli_fetch_assoc(resultado2);
-                       // var curso =row["descricao"];
-                        
-                        mostrar += "<tr><td data-label='Aluno'>" + obj.cpf_aluno + "</td>";
-                        mostrar += "<td data-label='Curso'>" + obj.curso + "</td>";
-                        mostrar += "<td data-label='Data'>" + obj.data_inicio + "</td>";
-                        mostrar += "<td data-label='Id_Processo'>" + obj.id_processo + "</td></tr>";
+                        mostrar += "<tr>    <td data-label='Foto'><a href='consultar-aluno.php?id=" +obj.id+ "'><img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'></a></td>";
+                        mostrar += "    <td data-label='Nome'><a href='consultar-aluno.php?id=" +obj.id+ "'>" + obj.nome + "</a></td>";
+                        mostrar += "<td data-label='CPF'>" + obj.cpf + "</td>";
+                        mostrar += "<td data-label='Email'>" + obj.email + "</td>";
+                        mostrar += "<td data-label='Celular'>" + obj.celular + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
+                        mostrar += "</div>";
                     });
                     mostrar += "</tbody></table>";
+
                 } else {
                     // Sem registros no banco
                     mostrar += "<h4 class='margin'>" + data.erro + "</h4>";
                 }
+
                 // Colocar no DIV "resultado" acima
                 $('#resultado').html(mostrar).show();
             },
@@ -134,6 +131,7 @@
                 $('#resultado').html(mostrar).show();    
             }
         });
+
         }
     </script>
     <script src='https://unpkg.com/@popperjs/core@2'></script>

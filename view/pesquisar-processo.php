@@ -98,7 +98,7 @@
                     //    onde i é o índice e obj são os dados do produto
                     
                     mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
-                    mostrar +="<thead>     <tr>    <th>Aluno</th><th>Curso</th><th>Data_Inicio</th><th>Id_Processo</th></tr><thead>";
+                    mostrar +="<thead>     <tr>    <th>Id Processo</th><th>Aluno</th><th>Curso</th><th>Data_inicio</th></tr><thead>";
                     mostrar+="<tbody>   ";                  
                     data.processos.forEach(function(obj,i) {  
                         
@@ -109,10 +109,10 @@
                        // var row2 = mysqli_fetch_assoc(resultado2);
                        // var curso =row["descricao"];
                         
-                        mostrar += "<tr><td data-label='Aluno'>" + obj.cpf_aluno + "</td>";
+                        mostrar += "<tr><td data-label='Id Processo'><a href='consultar-processo.php?id=" +obj.id_processo+ "'>" + obj.id_processo + "</a></td>";
+                        mostrar += "<td data-label='Aluno'>" + obj.cpf_aluno + "</td>";
                         mostrar += "<td data-label='Curso'>" + obj.curso + "</td>";
-                        mostrar += "<td data-label='Data'>" + obj.data_inicio + "</td>";
-                        mostrar += "<td data-label='Id_Processo'>" + obj.id_processo + "</td></tr>";
+                        mostrar += "<td data-label='Data_inicio'>" + obj.data_inicio + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
                     mostrar += "</tbody></table>";

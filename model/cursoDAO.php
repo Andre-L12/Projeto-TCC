@@ -1,6 +1,6 @@
 <?php
     
-    require "conexaoBD.php";
+    require_once "conexaoBD.php";
     function comboBoxCursos(){
         
         $conexao = conectarBD();

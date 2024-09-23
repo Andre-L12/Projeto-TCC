@@ -121,7 +121,7 @@
                         else{
                             var x ="Feminino";
                         }
-                        mostrar += "<tr><td data-label='Nome'>" + obj.nome + "</td>";
+                        mostrar += "<tr><td data-label='Nome'><a href='consultar-instrutor.php?id=" +obj.matricula+ "'>" + obj.nome + "</a></td>";
                         mostrar += "<td data-label='CPF'>" + obj.cpf + "</td>";
                         mostrar += "<td data-label='Sexo'>" + x + "</td>";
                         mostrar += "<td data-label='Matrícula'>" + obj.matricula + "</td></tr>";
