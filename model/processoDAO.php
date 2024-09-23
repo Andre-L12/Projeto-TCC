@@ -32,5 +32,38 @@ function pegaIDProcesso($cpf){
         // Pegar os campos do REGISTRO
         $id_processo = $registro["id_processo"];
     return $id_processo;
+}
+function pesquisar ($pesq, $tipo) {
 
+    $conexao = conectarBD(); 
+
+    $sql = "SELECT * FROM processo WHERE ";
+    switch ($tipo) {
+        case 1: // Por nome
+                $sql = $sql . "cpf_aluno LIKE '$pesq%' ";
+                break;
+        case 2: // Por CPF
+                $sql = $sql . "curso = '$pesq' ";
+                break;
+        case 3: // Por ID
+            $sql = $sql . "id_processo = '$pesq' ";
+    }
+
+    $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    return $res;
+}
+
+function pesquisarProcessoPorCPFAluno ($pesq) {
+    return pesquisar($pesq,1);
+}
+
+//function pesquisarClientePorEstado ($pesq) {
+   // return pesquisar($pesq,2);}
+
+function pesquisarProcessoPorCurso ($pesq) {
+    return pesquisar($pesq,2);
+}
+
+function pesquisarProcessoPorID ($pesq) {
+    return pesquisar($pesq,3);
 }

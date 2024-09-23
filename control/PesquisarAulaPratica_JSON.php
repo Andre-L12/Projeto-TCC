@@ -23,7 +23,7 @@
                 $cpf_instrutor = $row["cpf_instrutor"];
                 $placa = $row["placa"];
                 $id_processo = $row["id_processo"];
-                $status = $row["status_detran"];
+                $status_detran = $row["status_detran"];
                 $obrigatoria = $row["obrigatoria"];
                 $data = $row["data_aula"];
                 $hora = $row["hora"];
@@ -35,7 +35,7 @@
                         "cpf_instrutor" => $cpf_instrutor,
                         "placa" => $placa,
                         "id_processo" => $id_processo,
-                        "status" => $status,
+                        "status" => $status_detran,
                         "obrigatoria" => $obrigatoria,
                         "hora" => $hora,
                         "data" => $data

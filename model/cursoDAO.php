@@ -20,4 +20,38 @@
         return $options;
 
     }
+    function pesquisar ($pesq, $tipo) {
+
+        $conexao = conectarBD(); 
+    
+        $sql = "SELECT * FROM curso WHERE ";
+        switch ($tipo) {
+            case 1: // Por nome
+                    $sql = $sql . "sigla LIKE '$pesq%' ";
+                    break;
+            case 2: // Por CPF
+                    $sql = $sql . "descricao = '$pesq' ";
+                    break;
+            case 3: // Por ID
+                $sql = $sql . "categoria = '$pesq' ";
+        }
+    
+        $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+        return $res;
+    }
+    
+    function pesquisarCursoPorSigla ($pesq) {
+        return pesquisar($pesq,1);
+    }
+    
+    //function pesquisarClientePorEstado ($pesq) {
+       // return pesquisar($pesq,2);}
+    
+    function pesquisarCursoPorDescricao ($pesq) {
+        return pesquisar($pesq,2);
+    }
+    
+    function pesquisarCursoPorCategoria ($pesq) {
+        return pesquisar($pesq,3);
+    }
 ?>

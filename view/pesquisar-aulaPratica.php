@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisar Aluno</title>
+    <title>Consultar Aulas Praticas</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -39,7 +39,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title">ALUNOS</span>
+                <span class="header-title">AULAS PRÁTICAS</span>
             </div>
         </header>
             <main class="content">
@@ -87,7 +87,7 @@
             // Chamar o PHP do servidor com AJAX
 
             $.ajax({
-            url: '../control/pesquisarAluno_JSON.php',
+            url: '../control/pesquisarAulaPratica_JSON.php',
             type: 'POST',
             data: { pesq: pesq },       // Envio do texto de pesquisa
             dataType: 'json',
@@ -101,25 +101,43 @@
                 if ( data.erro == "" )  {       
                     // Se NÃO tiver erros
 
-                    if ( data.alunos.length == 1) {
-                        mostrar += "<h4>Foi encontrado 1 aluno.</h4>";
+                    if ( data.aulas.length == 1) {
+                        mostrar += "<h4>Foi encontrado 1 aula.</h4>";
                     } else {
-                        mostrar += "<h4>Foram encontrados " + data.alunos.length + " alunos.</h4>";
+                        mostrar += "<h4>Foram encontrados " + data.aulas.length + " aulas.</h4>";
                     }
 
                     // Percorre todos os produtos do array "produtos", 
                     //    onde i é o índice e obj são os dados do produto
                     
                     mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
-                    mostrar +="<thead>     <tr>    <th>Foto</th><th>Nome</th><th>CPF</th><th>Email</th><th>Celular</th></tr><thead>";
+                    mostrar +="<thead>     <tr>    <th>Aluno</th><th>Instrutor</th><th>ID Processo</th><th>Placa Veículo</th><th>Data</th><th>Hora</th><th>Id</th><th>Status Detran</th><th>Obrigatoria</th></tr><thead>";
                     mostrar+="<tbody>   ";                  
-                    data.alunos.forEach(function(obj,i) {                  
+                    data.aulas.forEach(function(obj,i) {                  
                         
-                        mostrar += "<tr>    <td data-label='Foto'><img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'></td>";
-                        mostrar += "    <td data-label='Nome'>" + obj.nome + "</td>";
-                        mostrar += "<td data-label='CPF'>" + obj.cpf + "</td>";
-                        mostrar += "<td data-label='Email'>" + obj.email + "</td>";
-                        mostrar += "<td data-label='Celular'>" + obj.celular + "</td></tr>";
+                        if(obj.obrigatoria==0){
+                            var x="não";
+                        }
+                        else{
+                            var x ="sim";
+                        }
+                        if(obj.status_detran==0){
+                            var y="Não registrada";
+                        }
+                        else{
+                            var y ="Registrada";
+                        }
+
+
+                        mostrar += "<tr>    <td data-label='Aluno'>"+obj.cpf_aluno+"</td>";
+                        mostrar += "<td data-label='Instrutor'>" + obj.cpf_instrutor + "</td>";
+                        mostrar += "<td data-label='ID Processo'>" + obj.id_processo + "</td>";
+                        mostrar += "<td data-label='Placa Veículo'>" + obj.placa + "</td>";
+                        mostrar += "<td data-label='Data'>" + obj.data+ "</td>";
+                        mostrar += "<td data-label='Hora'>" + obj.hora+ "</td>";
+                        mostrar += "<td data-label='Id'>" + obj.id + "</td>";
+                        mostrar += "<td data-label='Status Detran'>" + y + "</td>"; 
+                        mostrar += "<td data-label='Obrigatoria'>" + x + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
                     mostrar += "</tbody></table>";

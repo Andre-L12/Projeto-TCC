@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisar Aluno</title>
+    <title>Consultar veiculo</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -39,7 +39,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title">ALUNOS</span>
+                <span class="header-title">VEÍCULOS</span>
             </div>
         </header>
             <main class="content">
@@ -87,7 +87,7 @@
             // Chamar o PHP do servidor com AJAX
 
             $.ajax({
-            url: '../control/pesquisarAluno_JSON.php',
+            url: '../control/pesquisarVeiculo_JSON.php',
             type: 'POST',
             data: { pesq: pesq },       // Envio do texto de pesquisa
             dataType: 'json',
@@ -101,28 +101,35 @@
                 if ( data.erro == "" )  {       
                     // Se NÃO tiver erros
 
-                    if ( data.alunos.length == 1) {
-                        mostrar += "<h4>Foi encontrado 1 aluno.</h4>";
+                    if ( data.veiculos.length == 1) {
+                        mostrar += "<h4>Foi encontrado 1 veículo .</h4>";
                     } else {
-                        mostrar += "<h4>Foram encontrados " + data.alunos.length + " alunos.</h4>";
+                        mostrar += "<h4>Foram encontrados " + data.veiculos.length + " veículos.</h4>";
                     }
 
                     // Percorre todos os produtos do array "produtos", 
                     //    onde i é o índice e obj são os dados do produto
                     
                     mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
-                    mostrar +="<thead>     <tr>    <th>Foto</th><th>Nome</th><th>CPF</th><th>Email</th><th>Celular</th></tr><thead>";
+                    mostrar +="<thead>     <tr>    <th>Marca</th><th>Modelo</th><th>Ano</th><th>Placa</th><th>Sigla-Categoria</th><th>Adaptado</th></tr><thead>";
                     mostrar+="<tbody>   ";                  
-                    data.alunos.forEach(function(obj,i) {                  
+                    data.veiculos.forEach(function(obj,i) {  
+                        if(obj.adaptado==0){
+                            var x="não";
+                        }
+                        else{
+                           var x="sim";
+                        }      
                         
-                        mostrar += "<tr>    <td data-label='Foto'><img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'></td>";
-                        mostrar += "    <td data-label='Nome'>" + obj.nome + "</td>";
-                        mostrar += "<td data-label='CPF'>" + obj.cpf + "</td>";
-                        mostrar += "<td data-label='Email'>" + obj.email + "</td>";
-                        mostrar += "<td data-label='Celular'>" + obj.celular + "</td></tr>";
+                        mostrar += "<tr>    <td data-label='Marca'>"+obj.marca +"</td>";
+                        mostrar += "    <td data-label='Modelo'>" + obj.modelo + "</td>";
+                        mostrar += "<td data-label='Ano'>" + obj.ano + "</td>";
+                        mostrar += "<td data-label='Placa'>" + obj.placa + "</td>";
+                        mostrar += "<td data-label='Sigla-Categoria'>" + obj.sigla_categoria + "</td>";
+                        mostrar += "<td data-label='Adaptado'>" + x + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
-                    mostrar += "</tbody></table>";
+                    mostrar += "</tbody></table>";  
 
                 } else {
                     // Sem registros no banco

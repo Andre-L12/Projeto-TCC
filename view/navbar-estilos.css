@@ -513,6 +513,49 @@ a {
   align-items: center;
   margin-bottom: 3px;
 }
+/*coisas de tebela*/
+@media screen and (max-width: 767px) {
+  .responsive-table {
+      border: 0;
+  }
+
+  .responsive-table caption {
+      font-size: 1.3em;
+  }
+
+  .responsive-table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+  }
+
+  .responsive-table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+  }
+
+  .responsive-table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      text-align: right;
+  }
+
+  .responsive-table td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+  }
+
+  .responsive-table td:last-child {
+      border-bottom: 0;
+  }
+}
 
 
 

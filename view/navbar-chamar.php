@@ -71,7 +71,7 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>"; // Colocar link
+        $navbar .= "<a href='pesquisar-instrutor.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Instrutor</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -93,7 +93,7 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>"; // Colocar link
+        $navbar .= "<a href='pesquisar-aulaPratica.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Aula</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -115,7 +115,7 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>"; // Colocar link
+        $navbar .= "<a href='pesquisar-veiculo.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Veículo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";
@@ -137,7 +137,7 @@
         $navbar .= "</a>";
         $navbar .= "</li>";
         $navbar .= "<li class='menu-item'>";
-        $navbar .= "<a href='#'>"; // Colocar link
+        $navbar .= "<a href='pesquisar-processo.php'>"; // Colocar link
         $navbar .= "<span class='menu-title'>Consultar Processo</span>";
         $navbar .= "</a>";
         $navbar .= "</li>";

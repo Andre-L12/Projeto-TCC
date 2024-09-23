@@ -7,7 +7,7 @@
 
         require_once '../model/AlunoDAO.php';              
         
-        $resultado = pesquisarAluno($pesq);
+        $resultado = pesquisarAlunoPorNome($pesq);
 
         if ( mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados
