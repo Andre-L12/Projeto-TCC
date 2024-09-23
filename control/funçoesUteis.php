@@ -13,6 +13,25 @@
         return $msgErro;
     }
 
+    function validarInstrutorCurso($instrutor, $curso, $dias_semana){
+        $msgErro = "";
+        
+        if (empty($instrutor)){
+            $msgErro .= "Selecione um instrutor. <br>";
+        }
+
+        if (empty($curso)){
+            $msgErro .= "Selecione um curso. <br>";
+        }
+
+        if ($dias_semana == "0000000"){
+            $msgErro .= "Selecione ao menos um dia da semana. <br>";
+        }
+
+        return $msgErro;
+
+    }
+
     function validarPreocesso($curso, $aluno, $data_inicio){
         $msgErro = "";
 

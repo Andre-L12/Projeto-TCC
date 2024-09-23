@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Instrutor</title>
+    <title>Vincular Instrutor a Curso</title>
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
@@ -40,12 +40,12 @@
                 </div>
                 <!-- Form Cadastrar Instrutor -->
                 <div class="form-container">
-                    <h2 class="form-titulo">Curso em que Instrutor atua</h2>
-                    <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor" >
+                    <h2 class="form-titulo">Vincular Instrutor a Curso</h2>
+                    <form action="../control/cadastrarInstrutorCurso.php" method="POST" name="formCadastroInstrutorCurso" >
                             <!-- Selecionar Instrutor -->
                             <div class="form-campo">
-                                <label for="nome" class="form-subtitulo">Instrutor: </label>
-                                <select name="curso" id="opcoesCurso" class="form-input">
+                                <label for="instrutor" class="form-subtitulo">Instrutor: </label>
+                                <select name="instrutor" id="instrutor" class="form-input">
                                     <?php
                                         require_once "../model/funcoesBD.php";
                                         $options = comboBoxInstrutor();              
@@ -57,11 +57,11 @@
                             <!-- Selecionar Curso -->
                             <div class="form-campo">
                                 <label for="curso" class="form-subtitulo">Atua no curso:</label>
-                                <select name="curso" id="opcoesCurso" class="form-input">
+                                <select name="curso" id="curso" class="form-input">
                                     <?php
-                                        // require_once "../model/funcoesBD.php";
-                                        // $options = comboBoxCurso();              
-                                        // echo $options;
+                                        require_once "../model/funcoesBD.php";
+                                        $options = comboBoxCurso();              
+                                        echo $options;
                                     ?>
                                 </select>
                             </div>
@@ -70,31 +70,31 @@
                             <div class="form-campo">
                                 <label class="form-subtitulo">Dias da semana que atua nesse curso:</label>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="segunda" name="segunda">
+                                    <input type="checkbox" id="segunda" name="segunda" value="seg" >
                                     <label for="segunda">Segunda-feira</label>  
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="terca" name="segunda">
+                                    <input type="checkbox" id="terca" name="terca" value="ter">
                                     <label for="terca">Terça-feira</label>  
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="quarta" name="segunda">
+                                    <input type="checkbox" id="quarta" name="quarta" value="qua">
                                     <label for="quarta">Quarta-feira</label>  
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="quinta" name="segunda">
+                                    <input type="checkbox" id="quinta" name="quinta" value="qui">
                                     <label for="quinta">Quinta-feira</label>  
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="sexta" name="segunda">
+                                    <input type="checkbox" id="sexta" name="sexta" value="sex">
                                     <label for="sexta">Sexta-feira</label>  
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="sabado" name="segunda">
-                                    <label for="sabado">Sabado</label>
+                                    <input type="checkbox" id="sabado" name="sabado" value="sab">
+                                    <label for="sabado">Sábado</label>
                                 </div>
                                 <div class="form-campo-checkbox">
-                                    <input type="checkbox" id="domingo" name="segunda">
+                                    <input type="checkbox" id="domingo" name="domingo" value="dom">
                                     <label for="domingo">Domingo</label>  
                                 </div>
                                  
