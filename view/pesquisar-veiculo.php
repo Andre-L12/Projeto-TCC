@@ -53,8 +53,8 @@
                     <div>
                         <!-- PESQUISAR -->
                         <form method="POST" >
-                            <input type="text" id="txtPesquisa" name="txtPesquisa" >
-                            <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="btn btn-success" style="background-color: #216EC0; border-color:#216EC0 ;">
+                            <input type="text" id="txtPesquisa" name="txtPesquisa" class="form-input" >
+                            <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
                         </form>
                     </div>
                     <div id="resultado" >                        

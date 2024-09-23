@@ -38,12 +38,12 @@
             echo json_encode($registros);
         } else {
             // instrutor não encontrado
-            echo json_encode(['erro' => 'instrutor não encontrado.']);
+            echo json_encode(['erro' => 'processo não encontrado.']);
         }
             
        
     } else {
-        echo json_encode(['erro' => 'ERRO ao pesquisar instrutores.']);
+        echo json_encode(['erro' => 'ERRO ao pesquisar processo.']);
     }
 
 ?>

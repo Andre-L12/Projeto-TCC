@@ -30,7 +30,7 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
 
 function alterarAluno ($id, $nome, $cpf, $email,$celular,$foto) {
 
-    $conexao = conectarBD();   
+    $conexao = conectarBD();
     
    
     // Transformar a imagem

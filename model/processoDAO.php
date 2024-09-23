@@ -69,3 +69,11 @@ function pesquisarProcessoPorCurso ($pesq) {
 function pesquisarProcessoPorID ($pesq) {
     return pesquisar($pesq,3);
 }
+
+function excluirProcesso($id){
+    $sql = "DELETE FROM processo WHERE id_processo = $id";
+
+    $conexao = conectarBD();  
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    //return
+}

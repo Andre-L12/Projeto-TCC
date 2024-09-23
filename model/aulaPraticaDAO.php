@@ -21,12 +21,12 @@ function cadastrarAulaPratica($cpf_aluno, $cpf_instrutor, $placa, $id_processo, 
         $id = mysqli_insert_id($conect);
 
         if ($select2) {
-            $mensagem = "Aula $id inserida com sucesso!";
+            $mensagem = "Aula $id inserida com sucesso.";
         } else {
-            $mensagem = "Não foi possível realizar o cadastro!";
+            $mensagem = "Não foi possível realizar o cadastro.";
         }
     } else {
-        $mensagem = "Essa aula já existe!";
+        $mensagem = "Essa aula já existe.";
     }
 
     return $mensagem;

@@ -43,7 +43,7 @@
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
                     <h1 class="form-titulo">Agendar Aula Prática</h1>
-                    <form action="../../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
+                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
                         <div>
                             <!-- Campo Instrutor -->
                             <div class="form-campo">

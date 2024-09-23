@@ -20,7 +20,7 @@
         return $options;
 
     }
-    function pesquisar ($pesq, $tipo) {
+    function pesquisarCS ($pesq, $tipo) {
 
         $conexao = conectarBD(); 
     
@@ -41,17 +41,17 @@
     }
     
     function pesquisarCursoPorSigla ($pesq) {
-        return pesquisar($pesq,1);
+        return pesquisarCS($pesq,1);
     }
     
     //function pesquisarClientePorEstado ($pesq) {
        // return pesquisar($pesq,2);}
     
     function pesquisarCursoPorDescricao ($pesq) {
-        return pesquisar($pesq,2);
+        return pesquisarCS($pesq,2);
     }
     
     function pesquisarCursoPorCategoria ($pesq) {
-        return pesquisar($pesq,3);
+        return pesquisarCS($pesq,3);
     }
 ?>
