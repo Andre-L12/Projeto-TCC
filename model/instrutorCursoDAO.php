@@ -27,4 +27,12 @@ function vincularInstrutorCurso($instrutor, $curso, $dias_semana){
     return $mensagem;
 }
 
+function excluirInstrutorCurso($id_instrutor_curso){
+    $sql = "DELETE FROM curso_instrutor WHERE id_curso_insrutor = $id_instrutor_curso";
+
+    $conexao = conectarBD();  
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    // return
+}
+
 ?>

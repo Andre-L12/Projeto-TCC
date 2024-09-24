@@ -67,14 +67,8 @@
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
     
     }
-    function pesquisarVeiculo($pesq) {
-        $conexao = conectarBD(); 
-        $sql = "SELECT * FROM veiculo WHERE placa LIKE '%$pesq%' ";
-        $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
-        return $res;
-        
-    }
-    function pesquisar ($pesq, $tipo) {
+
+    function pesquisarVeiculo ($pesq, $tipo) {
     
         $conexao = conectarBD(); 
     
@@ -98,20 +92,20 @@
     }
     
     function pesquisarVeiculoPorModelo ($pesq) {
-        return pesquisar($pesq,1);
+        return pesquisarVeiculo($pesq,1);
     }
     
     //function pesquisarClientePorEstado ($pesq) {
        // return pesquisar($pesq,2);}
     
     function pesquisarVeiculoPorMarca ($pesq) {
-        return pesquisar($pesq,2);
+        return pesquisarVeiculo($pesq,2);
     }
     
     function pesquisarVeiculoPorAdaptado ($pesq) {
-        return pesquisar($pesq,3);
+        return pesquisarVeiculo($pesq,3);
     }
     function pesquisarVeiculoPorPlaca ($pesq) {
-        return pesquisar($pesq,4);
+        return pesquisarVeiculo($pesq,4);
     }
 ?>

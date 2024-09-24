@@ -1,5 +1,5 @@
 <?php
-    require "conexaoBD.php";
+    require_once "conexaoBD.php";
     function criarInstrutor($nome, $cpf, $sexo){
         $conexao = conectarBD();
 
@@ -62,14 +62,7 @@
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
     
     }
-    function pesquisarInstrutor($pesq) {
-        $conexao = conectarBD(); 
-        $sql = "SELECT * FROM instrutor WHERE nome LIKE '%$pesq%' ";
-        $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
-        return $res;
-        
-    }
-    function pesquisar ($pesq, $tipo) {
+    function pesquisarInstrutor($pesq, $tipo) {
     
         $conexao = conectarBD(); 
     
@@ -82,7 +75,7 @@
                     $sql = $sql . "cpf = '$pesq' ";
                     break;
             case 3: // Por ID
-                $sql = $sql . "id = '$pesq' ";
+                $sql = $sql . "id_instrutor = '$pesq' ";
         }
     
         $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
@@ -90,18 +83,18 @@
     }
     
     function pesquisarInstrutorPorNome ($pesq) {
-        return pesquisar($pesq,1);
+        return pesquisarInstrutor($pesq,1);
     }
     
     //function pesquisarClientePorEstado ($pesq) {
        // return pesquisar($pesq,2);}
     
     function pesquisarInstrutorPorCPF ($pesq) {
-        return pesquisar($pesq,2);
+        return pesquisarInstrutor($pesq,2);
     }
     
     function pesquisarInstrutorPorID ($pesq) {
-        return pesquisar($pesq,3);
+        return pesquisarInstrutor($pesq,3);
     }
     // function excluirInstutor{
 
