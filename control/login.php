@@ -34,7 +34,7 @@
         $password=$resultado["senha"];
 
         if ($senha==$password){
-            header("Location:../view/navbar.html");
+            header("Location:../view/menu-funcionario.php");
         } else {
             $mensagem="Deu errado! Usuário ou senha incorretos";
             header("Location:../view/tela-login.php?msg=$mensagem");

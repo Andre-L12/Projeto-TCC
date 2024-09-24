@@ -50,7 +50,7 @@
         // Montar SQL
         $sql = "UPDATE veiculo SET "
         . "sigla_categoria = '$sigla_categoria', "
-        . "adaptado = '$adaptado', "
+        . "adaptado = $adaptado, "
         . "marca = '$marca', "
         . "modelo = '$modelo',"
         . "ano = '$ano'"
