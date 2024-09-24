@@ -5,6 +5,7 @@
         require_once "../model/aulaPraticaDAO.php";
 
         $id = $_GET["id"];
+<<<<<<< HEAD
         $resultado =pesquisarAulaPorPlaca($id);
         $qtd=mysqli_num_rows($resultado);
         if($qtd==0){
@@ -16,8 +17,17 @@
             header("Location:../view/pesquisar-veiculo.php?msg=$msg"); 
         }
         
+=======
+
+        // Exlcuir Veículo
+        excluirVeiculo($id);
+
+        // Voltar para a tela Pesquisar
+        header("Location:../view/pesquisar-veiculo.php");
+>>>>>>> d35300ea00f1849f11a8ea286d2abba4dffbf7b7
     }
     else {
-        header("Location:../view/pesquisar-veiculo.php?id=$id"); 
+        // ERRO: Voltar para tela Consultar
+        header("Location:../view/consultar-veiculo.php?id=$id"); 
     }
 ?>
