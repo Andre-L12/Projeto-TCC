@@ -56,7 +56,7 @@
     }
     
     function excluirInstrutor ( $id ) {
-        $sql = "DELETE FROM instrutor WHERE id = $id";
+        $sql = "DELETE FROM instrutor WHERE id_instrutor = $id";
     
         $conexao = conectarBD();  
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );

@@ -36,9 +36,9 @@ function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
     
    
     // Transformar a imagem //se der erro tirar essa parte
-    $tamanhoImg = $foto["size"]; 
-    $arqAberto = fopen ( $foto["tmp_name"], "r" );
-    $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
+    // $tamanhoImg = $foto["size"]; 
+    // $arqAberto = fopen ( $foto["tmp_name"], "r" );
+    // $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
 
     // Montar SQL
     $sql = "UPDATE aluno SET "

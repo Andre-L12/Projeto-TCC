@@ -17,40 +17,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     
-   <!--Buscando os dados com php-->
-     <?php
-        require_once "../model/AlunoDAO.php";
-        require_once "../model/aulaPraticaDAO.php";
-        require_once "../model/processoDAO.php";
-        if(isset($_GET["id"])){
-        $id = $_GET["id"];
-        $resultado=pesquisarAlunoPorID($id);
-        $row=mysqli_fetch_assoc($resultado);
-        $nome=$row['nome'];
-        $cpf=$row["cpf"];
-        $id=$row["id"];
-        $email=$row["email"];
-        $celular=$row["celular"];
-        $foto = $row["foto"];
-        $imageBase64 = base64_encode($foto);
-
-        //buscando processos
-        $resultado3=pesquisarProcessoPorCPFAluno($cpf);
-        $qtd_processos=mysqli_num_rows($resultado3);
-        $processos=comboBoxProcessoAluno($cpf);
-        
-
-        //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
-        $resultado2=pesquisarAulaPorAluno($cpf);
-        $aulas=mysqli_num_rows($resultado2);
-        //busca veículo
-        //busca cursos
-        }
-    ?>
 </head>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
+        
+        <!--Buscando os dados com php-->
+        <?php
+            require_once "../model/AlunoDAO.php";
+            require_once "../model/aulaPraticaDAO.php";
+            require_once "../model/processoDAO.php";
+            if(isset($_GET["id"])){
+            $id = $_GET["id"];
+            $resultado = pesquisarAlunoPorID($id);
+            $row = mysqli_fetch_assoc($resultado);
+            $nome = $row['nome'];
+            $cpf = $row["cpf"];
+            $id = $row["id"];
+            $email = $row["email"];
+            $celular = $row["celular"];
+            $foto = $row["foto"];
+            $imageBase64 = base64_encode($foto);
+
+            //buscando processos
+            $resultado3 = pesquisarProcessoPorCPFAluno($cpf);
+            $qtd_processos = mysqli_num_rows($resultado3);
+            $processos = comboBoxProcessoAluno($cpf);
+            
+            //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
+            $resultado2 = pesquisarAulaPorAluno($cpf);
+            $aulas = mysqli_num_rows($resultado2);
+            //busca veículo
+            //busca cursos
+            }
+        ?>
+        
         <?php
             require_once "navbar-chamar.php";
             $navbar = chamarNavbar();              
@@ -63,7 +63,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title"><?php echo $nome; ?></span>
+                <span class="header-title">ALUNOS > <?php echo $nome; ?></span>
             </div>
         </header>
             <main class="content">
@@ -101,10 +101,9 @@
 
                     <!--BOTÕES DE AÇÃO CADASTRAR E EXCLUIR -->
                     
-                    <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br><br>
-                        <input type="button" id="btnExcluir" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
-                        <br><br>
-                        <input type="button" id="btnExcluir" name="btnPesq" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
+                    <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
+                        <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Alterar</button>
+                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir</button>
                     </div>
                   
                 </div>
@@ -112,6 +111,27 @@
             <div class="overlay"></div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('btnAlterar').addEventListener('click', function() {
+            var cpf = "<?php echo $cpf; ?>"; 
+            
+            window.location.href = 'cadastrar-aluno.php?id=' + cpf;
+        });
+
+        document.getElementById('btnExcluir').addEventListener('click', function() {
+            var id = "<?php echo $id; ?>";
+
+            // CONFIRMAR ANTES DE EXCLUIR
+            var confirmacao = confirm("Você tem certeza de que deseja excluir este aluno?");
+            
+            if (confirmacao) {
+                window.location.href = '../control/excluirAluno.php?id=' + id;
+            }
+            
+        });
+    </script>
+
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

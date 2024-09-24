@@ -61,7 +61,7 @@
     }
     
     function excluirVeiculo ( $placa ) {
-        $sql = "DELETE FROM veiculo WHERE placa = $placa";
+        $sql = "DELETE FROM veiculo WHERE placa = '$placa'";
     
         $conexao = conectarBD();  
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );

@@ -127,7 +127,7 @@
                 // ERRO ao pesquisar
                 var mostrar = "";
                 mostrar += "<h4 class='margin'>Erro ao chamar o pesquisar do servidor.</h4>";
-                $('#resultado').html(mostrar).show();    
+                $('#resultado').html(mostrar).show();
             }
         });
         }

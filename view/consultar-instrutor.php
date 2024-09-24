@@ -17,34 +17,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     
-   <!--Buscando os dados com php-->
-     <?php
-        require_once "../model/instrutorDAO.php";
-        require_once "../model/aulaPraticaDAO.php";
-        if(isset($_GET["id"])){
-        $id = $_GET["id"];
-        $resultado=pesquisarInstrutorPorID($id);
-        $row=mysqli_fetch_assoc($resultado);
-        $nome=$row['nome'];
-        $cpf=$row["cpf"];
-        $matricula=$row["id_instrutor"];
-        $sexo=$row["sexo"];
-        if($sexo=="M"){
-            $x="Masculino";
-        }
-        else{
-            $x="Feminino";
-        }
-        $resultado2=pesquisarAulaPorInstrutor($cpf);
-        $aulas=mysqli_num_rows($resultado2);
-        //busca veículo
-        //busca cursos
-        }
-    ?>
 </head>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
+        
+        <!--Buscando os dados com php-->
+        <?php
+            require_once "../model/instrutorDAO.php";
+            require_once "../model/aulaPraticaDAO.php";
+            if(isset($_GET["id"])){
+                $id = $_GET["id"];
+                $resultado = pesquisarInstrutorPorID($id);
+                $row = mysqli_fetch_assoc($resultado);
+                $nome = $row['nome'];
+                $cpf = $row["cpf"];
+                $matricula = $row["id_instrutor"];
+                $sexo = $row["sexo"];
+                if ($sexo=="M"){
+                    $x="Masculino";
+                } else {
+                    $x="Feminino";
+                }
+                $resultado2=pesquisarAulaPorInstrutor($cpf);
+                $aulas=mysqli_num_rows($resultado2);
+                //busca veículo
+                //busca cursos
+            }
+        ?>
+        
         <?php
             require_once "navbar-chamar.php";
             $navbar = chamarNavbar();              
@@ -57,7 +57,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title"><?php echo $nome; ?></span>
+                <span class="header-title">INSTRUTORES > <?php echo $nome; ?></span>
             </div>
         </header>
             <main class="content">
@@ -66,6 +66,9 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
+
+                
+
                 <!-- Form Cadastrar Aluno -->
                 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #f4f4f4;   border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class="col-sm-5" style="font-family: Arial, sans-serif; color: #333;">
@@ -84,9 +87,8 @@
 
                     <!--BOTÕES DE AÇÃO CADASTRAR E EXCLUIR -->
                     <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
-                        <input type="button" id="btnExcluir" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
-                        <br><br>
-                        <input type="button" id="btnExcluir" name="btnPesq" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
+                        <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Alterar</button>
+                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir</button>
                     </div>
                   
                 </div>
@@ -94,6 +96,27 @@
             <div class="overlay"></div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('btnAlterar').addEventListener('click', function() {
+            var cpf = "<?php echo $cpf; ?>"; 
+            
+            window.location.href = 'cadastrar-instrutor.php?id=' + cpf;
+        });
+
+        document.getElementById('btnExcluir').addEventListener('click', function() {
+            var id = "<?php echo $id; ?>";
+
+            // CONFIRMAR ANTES DE EXCLUIR
+            var confirmacao = confirm("Você tem certeza de que deseja excluir este instrutor?");
+            
+            if (confirmacao) {
+                window.location.href = '../control/excluirInstrutor.php?id=' + id;
+            }
+            
+        });
+    </script>
+
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

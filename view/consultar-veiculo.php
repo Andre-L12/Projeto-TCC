@@ -17,38 +17,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     
-   <!--Buscando os dados com php-->
-     <?php
-        require_once "../model/veiculoDAO.php";
-        require_once "../model/aulaPraticaDAO.php";
-        if(isset($_GET["id"])){
-        $id = $_GET["id"];
-        $resultado=pesquisarVeiculoPorPlaca($id);
-        $row=mysqli_fetch_assoc($resultado);
-        $marca=$row['marca'];
-        $modelo=$row["modelo"];
-        $categoria=$row["sigla_categoria"];
-        $ano=$row["ano"];
-        $adaptado=$row["adaptado"];
-        if($adaptado==0){
-            $x="não";
-        }
-        else{
-            $x="sim";
-        }
-            
-        //busca informações de aula
-        $resultado2=pesquisarAulaPorPlaca($id);
-        $aulas=mysqli_num_rows($resultado2);
-        
-        //busca informação de instrutores
-        
-        }
-    ?>
 </head>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
+        
+        <!--Buscando os dados com php-->
+        <?php
+            require_once "../model/veiculoDAO.php";
+            require_once "../model/aulaPraticaDAO.php";
+            if(isset($_GET["id"])){
+            $id = $_GET["id"];
+            $resultado = pesquisarVeiculoPorPlaca($id);
+            $row = mysqli_fetch_assoc($resultado);
+            $marca = $row['marca'];
+            $modelo = $row["modelo"];
+            $categoria = $row["sigla_categoria"];
+            $ano = $row["ano"];
+            $adaptado = $row["adaptado"];
+            if ($adaptado == 0){
+                $x = "Não";
+            }
+            else{
+                $x = "Sim";
+            }
+                
+            //busca informações de aula
+            $resultado2=pesquisarAulaPorPlaca($id);
+            $aulas=mysqli_num_rows($resultado2);
+            
+            //busca informação de instrutores
+            
+            }
+        ?>
+        
         <?php
             require_once "navbar-chamar.php";
             $navbar = chamarNavbar();              
@@ -61,7 +62,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title"><?php echo "$marca $modelo $id"; ?></span>
+                <span class="header-title">VEÍCULOS > <?php echo "$marca $modelo $id"; ?></span>
             </div>
         </header>
             <main class="content">
@@ -93,9 +94,8 @@
 
                     <!--BOTÕES DE AÇÃO CADASTRAR E EXCLUIR -->
                     <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
-                        <input type="button" id="btnExcluir" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
-                        <br><br>
-                        <input type="button" id="btnExcluir" name="btnPesq" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
+                        <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Alterar</button>
+                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir</button>
                     </div>
                   
                 </div>
@@ -103,6 +103,25 @@
             <div class="overlay"></div>
         </div>
     </div>
+
+    <script>
+        var id = "<?php echo $id; ?>"; // Placa
+
+        document.getElementById('btnAlterar').addEventListener('click', function() {
+            window.location.href = 'cadastrar-veiculo.php?id=' + id;
+        });
+
+        document.getElementById('btnExcluir').addEventListener('click', function() {
+            // CONFIRMAR ANTES DE EXCLUIR
+            var confirmacao = confirm("Você tem certeza de que deseja excluir este veículo?");
+            
+            if (confirmacao) {
+                window.location.href = '../control/excluirVeiculo.php?id=' + id;
+            }
+            
+        });
+    </script>
+
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
