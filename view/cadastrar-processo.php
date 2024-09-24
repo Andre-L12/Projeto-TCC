@@ -40,14 +40,46 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
+
+                <?php
+                    if (isset($_GET['id'])){
+                        // ALTERAR
+                        require "../model/processoDAO.php";
+
+                        $id = $_GET['id'];
+
+                        $resProcesso = pesquisarProcessoPorID($id);
+                        if ($resProcesso != null){
+                            $registro = mysqli_fetch_assoc($resProcesso);
+
+                            $aluno = $registro["cpf_aluno"];
+                            // $aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf_aluno))["nome"];
+
+                            $curso = $registro["curso"];
+                            $inicio = $registro["data_inicio"];
+
+                            $titulo = "Alterar Processo";
+                            $botao = "Alterar";
+                        }
+                    } else {
+                        // INSERIR
+                        $aluno = "";
+                        $curso = "";
+                        $inicio = "";
+
+                        $titulo = "Cadastrar Processo";
+                        $botao = "Cadastrar";
+                    }
+                ?>
+
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
-                    <h1 class="form-titulo">Iniciar Processo</h1>
+                    <h1 class="form-titulo"><?php echo $titulo?></h1>
                     <form action="../control/iniciarProcesso.php" method="POST" name="formCadastroProcesso">
                             <!-- Campo CPF -->
                             <div class="form-campo">
                                 <label for="aluno" class="form-subtitulo">Aluno:</label>
-                                <select name="aluno" class="form-input">
+                                <select name="aluno" class="form-input" value="<?php echo $aluno?>">
                                     <?php
                                     require_once "../model/funcoesBD.php";
                                     $options = comboBoxAluno();
@@ -59,7 +91,7 @@
                             <!-- Campo CURSO -->
                             <div class="form-campo">
                                 <label for="curso" class="form-subtitulo">Curso:</label>
-                                <select name="curso" class="form-input">
+                                <select name="curso" class="form-input" value="<?php echo $curso?>">
                                     <?php
                                     $options = comboBoxCurso();
                                     echo $options;
@@ -70,11 +102,11 @@
                             <!-- Campo DATA -->
                             <div class="form-campo">
                                 <label for="data_inicio" class="form-subtitulo">Data de inicio:</label>
-                                <input type="date" name="data_inicio" id="data_inicio" class="form-input">
+                                <input type="date" name="data_inicio" id="data_inicio" class="form-input" value="<?php echo $inicio?>">
                             </div>
 
                             <div>
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>" class="form-btn"><?php echo $botao; ?></button>
                             </div>
 
                             <?php

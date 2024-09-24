@@ -41,31 +41,73 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
+
+                <?php
+                    if (isset($_GET['id'])){
+                        // ALTERAR
+                        require "../model/instrutorDAO.php";
+
+                        $cpf = $_GET['id'];
+
+                        $resInstrutor = pesquisarInstrutorPorCPF($cpf);
+                        if ($resInstrutor != null){
+                            $registro = mysqli_fetch_assoc($resInstrutor);
+
+                            $nome = $registro["nome"];
+                            $cpf = $registro["cpf"];
+                            $sexo = $registro["sexo"];
+
+                            if ( $sexo == 'M') {
+                                $sexoM = "checked";
+                                $sexoF = "";
+                            } else {
+                                $sexoM = "";
+                                $sexoF = "checked";
+                            }
+
+                            $titulo = "Alterar Instrutor";
+                            $botao = "Alterar";
+                        } 
+
+                    } else {
+                        // INSERIR
+                        $nome = "";
+                        $cpf = "";
+                        $sexo = "";
+
+                        $sexoM = "";
+                        $sexoF = "";
+
+                        $titulo = "Cadastrar Instrutor";
+                        $botao = "Cadastrar";
+                    }
+                ?>
+
                 <!-- Form Cadastrar Instrutor -->
                 <div class="form-container">
-                    <h1 class="form-titulo">Cadastrar Instrutor</h1>
+                    <h1 class="form-titulo"><?php echo $titulo?></h1>
                     <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor" >
                             <!-- Campo nome -->
                             <div class="form-campo">
                                 <label for="nome" class="form-subtitulo">Nome completo:</label>
-                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui" class="form-input">
+                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui" class="form-input" value="<?php echo $nome ?>">
                             </div>
 
                             <!-- Campo CPF -->
                             <div class="form-campo">
                                 <label for="cpf" class="form-subtitulo">CPF:</label>
-                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00" class="form-input">
+                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00" class="form-input" value="<?php echo $cpf ?>">
                             </div>
 
                             <!-- Radio Sexo -->
                             <div class="form-campo">
                                 <label class="form-subtitulo">Sexo:</label>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="M" id="masc">
+                                    <input type="radio" name="sexo" value="M" id="masc" <?php echo $sexoM; ?>>
                                     <label for="masc">Masculino</label>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="F" id="fem">
+                                    <input type="radio" name="sexo" value="F" id="fem" <?php echo $sexoF; ?>>
                                     <label for="fem">Feminino</label>
                                 </div>
                             </div>
@@ -97,7 +139,7 @@
                             </div> -->
 
                             <div class="form-div-btn">
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>" class="form-btn"><?php echo $botao; ?></button>
                             </div>
 
                             <?php

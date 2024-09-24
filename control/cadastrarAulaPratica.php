@@ -11,7 +11,7 @@
     $status=$_POST["status_detran"];
 
     require_once "../model/processoDAO.php";
-    $id_processo =pegaIDProcesso($cpf_aluno);
+    $id_processo = pegaIDProcesso($cpf_aluno); // Dá erro se um aluno tiver mais que um processo
     
     //Inserindo dados no banco
     $id = cadastrarAulaPratica($cpf_aluno,$cpf_instrutor,$placa,$id_processo,$data,$hora,$obrigatoria,$status);

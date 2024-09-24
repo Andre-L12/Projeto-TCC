@@ -26,16 +26,31 @@ function iniciarProcesso($curso,$aluno,$data_inicio){
     }
     return $mensagem;
 }
-function pegaIDProcesso($cpf){
-    $conect = conectarBD();
-    $query1 = "SELECT * FROM processo WHERE cpf_aluno='$cpf';";
-    $select1 = mysqli_query($conect,$query1); 
-    $registro = mysqli_fetch_assoc($select1);
-        // Pegar os campos do REGISTRO
-        $id_processo = $registro["id_processo"];
+
+function alterarProcesso($curso, $aluno, $data_inicio, $id_processo){
+    $conexao = conectarBD();
+
+    // Montar SQL
+    $sql = "UPDATE processo SET "
+    . "curso = '$curso', "
+    . "cpf_aluno = '$aluno', "
+    . "data_inicio = '$data_inicio' "
+    . "WHERE id_processo = $id_processo";
+
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) ); // Inserir no banco
+    
     return $id_processo;
 }
-function pesquisar ($pesq, $tipo) {
+function pegaIDProcesso($aluno){
+    $conect = conectarBD();
+    $query1 = "SELECT * FROM processo WHERE cpf_aluno='$aluno';";
+    $select1 = mysqli_query($conect,$query1); 
+    $registro = mysqli_fetch_assoc($select1);
+    // Pegar os campos do REGISTRO
+    $id_processo = $registro["id_processo"];
+    return $id_processo;
+}
+function pesquisar($pesq, $tipo) {
 
     $conexao = conectarBD(); 
 

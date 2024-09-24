@@ -2,6 +2,8 @@
     require "funçoesUteis.php";
     require "../model/veiculoDAO.php";
 
+    $acao = $_POST["btnCadastrar"];
+
     $sigla = $_POST["categoria"];
     $adaptado = $_POST["adaptado"];
     $placa = $_POST["txtPlaca"];
@@ -9,26 +11,25 @@
     $modelo = $_POST["txtModelo"];
     $ano = $_POST["ano"];
 
-    $msg = "";
-
-    $veiculoExiste = veiculoExiste($placa);
-
-    if (!$veiculoExiste){
-        $msg = validarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
-    } else {
-        $msg = "Esse veículo já está cadastrado.";
-    }
+    $msg = validarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
 
     if(empty($msg)){
         //Tratando dados
         $marca = trim($marca);
-        $modelo = trim($modelo);    
+        $modelo = trim($modelo);
+        
+        if ($acao == "Cadastrar"){
+            //Inserindo dados no banco
+            $id = criarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
 
-        //Inserindo dados no banco
-        $id = criarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
+            //Devolvendo mensagem
+            header("Location:../view/cadastrar-veiculo.php?msg= $id");
+        } else {
+            $id = alterarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano);
 
-        //Devolvendo mensagem
-        header("Location:../view/cadastrar-veiculo.php?msg=Cadastro de veículo $id realizado com sucesso.");
+            header("Location:../view/cadastrar-veiculo.php?msg=Veículo $id alterado com sucesso.");
+        }
+        
     } else {
         header("Location:../view/cadastrar-veiculo.php?msg=$msg");
     }

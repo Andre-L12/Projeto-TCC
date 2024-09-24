@@ -483,6 +483,7 @@ a {
 .form-subtitulo{
   font-weight: bold;
   margin-bottom: 5px; 
+  display: flex;
 }
 
 .form-input {
@@ -513,6 +514,22 @@ a {
   align-items: center;
   margin-bottom: 3px;
 }
+
+.foto-usuario{
+  display: flex;
+  width: 70px; 
+  height: 70px;
+  min-width: 70px;
+  min-height: 70px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  border: 2px solid var(--Branco-azulado); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
 /*coisas de tebela*/
 @media screen and (max-width: 767px) {
   .responsive-table {

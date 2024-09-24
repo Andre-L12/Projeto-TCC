@@ -38,15 +38,61 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
+
+                <?php
+                    if (isset($_GET['id'])){
+                        // ALTERAR
+                        require "../model/veiculoDAO.php";
+
+                        $placa = $_GET['id'];
+
+                        $resVeiculo = pesquisarVeiculoPorPlaca($placa);
+                        if ($resVeiculo != null){
+                            $registro = mysqli_fetch_assoc($resVeiculo);
+
+                            $sigla = $registro["sigla_categoria"];
+                            $adaptado = $registro["adaptado"];
+                            $placa = $registro["placa"];
+                            $marca = $registro["marca"];
+                            $modelo = $registro["modelo"];
+                            $ano = $registro["ano"];
+
+                            if ( $adaptado == '0') {
+                                $adaptadoN = "checked";
+                                $adaptadoS = "";
+                            } else {
+                                $adaptadoN = "";
+                                $adaptadoS = "checked";
+                            }
+
+                            $titulo = "Alterar Veículo";
+                            $botao = "Alterar";
+                        }
+                    } else {
+                        // INSERIR
+                        $sigla = "";
+                        $adaptado = "";
+                        $placa = "";
+                        $marca = "";
+                        $modelo = "";
+                        $ano = "";
+
+                        $adaptadoN = "";
+                        $adaptadoS = "";
+
+                        $titulo = "Cadastrar Veículo";
+                        $botao = "Cadastrar";
+                    }
+                ?>
+
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
-                    <h1 class="form-titulo">Cadastrar Veículo</h1>
+                    <h1 class="form-titulo"><?php echo $titulo?></h1>
                     <form action="../control/cadastrarVeiculo.php" method="POST" name="formCadastroVeiculo">
                             <!-- ComboBox Categoria do veículo -->
                             <div class="form-campo">
                                 <label for="categoria" class="form-subtitulo">Categoria:</label>
-                                <select name="categoria" id="categoria" class="form-input">
-                                    <option value=""></option>
+                                <select name="categoria" id="categoria" class="form-input" value="<?php echo $sigla ?>">
                                     <option value="ACC">ACC</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
@@ -60,11 +106,11 @@
                             <div class="form-campo">
                                 <label class="form-subtitulo">Veículo adaptado?</label>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="adaptado" value="true" id="sim">
+                                    <input type="radio" name="adaptado" value="true" id="sim" <?php echo $adaptadoS; ?>>
                                     <label for="sim">Sim</label>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="adaptado" value="false" id="nao">
+                                    <input type="radio" name="adaptado" value="false" id="nao" <?php echo $adaptadoN; ?>>
                                     <label for="nao">Não</label>
                                 </div>
                             </div>
@@ -72,29 +118,29 @@
                             <!-- Campo Placa -->
                             <div class="form-campo">
                                 <label for="placa" class="form-subtitulo">Placa:</label>
-                                <input type="text" name="txtPlaca" id="placa" placeholder="ex.: QTP5F71" maxlength="7" class="form-input">
+                                <input type="text" name="txtPlaca" id="placa" placeholder="ex.: QTP5F71" maxlength="7" class="form-input" value="<?php echo $placa ?>">
                             </div>
 
                             <!-- Campo Marca -->
                             <div class="form-campo">
                                 <label for="marca" class="form-subtitulo">Marca:</label>
-                                <input type="text" name="txtMarca" id="marca" placeholder="ex.: Fiat" class="form-input">
+                                <input type="text" name="txtMarca" id="marca" placeholder="ex.: Fiat" class="form-input" value="<?php echo $marca ?>">
                             </div>
                             
                             <!-- Campo Modelo -->
                             <div class="form-campo">
                                 <label for="modelo" class="form-subtitulo">Modelo</label>
-                                <input type="text" name="txtModelo" id="modelo" placeholder="ex.: Uno" class="form-input">
+                                <input type="text" name="txtModelo" id="modelo" placeholder="ex.: Uno" class="form-input" value="<?php echo $modelo ?>">
                             </div>
                             
                             <!-- Campo Ano -->
                             <div class="form-campo">
                                 <label for="ano" class="form-subtitulo">Ano de fabricação:</label>
-                                <input type="number" name="ano" id="ano" placeholder="ex.: 2013" class="form-input">
+                                <input type="number" name="ano" id="ano" placeholder="ex.: 2013" class="form-input" value="<?php echo $ano ?>">
                             </div>
 
                             <div>
-                                <button type="input" class="form-btn">Cadastrar</button>
+                                <button type="input" class="form-btn" name="btnCadastrar" value="<?php echo $botao ?>"><?php echo $botao ?></button>
                             </div>
 
                             <?php

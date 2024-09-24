@@ -4,11 +4,26 @@
     //Função para criar veículo
     function criarVeiculo($sigla, $adaptado, $placa, $marca, $modelo, $ano){
         $conexao = conectarBD();
-        $sql = "INSERT INTO veiculo (sigla_categoria, adaptado, placa, marca, modelo, ano) VALUES ('$sigla', '$adaptado', '$placa', '$marca', '$modelo', '$ano')";
 
-        mysqli_query($conexao, $sql);
+        $query1="SELECT placa FROM veiculo WHERE placa='$placa'";
+        $select1=mysqli_query($conexao,$query1);  
+        $qtd=mysqli_num_rows($select1);
 
-        return $placa . " " . $marca . " " . $modelo;
+        if($qtd == 0){
+            $sql = "INSERT INTO veiculo (sigla_categoria, adaptado, placa, marca, modelo, ano) VALUES ('$sigla', '$adaptado', '$placa', '$marca', '$modelo', '$ano')";
+            $select2=mysqli_query($conexao,$sql);
+
+            if($select2){
+                $mensagem = "Veículo $placa inserido com sucesso.";
+            }
+            else{
+                $mensagem = "Não foi possível realizar o cadastro.";
+            }
+        } else {
+            $mensagem ="Esse veículo já existe.";
+        }
+
+        return $mensagem; 
 
     }
 
@@ -38,7 +53,7 @@
         . "adaptado = '$adaptado', "
         . "marca = '$marca', "
         . "modelo = '$modelo'"
-        . "WHERE placa = $placa";
+        . "WHERE placa = '$placa'";
     
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco
         

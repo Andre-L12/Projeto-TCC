@@ -2,11 +2,27 @@
     require "conexaoBD.php";
     function criarInstrutor($nome, $cpf, $sexo){
         $conexao = conectarBD();
-        $sql = "INSERT INTO instrutor (nome, cpf, sexo) VALUES ('$nome', '$cpf', '$sexo')";
 
-        mysqli_query($conexao, $sql);
+        $query1="SELECT cpf FROM instrutor WHERE cpf='$cpf'";
+        $select1=mysqli_query($conexao,$query1);  
+        $qtd=mysqli_num_rows($select1);
 
-        return $nome; 
+        if($qtd == 0){
+            $sql = "INSERT INTO instrutor (nome, cpf, sexo) VALUES ('$nome', '$cpf', '$sexo')";
+            $select2=mysqli_query($conexao,$sql);
+            $id = mysqli_insert_id($conexao);  
+            
+            if($select2){
+                $mensagem = "Intrutor $id inserido com sucesso.";
+            }
+            else{
+                $mensagem = "Não foi possível realizar o cadastro.";
+            }
+        } else {
+            $mensagem = "Esse instrutor já existe.";
+        }
+
+        return $mensagem; 
     }
 
     function instrutorExiste($cpf){
@@ -23,19 +39,18 @@
             return false;
         }
     }
-    function alterarInstrutor ($nome, $cpf, $sexo,$id_instrutor) {
+    function alterarInstrutor ($nome, $cpf, $sexo, $id_instrutor) {
 
         $conexao = conectarBD();   
         
-
         // Montar SQL
         $sql = "UPDATE instrutor SET "
         . "nome = '$nome', "
         . "cpf = '$cpf', "
-        . "sexo = '$sexo', "
+        . "sexo = '$sexo' "
         . "WHERE id_instrutor = $id_instrutor";
     
-        mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco
+        mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) ); // Inserir no banco
         
         return $id_instrutor;
     }

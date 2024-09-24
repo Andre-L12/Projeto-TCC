@@ -7,7 +7,7 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     $tamanhoImg = $foto["size"]; 
     $arqAberto = fopen ( $foto["tmp_name"], "r" );
     $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
-
+    
     $query1="SELECT cpf FROM aluno WHERE cpf='$cpf'";
     $select1=mysqli_query($conect,$query1);  
     $qtd=mysqli_num_rows($select1);
@@ -28,26 +28,32 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     return $mensagem;
 }
 
-function alterarAluno ($id, $nome, $cpf, $email,$celular,$foto) {
+function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
 
-    $conexao = conectarBD();   
-    
-   
-    // Transformar a imagem
-    $tamanhoImg = $foto["size"]; 
-    $arqAberto = fopen ( $foto["tmp_name"], "r" );
-    $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
+    $conexao = conectarBD();
 
     // Montar SQL
     $sql = "UPDATE aluno SET "
     . "nome = '$nome', "
     . "cpf = '$cpf', "
     . "email = '$email', "
-    . "celular = '$celular', "
-    . "imagem = '$midia'"
-    . "WHERE idCliente = $id";
+    . "celular = '$celular'";
 
-    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco
+    if ($foto != null) {
+        // Transformar a imagem
+        $tamanhoImg = $foto["size"]; 
+        $arqAberto = fopen ( $foto["tmp_name"], "r" );
+        $midia = addslashes( fread ( $arqAberto , $tamanhoImg ) );
+
+        // Montar SQL com foto
+        $sql = $sql . ", foto = '$midia'"
+                       . " WHERE id = $id";
+    } else {
+        // Não alterar a foto
+        $sql = $sql . " WHERE id = $id";
+    }
+
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) ); // Inserir no banco
     
     return $id;
 }

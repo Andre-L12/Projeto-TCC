@@ -83,35 +83,45 @@
         return $msgErro;
 
     }
-    function validarAluno($nome, $cpf,$foto){
+    function validarAluno($nome, $cpf, $email){
         $msgErro = "";
     if ( empty($nome) ) {
         $msgErro = $msgErro . "Informe o nome.<br>";        
-    }        
+    }
+
+    if (empty($email)){
+        $msgErro = $msgErro . "Informe o Email.<br>";
+    }
     
     if ( validarCPF2($cpf) == false) {
         $msgErro = $msgErro . "CPF inválido.<br>";
     }
 
-    if ( $foto["error"] != 0 ) {
+    return $msgErro;
+    }
+
+function validarImagem($imagem){
+    $msgErro = "";
+
+    if ( $imagem["error"] != 0 ) {
         $msgErro = $msgErro . "ERRO no upload do arquivo.<br>";
     } 
  
-    else if ( $foto["size"] > 1000000   ) {
+    else if ( $imagem["size"] > 1000000   ) {
             $msgErro = $msgErro . "Arquivo muito grande.<br>";
-    } 
-    else if ( ( $foto["type"] != "image/gif" ) &&
-    	( $foto["type"] != "image/jpeg" ) &&
-        ( $foto["type"] != "image/pjpeg" ) &&
-        ( $foto["type"] != "image/png" ) &&
-        ( $foto["type"] != "image/x-png" ) &&
-        ( $foto["type"] != "image/bmp" )  ) {
+    }
+    else if ( ( $imagem["type"] != "image/gif" ) &&
+    	( $imagem["type"] != "image/jpeg" ) &&
+        ( $imagem["type"] != "image/pjpeg" ) &&
+        ( $imagem["type"] != "image/png" ) &&
+        ( $imagem["type"] != "image/x-png" ) &&
+        ( $imagem["type"] != "image/bmp" )  ) {
 
        $msgErro = $msgErro . "Tipo de arquivo não permitido.<br>";
     }
 
     return $msgErro;
-    }
+}
     
 function validarCPF2($cpf) {
  
