@@ -65,7 +65,27 @@
             <div class="overlay"></div>
         </div>
     </div>
+    <?php
+        if(isset($_GET["msg"])){
+            $mensagem = $_GET["msg"];
+            echo "<script>alert('$mensagem');</script>"; // Alerta em JavaScript
+        }
+    ?>
     <script>
+        function converterData(dataBanco) {
+            if (!dataBanco) {
+                return null; // Retorna null se a data não for válida
+            }
+
+            // Divide a data recebida no formato YYYY-MM-DD
+            const partes = dataBanco.split("-");
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+
+            // Retorna a data no formato DD/MM/YYYY
+            return `${dia}/${mes}/${ano}`;
+        }
         $(document).ready(function(){
             <!-- Quando clicar no botão Pesquisar -->
             $('#btnPesq').click(function(e){
@@ -108,11 +128,13 @@
                        //$resultado2=pesquisarCursoPorSigla(obj.curso);
                        // var row2 = mysqli_fetch_assoc(resultado2);
                        // var curso =row["descricao"];
+                       const dataBanco = obj.data_inicio;  // Exemplo de data no formato do banco de dados
+                       const dataConvertida = converterData(dataBanco);
                         
                         mostrar += "<tr><td data-label='Id Processo'><a href='consultar-processo.php?id=" +obj.id_processo+ "'>" + obj.id_processo + "</a></td>";
                         mostrar += "<td data-label='Aluno'>" + obj.cpf_aluno + "</td>";
                         mostrar += "<td data-label='Curso'>" + obj.curso + "</td>";
-                        mostrar += "<td data-label='Data_inicio'>" + obj.data_inicio + "</td></tr>";
+                        mostrar += "<td data-label='Data_inicio'>" + dataConvertida + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
                     mostrar += "</tbody></table>";

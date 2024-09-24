@@ -68,7 +68,12 @@
             <div class="overlay"></div>
         </div>
     </div>
-
+    <?php
+            if(isset($_GET["msg"])){
+                $mensagem = $_GET["msg"];
+                echo "<script>alert('$mensagem');</script>"; // Alerta em JavaScript
+            }
+        ?>
     <script>
         $(document).ready(function(){
 
@@ -147,7 +152,7 @@
         });
 
         }
-
+      
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>

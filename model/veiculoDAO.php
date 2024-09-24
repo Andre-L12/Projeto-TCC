@@ -42,7 +42,7 @@
             return false;
         }
     }
-    function alterarVeiculo ($sigla_categoria,$adaptado,$placa,$marca,$modelo) {
+    function alterarVeiculo ($sigla_categoria,$adaptado,$placa,$marca,$modelo,$ano) {
 
         $conexao = conectarBD();   
         
@@ -52,7 +52,8 @@
         . "sigla_categoria = '$sigla_categoria', "
         . "adaptado = '$adaptado', "
         . "marca = '$marca', "
-        . "modelo = '$modelo'"
+        . "modelo = '$modelo',"
+        . "ano = '$ano'"
         . "WHERE placa = '$placa'";
     
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );     // Inserir no banco

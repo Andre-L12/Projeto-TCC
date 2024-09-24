@@ -69,8 +69,20 @@
                 }
             
                 // Exibe a data final com a cor correspondente
-                return "<p style='color: $cor;'><strong>Data de fim: </strong>" . $dataFinal->format('Y-m-d') . "</p>";
+                return "<p style='color: $cor;'><strong>Data de fim: </strong>" . $dataFinal->format('d/m/y') . "</p>";
             }
+            function converterData($dataBanco) {
+                // Verifica se a data foi passada corretamente
+                if (!$dataBanco || $dataBanco == '0000-00-00') {
+                    return null; // Retorna null se a data não for válida
+                }
+            
+                // Converte a data do formato Y-m-d para d/m/Y
+                $dataConvertida = DateTime::createFromFormat('Y-m-d', $dataBanco)->format('d/m/Y');
+            
+                return $dataConvertida;
+            }
+            $dataInicio=converterData($data_inicio);
 
             $data_fim= verificarPrazo($datafim);
 
@@ -101,7 +113,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title"><?php echo "$nome $curso"; ?></span>
+                <span class="header-title"> PROCESSOS > <?php echo "$nome > $curso"; ?></span>
             </div>
         </header>
             <main class="content">
@@ -118,7 +130,7 @@
                             <p><strong>Nome do aluno:</strong> <?php echo $nome; ?></p>
                             <p><strong>CPF do alno:</strong> <?php echo $cpf_aluno; ?></p>
                             <p><strong>Processo Id:</strong> <?php echo $id; ?></p>
-                            <p><strong>Data de inicio:</strong> <?php echo $data_inicio; ?></p>
+                            <p><strong>Data de inicio:</strong> <?php echo $dataInicio; ?></p>
                             <p><strong></strong> <?php echo $data_fim; ?></p>
                             
                             <br>
