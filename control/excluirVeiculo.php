@@ -4,10 +4,15 @@
         require_once '../model/veiculoDAO.php';
 
         $id = $_GET["id"];
+
+        // Exlcuir Veículo
         excluirVeiculo($id);
+
+        // Voltar para a tela Pesquisar
         header("Location:../view/pesquisar-veiculo.php");
     }
     else {
-        header("Location:../view/pesquisar-veiculo.php?id=$id"); 
+        // ERRO: Voltar para tela Consultar
+        header("Location:../view/consultar-veiculo.php?id=$id"); 
     }
 ?>

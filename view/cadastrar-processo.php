@@ -42,80 +42,81 @@
                 </div>
 
                 <?php
-                    if (isset($_GET['id'])){
-                        // ALTERAR
-                        require "../model/processoDAO.php";
+                if (isset($_GET['id'])) {
+                    // ALTERAR
+                    require "../model/processoDAO.php";
 
-                        $id = $_GET['id'];
+                    $id = $_GET['id'];
 
-                        $resProcesso = pesquisarProcessoPorID($id);
-                        if ($resProcesso != null){
-                            $registro = mysqli_fetch_assoc($resProcesso);
+                    $resProcesso = pesquisarProcessoPorID($id);
+                    if ($resProcesso != null) {
+                        $registro = mysqli_fetch_assoc($resProcesso);
 
-                            $aluno = $registro["cpf_aluno"];
-                            // $aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf_aluno))["nome"];
+                        $aluno = $registro["cpf_aluno"];
+                        // $aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf_aluno))["nome"];
+                
+                        $curso = $registro["curso"];
+                        $inicio = $registro["data_inicio"];
 
-                            $curso = $registro["curso"];
-                            $inicio = $registro["data_inicio"];
-
-                            $titulo = "Alterar Processo";
-                            $botao = "Alterar";
-                        }
-                    } else {
-                        // INSERIR
-                        $aluno = "";
-                        $curso = "";
-                        $inicio = "";
-
-                        $titulo = "Cadastrar Processo";
-                        $botao = "Cadastrar";
+                        $titulo = "Alterar Processo";
+                        $botao = "Alterar";
                     }
+                } else {
+                    // INSERIR
+                    $aluno = "";
+                    $curso = "";
+                    $inicio = "";
+
+                    $titulo = "Cadastrar Processo";
+                    $botao = "Cadastrar";
+                }
                 ?>
 
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
-                    <h1 class="form-titulo"><?php echo $titulo?></h1>
+                    <h1 class="form-titulo"><?php echo $titulo ?></h1>
                     <form action="../control/iniciarProcesso.php" method="POST" name="formCadastroProcesso">
-                            <!-- Campo CPF -->
-                            <div class="form-campo">
-                                <label for="aluno" class="form-subtitulo">Aluno:</label>
-                                <select name="aluno" class="form-input" value="<?php echo $aluno?>">
-                                    <?php
-                                    require_once "../model/funcoesBD.php";
-                                    $options = comboBoxAluno();
-                                    echo $options;
-                                    ?>
-                                </select>
-                            </div>
+                        <!-- Campo CPF -->
+                        <div class="form-campo">
+                            <label for="aluno" class="form-subtitulo">Aluno:</label>
+                            <select name="aluno" class="form-input" value="<?php echo $aluno ?>">
+                                <?php
+                                require_once "../model/funcoesBD.php";
+                                $options = comboBoxAluno();
+                                echo $options;
+                                ?>
+                            </select>
+                        </div>
 
-                            <!-- Campo CURSO -->
-                            <div class="form-campo">
-                                <label for="curso" class="form-subtitulo">Curso:</label>
-                                <select name="curso" class="form-input" value="<?php echo $curso?>">
-                                    <?php
-                                    $options = comboBoxCurso();
-                                    echo $options;
-                                    ?>
-                                </select>
-                            </div>
+                        <!-- Campo CURSO -->
+                        <div class="form-campo">
+                            <label for="curso" class="form-subtitulo">Curso:</label>
+                            <select name="curso" class="form-input" value="<?php echo $curso ?>">
+                                <?php
+                                $options = comboBoxCurso();
+                                echo $options;
+                                ?>
+                            </select>
+                        </div>
 
-                            <!-- Campo DATA -->
-                            <div class="form-campo">
-                                <label for="data_inicio" class="form-subtitulo">Data de inicio:</label>
-                                <input type="date" name="data_inicio" id="data_inicio" class="form-input" value="<?php echo $inicio?>">
-                            </div>
+                        <!-- Campo DATA -->
+                        <div class="form-campo">
+                            <label for="data_inicio" class="form-subtitulo">Data de inicio:</label>
+                            <input type="date" name="data_inicio" id="data_inicio" class="form-input"
+                                value="<?php echo $inicio ?>">
+                        </div>
 
-                            <div>
-                                <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>" class="form-btn"><?php echo $botao; ?></button>
-                            </div>
+                        <div class="form-div-btn">
+                            <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>" class="form-btn"><?php echo $botao; ?></button>
+                        </div>
 
-                            <?php
-                            // Exibir a mensagem de ERRO caso ocorra
-                            if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
-                                $mensagem = $_GET["msg"];
-                                echo "<FONT color=red>$mensagem</FONT>";
-                            }
-                            ?>
+                        <?php
+                        // Exibir a mensagem de ERRO caso ocorra
+                        if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
+                            $mensagem = $_GET["msg"];
+                            echo "<FONT color=red>$mensagem</FONT>";
+                        }
+                        ?>
                     </form>
                 </div>
             </main>

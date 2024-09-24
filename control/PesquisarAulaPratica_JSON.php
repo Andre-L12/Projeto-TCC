@@ -2,14 +2,14 @@
 
     // Esse programa é chamado pelo JSON no front-end
 
-    if ( isset($_POST["pesq"])  ) {
+    if ( isset($_POST["pesq"])) {
         $pesq = $_POST["pesq"];
 
         require_once '../model/aulaPraticaDAO.php';              
         
         $resultado = pesquisarAulaPorAluno($pesq);
 
-        if ( mysqli_num_rows($resultado) > 0) {
+        if (mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados
             $registros = array(
                 "erro" => "",
@@ -17,7 +17,7 @@
             );
 
             // Percorre todos os resultados e os adiciona ao array
-            while ( $row = mysqli_fetch_assoc($resultado) ) {
+            while ($row = mysqli_fetch_assoc($resultado)) {
                 $id = $row["id"];
                 $cpf_aluno = $row["cpf_aluno"];
                 $cpf_instrutor = $row["cpf_instrutor"];

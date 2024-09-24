@@ -43,16 +43,16 @@
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
                     <h1 class="form-titulo">Agendar Aula Prática</h1>
-                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica"  >
+                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica">
                         <div>
                             <!-- Campo Instrutor -->
                             <div class="form-campo">
                                 <label for="instrutor" class="form-subtitulo">Instrutor:</label>
                                 <select name="instrutor" class="form-input">
                                     <?php
-                                        require_once "../model/funcoesBD.php";
-                                        $options = comboBoxInstrutor();              
-                                        echo $options;
+                                    require_once "../model/funcoesBD.php";
+                                    $options = comboBoxInstrutor();
+                                    echo $options;
                                     ?>
                                 </select>
                             </div>
@@ -60,10 +60,10 @@
                             <div class="form-campo">
                                 <label for="aluno" class="form-subtitulo">Aluno:</label>
                                 <select name="aluno" class="form-input">
-                                <?php
-                                    $options = comboBoxAluno();              
+                                    <?php
+                                    $options = comboBoxAluno();
                                     echo $options;
-                                ?>
+                                    ?>
                                 </select>
                             </div>
                             <!-- Selecionar Veículo -->
@@ -71,9 +71,9 @@
                                 <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
                                 <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
-                                        require_once "../model/funcoesBD.php";
-                                        $options = comboBoxVeiculo();              
-                                        echo $options;
+                                    require_once "../model/funcoesBD.php";
+                                    $options = comboBoxVeiculo();
+                                    echo $options;
                                     ?>
                                 </select>
                             </div>
@@ -113,16 +113,16 @@
                                 </div>
                             </div>
 
-                            <div>
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
+                            <div class="form-div-btn">
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn"> Cadastrar</button>
                             </div>
 
                             <?php
-                                // Exibir a mensagem de ERRO caso ocorra
-                                if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
-                                    $mensagem = $_GET["msg"]; 
-                                    echo "<FONT color=red>$mensagem</FONT>";
-                                }
+                            // Exibir a mensagem de ERRO caso ocorra
+                            if (isset($_GET["msg"])) {  // Verifica se tem mensagem de ERRO
+                                $mensagem = $_GET["msg"];
+                                echo "<FONT color=red>$mensagem</FONT>";
+                            }
                             ?>
 
                         </div>

@@ -1,4 +1,7 @@
 <?php
+
+    // É Usado??
+    
     require "../model/conexaoBD.php";
 
     if (isset($_POST['textoCampo'])){

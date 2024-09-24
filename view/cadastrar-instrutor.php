@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,23 +19,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 </head>
+
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-            require_once "navbar-chamar.php";
-            $navbar = chamarNavbar();              
-            echo $navbar;
+        require_once "navbar-chamar.php";
+        $navbar = chamarNavbar();
+        echo $navbar;
         ?>
 
         <div class="layout">
-        <header>
-            <div>
-                <span class="header-icon">
-                    <i class="bi bi-person-lines-fill"></i>
-                </span>
-                <span class="header-title">INSTRUTORES</span>
-            </div>
-        </header>
+            <header>
+                <div>
+                    <span class="header-icon">
+                        <i class="bi bi-person-lines-fill"></i>
+                    </span>
+                    <span class="header-title">INSTRUTORES</span>
+                </div>
+            </header>
             <main class="content">
                 <div>
                     <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
@@ -43,112 +45,115 @@
                 </div>
 
                 <?php
-                    if (isset($_GET['id'])){
-                        // ALTERAR
-                        require "../model/instrutorDAO.php";
+                if (isset($_GET['id'])) {
+                    // ALTERAR
+                    require "../model/instrutorDAO.php";
 
-                        $cpf = $_GET['id'];
+                    $cpf = $_GET['id'];
 
-                        $resInstrutor = pesquisarInstrutorPorCPF($cpf);
-                        if ($resInstrutor != null){
-                            $registro = mysqli_fetch_assoc($resInstrutor);
+                    $resInstrutor = pesquisarInstrutorPorCPF($cpf);
+                    if ($resInstrutor != null) {
+                        $registro = mysqli_fetch_assoc($resInstrutor);
 
-                            $nome = $registro["nome"];
-                            $cpf = $registro["cpf"];
-                            $sexo = $registro["sexo"];
+                        $nome = $registro["nome"];
+                        $cpf = $registro["cpf"];
+                        $sexo = $registro["sexo"];
 
-                            if ( $sexo == 'M') {
-                                $sexoM = "checked";
-                                $sexoF = "";
-                            } else {
-                                $sexoM = "";
-                                $sexoF = "checked";
-                            }
+                        if ($sexo == 'M') {
+                            $sexoM = "checked";
+                            $sexoF = "";
+                        } else {
+                            $sexoM = "";
+                            $sexoF = "checked";
+                        }
 
-                            $titulo = "Alterar Instrutor";
-                            $botao = "Alterar";
-                        } 
-
-                    } else {
-                        // INSERIR
-                        $nome = "";
-                        $cpf = "";
-                        $sexo = "";
-
-                        $sexoM = "";
-                        $sexoF = "";
-
-                        $titulo = "Cadastrar Instrutor";
-                        $botao = "Cadastrar";
+                        $titulo = "Alterar Instrutor";
+                        $botao = "Alterar";
                     }
+
+                } else {
+                    // INSERIR
+                    $nome = "";
+                    $cpf = "";
+                    $sexo = "";
+
+                    $sexoM = "";
+                    $sexoF = "";
+
+                    $titulo = "Cadastrar Instrutor";
+                    $botao = "Cadastrar";
+                }
                 ?>
 
                 <!-- Form Cadastrar Instrutor -->
                 <div class="form-container">
-                    <h1 class="form-titulo"><?php echo $titulo?></h1>
-                    <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor" >
-                            <!-- Campo nome -->
-                            <div class="form-campo">
-                                <label for="nome" class="form-subtitulo">Nome completo:</label>
-                                <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui" class="form-input" value="<?php echo $nome ?>">
+                    <h1 class="form-titulo"><?php echo $titulo ?></h1>
+                    <form action="../control/cadastrarInstrutor.php" method="POST" name="formCadastroInstrutor">
+                        <!-- Campo nome -->
+                        <div class="form-campo">
+                            <label for="nome" class="form-subtitulo">Nome completo:</label>
+                            <input type="text" name="txtNome" id="nome" placeholder="Digite o nome aqui"
+                                class="form-input" value="<?php echo $nome ?>">
+                        </div>
+
+                        <!-- Campo CPF -->
+                        <div class="form-campo">
+                            <label for="cpf" class="form-subtitulo">CPF:</label>
+                            <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00"
+                                class="form-input" value="<?php echo $cpf ?>">
+                        </div>
+
+                        <!-- Radio Sexo -->
+                        <div class="form-campo">
+                            <label class="form-subtitulo">Sexo:</label>
+                            <div style="display: flex; align-items: center;">
+                                <input type="radio" name="sexo" value="M" id="masc" <?php echo $sexoM; ?>>
+                                <label for="masc">Masculino</label>
                             </div>
-
-                            <!-- Campo CPF -->
-                            <div class="form-campo">
-                                <label for="cpf" class="form-subtitulo">CPF:</label>
-                                <input type="text" name="txtCPF" id="cpf" placeholder="ex.: 000.000.000-00" class="form-input" value="<?php echo $cpf ?>">
+                            <div style="display: flex; align-items: center;">
+                                <input type="radio" name="sexo" value="F" id="fem" <?php echo $sexoF; ?>>
+                                <label for="fem">Feminino</label>
                             </div>
+                        </div>
 
-                            <!-- Radio Sexo -->
-                            <div class="form-campo">
-                                <label class="form-subtitulo">Sexo:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="M" id="masc" <?php echo $sexoM; ?>>
-                                    <label for="masc">Masculino</label>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="sexo" value="F" id="fem" <?php echo $sexoF; ?>>
-                                    <label for="fem">Feminino</label>
-                                </div>
-                            </div>
+                        <!-- <h2 class="form-titulo-2">Vincular a curso</h2> -->
 
-                            <!-- <h2 class="form-titulo-2">Vincular a curso</h2> -->
-
-                            <!-- Selecionar Curso -->
-                            <!-- <div class="form-campo">
+                        <!-- Selecionar Curso -->
+                        <!-- <div class="form-campo">
                                 <label for="curso" class="form-subtitulo">Atua no curso:</label>
                                 <select name="curso" id="opcoesCurso" class="form-input">
                                     <?php
-                                        // require_once "../model/funcoesBD.php";
-                                        // $options = comboBoxCurso();              
-                                        // echo $options;
+                                    // require_once "../model/funcoesBD.php";
+                                    // $options = comboBoxCurso();              
+                                    // echo $options;
                                     ?>
                                 </select>
                             </div> -->
 
-                            <!-- Selecionar Veículo -->
-                            <!-- <div class="form-campo">
+                        <!-- Selecionar Veículo -->
+                        <!-- <div class="form-campo">
                             <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
                                 <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
-                                        // require_once "../model/funcoesBD.php";
-                                        // $options = comboBoxVeiculo();              
-                                        // echo $options;
+                                    // require_once "../model/funcoesBD.php";
+                                    // $options = comboBoxVeiculo();              
+                                    // echo $options;
                                     ?>
                                 </select>
                             </div> -->
 
-                            <div class="form-div-btn">
-                                <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>" class="form-btn"><?php echo $botao; ?></button>
-                            </div>
+                        <div class="form-div-btn">
+                            <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>"
+                                class="form-btn"><?php echo $botao; ?></button>
+                        </div>
 
-                            <?php
-                                // Exibir a mensagem header
-                                if (isset($_GET["msg"])) {  // Verifica se tem mensagem
-                                    $mensagem = $_GET["msg"]; 
-                                    echo "<FONT color=red>$mensagem</FONT>";
-                                }
-                            ?>
+                        <?php
+                        // Exibir a mensagem header
+                        if (isset($_GET["msg"])) {  // Verifica se tem mensagem
+                            $mensagem = $_GET["msg"];
+                            echo "<FONT color=red>$mensagem</FONT>";
+                        }
+                        ?>
 
                     </form>
                 </div>
@@ -159,7 +164,7 @@
 
     <script>
         // Máscara para CPF
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#cpf').mask('000.000.000-00');
         });
     </script>
