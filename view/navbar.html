@@ -1,227 +1,155 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Menu</title>
-
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
-  <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-  <link rel="stylesheet" href="./navbar-estilos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-</head>
-
-<body>
-  <!-- partial:index.partial.html -->
-  <div class="layout has-sidebar fixed-sidebar fixed-header">
-    <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
-      <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-      <div class="image-wrapper">
-        <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
-      </div>
-      <div class="sidebar-layout">
-        <div class="sidebar-header">
-          <div class="pro-sidebar-logo">
-            <div><img src="../img/AutoCFC.svg" alt=""></div>
-            <h5>AutoCFC</h5>
-          </div>
+<aside id='sidebar' class='sidebar break-point-sm has-bg-image'>
+    <a id='btn-collapse' class='sidebar-collapser'>
+        <i class='ri-arrow-left-s-line'></i>
+    </a>
+    <!-- <div class='image-wrapper'> -->
+    <!-- <img src='assets/images/sidebar-bg.jpg' alt='sidebar background' /> -->
+    <!-- </div> -->
+    <div class='sidebar-layout'>
+        <div class='sidebar-header'>
+            <div class='pro-sidebar-logo'>
+                <div><img src='../img/AutoCFC.svg' alt=''></div>
+                <h5>AutoCFC</h5>
+            </div>
         </div>
-        <div class="sidebar-content">
-          <nav class="menu open-current-submenu">
-            <ul>
-              <!-- <li class="menu-header"><span> GENERAL </span></li> -->
-              <li class="menu-item">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-grid-fill"></i>
-                  </span>
-                  <span class="menu-title">MENU</span>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="ri-calendar-fill"></i>
-                  </span>
-                  <span class="menu-title">CALENDÁRIO</span>
-                </a>
-              </li>
-              <li class="menu-item sub-menu">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-person-fill"></i>
-                  </span>
-                  <span class="menu-title">ALUNOS</span>
-                  <!-- <span class="menu-suffix">
-                      <span class="badge primary">Hot</span>
-                    </span> -->
-                </a>
-                <div class="sub-menu-list">
-                  <ul>
-                    <li class="menu-item">
-                      <a href="base/form-cadastrar-aluno.php">
-                        <span class="menu-title">Cadastrar Aluno</span>
-                      </a>
+        <div class='sidebar-content'>
+            <nav class='menu open-current-submenu'>
+                <ul>
+                    <li class='menu-item'>
+                        <a href='menu-funcionario.php'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-grid-fill'></i>
+                            </span>
+                            <span class='menu-title'>MENU</span>
+                        </a>
                     </li>
-                    <li class="menu-item">
-                      <a href="base/pesqAluno.php">
-                        <span class="menu-title">Consultar Aluno</span>
-                      </a>
+                    <li class='menu-item'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='ri-calendar-fill'></i>
+                            </span>
+                            <span class='menu-title'>CALENDÁRIO</span>
+                        </a>
                     </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="menu-item sub-menu">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-person-lines-fill"></i>
-                  </span>
-                  <span class="menu-title">INSTRUTORES</span>
-                </a>
-                <div class="sub-menu-list">
-                  <ul>
-                    <li class="menu-item">
-                      <a href="base/form-cadastrar-instrutor.php">
-                        <span class="menu-title">Cadastrar Instrutor</span>
-                      </a>
+                    <li class='menu-item sub-menu'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-person-fill'></i>
+                            </span>
+                            <span class='menu-title'>MEUS DADOS</span>
+                        </a>
+                        <div class='sub-menu-list'>
+                            <ul>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-aluno.php'>
+                                        <span class='menu-title'>Cadastrar Aluno</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='pesquisar-aluno.php'>
+                                        <span class='menu-title'>Pesquisar Aluno</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="menu-item">
-                      <a href="base/pesqInstrutor.php">
-                        <span class="menu-title">Consultar Instrutor</span>
-                      </a>
+                    <li class='menu-item sub-menu'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-person-lines-fill'></i>
+                            </span>
+                            <span class='menu-title'>INSTRUTORES</span>
+                        </a>
+                        <div class='sub-menu-list'>
+                            <ul>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-instrutor.php'>
+                                        <span class='menu-title'>Cadastrar Instrutor</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='pesquisar-instrutor.php'>
+                                        <span class='menu-title'>Consultar Instrutor</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-instrutor-curso.php'>
+                                        <span class='menu-title'>Vincular a um curso</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="menu-item sub-menu">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-cone-striped"></i>
-                  </span>
-                  <span class="menu-title">AULAS PRÁTICAS</span>
-                </a>
-                <div class="sub-menu-list">
-                  <ul>
-                    <li class="menu-item">
-                      <a href="base/form-aulaPratica.php">
-                        <span class="menu-title">Agendar Aula</span>
-                      </a>
+                    <li class='menu-item sub-menu'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-cone-striped'></i>
+                            </span>
+                            <span class='menu-title'>AULAS PRÁTICAS</span>
+                        </a>
+                        <div class='sub-menu-list'>
+                            <ul>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-aula.php'>
+                                        <span class='menu-title'>Agendar Aula</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='pesquisar-aulaPratica.php'>
+                                        <span class='menu-title'>Consultar Aula</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="menu-item">
-                      <a href="base/pesqAulaPratica.php">
-                        <span class="menu-title">Consultar Aula</span>
-                      </a>
+                    <li class='menu-item sub-menu'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-car-front-fill'></i>
+                            </span>
+                            <span class='menu-title'>VEÍCULOS</span>
+                        </a>
+                        <div class='sub-menu-list'>
+                            <ul>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-veiculo.php'>
+                                        <span class='menu-title'>Cadastrar Veículo</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='pesquisar-veiculo.php'>
+                                        <span class='menu-title'>Consultar Veículo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="menu-item sub-menu">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-car-front-fill"></i>
-                  </span>
-                  <span class="menu-title">VEÍCULOS</span>
-                </a>
-                <div class="sub-menu-list">
-                  <ul>
-                    <li class="menu-item">
-                      <a href="base/form-cadastrar-veiculo.php">
-                        <span class="menu-title">Cadastrar Veículo</span>
-                      </a>
+                    <li class='menu-item sub-menu'>
+                        <a href='#'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-clipboard2-fill'></i>
+                            </span>
+                            <span class='menu-title'>PROCESSOS</span>
+                        </a>
+                        <div class='sub-menu-list'>
+                            <ul>
+                                <li class='menu-item'>
+                                    <a href='cadastrar-processo.php'>
+                                        <span class='menu-title'>Iniciar Processo</span>
+                                    </a>
+                                </li>
+                                <li class='menu-item'>
+                                    <a href='pesquisar-processo.php'>
+                                        <span class='menu-title'>Consultar Processo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="menu-item">
-                      <a href="base/pesqVeiculo.php">
-                        <span class="menu-title">Consultar Veículo</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="menu-item sub-menu">
-                <a href="#">
-                  <span class="menu-icon">
-                    <i class="bi bi-clipboard2-fill"></i>
-                  </span>
-                  <span class="menu-title">PROCESSOS</span>
-                </a>
-                <div class="sub-menu-list">
-                  <ul>
-                    <li class="menu-item">
-                      <a href="base/form-cadastrar-processo.php">
-                        <span class="menu-title">Cadastrar Processo</span>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="base/pesqProcesso.php">
-                        <span class="menu-title">Consultar</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <!-- <li class="menu-header" style="padding-top: 20px"><span> EXTRA </span></li> -->
-            </ul>
-          </nav>
+                </ul>
+            </nav>
         </div>
-        <!-- <div class="sidebar-footer">
-                <div class="footer-box">
-                  <div>
-                    <img
-                      class="react-logo"
-                      src="https://user-images.githubusercontent.com/25878302/213938106-ca8f0485-3f30-4861-9188-2920ed7ab284.png"
-                      alt="react"
-                    />
-                  </div>
-                  <div style="padding: 0 10px">
-                    <span style="display: block; margin-bottom: 10px"
-                      >Pro sidebar is also available as a react package
-                    </span>
-                    <div style="margin-bottom: 15px">
-                      <img
-                        alt="preview badge"
-                        src="https://img.shields.io/github/stars/azouaoui-med/react-pro-sidebar?style=social"
-                      />
-                    </div>
-                    <div>
-                      <a href="https://github.com/azouaoui-med/react-pro-sidebar" target="_blank"
-                        >Check it out!</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-      </div>
-    </aside>
-    <div id="overlay" class="overlay"></div>
-    <div class="layout">
-      <header>
-        <div>
-          <span class="header-icon">
-            <i class="bi bi-grid-fill"></i>
-          </span>
-          <span class="header-title">MENU</span>
-        </div>
-      </header>
-      <main class="content">
-        oi
-        <div>
-          <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
-            <i class="ri-menu-line ri-xl"></i>
-          </a>
-        </div>
-        <p>Teste</p>
-        <footer class="footer">
-        </footer>
-      </main>
-      <div class="overlay"></div>
     </div>
-  </div>
-  <!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script>
-  <script src="navbar-script.js"></script>
-
-</body>
-
-</html>
+</aside>
+<div id='overlay' class='overlay'></div>

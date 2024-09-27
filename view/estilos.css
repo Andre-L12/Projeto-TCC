@@ -276,3 +276,132 @@ nav{
 main{
     width: 100%;
 }
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+    --Branco-azulado: #F4FAFF;
+    --Azul-Claro: #216ec8;
+    --Preto-azulado: #08090A;
+    --Branco: #FFFFFF;
+    --Cinza: #E0E0E0;
+    --Laranja: #FF9233;
+}
+
+body{
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fundo-azul-claro{
+    background-color: var(--Azul-Claro);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.quadro-azul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-quadro-azul{
+    width: 200px;
+    height: auto;
+}
+
+.formulario-login{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: var(--Branco-azulado);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-formulario{
+    font-size: 24px;
+    color: var(--Preto-azulado);
+    text-align: center;
+}
+
+.campos-login{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.campo-login-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-campo{
+    font-size: 14px;
+    color: var(--Preto-azulado);
+}
+
+.input-campo{
+    padding-left: 10px;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    background-color: var(--Branco);
+    border: 1px solid var(--Cinza);
+    color: var(--Preto-azulado);
+    border-radius: 8px;
+}
+
+.botao-enviar{
+    width: 100%;
+    height: 45px;  
+    font-size: 16px;
+    background-color: var(--Laranja);
+    color: var(--Branco);
+    text-align: center;           
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.botao-enviar:hover{
+    background-color: #ff7e0d;
+    box-shadow: 0 1px 1px 0 rgba(182, 182, 182, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .formulario-login {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .titulo-formulario {
+        font-size: 22px;
+    }
+
+    .input-campo, .botao-enviar {
+        height: 40px;
+        font-size: 14px;
+    }
+}
