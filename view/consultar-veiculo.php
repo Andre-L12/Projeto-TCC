@@ -42,8 +42,8 @@
             }
                 
             //busca informações de aula
-            $resultado2=pesquisarAulaPorPlaca($id);
-            $aulas=mysqli_num_rows($resultado2);
+            // $resultado2=pesquisarAulaPorPlaca($id);
+            // $aulas=mysqli_num_rows($resultado2);
             
             //busca informação de instrutores
             
@@ -81,10 +81,9 @@
                         <p><strong>Ano:</strong> <?php echo $ano; ?></p>
                         <p><strong>Categoria:</strong> <?php echo $categoria; ?></p>
                         <p><strong>Adaptado:</strong> <?php echo $x; ?></p>
-                    
-                        <br>
+
                         <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                        <p><strong>Quantidade de Aulas com o veículo:</strong> <?php echo $aulas; ?></p>
+                        <p><strong>Quantidade de Aulas com o veículo:</strong> <?php //echo $aulas; ?></p>
                         <p><strong>Instrutor Vinculado:</strong>#pegar no banco veiculo-instrutor<br>#tamofazendo</p>
                     
                         

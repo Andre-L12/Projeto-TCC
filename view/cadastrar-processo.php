@@ -52,10 +52,10 @@
                     if ($resProcesso != null) {
                         $registro = mysqli_fetch_assoc($resProcesso);
 
-                        $aluno = $registro["cpf_aluno"];
+                        $aluno = $registro["id_aluno"];
                         // $aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf_aluno))["nome"];
                 
-                        $curso = $registro["curso"];
+                        $curso = $registro["id_curso"];
                         $inicio = $registro["data_inicio"];
 
                         $titulo = "Alterar Processo";
@@ -76,7 +76,7 @@
                 <div class="form-container">
                     <h1 class="form-titulo"><?php echo $titulo ?></h1>
                     <form action="../control/iniciarProcesso.php" method="POST" name="formCadastroProcesso">
-                        <!-- Campo CPF -->
+                        <!-- Campo ALUNO -->
                         <div class="form-campo">
                             <label for="aluno" class="form-subtitulo">Aluno:</label>
                             <select name="aluno" class="form-input" value="<?php echo $aluno ?>">

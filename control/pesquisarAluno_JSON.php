@@ -18,7 +18,7 @@
 
             // Percorre todos os resultados e os adiciona ao array
             while ( $row = mysqli_fetch_assoc($resultado) ) {
-                $id = $row["id"];
+                $id = $row["id_aluno"];
                 $nome = $row["nome"];
                 $cpf = $row["cpf"];
                 $email = $row["email"];
@@ -27,7 +27,7 @@
                 $imageBase64 = base64_encode($foto);      // Converter a imagem em binário para Base64
                 
                 $registros["alunos"][] = array(
-                        "id" => $id,
+                        "id_aluno" => $id,
                         "nome" => $nome,
                         "cpf" => $cpf,
                         "email" => $email,

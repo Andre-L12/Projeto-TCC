@@ -38,8 +38,11 @@
                 } else {
                     $x="Feminino";
                 }
-                $resultado2=pesquisarAulaPorInstrutor($cpf);
-                $aulas=mysqli_num_rows($resultado2);
+
+                //busca aula
+                // $resultado2=pesquisarAulaPorInstrutor($cpf);
+                // $aulas=mysqli_num_rows($resultado2);
+
                 //busca veículo
                 //busca cursos
             }
@@ -77,9 +80,8 @@
                         <p><strong>CPF:</strong> <?php echo $cpf; ?></p>
                         <p><strong>Sexo:</strong> <?php echo $x; ?></p>
                         <p><strong>Matrícula:</strong> <?php echo $matricula; ?></p>
-                        <br>
                         <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                        <p><strong>Quantidade de Aulas:</strong> <?php echo $aulas; ?></p>
+                        <p><strong>Quantidade de Aulas:</strong> <?php //echo $aulas; ?></p>
                         <p><strong>Cursos:</strong> #tem que colocar ainda #tamofazendo</p>
                         <p><strong>veiculos:</strong> #tem que colocar ainda #tamofazendo</p>
                         
@@ -99,9 +101,9 @@
 
     <script>
         document.getElementById('btnAlterar').addEventListener('click', function() {
-            var cpf = "<?php echo $cpf; ?>"; 
+            var id = "<?php echo $id; ?>";
             
-            window.location.href = 'cadastrar-instrutor.php?id=' + cpf;
+            window.location.href = 'cadastrar-instrutor.php?id=' + id;
         });
 
         document.getElementById('btnExcluir').addEventListener('click', function() {

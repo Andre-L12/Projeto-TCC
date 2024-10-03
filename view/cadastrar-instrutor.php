@@ -49,9 +49,9 @@
                     // ALTERAR
                     require "../model/instrutorDAO.php";
 
-                    $cpf = $_GET['id'];
+                    $id = $_GET['id'];
 
-                    $resInstrutor = pesquisarInstrutorPorCPF($cpf);
+                    $resInstrutor = pesquisarInstrutorPorID($id);
                     if ($resInstrutor != null) {
                         $registro = mysqli_fetch_assoc($resInstrutor);
 

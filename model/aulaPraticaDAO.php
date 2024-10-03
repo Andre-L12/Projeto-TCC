@@ -2,20 +2,20 @@
 require_once "conexaoBD.php";
 static $conexao;
 
-function cadastrarAulaPratica($cpf_aluno, $cpf_instrutor, $placa, $id_processo, $data, $hora, $obrigatoria, $status) {
+function cadastrarAulaPratica($data, $hora, $status_detran, $obrigatoria, $status_aula, $id_veiculo, $id_instrutor, $id_processo) {
     // Conectar ao banco de dados
     $conect = conectarBD();
 
     // Verificar se já existe uma aula com os mesmos parâmetros
-    $query1 = "SELECT * FROM aulapratica WHERE cpf_aluno='$cpf_aluno' AND hora='$hora' AND data_aula='$data';";
+    $query1 = "SELECT * FROM aulapratica WHERE id_processo='$id_processo' AND hora_aula='$hora' AND data_aula='$data';";
     $select1 = mysqli_query($conect, $query1);
     $qtd = mysqli_num_rows($select1);
 
     if ($qtd == 0) {
         // Inserir a nova aula prática
         $query2 = "INSERT INTO `banco_cfc`.`aulapratica` 
-                   (`cpf_instrutor`, `cpf_aluno`, `id_processo`, `placa`, `data_aula`, `hora`, `status_detran`, `obrigatoria`) 
-                   VALUES ('$cpf_instrutor', '$cpf_aluno', '$id_processo', '$placa', '$data', '$hora', '$status', '$obrigatoria');";
+                   (`data_aula`, `hora_aula`, `status_detran`, `obrigatoria`, `status_aula`, `id_veiculo`, `id_instrutor`, `id_processo`) 
+                   VALUES ('$data', '$hora', '$status_detran', '$obrigatoria', '$status_aula', '$id_veiculo', '$id_instrutor', '$id_processo');";
         
         $select2 = mysqli_query($conect, $query2);
         $id = mysqli_insert_id($conect);
@@ -37,8 +37,12 @@ function pesquisarAula($pesq, $tipo) {
 
     $sql = "SELECT * FROM aulapratica WHERE ";
     switch ($tipo) {
-        case 1: // Por cpf aluno
-                $sql = $sql . "cpf_aluno LIKE '$pesq%' ";
+        case 1: // Por CPF aluno
+                $sql = "SELECT ap.*
+                FROM `BANCO_CFC`.`AulaPratica` ap
+                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                WHERE a.cpf = '$pesq';";
                 break;
         case 2: // Por cpf instrutor
                 $sql = $sql . "cpf_instrutor = '$pesq' ";
@@ -47,7 +51,7 @@ function pesquisarAula($pesq, $tipo) {
                 $sql = $sql . "id_processo = '$pesq' ";
                 break;
         case 4: // Por placa
-                $sql = $sql . "placa = '$pesq' ";
+                $sql = $sql . "id_veiculo = '$pesq' ";
                 break;
         case 5: // Por status no detran
                 $sql = $sql . "status_detran = '$pesq' ";
@@ -63,7 +67,7 @@ function pesquisarAula($pesq, $tipo) {
     return $res;
 }
 
-function pesquisarAulaPorAluno($pesq) {
+function pesquisarAulaPorCPFAluno($pesq) {
     return pesquisarAula($pesq,1);
     
 }

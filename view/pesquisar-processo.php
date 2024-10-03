@@ -132,8 +132,8 @@
                        const dataConvertida = converterData(dataBanco);
                         
                         mostrar += "<tr><td data-label='Id Processo'><a href='consultar-processo.php?id=" +obj.id_processo+ "'>" + obj.id_processo + "</a></td>";
-                        mostrar += "<td data-label='Aluno'>" + obj.cpf_aluno + "</td>";
-                        mostrar += "<td data-label='Curso'>" + obj.curso + "</td>";
+                        mostrar += "<td data-label='Aluno'>" + obj.id_aluno + "</td>";
+                        mostrar += "<td data-label='Curso'>" + obj.id_curso + "</td>";
                         mostrar += "<td data-label='Data_inicio'>" + dataConvertida + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });

@@ -32,20 +32,22 @@
             $row = mysqli_fetch_assoc($resultado);
             $nome = $row['nome'];
             $cpf = $row["cpf"];
-            $id = $row["id"];
+            $id = $row["id_aluno"];
             $email = $row["email"];
             $celular = $row["celular"];
             $foto = $row["foto"];
             $imageBase64 = base64_encode($foto);
 
             //buscando processos
-            $resultado3 = pesquisarProcessoPorCPFAluno($cpf);
+            $resultado3 = pesquisarProcessoPorIDAluno($id);
             $qtd_processos = mysqli_num_rows($resultado3);
             $processos = comboBoxProcessoAluno($cpf);
             
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
-            $resultado2 = pesquisarAulaPorAluno($cpf);
-            $aulas = mysqli_num_rows($resultado2);
+
+            // $resultado2 = pesquisarAulaPorCPFAluno($cpf);
+            // $aulas = mysqli_num_rows($resultado2);
+
             //busca veículo
             //busca cursos
             }
@@ -91,7 +93,9 @@
                         <!--</div>-->
                         <!--<div >-->
                             <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                            <p><strong>Quantidade de Aulas:</strong> <?php echo $aulas; ?></p>
+                            <p><strong>Quantidade de Aulas:</strong>
+                                <?php // echo $aulas; ?>
+                            </p>
                             <p><strong>Instrutor:</strong> #não sei se coloco <br>#tamofazendo</p>
                             <p><strong>Aulas Obrigatórias:</strong> #não sei se coloco<br> #tamofazendo</p>
                             <br>
@@ -114,9 +118,9 @@
 
     <script>
         document.getElementById('btnAlterar').addEventListener('click', function() {
-            var cpf = "<?php echo $cpf; ?>"; 
+            var id = "<?php echo $id; ?>";
             
-            window.location.href = 'cadastrar-aluno.php?id=' + cpf;
+            window.location.href = 'cadastrar-aluno.php?id=' + id;
         });
 
         document.getElementById('btnExcluir').addEventListener('click', function() {

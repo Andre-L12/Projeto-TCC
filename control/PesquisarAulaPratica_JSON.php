@@ -7,7 +7,7 @@
 
         require_once '../model/aulaPraticaDAO.php';              
         
-        $resultado = pesquisarAulaPorAluno($pesq);
+        $resultado = pesquisarAulaPorCPFAluno($pesq);
 
         if (mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados

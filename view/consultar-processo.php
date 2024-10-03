@@ -28,11 +28,11 @@
             require_once "../model/cursoDAO.php";
             if(isset($_GET["id"])){
             $id = $_GET["id"];
-            $resultado=pesquisarProcessoPorID($id);
-            $row=mysqli_fetch_assoc($resultado);
-            $cpf_aluno=$row['cpf_aluno'];
-            $data_inicio=$row["data_inicio"];
-            $sigla=$row["curso"];
+            $resultado = pesquisarProcessoPorID($id);
+            $row = mysqli_fetch_assoc($resultado);
+            $id_aluno = $row['id_aluno'];
+            $data_inicio = $row["data_inicio"];
+            $sigla = $row["id_curso"];
 
             function adicionarUmAno($data_inicio) {
                 // Criar um objeto DateTime com a data original
@@ -82,20 +82,21 @@
             
                 return $dataConvertida;
             }
-            $dataInicio=converterData($data_inicio);
+            $dataInicio = converterData($data_inicio);
 
-            $data_fim= verificarPrazo($datafim);
+            $data_fim = verificarPrazo($datafim);
 
-            //buscando pelo nome do aluno 
-            $resultado3=pesquisarAlunoPorCPF($cpf_aluno);
-            $row2=mysqli_fetch_assoc($resultado3);
-            $nome=$row2["nome"];
+            //buscando pelo nome e CPF do aluno 
+            $resultado3 = pesquisarAlunoPorID($id_aluno);
+            $row2 = mysqli_fetch_assoc($resultado3);
+            $nome = $row2["nome"];
+            $cpf = $row2["cpf"];
 
             //buscando a descrição do curso vinculado ao processo
-            $resultado2=pesquisarCursoPorSigla($sigla);
-            $row3=mysqli_fetch_assoc($resultado2);
-            $curso=$row3["descricao"];
-            $categoria=$row3["categoria"];
+            $resultado2 = pesquisarCursoPorSigla($sigla);
+            $row3 = mysqli_fetch_assoc($resultado2);
+            $curso = $row3["descricao"];
+            $categoria = $row3["categoria"];
             //busca veículo
             //busca cursos
             }
@@ -128,9 +129,9 @@
                         <!--<div >-->
                             <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados do processo</h3>
                             <p><strong>Nome do aluno:</strong> <?php echo $nome; ?></p>
-                            <p><strong>CPF do alno:</strong> <?php echo $cpf_aluno; ?></p>
-                            <p><strong>Processo Id:</strong> <?php echo $id; ?></p>
-                            <p><strong>Data de inicio:</strong> <?php echo $dataInicio; ?></p>
+                            <p><strong>CPF do alno:</strong> <?php echo $cpf; ?></p>
+                            <p><strong>Processo ID:</strong> <?php echo $id; ?></p>
+                            <p><strong>Data de início:</strong> <?php echo $dataInicio; ?></p>
                             <p><strong></strong> <?php echo $data_fim; ?></p>
                             
                             <br>

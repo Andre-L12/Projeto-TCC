@@ -18,15 +18,15 @@
 
             // Percorre todos os resultados e os adiciona ao array
             while ( $row = mysqli_fetch_assoc($resultado) ) {
-                $cpf_aluno = $row["cpf_aluno"];
-                $curso = $row["curso"];
+                $id_aluno = $row["id_aluno"];
+                $id_curso = $row["id_curso"];
                 $data_inicio = $row["data_inicio"];
                 $id_processo = $row["id_processo"];
                 
                 
                 $registros["processos"][] = array(
-                        "cpf_aluno" => $cpf_aluno,
-                        "curso" => $curso,
+                        "id_aluno" => $id_aluno,
+                        "id_curso" => $id_curso,
                         "data_inicio" => $data_inicio,
                         "id_processo" => $id_processo
                         );
@@ -38,7 +38,7 @@
             echo json_encode($registros);
         } else {
             // instrutor não encontrado
-            echo json_encode(['erro' => 'processo não encontrado.']);
+            echo json_encode(['erro' => 'Processo não encontrado.']);
         }
             
        

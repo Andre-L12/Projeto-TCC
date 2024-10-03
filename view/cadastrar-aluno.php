@@ -53,9 +53,9 @@
                     // ALTERAR
                     require "../model/AlunoDAO.php";
 
-                    $cpf = $_GET['id'];
+                    $id_aluno = $_GET['id'];
 
-                    $resAluno = pesquisarAlunoPorCPF($cpf);
+                    $resAluno = pesquisarAlunoPorID($id_aluno);
                     if ($resAluno != null) {
                         $registro = mysqli_fetch_assoc($resAluno);
 

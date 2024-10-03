@@ -25,10 +25,10 @@ function comboBoxAluno() {
     $options = "";
     while (  $registro = mysqli_fetch_assoc($resultado)  ) {
         // Pegar os campos do REGISTRO
-        $cpf = $registro["cpf"];
+        $id = $registro["id_aluno"];
         $nome = $registro["nome"];
 
-        $options = $options . "<OPTION value='$cpf'>$nome</OPTION>";
+        $options = $options . "<OPTION value='$id'>$nome</OPTION>";
     }
     return $options;
 }

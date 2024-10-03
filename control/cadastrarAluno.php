@@ -40,7 +40,7 @@
             header("Location:../view/cadastrar-aluno.php?msg=$id");
         } else {
             // Alterar dados de Aluno
-            $id_aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf))["id"];
+            $id_aluno = mysqli_fetch_array(pesquisarAlunoPorCPF($cpf))["id_aluno"];
             $id = alterarAluno($id_aluno, $nome, $cpf, $email,$celular,$foto);
 
             // Devolver mensagem

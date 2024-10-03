@@ -1,105 +1,181 @@
-CREATE DATABASE BANCO_CFC;
-USE BANCO_CFC;
+-- MySQL Workbench Forward Engineering
 
-CREATE TABLE Funcionario (
-    nome VARCHAR(100),
-    cpf VARCHAR(14),
-    senha VARCHAR(50),
-    matricula varchar(7) PRIMARY KEY,
-    foto BLOB
-);
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE TABLE Aluno (
-    email VARCHAR(100),
-    celular VARCHAR(15),
-    cpf VARCHAR(14) unique,
-    nome VARCHAR(100),
-    id INT PRIMARY KEY auto_increment,
-    foto BLOB
-);
+-- -----------------------------------------------------
+-- Schema BANCO_CFC
+-- -----------------------------------------------------
 
-CREATE TABLE Instrutor (
-    nome VARCHAR(100),
-    cpf VARCHAR(14) unique,
-    sexo CHAR(1),
-    id_instrutor int PRIMARY KEY auto_increment
-);
+-- -----------------------------------------------------
+-- Schema BANCO_CFC
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `BANCO_CFC` DEFAULT CHARACTER SET utf8 ;
+USE `BANCO_CFC` ;
 
-CREATE TABLE Veiculo (
-    sigla_categoria CHAR(3),
-    adaptado BOOLEAN,
-    placa VARCHAR(7) PRIMARY KEY,
-    marca VARCHAR(30),
-    modelo VARCHAR(30),
-    ano YEAR(4)
-);
-CREATE TABLE Veiculo_Instrutor (
-	cpf_instrutor varchar(14),
-    placa_veiculo varchar(7),
-    
-    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
-    FOREIGN KEY (placa_veiculo) REFERENCES Veiculo(placa)
-);
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Aluno`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Aluno` (
+  `id_aluno` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NULL,
+  `cpf` VARCHAR(14) NULL,
+  `celular` VARCHAR(15) NULL,
+  `email` VARCHAR(100) NULL,
+  `foto` BLOB NULL,
+  PRIMARY KEY (`id_aluno`),
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC))
+ENGINE = InnoDB;
 
-CREATE TABLE Etapa (
-    nome VARCHAR(100),
-    id CHAR(1) PRIMARY KEY
-);
 
-CREATE TABLE Curso (
-    sigla VARCHAR(5) PRIMARY KEY,
-    descricao VARCHAR(100),
-    categoria CHAR(2)
-);
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Curso`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Curso` (
+  `sigla` VARCHAR(5) NOT NULL,
+  `descricao` VARCHAR(100) NULL,
+  `categoria` VARCHAR(3) NULL,
+  PRIMARY KEY (`sigla`))
+ENGINE = InnoDB;
 
-CREATE TABLE Processo (
-    curso VARCHAR(5),
-    cpf_aluno VARCHAR(14),
-    data_inicio DATE,
-    id_processo INT PRIMARY KEY auto_increment,
-    
-    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf),
-    FOREIGN KEY (curso) REFERENCES Curso(sigla)
-);
 
-CREATE TABLE Etapa_Curso (
-    etapa CHAR(1),
-    curso CHAR(1),
-    ordem_curso INT,
-    id_etapa_curso INT PRIMARY KEY, 
-    
-    FOREIGN KEY (etapa) REFERENCES Etapa(id),
-    FOREIGN KEY (curso) REFERENCES Curso(sigla)
-);
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Processo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Processo` (
+  `id_processo` INT NOT NULL AUTO_INCREMENT,
+  `data_inicio` DATE NULL,
+  `id_aluno` INT NOT NULL,
+  `id_curso` VARCHAR(5) NOT NULL,
+  `etapa` INT NULL,
+  PRIMARY KEY (`id_processo`),
+  INDEX `fk_Processo_Aluno_idx` (`id_aluno` ASC),
+  INDEX `fk_Processo_Curso1_idx` (`id_curso` ASC),
+  CONSTRAINT `fk_Processo_Aluno`
+    FOREIGN KEY (`id_aluno`)
+    REFERENCES `BANCO_CFC`.`Aluno` (`id_aluno`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Processo_Curso1`
+    FOREIGN KEY (`id_curso`)
+    REFERENCES `BANCO_CFC`.`Curso` (`sigla`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-CREATE TABLE Curso_Instrutor (
-    id_curso_instrutor INT PRIMARY KEY auto_increment,
-    cpf_instrutor VARCHAR(14),
-    sigla_curso CHAR(1),
-    dias_semana VARCHAR(7),
-    /* Excluir tabela Veiculo_Instrutor e criar um atributo veiculo aqui*/
-    
-    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
-    FOREIGN KEY (sigla_curso) REFERENCES Curso(sigla)
-);
 
-CREATE TABLE AulaPratica (
-    cpf_instrutor VARCHAR(14),
-    cpf_aluno VARCHAR(14), /*Tirar*/
-    id_processo INT,
-    placa VARCHAR(7), /*Tirar*/
-    data_aula DATE,
-    hora TIME,
-    status_detran BOOLEAN,
-    id INT PRIMARY KEY auto_increment,
-    obrigatoria BOOLEAN,
-    /*Criar: status_aula VARCHAR(20), */
-    
-    FOREIGN KEY (cpf_instrutor) REFERENCES Instrutor(cpf),
-    FOREIGN KEY (cpf_aluno) REFERENCES Aluno(cpf), /*Tirar*/
-    FOREIGN KEY (placa) REFERENCES Veiculo(placa), /*Tirar*/
-    FOREIGN KEY (id_processo) REFERENCES Processo(id_processo)
-);
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Veiculo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Veiculo` (
+  `placa` VARCHAR(7) NOT NULL,
+  `sigla_categoria` VARCHAR(3) NULL,
+  `adaptado` TINYINT(1) NULL,
+  `marca` VARCHAR(45) NULL,
+  `modelo` VARCHAR(45) NULL,
+  `ano` YEAR NULL,
+  PRIMARY KEY (`placa`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Instrutor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Instrutor` (
+  `id_instrutor` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NULL,
+  `cpf` VARCHAR(14) NULL,
+  `sexo` VARCHAR(1) NULL,
+  `dias_semana` VARCHAR(7) NULL,
+  PRIMARY KEY (`id_instrutor`),
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`AulaPratica`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`AulaPratica` (
+  `id_aulaPratica` INT NOT NULL AUTO_INCREMENT,
+  `data_aula` DATE NULL,
+  `hora_aula` TIME NULL,
+  `status_detran` TINYINT(1) NULL,
+  `obrigatoria` TINYINT(1) NULL,
+  `status_aula` VARCHAR(20) NULL,
+  `id_veiculo` VARCHAR(7) NOT NULL,
+  `id_instrutor` INT NOT NULL,
+  `id_processo` INT NOT NULL,
+  PRIMARY KEY (`id_aulaPratica`),
+  INDEX `fk_AulaPratica_Veiculo1_idx` (`id_veiculo` ASC),
+  INDEX `fk_AulaPratica_Instrutor1_idx` (`id_instrutor` ASC),
+  INDEX `fk_AulaPratica_Processo1_idx` (`id_processo` ASC),
+  CONSTRAINT `fk_AulaPratica_Veiculo1`
+    FOREIGN KEY (`id_veiculo`)
+    REFERENCES `BANCO_CFC`.`Veiculo` (`placa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AulaPratica_Instrutor1`
+    FOREIGN KEY (`id_instrutor`)
+    REFERENCES `BANCO_CFC`.`Instrutor` (`id_instrutor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AulaPratica_Processo1`
+    FOREIGN KEY (`id_processo`)
+    REFERENCES `BANCO_CFC`.`Processo` (`id_processo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Curso_Instrutor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Curso_Instrutor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `id_veiculo` VARCHAR(7) NOT NULL,
+  `id_curso` VARCHAR(5) NOT NULL,
+  `id_instrutor` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Curso_Instrutor_Veiculo1_idx` (`id_veiculo` ASC),
+  INDEX `fk_Curso_Instrutor_Curso1_idx` (`id_curso` ASC),
+  INDEX `fk_Curso_Instrutor_Instrutor1_idx` (`id_instrutor` ASC),
+  CONSTRAINT `fk_Curso_Instrutor_Veiculo1`
+    FOREIGN KEY (`id_veiculo`)
+    REFERENCES `BANCO_CFC`.`Veiculo` (`placa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Curso_Instrutor_Curso1`
+    FOREIGN KEY (`id_curso`)
+    REFERENCES `BANCO_CFC`.`Curso` (`sigla`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Curso_Instrutor_Instrutor1`
+    FOREIGN KEY (`id_instrutor`)
+    REFERENCES `BANCO_CFC`.`Instrutor` (`id_instrutor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BANCO_CFC`.`Funcionario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`Funcionario` (
+  `matricula` VARCHAR(7) NOT NULL,
+  `nome` VARCHAR(100) NULL,
+  `cpf` VARCHAR(14) NULL,
+  `senha` VARCHAR(50) NULL,
+  `foto` BLOB NULL,
+  PRIMARY KEY (`matricula`),
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC))
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 /* Inserindo Cursos */
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação A', 'A');
@@ -118,14 +194,14 @@ INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('MD'
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('ME', 'Mudança de Categoria E', 'E');
 
 /* Inserindo Instrutores */
-INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Adilson Santana', '001.290.090-75', 'M');
-INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Maria Rosa', '302.228.210-94', 'F');
-INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`) VALUES ('Carlos Brito', '910.580.110-90', 'M');
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`, `dias_semana`) VALUES ('Adilson Santana', '001.290.090-75', 'M', 1111100);
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`, `dias_semana`) VALUES ('Maria Rosa', '302.228.210-94', 'F', 1111100);
+INSERT INTO `BANCO_CFC`.`instrutor` (`nome`, `cpf`, `sexo`, `dias_semana`) VALUES ('Carlos Brito', '910.580.110-90', 'M', 1111100);
 
 /* Inserindo Alunos */
-INSERT INTO `BANCO_CFC`.`aluno` (`email`, `celular`, `cpf`, `nome`) VALUES ('liliaalvarenga@gmail.com', '(27) 99872-1321','040.592.730-40', 'Lilia Alvarenga');
-INSERT INTO `BANCO_CFC`.`aluno` (`email`, `celular`, `cpf`, `nome`) VALUES ('Daniellebrun@gmail.com', '(27) 99841-1919','412.207.470-33', 'Danielle Brun');
+INSERT INTO `BANCO_CFC`.`aluno` (`nome`, `cpf`, `celular`, `email`) VALUES ('Lilia Alvarenga', '040.592.730-40', '(27) 99872-1321', 'liliaalvarenga@gmail.com');
+INSERT INTO `BANCO_CFC`.`aluno` (`nome`, `cpf`, `celular`, `email`) VALUES ('Danielle Brun', '412.207.470-33', '(27) 99841-1919', 'Daniellebrun@gmail.com');
 
 /* Inserindo Veículos */
-INSERT INTO `BANCO_CFC`.`veiculo` (`sigla_categoria`, `adaptado`, `placa`, `marca`, `modelo`, `ano`) VALUES ('A', '0','XIS3J98', 'Honda', 'CG 160', '2015');
-INSERT INTO `BANCO_CFC`.`veiculo` (`sigla_categoria`, `adaptado`, `placa`, `marca`, `modelo`, `ano`) VALUES ('B', '0','JJS3B28', 'Fiat', 'Uno', '2005');
+INSERT INTO `BANCO_CFC`.`veiculo` (`placa`, `sigla_categoria`, `adaptado`, `marca`, `modelo`, `ano`) VALUES ('XIS3J98', 'A', '0', 'Honda', 'CG 160', '2015');
+INSERT INTO `BANCO_CFC`.`veiculo` (`placa`, `sigla_categoria`, `adaptado`, `marca`, `modelo`, `ano`) VALUES ('JJS3B28', 'B', '0', 'Fiat', 'Uno', '2005');

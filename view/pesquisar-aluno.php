@@ -106,8 +106,8 @@
                         mostrar+="<tbody>   ";                  
                     data.alunos.forEach(function(obj,i) {  
                         
-                        mostrar += "<tr>    <td data-label='Foto'><a href='consultar-aluno.php?id=" +obj.id+ "'><img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'></a></td>";
-                        mostrar += "    <td data-label='Nome'><a href='consultar-aluno.php?id=" +obj.id+ "'>" + obj.nome + "</a></td>";
+                        mostrar += "<tr>    <td data-label='Foto'><a href='consultar-aluno.php?id=" +obj.id_aluno+ "'><img src='data:image/jpeg;base64," + obj.foto + "' height='100' width='100'></a></td>";
+                        mostrar += "    <td data-label='Nome'><a href='consultar-aluno.php?id=" +obj.id_aluno+ "'>" + obj.nome + "</a></td>";
                         mostrar += "<td data-label='CPF'>" + obj.cpf + "</td>";
                         mostrar += "<td data-label='Email'>" + obj.email + "</td>";
                         mostrar += "<td data-label='Celular'>" + obj.celular + "</td></tr>";

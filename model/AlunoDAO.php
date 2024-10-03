@@ -1,7 +1,7 @@
 <?php
 require "conexaoBD.php";
 static $conexão;
-function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
+function cadastrarAluno($nome, $cpf, $email, $celular, $foto){
     $conect=conectarBD();
 
     $tamanhoImg = $foto["size"]; 
@@ -12,7 +12,7 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
     $select1=mysqli_query($conect,$query1);  
     $qtd=mysqli_num_rows($select1);
     if($qtd == 0){
-        $query2="INSERT INTO `banco_cfc`.`aluno` (`email`, `celular`, `cpf`, `nome`,`foto`) VALUES ('$email', '$celular', '$cpf', '$nome', '$midia');";
+        $query2="INSERT INTO `banco_cfc`.`aluno` (`nome`, `cpf`, `celular`, `email`, `foto`) VALUES ('$nome', '$cpf', '$celular', '$email', '$midia');";
         $select2=mysqli_query($conect,$query2);
         $id = mysqli_insert_id($conect);  
         if($select2){
@@ -23,7 +23,7 @@ function cadastrarAluno($nome, $cpf, $email,$celular,$foto){
         }
     }
     else{
-        $mensagem="Esse aluno já existe.";
+        $mensagem="Esse CPF já está cadastrado.";
     }
     return $mensagem;
 }
@@ -44,8 +44,8 @@ function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
     $sql = "UPDATE aluno SET "
     . "nome = '$nome', "
     . "cpf = '$cpf', "
-    . "email = '$email', "
-    . "celular = '$celular'";
+    . "celular = '$celular', "
+    . "email = '$email'";
 
     if ($foto != null) {
         // Transformar a imagem
@@ -55,10 +55,10 @@ function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
 
         // Montar SQL com foto
         $sql = $sql . ", foto = '$midia'"
-                       . " WHERE id = $id";
+                       . " WHERE id_aluno = $id";
     } else {
         // Não alterar a foto
-        $sql = $sql . " WHERE id = $id";
+        $sql = $sql . " WHERE id_aluno = $id";
     }
 
     mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) ); // Inserir no banco
@@ -67,7 +67,7 @@ function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
 }
 
 function excluirAluno ( $id ) {
-    $sql = "DELETE FROM aluno WHERE id = $id";
+    $sql = "DELETE FROM aluno WHERE id_aluno = $id";
 
     $conexao = conectarBD();  
     mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
@@ -93,7 +93,7 @@ function pesquisar ($pesq, $tipo) {
                 $sql = $sql . "cpf = '$pesq' ";
                 break;
         case 3: // Por ID
-            $sql = $sql . "id = '$pesq' ";
+            $sql = $sql . "id_aluno = '$pesq' ";
     }
 
     $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
@@ -104,9 +104,6 @@ function pesquisarAlunoPorNome ($pesq) {
     return pesquisar($pesq,1);
 }
 
-//function pesquisarClientePorEstado ($pesq) {
-   // return pesquisar($pesq,2);}
-
 function pesquisarAlunoPorCPF ($pesq) {
     return pesquisar($pesq,2);
 }
@@ -115,18 +112,7 @@ function pesquisarAlunoPorID ($pesq) {
     return pesquisar($pesq,3);
 }
 
-/*function deletarAluno($cpf){
-    $conect=conectarBD();
-    $query="DELETE FROM `novobanco_cfc`.`aluno` WHERE (`cpf` = '$cpf ');";
-    $select=mysqli_query($conect,$query);
-    if($select){
-        $mensagem="aluno exluido com sucesso!";
-    }
-    else{
-        $mensagem="nao foi possivel realizar a operação!";
-    } 
-    return $mensagem;
-}
+/*
 function exibirAluno($cpf){
     $conect=conectarBD();
     $query="SELECT * FROM `novobanco_cfc`.`aluno` WHERE (`cpf` = '$cpf ');";
