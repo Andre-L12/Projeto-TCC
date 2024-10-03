@@ -214,8 +214,13 @@
   
 
   <script>
-    const markedDates = ["2024-10-01", "2024-12-25", "2024-11-03", "2024-12-01", "2024-01-05", "2024-09-19"]; // Exemplo de datas marcadas
-    
+    <?php
+    // Exemplo de array com as datas
+    $datasMarcadas = ["2024-10-01", "2024-12-25", "2024-11-03", "2024-12-01", "2024-01-05", "2024-09-19"]; // Isso deve vir do banco de dados
+
+    // Convertendo o array PHP para um array JavaScript
+    echo "const markedDates = " . json_encode($datasMarcadas) . ";";
+    ?>
     let currentDate = new Date();
 
     function renderCalendar() {
