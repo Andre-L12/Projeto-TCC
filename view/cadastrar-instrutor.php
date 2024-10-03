@@ -23,9 +23,7 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-        require_once "navbar-chamar.php";
-        $navbar = chamarNavbar();
-        echo $navbar;
+        require_once "navbar.html";
         ?>
 
         <div class="layout">
@@ -67,6 +65,29 @@
                             $sexoF = "checked";
                         }
 
+                        $dias_semana = $registro["dias_semana"];
+                        $dias_semana = str_split($dias_semana); // Transformando String em Array
+
+                        $check_dias_semana = array(
+                            "seg" => "",
+                            "ter" => "",
+                            "qua" => "",
+                            "qui" => "",
+                            "sex" => "",
+                            "sab" => "",
+                            "dom" => ""
+                        );
+
+                        // Dias da semana para as chaves array
+                        $dias = ["seg", "ter", "qua", "qui", "sex", "sab", "dom"];
+                        
+                        foreach ($dias_semana as $index => $valor) {
+                            if ($valor == "1") {
+                                // Dia da semana recebe 'checked' se o valor for 1
+                                $check_dias_semana[$dias[$index]] = "checked";
+                            }
+                        }
+
                         $titulo = "Alterar Instrutor";
                         $botao = "Alterar";
                     }
@@ -79,6 +100,16 @@
 
                     $sexoM = "";
                     $sexoF = "";
+
+                    $check_dias_semana = array(
+                        "seg" => "",
+                        "ter" => "",
+                        "qua" => "",
+                        "qui" => "",
+                        "sex" => "",
+                        "sab" => "",
+                        "dom" => ""
+                    );
 
                     $titulo = "Cadastrar Instrutor";
                     $botao = "Cadastrar";
@@ -116,31 +147,39 @@
                             </div>
                         </div>
 
-                        <!-- <h2 class="form-titulo-2">Vincular a curso</h2> -->
+                        <!-- Checkbox Dias da semana-->
+                        <div class="form-campo">
+                            <label class="form-subtitulo">Dias da semana que atua nesse curso:</label>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="segunda" name="segunda" value="seg" <?php echo $check_dias_semana["seg"] ?>>
+                                <label for="segunda">Segunda-feira</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="terca" name="terca" value="ter" <?php echo $check_dias_semana["ter"] ?>>
+                                <label for="terca">Terça-feira</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="quarta" name="quarta" value="qua" <?php echo $check_dias_semana["qua"] ?>>
+                                <label for="quarta">Quarta-feira</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="quinta" name="quinta" value="qui" <?php echo $check_dias_semana["qui"] ?>>
+                                <label for="quinta">Quinta-feira</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="sexta" name="sexta" value="sex" <?php echo $check_dias_semana["sex"] ?>>
+                                <label for="sexta">Sexta-feira</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="sabado" name="sabado" value="sab" <?php echo $check_dias_semana["sab"] ?>>
+                                <label for="sabado">Sábado</label>
+                            </div>
+                            <div class="form-campo-checkbox">
+                                <input type="checkbox" id="domingo" name="domingo" value="dom" <?php echo $check_dias_semana["dom"] ?>>
+                                <label for="domingo">Domingo</label>
+                            </div>
 
-                        <!-- Selecionar Curso -->
-                        <!-- <div class="form-campo">
-                                <label for="curso" class="form-subtitulo">Atua no curso:</label>
-                                <select name="curso" id="opcoesCurso" class="form-input">
-                                    <?php
-                                    // require_once "../model/funcoesBD.php";
-                                    // $options = comboBoxCurso();              
-                                    // echo $options;
-                                    ?>
-                                </select>
-                            </div> -->
-
-                        <!-- Selecionar Veículo -->
-                        <!-- <div class="form-campo">
-                            <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
-                                <select name="veiculo" id="opcoesVeiculo" class="form-input">
-                                    <?php
-                                    // require_once "../model/funcoesBD.php";
-                                    // $options = comboBoxVeiculo();              
-                                    // echo $options;
-                                    ?>
-                                </select>
-                            </div> -->
+                        </div>
 
                         <div class="form-div-btn">
                             <button type="submit" name="btnCadastrar" value="<?php echo $botao; ?>"

@@ -20,9 +20,7 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-        require_once "navbar-chamar.php";
-        $navbar = chamarNavbar();
-        echo $navbar;
+        require_once "navbar.html";
         ?>
 
         <div class="layout">
@@ -70,7 +68,7 @@
                         </div>
 
                         <!-- Checkbox Dias da semana-->
-                        <div class="form-campo">
+                        <!-- <div class="form-campo">
                             <label class="form-subtitulo">Dias da semana que atua nesse curso:</label>
                             <div class="form-campo-checkbox">
                                 <input type="checkbox" id="segunda" name="segunda" value="seg">
@@ -101,7 +99,7 @@
                                 <label for="domingo">Domingo</label>
                             </div>
 
-                        </div>
+                        </div> -->
 
                         <!-- Selecionar Veículo -->
                         <div class="form-campo">

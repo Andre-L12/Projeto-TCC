@@ -5,59 +5,14 @@
     // Receber os campos POST:
     $instrutor = $_POST["instrutor"];
     $curso = $_POST["curso"];
-
-    $dias_semana = "";
-
-    // - Checkbox dias da semana:
-
-    if (isset($_POST["segunda"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["terca"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["quarta"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["quinta"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["sexta"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["sabado"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["domingo"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
+    $veiculo = $_POST["veiculo"];
+    
     // Validação de dados:
-    $msg = validarInstrutorCurso($instrutor, $curso, $dias_semana);
+    $msg = validarInstrutorCurso($instrutor, $curso, $veiculo);
 
     if (empty($msg)){
         // Inserir vínculo
-        $msgBanco = vincularInstrutorCurso($instrutor, $curso, $dias_semana);
+        $msgBanco = vincularInstrutorCurso($instrutor, $curso, $veiculo);
         
         // Devolver mensagem
         header("Location:../view/cadastrar-instrutor-curso.php?msg=$msgBanco");

@@ -49,9 +49,7 @@
         ?>
         
         <?php
-            require_once "navbar-chamar.php";
-            $navbar = chamarNavbar();              
-            echo $navbar;
+        require_once "navbar.html";
         ?>
 
         <di class="layout">

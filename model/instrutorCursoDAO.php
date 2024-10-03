@@ -1,15 +1,15 @@
 <?php
 require_once "conexaoBD.php";
-function vincularInstrutorCurso($instrutor, $curso, $dias_semana){
+function vincularInstrutorCurso($instrutor, $curso, $veiculo){
     $conexao = conectarBD();
 
-    $query1 = "SELECT * FROM curso_instrutor WHERE cpf_instutor='$instrutor' and sigla_curso='$curso';";
+    $query1 = "SELECT * FROM curso_instrutor WHERE id_instrutor='$instrutor' and id_curso='$curso';";
     $select1 = mysqli_query($conexao,$query1);
     $qtd = mysqli_num_rows($select1);
 
     if ($qtd == 0){
         // Vinculo ainda não existe na tabela.
-        $sql = "INSERT INTO curso_instrutor (cpf_instrutor, sigla_curso, dias_semana) VALUES ('$instrutor', '$curso', '$dias_semana')";
+        $sql = "INSERT INTO curso_instrutor (id_veiculo, id_curso, id_instrutor) VALUES ('$veiculo','$curso', '$instrutor')";
 
         $select = mysqli_query($conexao, $sql);
         $id = mysqli_insert_id($conexao);
@@ -28,7 +28,7 @@ function vincularInstrutorCurso($instrutor, $curso, $dias_semana){
 }
 
 function excluirInstrutorCurso($id_instrutor_curso){
-    $sql = "DELETE FROM curso_instrutor WHERE id_curso_insrutor = $id_instrutor_curso";
+    $sql = "DELETE FROM curso_instrutor WHERE id = $id_instrutor_curso";
 
     $conexao = conectarBD();  
     mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );

@@ -1,5 +1,5 @@
 <?php
-    function validarInstrutor($nome, $cpf, $sexo){
+    function validarInstrutor($nome, $cpf, $sexo, $dias_semana){
         $msgErro = "";
 
         $msgErro = $msgErro . validarNome($nome);
@@ -10,10 +10,14 @@
             $msgErro = $msgErro . "Selecione o sexo. <br>";
         }
 
+        if ($dias_semana == "0000000"){
+            $msgErro .= "Selecione ao menos um dia da semana. <br>";
+        }
+
         return $msgErro;
     }
 
-    function validarInstrutorCurso($instrutor, $curso, $dias_semana){
+    function validarInstrutorCurso($instrutor, $curso, $veiculo){
         $msgErro = "";
         
         if (empty($instrutor)){
@@ -24,8 +28,8 @@
             $msgErro .= "Selecione um curso. <br>";
         }
 
-        if ($dias_semana == "0000000"){
-            $msgErro .= "Selecione ao menos um dia da semana. <br>";
+        if (empty($veiculo)){
+            $msgErro .= "Selecione um veículo. <br>";
         }
 
         return $msgErro;

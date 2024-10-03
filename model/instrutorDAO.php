@@ -1,6 +1,6 @@
 <?php
     require_once "conexaoBD.php";
-    function criarInstrutor($nome, $cpf, $sexo){
+    function criarInstrutor($nome, $cpf, $sexo, $dias_semana){
         $conexao = conectarBD();
 
         $query1="SELECT cpf FROM instrutor WHERE cpf='$cpf'";
@@ -8,8 +8,8 @@
         $qtd=mysqli_num_rows($select1);
 
         if($qtd == 0){
-            $sql = "INSERT INTO instrutor (nome, cpf, sexo) VALUES ('$nome', '$cpf', '$sexo')";
-            $select2=mysqli_query($conexao,$sql);
+            $sql = "INSERT INTO instrutor (nome, cpf, sexo, dias_semana) VALUES ('$nome', '$cpf', '$sexo', '$dias_semana')";
+            $select2 = mysqli_query($conexao,$sql);
             $id = mysqli_insert_id($conexao);  
             
             if($select2){
@@ -39,7 +39,7 @@
             return false;
         }
     }
-    function alterarInstrutor ($nome, $cpf, $sexo, $id_instrutor) {
+    function alterarInstrutor ($nome, $cpf, $sexo, $dias_semana, $id_instrutor) {
 
         $conexao = conectarBD();   
         
@@ -47,7 +47,8 @@
         $sql = "UPDATE instrutor SET "
         . "nome = '$nome', "
         . "cpf = '$cpf', "
-        . "sexo = '$sexo' "
+        . "sexo = '$sexo', "
+        . "dias_semana = '$dias_semana' "
         . "WHERE id_instrutor = $id_instrutor";
     
         mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) ); // Inserir no banco

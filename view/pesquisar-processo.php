@@ -26,10 +26,9 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-            require_once "navbar-chamar.php";
-            $navbar = chamarNavbar();              
-            echo $navbar;
+        require_once "navbar.html";
         ?>
+        
         <div class="layout">
         <header>
             <div>
