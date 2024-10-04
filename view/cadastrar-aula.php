@@ -43,38 +43,48 @@
                     <h1 class="form-titulo">Agendar Aula Prática</h1>
                     <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica">
                         <div>
-                            <!-- Campo Instrutor -->
-                            <div class="form-campo">
-                                <label for="instrutor" class="form-subtitulo">Instrutor:</label>
-                                <select name="instrutor" class="form-input">
-                                    <?php
-                                    require_once "../model/funcoesBD.php";
-                                    $options = comboBoxInstrutor();
-                                    echo $options;
-                                    ?>
-                                </select>
-                            </div>
                             <!-- Campo Aluno -->
                             <div class="form-campo">
                                 <label for="aluno" class="form-subtitulo">Aluno:</label>
-                                <select name="aluno" class="form-input">
+                                <select name="aluno" id="aluno" class="form-input">
                                     <?php
+                                    require_once "../model/funcoesBD.php";
                                     $options = comboBoxAluno();
                                     echo $options;
                                     ?>
                                 </select>
                             </div>
+
+                            <!-- Campo Processo -->
+                            <div class="form-campo">
+                                <label for="processo" class="form-subtitulo">Processo:</label>
+                                <select name="processo" id="processo" class="form-input">
+                                    <?php
+                                    // Exibir apenas os processos do aluno selecionado
+                                    ?>
+                                </select>
+                            </div>
+
+                            <!-- Campo Instrutor -->
+                            <div class="form-campo">
+                                <label for="instrutor" class="form-subtitulo">Instrutor:</label>
+                                <select name="instrutor" class="form-input">
+                                    <?php
+                                    // Exibir apenas instrutores vinculados ao curso do processo
+                                    ?>
+                                </select>
+                            </div>
+
                             <!-- Selecionar Veículo -->
                             <div class="form-campo">
                                 <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
                                 <select name="veiculo" id="opcoesVeiculo" class="form-input">
                                     <?php
-                                    require_once "../model/funcoesBD.php";
-                                    $options = comboBoxVeiculo();
-                                    echo $options;
+                                    // Apenas veículos da categoria do curso do processo selecionado
                                     ?>
                                 </select>
                             </div>
+
                             <!-- Campo data -->
                             <div class="form-campo">
                                 <label for="data" class="form-subtitulo">Data:</label>
@@ -84,8 +94,12 @@
                             <!-- Campo Hora -->
                             <div class="form-campo">
                                 <label for="hora" class="form-subtitulo">Hora:</label>
-                                <input type="time" name="hora" id="hora" class="form-input">
+
+                                <!-- Exibir horas disponíveis do instrutor no dia -->
+
+                                <!-- <input type="time" name="hora" id="hora" class="form-input"> -->
                             </div>
+
                             <!-- Campo Obrigatoriedade -->
                             <div class="form-campo">
                                 <label for="obrigatoria" class="form-subtitulo">Obrigatoria:</label>
@@ -96,18 +110,6 @@
                                 <div style="display: flex; align-items: center;">
                                     <input type="radio" name="obrigatoria" value="0" id="não">
                                     <label for="não">Não</label>
-                                </div>
-                            </div>
-                            <!-- Campo status detran -->
-                            <div class="form-campo">
-                                <label for="obrigatoria" class="form-subtitulo">Status:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="status_detran" value="1" id="sim">
-                                    <label for="sim">Registrada</label>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="status_detran" value="0" id="não">
-                                    <label for="não">Não registrada</label>
                                 </div>
                             </div>
 
