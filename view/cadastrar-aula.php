@@ -134,6 +134,19 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+            $('#aluno').on('blur', function() {
+                var id_aluno = $(this).val();
+
+                if (id_aluno !== "") {
+                    pesquisarProcessosPorAluno(id_aluno); // criar essa função
+                }
+                
+            });
+        });
+    </script>
+
+    <script>
         // Máscara para placa de veículo
         document.getElementById('placa').addEventListener('input', function () {
             this.value = this.value.toUpperCase();
