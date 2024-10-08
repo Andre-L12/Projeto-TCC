@@ -1,6 +1,9 @@
 <!-- Toda página que puxar Navbar terá que ter essa base -->
 
-<!DOCTYPE html>
+<?php
+    require_once "../control/validarUsuario.php";
+ ?>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -139,7 +142,7 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-        require_once "navbar-aluno.html";
+        require_once "navbar-aluno.php";
         ?>
 
         <div class="layout">

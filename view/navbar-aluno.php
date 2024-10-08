@@ -150,6 +150,19 @@
                 </ul>
             </nav>
         </div>
+            <div class="sidebar-footer">
+            <div class="logged-user">
+                <!--adicionar a foto-->
+                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                <span class="user-name">
+                    <?php
+                    echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
+                    ?>
+                </span><br><br>
+                <span class="menu-title"><a href="../control/logout.php" style="background-color: #ff4d4d; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease;">Sair</a>
+                </span>
+            </div>
+        </div>
     </div>
 </aside>
 <div id='overlay' class='overlay'></div>

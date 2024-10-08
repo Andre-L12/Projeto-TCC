@@ -1,3 +1,6 @@
+<?php
+    require_once "../control/validarUsuario.php";
+ ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -103,7 +106,7 @@
         ?>
         
         <?php
-        require_once "navbar.html";
+        require_once "navbar.php";
         ?>
 
         <di class="layout">

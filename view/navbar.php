@@ -152,12 +152,14 @@
         </div>
         <div class="sidebar-footer">
             <div class="logged-user">
+                <!--adicionar a foto-->
                 <span class="user-icon"><i class="bi bi-person-circle"></i></span>
                 <span class="user-name">
                     <?php
                     echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
                     ?>
-                </span>
+                </span><br>
+                <span class="menu-title"><a href="../control/logout.php" > Sair</a></span>
             </div>
         </div>
     </div>

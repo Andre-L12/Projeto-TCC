@@ -17,7 +17,7 @@
         
         if (empty($resultado)){
             //O CPF é de um aluno
-            $query = "SELECT cpf FROM aluno WHERE cpf='$usuario'";
+            $query = "SELECT * FROM aluno WHERE cpf='$usuario'";
             $select = mysqli_query($conect,$query);
             $resultado = mysqli_fetch_assoc($select);
             $qtd = mysqli_num_rows($select);
@@ -27,6 +27,7 @@
                 $_SESSION["nome"] = $resultado["nome"];
                 $_SESSION["id_aluno"] = $resultado["id_aluno"];
                 $_SESSION["tipo"] = '1'; 
+                $_SESSION["foto"]=$resultado["foto"];
                 header("Location:../view/menu-aluno.php");
             } else {
                 $mensagem="Deu errado! Usuário ou senha incorretos aluno";
@@ -41,7 +42,8 @@
                 session_start();
                 $_SESSION["nome"] = $resultado["nome"];
                 $_SESSION["matricula"] = $resultado["matricula"];
-                $_SESSION["tipo"] = '2'; 
+                $_SESSION["tipo"] = '2';
+                $_SESSION["foto"]=$resultado["foto"];
                 header("Location:../view/menu-funcionario.php");
             } else {
                 $mensagem="Deu errado! Usuário ou senha incorretos funcionario";
