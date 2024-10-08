@@ -139,7 +139,7 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-        require_once "navbar.html";
+        require_once "navbar-aluno.html";
         ?>
 
         <div class="layout">

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
@@ -49,7 +50,7 @@
                                 <select name="aluno" id="aluno" class="form-input">
                                     <?php
                                     require_once "../model/funcoesBD.php";
-                                    $options = comboBoxAluno();
+                                    $options = comboBoxAlunoCPF();
                                     echo $options;
                                     ?>
                                 </select>
@@ -59,10 +60,9 @@
                             <div class="form-campo">
                                 <label for="processo" class="form-subtitulo">Processo:</label>
                                 <select name="processo" id="processo" class="form-input">
-                                    <?php
-                                    // Exibir apenas os processos do aluno selecionado
-                                    ?>
+                                    
                                 </select>
+                                <div id="div-erro"></div>
                             </div>
 
                             <!-- Campo Instrutor -->
@@ -135,25 +135,54 @@
 
     <script>
         $(document).ready(function() {
-            $('#aluno').on('blur', function() {
-                var id_aluno = $(this).val();
 
-                if (id_aluno !== "") {
-                    pesquisarProcessosPorAluno(id_aluno); // criar essa função
+            function verificarAluno() {
+                var cpf_aluno = $('#aluno').val();
+
+                if (cpf_aluno !== "") {
+                    pesquisarProcessosPorAluno(cpf_aluno);
                 }
-                
+            }
+
+            // Acionar a função ao carregar a página
+            verificarAluno();
+
+            // Acionar a função ao selecionar outra opção no combobox
+            $('#aluno').on('change', verificarAluno);
+        });
+
+        function pesquisarProcessosPorAluno(pesq){
+            $.ajax({
+                url: '../control/pesquisarProcesso_JSON.php',
+                type: 'POST',
+                data: { pesq : pesq },
+                dataType: 'json',
+                success: function(data) {
+
+                    var mostrar = "";
+
+                    if ( data.erro == "" )  {
+                        data.processos.forEach(function(obj,i) {
+                            const dataBanco = obj.data_inicio;
+                            const dataConvertida = converterData(dataBanco);
+
+                            mostrar += "<OPTION value='" + obj.id_processo + "'>" + obj.id_curso + "</OPTION>";
+                        });
+                        $('#processo').empty();
+                        $('#processo').html(mostrar).show();
+                    } else {
+                        mostrar += "Esse aluno não possui nenhum processo.";
+                        $('#div-erro').html(mostrar).show();
+                    }
+                },
+                error: function() {
+                    var mostrar = "";
+
+                    mostrar += "Erro ao chamar o pesquisar do servidor";
+                    $('#div-erro').html(mostrar).show();
+                }
             });
-        });
-    </script>
-
-    <script>
-        // Máscara para placa de veículo
-        document.getElementById('placa').addEventListener('input', function () {
-            this.value = this.value.toUpperCase();
-        });
-
-        // Define o ano para 2000 ao carregar a página;
-        document.getElementById('ano').value = '2000';
+        }
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
