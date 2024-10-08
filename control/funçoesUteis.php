@@ -265,4 +265,15 @@ function validarCPF2($cpf) {
         return "";
 
     }
+    function validarLogin($usuario,$senha){
+        $msg = "";
+        if(empty($usuario)){
+            $msg = $msg . "Informe o usuário   |  ";
+        }
+        if(strlen($senha)<5){
+            $msg =$msg . "Informe uma senha maior que 4 caracteres";
+        }
+        return $msg;
+
+    }
 ?>
