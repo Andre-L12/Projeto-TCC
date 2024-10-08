@@ -32,6 +32,23 @@ function comboBoxAluno() {
     }
     return $options;
 }
+
+function comboBoxAlunoCPF() {
+    $sql = "SELECT * FROM aluno";
+    $conexao = conectarBD();
+    $resultado = mysqli_query($conexao, $sql );
+
+    $options = "";
+    while (  $registro = mysqli_fetch_assoc($resultado)  ) {
+        // Pegar os campos do REGISTRO
+        $cpf = $registro["cpf"];
+        $nome = $registro["nome"];
+
+        $options = $options . "<OPTION value='$cpf'>$nome</OPTION>";
+    }
+    return $options;
+}
+
 function comboBoxVeiculo() {
     $sql = "SELECT * FROM veiculo";
     $conexao = conectarBD();    
