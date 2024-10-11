@@ -65,7 +65,7 @@
                                 <select name="processo" id="processo" class="form-input">
                                     
                                 </select>
-                                <div id="div-erro"></div>
+                                <div id="div-erro-processo"></div>
                             </div>
 
                             <!-- Campo Instrutor -->
@@ -76,6 +76,7 @@
                                     // Exibir apenas instrutores vinculados ao curso do processo
                                     ?>
                                 </select>
+                                <div id="div-erro-instrutor"></div>
                             </div>
 
                             <!-- Selecionar Veículo -->
@@ -139,19 +140,43 @@
     <script>
         $(document).ready(function() {
 
+            // Para carregar processos de aluno:
             function verificarAluno() {
                 var cpf_aluno = $('#aluno').val();
+
+                $('#processo').empty();
+                $('#div-erro-processo').empty();
 
                 if (cpf_aluno !== "") {
                     pesquisarProcessosPorAluno(cpf_aluno);
                 }
             }
 
-            // Acionar a função ao carregar a página
+            // - Acionar a função ao carregar a página
             verificarAluno();
 
-            // Acionar a função ao selecionar outra opção no combobox
+            // - Acionar a função ao selecionar outra opção no combobox
             $('#aluno').on('change', verificarAluno);
+
+            // ===========================================================
+            // Para carregar instrutores de curso:
+            function verificarCurso() {
+                var id_curso = $('#processo').val();
+
+                $('#instrutor').empty();
+                $('#div-erro-instrutor').empty();
+
+                if (id_curso !== "") {
+                    pesquisarIntrutorPorCurso(id_curso);
+                }
+            }
+
+            // - Acionar a função ao carregar a página
+            verificarCurso();
+
+            // - Acionar a função ao selecionar outra opção no combobox
+            $('#processo').on('change', verificarCurso);
+
         });
 
         function pesquisarProcessosPorAluno(pesq){
@@ -166,26 +191,58 @@
 
                     if ( data.erro == "" )  {
                         data.processos.forEach(function(obj,i) {
-                            const dataBanco = obj.data_inicio;
-                            const dataConvertida = converterData(dataBanco);
-
-                            mostrar += "<OPTION value='" + obj.id_processo + "'>" + obj.id_curso + "</OPTION>";
+                            mostrar += "<OPTION value='" + obj.id_curso + "'>" + obj.id_curso + "</OPTION>";
                         });
-                        $('#processo').empty();
+                        
                         $('#processo').html(mostrar).show();
                     } else {
                         mostrar += "Esse aluno não possui nenhum processo.";
-                        $('#div-erro').html(mostrar).show();
+                        $('#div-erro-processo').html(mostrar).show();
                     }
                 },
                 error: function() {
                     var mostrar = "";
 
                     mostrar += "Erro ao chamar o pesquisar do servidor";
-                    $('#div-erro').html(mostrar).show();
+                    $('#div-erro-processo').html(mostrar).show();
                 }
             });
         }
+
+
+        function pesquisarIntrutorPorCurso(pesq){
+            $.ajax({
+                url: '../control/pesquisarCursoInstrutor_JSON.php',
+                type: 'POST',
+                data: { pesq : pesq },
+                dataType: 'json',
+                success: function(data) {
+
+                    var mostrar = "";
+
+                    if ( data.erro == "" )  {
+                        data.vinculos.forEach(function(obj,i) {
+                            mostrar += "<OPTION value='" + id_instrutor + "'>" + id_instrutor + "</OPTION>";
+                        });
+                        
+                        $('#instrutor').html(mostrar).show();
+                    } else {
+                        mostrar += "Esse curso não está vinculado a nenhum instrutor.";
+                        $('#div-erro-instrutor').html(mostrar).show();
+                    }
+                },
+                error: function() {
+                    var mostrar = "";
+
+                    mostrar += "Erro ao chamar o pesquisar do servidor";
+                    $('#div-erro-instrutor').html(mostrar).show();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
