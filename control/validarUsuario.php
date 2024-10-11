@@ -20,7 +20,7 @@
             // Última atividade foi há mais do que 30 minutos
             session_unset();
             session_destroy();
-            header("Location: tela-login.php?msg= sua sessão terminou!");
+            header("Location: tela-login.php?msg= Sua sessão terminou!");
             exit();
         }
     }

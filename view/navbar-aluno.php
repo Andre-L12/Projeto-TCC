@@ -32,6 +32,38 @@
                             <span class='menu-title'>CALENDÁRIO</span>
                         </a>
                     </li>
+                    <li class='menu-item'>
+                        <a href='paginaAvisos.php'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-bell-fill'></i>
+                            </span>
+                            <span class='menu-title'>AVISOS</span>
+                        </a>
+                    </li>
+                    <li class='menu-item'>
+                        <a href='paginaDuvidas.php'>
+                            <span class='menu-icon'>
+                                <i class='bi bi-question-diamond-fill'></i>
+                            </span>
+                            <span class='menu-title'>DUVÍDAS</span>
+                        </a>
+                    </li>
+                    <li class='menu-item'>
+                        <a href='paginaMeusDados.php '>
+                            <span class='menu-icon'>
+                                <i class='bi bi-person-fill'></i>
+                            </span>
+                            <span class='menu-title'>MEUS DADOS</span>
+                        </a>
+                    </li>
+                    <li class='menu-item'>
+                        <a href='paginaContato.php '>
+                            <span class='menu-icon'>
+                                <i class='bi bi-telephone-fill'></i>
+                            </span>
+                            <span class='menu-title'>CONTATO</span>
+                        </a>
+                    </li>
                     <!-- <li class='menu-item sub-menu'>
                         <a href='#'>
                             <span class='menu-icon'>
