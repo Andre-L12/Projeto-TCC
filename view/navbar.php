@@ -151,10 +151,10 @@
             </nav>
         </div>
         <div class="sidebar-footer">
-            <div class="logged-user">
+            <div class="menu-item">
                 <!--adicionar a foto-->
                 <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                <span class="user-name">
+                <span class="menu-title">
                     <?php
                     echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
                     ?>

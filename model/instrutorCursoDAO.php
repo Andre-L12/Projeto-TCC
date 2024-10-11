@@ -35,4 +35,36 @@ function excluirInstrutorCurso($id_instrutor_curso){
     // return
 }
 
+function pesquisarInstrutorCurso($pesq, $tipo) {
+
+    $conexao = conectarBD(); 
+
+    $sql = "SELECT * FROM curso_instrutor WHERE ";
+    switch ($tipo) {
+        case 1: // Por ID do curso
+                $sql = $sql . "id_curso = '$pesq' ";
+                break;
+        case 2: // Por ID do instrutor
+                $sql = $sql . "id_instrutor = '$pesq' ";
+                break;
+        case 3: // Por ID do curso_instrutor
+            $sql = $sql . "id = '$pesq' ";
+    }
+
+    $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+    return $res;
+}
+
+function pesquisarVinculoPorCurso ($pesq) {
+    return pesquisarInstrutorCurso($pesq, 1);
+}
+
+function pesquisarVinculoPorInstrutor ($pesq) {
+    return pesquisarInstrutorCurso($pesq, 2);
+}
+
+function pesquisarVinculoPorID ($pesq) {
+    return pesquisarInstrutorCurso($pesq, 3);
+}
+
 ?>

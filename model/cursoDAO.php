@@ -20,6 +20,20 @@
         return $options;
 
     }
+
+    function getDescricaoCurso($sigla){
+        $conexao = conectarBD();
+
+        $sql = "SELECT descricao FROM banco_cfc.curso WHERE sigla='$sigla'";
+
+        $res = mysqli_query($conexao, $sql) or die (mysqli_error($conexao)); 
+        $registro = mysqli_fetch_assoc($res);
+
+        $descricao = $registro['descricao'];
+
+        return $descricao;
+    }
+
     function pesquisarCS ($pesq, $tipo) {
 
         $conexao = conectarBD(); 

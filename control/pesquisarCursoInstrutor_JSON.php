@@ -5,41 +5,37 @@
     if (isset($_POST["pesq"])) {
         $pesq = $_POST["pesq"];
 
-        require_once '../model/processoDAO.php';              
+        require_once '../model/instrutorCursoDAO.php';              
         
-        $resultado = pesquisarProcessoPorCPFAluno($pesq);
+        $resultado = pesquisarVinculoPorCurso($pesq);
 
-        if ( mysqli_num_rows($resultado) > 0) {
+        if (mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados
             $registros = array(
                 "erro" => "",
-                "processos" => array()  
+                "vinculos" => array()
             );
 
             // Percorre todos os resultados e os adiciona ao array
             while ( $row = mysqli_fetch_assoc($resultado) ) {
-                $id_aluno = $row["id_aluno"];
+                $id_instrutor = $row["id_instrutor"];
                 $id_curso = $row["id_curso"];
-                $data_inicio = $row["data_inicio"];
-                $id_processo = $row["id_processo"];
-                // $desc_curso = getDescricaoCurso($id_curso);
+                $id = $row["id"];
+                $id_veiculo = $row["id_veiculo"];
                 
-                
-                $registros["processos"][] = array(
-                    "id_aluno" => $id_aluno,
+                $registros["vinculos"][] = array(
+                    "id_instrutor" => $id_instrutor,
                     "id_curso" => $id_curso,
-                    "data_inicio" => $data_inicio,
-                    "id_processo" => $id_processo
-                    // "desc_curso" => $desc_curso
-                    );
-
+                    "id" => $id,
+                    "id_veiculo" => $id_veiculo
+                );
             }
 
-            // Envia os dados como JSON (uma lista de processos)
+            // Envia os dados como JSON (uma lista de curso_instrutor)
             header('Content-Type: application/json');
             echo json_encode($registros);
         } else {
-            // processo não encontrado
+            // Não existem vinculos com esse curso
             echo json_encode(['erro' => 'Processo não encontrado.']);
         }
             
