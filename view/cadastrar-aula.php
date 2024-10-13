@@ -12,11 +12,9 @@
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-    <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'> -->
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
@@ -62,31 +60,22 @@
                             <!-- Campo Processo -->
                             <div class="form-campo">
                                 <label for="processo" class="form-subtitulo">Processo:</label>
-                                <select name="processo" id="processo" class="form-input">
-                                    
-                                </select>
+                                <select name="processo" id="processo" class="form-input"></select>
                                 <div id="div-erro-processo"></div>
                             </div>
 
                             <!-- Campo Instrutor -->
                             <div class="form-campo">
                                 <label for="instrutor" class="form-subtitulo">Instrutor:</label>
-                                <select name="instrutor" class="form-input">
-                                    <?php
-                                    // Exibir apenas instrutores vinculados ao curso do processo
-                                    ?>
-                                </select>
+                                <select name="instrutor" id="instrutor" class="form-input"></select>
                                 <div id="div-erro-instrutor"></div>
                             </div>
 
                             <!-- Selecionar Veículo -->
                             <div class="form-campo">
                                 <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
-                                <select name="veiculo" id="opcoesVeiculo" class="form-input">
-                                    <?php
-                                    // Apenas veículos da categoria do curso do processo selecionado
-                                    ?>
-                                </select>
+                                <select name="veiculo" id="veiculo" class="form-input"></select>
+                                <div id="div-erro-veiculo"></div>
                             </div>
 
                             <!-- Campo data -->
@@ -140,6 +129,24 @@
     <script>
         $(document).ready(function() {
 
+            // ===========================================================
+            // Para carregar instrutores de curso:
+            function verificarCurso() {
+                var id_curso = $('#processo').val();
+
+                $('#instrutor').empty();
+                $('#div-erro-instrutor').empty();
+
+                $('#veiculo').empty();
+                $('#div-erro-veiculo').empty()
+
+                if (id_curso !== "") {
+                    pesquisarIntrutorPorCurso(id_curso);
+                    pesquisarVeiculoPorCurso(id_curso);
+                }
+            }
+
+            // ===========================================================
             // Para carregar processos de aluno:
             function verificarAluno() {
                 var cpf_aluno = $('#aluno').val();
@@ -152,29 +159,14 @@
                 }
             }
 
+            // ===========================================================
             // - Acionar a função ao carregar a página
             verificarAluno();
 
-            // - Acionar a função ao selecionar outra opção no combobox
+            // - Acionar a função ao selecionar outra opção de aluno
             $('#aluno').on('change', verificarAluno);
-
-            // ===========================================================
-            // Para carregar instrutores de curso:
-            function verificarCurso() {
-                var id_curso = $('#processo').val();
-
-                $('#instrutor').empty();
-                $('#div-erro-instrutor').empty();
-
-                if (id_curso !== "") {
-                    pesquisarIntrutorPorCurso(id_curso);
-                }
-            }
-
-            // - Acionar a função ao carregar a página
-            verificarCurso();
-
-            // - Acionar a função ao selecionar outra opção no combobox
+            
+            // - Acionar a função ao selecionar outra opção de processo
             $('#processo').on('change', verificarCurso);
 
         });
@@ -195,6 +187,12 @@
                         });
                         
                         $('#processo').html(mostrar).show();
+
+                        // Forçar a seleção do primeiro processo carregado
+                        $('#processo').val($('#processo option:first').val());
+
+                        // Disparar o evento 'change' manualmente após a alteração
+                        $('#processo').trigger('change');
                     } else {
                         mostrar += "Esse aluno não possui nenhum processo.";
                         $('#div-erro-processo').html(mostrar).show();
@@ -222,27 +220,58 @@
 
                     if ( data.erro == "" )  {
                         data.vinculos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + id_instrutor + "'>" + id_instrutor + "</OPTION>";
+                            mostrar += "<OPTION value='" + obj.id_instrutor + "'>" + obj.id_instrutor + "</OPTION>";
                         });
                         
                         $('#instrutor').html(mostrar).show();
+
                     } else {
-                        mostrar += "Esse curso não está vinculado a nenhum instrutor.";
+                        var mostrar = data.erro;
                         $('#div-erro-instrutor').html(mostrar).show();
                     }
                 },
                 error: function() {
-                    var mostrar = "";
-
-                    mostrar += "Erro ao chamar o pesquisar do servidor";
+                    mostrar = "Erro ao chamar o pesquisar do servidor";
                     $('#div-erro-instrutor').html(mostrar).show();
                 }
             });
         }
-    </script>
 
-    <script>
-        
+        function pesquisarVeiculoPorCurso(pesq_curso){
+            $.ajax({
+                url: '../control/PesquisarVeiculo_JSON.php',
+                type: 'POST',
+                data: { pesq_curso : pesq_curso },
+                dataType: 'json',
+                success: function(data) {
+
+                    var mostrar = "";
+
+                    if ( data.erro == "" )  {
+                        data.veiculos.forEach(function(obj,i) {
+                            var iconeAdaptado = obj.adaptado == 1 ? " - ♿" : "";
+
+                            mostrar += "<OPTION value='" + obj.placa + "'>" + obj.marca + " " + obj.modelo + " - " + obj.placa + iconeAdaptado + "</OPTION>";
+                        });
+                        
+                        $('#veiculo').html(mostrar).show();
+
+                        // if (veiculo_instrutor != "") {
+                        //     $('#veiculo').val(veiculo_instrutor);
+                        // }
+                        
+                    } else {
+                        var mostrar = data.erro;
+                        $('#div-erro-veiculo').html(mostrar).show();
+                    }
+                },
+                error: function() {
+                    mostrar = "Erro ao chamar o pesquisar do servidor";
+                    $('#div-erro-veiculo').html(mostrar).show();
+                }
+            });
+        }
+
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>

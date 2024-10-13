@@ -76,11 +76,11 @@
         $sql = "SELECT * FROM veiculo WHERE ";
         switch ($tipo) {
             case 1: // Por modelo
-                    $sql = $sql . "modelo LIKE '$pesq%' ";
-                    break;
+                $sql = $sql . "modelo LIKE '$pesq%' ";
+                break;
             case 2: // Por marca
-                    $sql = $sql . "marca = '$pesq' ";
-                    break;
+                $sql = $sql . "marca = '$pesq' ";
+                break;
             case 3: // Por adaptado
                 $sql = $sql . "adaptado = '$pesq' ";
                 break;

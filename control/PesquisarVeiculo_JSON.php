@@ -2,10 +2,11 @@
 
     // Esse programa é chamado pelo JSON no front-end
 
+    // Quando a pesquisa é com base no Modelo: 
     if (isset($_POST["pesq"])) {
         $pesq = $_POST["pesq"];
 
-        require_once '../model/VeiculoDAO.php';              
+        require_once '../model/VeiculoDAO.php';
         
         $resultado = pesquisarVeiculoPorModelo($pesq);
 
@@ -26,27 +27,70 @@
                 $sigla_categoria = $row["sigla_categoria"];
                 
                 $registros["veiculos"][] = array(
-                        "marca" => $marca,
-                        "modelo" => $modelo,
-                        "ano" => $ano,
-                        "placa" => $placa,
-                        "sigla_categoria" => $sigla_categoria,
-                        "adaptado" => $adaptado
-                        );
+                    "marca" => $marca,
+                    "modelo" => $modelo,
+                    "ano" => $ano,
+                    "placa" => $placa,
+                    "sigla_categoria" => $sigla_categoria,
+                    "adaptado" => $adaptado
+                );
 
             }
 
-            // Envia os dados como JSON (uma lista de instrutores)
+            // Envia os dados como JSON (uma lista de veículos)
             header('Content-Type: application/json');
             echo json_encode($registros);
         } else {
             // instrutor não encontrado
-            echo json_encode(['erro' => 'instrutor não encontrado.']);
+            echo json_encode(['erro' => 'Veículo não encontrado.']);
         }
             
        
+    } 
+    // Quando a pesquisa é com base no curso: 
+    else if (isset($_POST["pesq_curso"])){
+        $curso = $_POST["pesq_curso"]; 
+
+        require_once '../model/funcoesBD.php';
+
+        $resultado = pesquisarVeiculoPorCurso($curso);
+
+        if ( mysqli_num_rows($resultado) > 0) {
+            // Cria um array para armazenar todos os resultados
+            $registros = array(
+                "erro" => "",
+                "veiculos" => array()  
+            );
+
+            // Percorre todos os resultados e os adiciona ao array
+            while ( $row = mysqli_fetch_assoc($resultado) ) {
+                $modelo = $row["modelo"];
+                $marca = $row["marca"];
+                $placa = $row["placa"];
+                $adaptado = $row["adaptado"];
+                $ano = $row["ano"];
+                $sigla_categoria = $row["sigla_categoria"];
+                
+                $registros["veiculos"][] = array(
+                    "marca" => $marca,
+                    "modelo" => $modelo,
+                    "ano" => $ano,
+                    "placa" => $placa,
+                    "sigla_categoria" => $sigla_categoria,
+                    "adaptado" => $adaptado
+                );
+            }
+
+            // Envia os dados como JSON (uma lista de veículos)
+            header('Content-Type: application/json');
+            echo json_encode($registros);
+        } else {
+            // instrutor não encontrado
+            echo json_encode(['erro' => 'Não há veículo da categoria desse curso.']);
+        }
+
     } else {
-        echo json_encode(['erro' => 'ERRO ao pesquisar instrutores.']);
+        echo json_encode(['erro' => 'ERRO ao pesquisar veículos.']);
     }
 
 ?>
