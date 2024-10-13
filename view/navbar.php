@@ -51,6 +51,11 @@
                                         <span class='menu-title'>Pesquisar Aluno</span>
                                     </a>
                                 </li>
+                                <li class='menu-item'>
+                                    <a href='menu-aluno.php'>
+                                        <span class='menu-title'>Modo aluno</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -153,13 +158,14 @@
         <div class="sidebar-footer">
             <div class="menu-item">
                 <!--adicionar a foto-->
-                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                <span class="menu-icon"><i class="bi bi-person-circle"></i></span>
                 <span class="menu-title">
                     <?php
                     echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
                     ?>
-                </span><br>
-                <span class="menu-title"><a href="../control/logout.php" > Sair</a></span>
+                </span><br><br>
+                <span class="menu-title"><a href="../control/logout.php" style="background-color: #ff4d4d; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease;">Sair</a>
+                </span>
             </div>
         </div>
     </div>

@@ -1,4 +1,7 @@
 
+<?php
+    session_start(); // serve para pegar o nome caso esteja logado mais se não tiver a página ainda é acessivel
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

@@ -39,6 +39,13 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #ffffff;">
+
+                <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
+                        <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Adicionar aviso</button>
+                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir aviso</button>
+                    </div>
+                    </div>
             </main>
             <div class="overlay"></div>
         </div>
