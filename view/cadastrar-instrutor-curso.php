@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
@@ -70,50 +69,11 @@
                             </select>
                         </div>
 
-                        <!-- Checkbox Dias da semana-->
-                        <!-- <div class="form-campo">
-                            <label class="form-subtitulo">Dias da semana que atua nesse curso:</label>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="segunda" name="segunda" value="seg">
-                                <label for="segunda">Segunda-feira</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="terca" name="terca" value="ter">
-                                <label for="terca">Terça-feira</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="quarta" name="quarta" value="qua">
-                                <label for="quarta">Quarta-feira</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="quinta" name="quinta" value="qui">
-                                <label for="quinta">Quinta-feira</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="sexta" name="sexta" value="sex">
-                                <label for="sexta">Sexta-feira</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="sabado" name="sabado" value="sab">
-                                <label for="sabado">Sábado</label>
-                            </div>
-                            <div class="form-campo-checkbox">
-                                <input type="checkbox" id="domingo" name="domingo" value="dom">
-                                <label for="domingo">Domingo</label>
-                            </div>
-
-                        </div> -->
-
                         <!-- Selecionar Veículo -->
                         <div class="form-campo">
                             <label for="veiculo" class="form-subtitulo">Veículo utilizado:</label>
-                            <select name="veiculo" id="opcoesVeiculo" class="form-input">
-                                <?php
-                                require_once "../model/funcoesBD.php";
-                                $options = comboBoxVeiculo();
-                                echo $options;
-                                ?>
-                            </select>
+                            <select name="veiculo" id="veiculo" class="form-input"></select>
+                            <div id="div-erro-veiculo"></div>
                         </div>
 
                         <div class="form-div-btn">
@@ -135,6 +95,57 @@
             <div class="overlay"></div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+
+            function verificarCurso() {
+                var id_curso = $('#curso').val();
+
+                $('#veiculo').empty();
+                $('#div-erro-veiculo').empty()
+
+                if (id_curso !== "") {
+                    pesquisarVeiculoPorCurso(id_curso);
+                }
+            }
+
+            verificarCurso();
+            $('#curso').on('change', verificarCurso);
+        });
+
+        function pesquisarVeiculoPorCurso(pesq_curso){
+            $.ajax({
+                url: '../control/PesquisarVeiculo_JSON.php',
+                type: 'POST',
+                data: { pesq_curso : pesq_curso },
+                dataType: 'json',
+                success: function(data) {
+
+                    var mostrar = "";
+
+                    if ( data.erro == "" )  {
+                        data.veiculos.forEach(function(obj,i) {
+                            var iconeAdaptado = obj.adaptado == 1 ? " - ♿" : "";
+
+                            mostrar += "<OPTION value='" + obj.placa + "'>" + obj.marca + " " + obj.modelo + " - " + obj.placa + iconeAdaptado + "</OPTION>";
+                        });
+                        
+                        $('#veiculo').html(mostrar).show();
+
+
+                    } else {
+                        var mostrar = data.erro;
+                        $('#div-erro-veiculo').html(mostrar).show();
+                    }
+                },
+                error: function() {
+                    mostrar = "Erro ao chamar o pesquisar do servidor";
+                    $('#div-erro-veiculo').html(mostrar).show();
+                }
+            });
+        }
+    </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
