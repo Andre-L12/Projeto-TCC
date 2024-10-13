@@ -1,6 +1,8 @@
 <?php 
+
 require_once "conexaoBD.php";
 static $conexao;
+
 function comboBoxCurso() {
     $sql = "SELECT * FROM curso";
     $conexao = conectarBD();    
@@ -82,3 +84,20 @@ function comboBoxInstrutor() {
 
     return $options;
 }
+
+
+// Consultas com JOIN =============================
+
+function pesquisarVeiculoPorCurso($id_curso){
+    $conexao = conectarBD(); 
+    $sql = 
+    "SELECT V.placa, V.sigla_categoria, V.adaptado, V.marca, V.modelo, V.modelo, V.ano
+    FROM banco_cfc.Veiculo V
+    JOIN banco_cfc.Curso C ON V.sigla_categoria = C.categoria
+    WHERE C.sigla = '$id_curso';";
+
+    $resultado = mysqli_query($conexao, $sql );
+
+    return $resultado;
+}
+?>

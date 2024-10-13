@@ -22,7 +22,7 @@ function vincularInstrutorCurso($instrutor, $curso, $veiculo){
         }
     }
     else {
-        $mensagem="Esse vículo já existe.";
+        $mensagem="Esse vínculo já existe.";
     }
     return $mensagem;
 }

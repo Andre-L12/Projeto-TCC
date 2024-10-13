@@ -36,12 +36,12 @@
             echo json_encode($registros);
         } else {
             // Não existem vinculos com esse curso
-            echo json_encode(['erro' => 'Processo não encontrado.']);
+            echo json_encode(['erro' => 'Esse curso não está vinculado a nenhum instrutor.']);
         }
             
        
     } else {
-        echo json_encode(['erro' => 'ERRO ao pesquisar processo.']);
+        echo json_encode(['erro' => 'ERRO ao pesquisar Instrutor.']);
     }
 
 ?>
