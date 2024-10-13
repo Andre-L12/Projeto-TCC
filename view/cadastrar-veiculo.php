@@ -12,11 +12,8 @@
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-    <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'> -->
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
 
 </head>
 
@@ -53,7 +50,18 @@
                     if ($resVeiculo != null) {
                         $registro = mysqli_fetch_assoc($resVeiculo);
 
+                        $selecaoCategorias = array(
+                            "ACC" => "",
+                            "A" => "",
+                            "B" => "",
+                            "C" => "",
+                            "D" => "",
+                            "E" => ""
+                        );
+
                         $sigla = $registro["sigla_categoria"];
+                        $selecaoCategorias[$sigla] = "selected";
+
                         $adaptado = $registro["adaptado"];
                         $placa = $registro["placa"];
                         $marca = $registro["marca"];
@@ -73,7 +81,15 @@
                     }
                 } else {
                     // INSERIR
-                    $sigla = "";
+                    $selecaoCategorias = array(
+                        "ACC" => "",
+                        "A" => "",
+                        "B" => "",
+                        "C" => "",
+                        "D" => "",
+                        "E" => ""
+                    );
+                        
                     $adaptado = "";
                     $placa = "";
                     $marca = "";
@@ -92,16 +108,17 @@
                 <div class="form-container">
                     <h1 class="form-titulo"><?php echo $titulo ?></h1>
                     <form action="../control/cadastrarVeiculo.php" method="POST" name="formCadastroVeiculo">
-                        <!-- ComboBox Categoria do veículo -->
+                        
+                    <!-- ComboBox Categoria do veículo -->
                         <div class="form-campo">
                             <label for="categoria" class="form-subtitulo">Categoria:</label>
-                            <select name="categoria" id="categoria" class="form-input" value="<?php echo $sigla ?>">
-                                <option value="ACC">ACC</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
+                            <select name="categoria" id="categoria" class="form-input" >
+                                <option value="ACC" <?php echo $selecaoCategorias["ACC"] ?>>ACC</option>
+                                <option value="A" <?php echo $selecaoCategorias["A"] ?>>A</option>
+                                <option value="B" <?php echo $selecaoCategorias["B"] ?>>B</option>
+                                <option value="C" <?php echo $selecaoCategorias["C"] ?>>C</option>
+                                <option value="D" <?php echo $selecaoCategorias["D"] ?>>D</option>
+                                <option value="E" <?php echo $selecaoCategorias["E"] ?>>E</option>
                             </select>
                         </div>
 
@@ -172,7 +189,7 @@
         });
 
         // Define o ano para 2000 ao carregar a página;
-        document.getElementById('ano').value = '2000';
+        // document.getElementById('ano').value = '2000';
     </script>
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
