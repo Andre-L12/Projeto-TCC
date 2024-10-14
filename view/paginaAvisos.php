@@ -1,11 +1,13 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dúvidas</title>
+    <title>Avisos</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
@@ -19,6 +21,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+<style>
+    /* Estilos dos cards */
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 10px;
+      padding: 1em;
+      background-color: #fff;
+      box-shadow: 0 0.0625em 0.25em rgba(0, 20, 50, 0.2), 0 0.5em 0.5em 0.125em rgba(0, 20, 50, 0.1);
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      font-weight: bold;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+    }
+
+    .card-body {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      text-align: right;
+      font-size: 0.8em;
+      color: #777;
+    }
+</style>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         
@@ -63,69 +99,51 @@
         <header>
             <div>
                 <span class="header-icon">
-                    <i class="bi bi-question-diamond-fill   "></i>
+                    <i class="bi bi-bell-fill"></i>
                 </span>
-                <span class="header-title">Dúvidas</span>
+                <span class="header-title">Avisos</span>
             </div>
         </header>
             <main class="content">
-                <div>
-                    <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
-                        <i class="ri-menu-line ri-xl"></i>
-                    </a>
+
+            <div class="container" id="avisos" style="width:90%;">
+                <!-- Espaço onde os avisos do banco de dados serão inseridos com PHP -->
+
+                <?php
+                  // Aqui vai a lógica para buscar avisos do banco de dados
+                  // Supondo que $avisos seja o array com os avisos do banco:
+                  /*
+                  foreach ($avisos as $aviso) {
+                      echo '
+                      <div class="card">
+                        <div class="card-title">' . $aviso["titulo"] . '</div>
+                        <div class="card-body">' . $aviso["conteudo"] . '</div>
+                        <div class="card-footer">Publicado em: ' . $aviso["data"] . '</div>
+                      </div>';
+                  }
+                  */
+                ?>
+
+                <!-- Exemplo de avisos estáticos para visualização -->
+                <div class="card">
+                  <div class="card-title">Aviso 1</div>
+                  <div class="card-body">Este é o conteúdo do primeiro aviso.</div>
+                  <div class="card-footer">Publicado em: 2024-10-12</div>
                 </div>
-                <!-- Form Cadastrar Aluno -->
-                <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f4f4f4; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
-    <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Contato da Autoescola</h3>
 
-    <!-- Redes Sociais -->
-    <div style="margin-bottom: 20px;">
-        <h4 style="color: #007bff;">Redes Sociais</h4>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="#" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/facebook.png" alt="Facebook" style="width: 30px; height: 30px;">
-            </a>
-            <a href="#" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" style="width: 30px; height: 30px;">
-            </a>
-            <a href="#" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" style="width: 30px; height: 30px;">
-            </a>
-            <a href="#" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube" style="width: 30px; height: 30px;">
-            </a>
-            <a href="#" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/twitter.png" alt="Twitter" style="width: 30px; height: 30px;">
-            </a>
-        </div>
-    </div>
+                <div class="card">
+                  <div class="card-title">Aviso 2</div>
+                  <div class="card-body">Este é o conteúdo do segundo aviso.</div>
+                  <div class="card-footer">Publicado em: 2024-10-11</div>
+                </div>
 
-    <!-- Horário de Funcionamento -->
-    <div style="margin-bottom: 20px;">
-        <h4 style="color: #007bff;">Horário de Funcionamento</h4>
-        <p style="line-height: 1.6;"><strong>Segunda a Sexta:</strong> 08:00 - 18:00<br>
-        <strong>Sábado:</strong> 08:00 - 12:00<br>
-        <strong>Domingo:</strong> Fechado</p>
-    </div>
+                <div class="card">
+                  <div class="card-title">Aviso 3</div>
+                  <div class="card-body">Este é o conteúdo do terceiro aviso.</div>
+                  <div class="card-footer">Publicado em: 2024-10-10</div>
+                </div>
 
-    <!-- Dados Administrativos -->
-    <div style="margin-bottom: 20px;">
-        <h4 style="color: #007bff;">Dados Administrativos</h4>
-        <p style="line-height: 1.6;">
-            <strong>CNPJ:</strong> 00.000.000/0001-00<br>
-            <strong>Endereço:</strong> Rua Exemplo, 123 - Centro, Cidade, Estado<br>
-            <strong>Telefone:</strong> (11) 1234-5678<br>
-            <strong>Email:</strong> contato@autoescola.com.br
-        </p>
-    </div>
-
-    <!-- Mapa (Opcional) -->
-    <div>
-        <h4 style="color: #007bff;">Localização</h4>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373631589832!3d-37.8172098421817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bee06c1a0c33!2sAutoescola!5e0!3m2!1spt-BR!2sbr!4v1617216843845!5m2!1spt-BR!2sbr" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-</div>
-
+            </div>
 
             </main>
             <div class="overlay"></div>

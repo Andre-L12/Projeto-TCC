@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Menu Aluno</title>
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
@@ -136,6 +136,34 @@
       text-decoration: none;
       cursor: pointer;
     }
+    /* Estilos para telas grandes */
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Cada div individual terá o mesmo tamanho */
+.custom-calendar, 
+.card {
+  width: 45%; /* Ocupa 45% da tela cada um, ajustável conforme necessário */
+  margin: 10px;
+}
+
+/* Estilos para telas menores (celulares) */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column; /* Coloca os divs um embaixo do outro */
+  }
+
+  .custom-calendar, 
+  .card {
+    width: 100%; /* Faz com que o div ocupe 100% da largura em telas menores */
+    margin: 10px 0;
+  }
+}
+
 </style>
 
 
@@ -151,7 +179,7 @@
                 <span class="header-icon">
                     <i class="bi bi-grid-fill"></i>
                 </span>
-                <span class="header-title">MENU</span>
+                <span class="header-title">MENU ALUNO</span>
             </div>
         </header>
             <main class="content">
@@ -159,53 +187,48 @@
                     <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
-                </div>
-                <div class="custom-calendar">
-                <div class="calendar-wrap">
-                    <h2 class="month-year" id="monthYear"></h2>
-                    <table class="calendar">
-                    <thead>
-                        <tr>
-                        <th class="day-title">Sun</th>
-                        <th class="day-title">Mon</th>
-                        <th class="day-title">Tue</th>
-                        <th class="day-title">Wed</th>
-                        <th class="day-title">Thu</th>
-                        <th class="day-title">Fri</th>
-                        <th class="day-title">Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendarBody"></tbody>
-                    </table>
-                    <button id="prevMonth">←</button>
-                    <button id="nextMonth">→</button>
-                </div>
-                </div>
-                <br>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; border-radius: 10px; width: 350px;padding: 0.75em;margin-left: 20px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); ">
+                    <div class="container">
+  <div class="custom-calendar">
+    <div class="calendar-wrap">
+      <h2 class="month-year" id="monthYear"></h2>
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th class="day-title">Sun</th>
+            <th class="day-title">Mon</th>
+            <th class="day-title">Tue</th>
+            <th class="day-title">Wed</th>
+            <th class="day-title">Thu</th>
+            <th class="day-title">Fri</th>
+            <th class="day-title">Sat</th>
+          </tr>
+        </thead>
+        <tbody id="calendarBody"></tbody>
+      </table>
+      <button id="prevMonth">←</button>
+      <button id="nextMonth">→</button>
+    </div>
+  </div>
 
-                    <div class="col-sm-5" style="font-family: Arial, sans-serif; color: #333;"><!--display:flex; flex-direction:column; justify-content:space-between;-->
-                                <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #000000;">Processo</h3>
-                                <p><strong>Quantidade de Aulas:</strong> informaçoes</p>
-                                <p><strong>Instrutor:</strong> #não sei se coloco <br>#tamofazendo</p>
-                                <p><strong>Aulas Obrigatórias:</strong> #não sei se coloco<br> #tamofazendo</p>
-                                <p><strong>Quantidade de Aulas:</strong> informaçoes</p>
-                                <p><strong>Instrutor:</strong> #não sei se coloco <br>#tamofazendo</p>
-                                <p><strong>Aulas Obrigatórias:</strong> #não sei se coloco<br> #tamofazendo</p>
-                                <br>
-                        <!-- </div>-->
-                        </div>
-                </div>
+  <div class="card" style=" border-radius: 10px; width: 350px;padding: 0.75em;margin-left: 20px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); ">
+    <div class="col-sm-5">
+      <h3 style="border-bottom: 2px solid #000000; padding-bottom: 10px; width: 100%; ">Processo</h3>
+      <p><strong>Quantidade de Aulas:</strong> informaçoes</p>
+      <p><strong>Instrutor:</strong> #não sei se coloco</p>
+      <p><strong>Aulas Obrigatórias:</strong> #não sei se coloco</p>
+      
+      <!-- mais conteúdo aqui  style="display: border-radius: 10px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); "-->
+    </div>
+  </div>
 
-                <br>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; border-radius: 10px; width: 350px;padding: 0.75em;margin-left: 20px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); ">
+  <div class="card" style=" border-radius: 10px; width: 350px;padding: 0.75em;margin-left: 20px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); ">
+    <div class="col-sm-5">
+      <h3 style="border-bottom: 2px solid #000000; padding-bottom: 10px;">Etapa</h3>
+      <p><img src="../img/sapo.jpg" alt="" height="auto" width="100%"></p>
+    </div>
+  </div>
+</div>
 
-                    <div class="col-sm-5" style="font-family: Arial, sans-serif; color: #333;"><!--display:flex; flex-direction:column; justify-content:space-between;-->
-                                <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #000000;">Etapa</h3>
-                                <p><img src="../img/sapo.jpg" alt="" height="auto" width="300px" ></p>
-                                <br>
-                        <!-- </div>-->
-                </div>
             </main>
             <div class="overlay"></div>
         </div>

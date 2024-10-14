@@ -51,6 +51,11 @@
                                         <span class='menu-title'>Pesquisar Aluno</span>
                                     </a>
                                 </li>
+                                <li class='menu-item'>
+                                    <a href='menu-aluno.php'>
+                                        <span class='menu-title'>Modo aluno</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
