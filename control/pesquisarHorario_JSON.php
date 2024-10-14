@@ -33,14 +33,15 @@
                 // Percorre todos os resultados 
                 while ( $row = mysqli_fetch_assoc($aulasInstrutorData) ) {
                     $hora = $row["hora_aula"];
+                    $hora_formatada = substr($hora, 0, 5); // Transforma hh:mm:ss em hh:mm
 
                     // Encontra o índice do horário no array
-                    $indice = array_search($hora, $registros["horarios"]);
+                    $indice = array_search($hora_formatada, $registros["horarios"]);
 
                     // Verifica se o horário foi encontrado
                     if ($indice !== false) {
                         // Remove o horário do array
-                        unset($array[$indice]);
+                        unset($registros["horarios"][$indice]);
                     }
                 }
             }

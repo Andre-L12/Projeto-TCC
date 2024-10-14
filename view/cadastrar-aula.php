@@ -43,7 +43,7 @@
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
                     <h1 class="form-titulo">Agendar Aula Prática</h1>
-                    <form action="" method="POST" name="formCadastroAulaPratica">
+                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica">
                         <div>
                             <!-- Campo Aluno -->
                             <div class="form-campo">
@@ -300,9 +300,16 @@
 
                     var mostrar = "";
                     if ( data.erro == "" )  {
-                        data.horarios.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj + "'>" + obj + "</OPTION>";
-                        });
+                        // data.horarios.forEach(function(obj,i) {
+                        //     mostrar += "<OPTION value='" + obj + "'>" + obj + "</OPTION>";
+                        // });
+
+                        for (var key in data.horarios) {
+                            if (data.horarios.hasOwnProperty(key)) {
+                                var horario = data.horarios[key];
+                                mostrar += "<OPTION value='" + horario + "'>" + horario + "</OPTION>";
+                            }
+                        }
                         
                         $('#hora').html(mostrar).show();
                         

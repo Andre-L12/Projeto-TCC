@@ -126,6 +126,37 @@ function validarImagem($imagem){
 
     return $msgErro;
 }
+
+function validarAula($id_processo, $id_instrutor, $id_veiculo, $data, $hora, $obrigatoria){
+    $msg = "";
+    
+    if (empty($id_processo)){
+        $msg .= "Selecione o processo.<br>";
+    }
+    
+    if (empty($id_instrutor)){
+        $msg .= "Selecione o instrutor.<br>";
+    }
+
+    if (empty($id_veiculo)){
+        $msg .= "Selecione o veículo.<br>";
+    }
+
+    if (empty($data)){
+        $msg .= "Selecione uma data.<br>";
+    }
+
+    if (empty($data)){
+        $msg .= "Selecione um horário.<br>";
+    }
+
+    if (empty($data)){
+        $msg .= "Informe se a aula é obrigatória ou não.<br>";
+    }
+
+    return $msg;
+
+}
     
 function validarCPF2($cpf) {
  

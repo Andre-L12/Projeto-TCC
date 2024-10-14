@@ -2,7 +2,7 @@
 require_once "conexaoBD.php";
 static $conexao;
 
-function cadastrarAulaPratica($data, $hora, $status_detran, $obrigatoria, $status_aula, $id_veiculo, $id_instrutor, $id_processo) {
+function cadastrarAulaPratica($id_processo, $id_instrutor, $id_veiculo, $data, $hora, $obrigatoria) {
     // Conectar ao banco de dados
     $conect = conectarBD();
 
@@ -15,7 +15,7 @@ function cadastrarAulaPratica($data, $hora, $status_detran, $obrigatoria, $statu
         // Inserir a nova aula prática
         $query2 = "INSERT INTO `banco_cfc`.`aulapratica` 
                    (`data_aula`, `hora_aula`, `status_detran`, `obrigatoria`, `status_aula`, `id_veiculo`, `id_instrutor`, `id_processo`) 
-                   VALUES ('$data', '$hora', '$status_detran', '$obrigatoria', '$status_aula', '$id_veiculo', '$id_instrutor', '$id_processo');";
+                   VALUES ('$data', '$hora', 0, '$obrigatoria', 'Marcada', '$id_veiculo', '$id_instrutor', '$id_processo');";
         
         $select2 = mysqli_query($conect, $query2);
         $id = mysqli_insert_id($conect);
@@ -23,7 +23,7 @@ function cadastrarAulaPratica($data, $hora, $status_detran, $obrigatoria, $statu
         if ($select2) {
             $mensagem = "Aula $id inserida com sucesso.";
         } else {
-            $mensagem = "Não foi possível realizar o cadastro.";
+            $mensagem = "Não foi possível realizar o agendamento.";
         }
     } else {
         $mensagem = "Essa aula já existe.";
