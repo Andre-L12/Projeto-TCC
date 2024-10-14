@@ -150,17 +150,23 @@
                 </ul>
             </nav>
         </div>
-        <div class="sidebar-footer">
-            <div class="menu-item">
-                <!--adicionar a foto-->
-                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
-                <span class="menu-title">
-                    <?php
-                    echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
-                    ?>
-                </span><br>
-                <span class="menu-title"><a href="../control/logout.php" > Sair</a></span>
-            </div>
+        <div class="menu sidebar-footer">
+            <li class="menu-item menu-sessao">
+                <a href="#">
+                    <span class="menu-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+                    <span class="menu-title footer-box">
+                        <?php
+                        echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
+                        ?>
+                    </span>
+                </a>
+                <a href="../control/logout.php" >
+                    <span class="footer-box"><i class="bi bi-box-arrow-left"></i></span>
+                </a>
+                
+            </li>
         </div>
     </div>
 </aside>

@@ -43,7 +43,7 @@
                 <!-- Form Cadastrar Veículo -->
                 <div class="form-container">
                     <h1 class="form-titulo">Agendar Aula Prática</h1>
-                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica">
+                    <form action="" method="POST" name="formCadastroAulaPratica">
                         <div>
                             <!-- Campo Aluno -->
                             <div class="form-campo">
@@ -81,16 +81,17 @@
                             <!-- Campo data -->
                             <div class="form-campo">
                                 <label for="data" class="form-subtitulo">Data:</label>
-                                <input type="date" name="data" id="data" class="form-input">
+                                <div class="form-campo-input-btn">
+                                    <input type="date" name="data" id="data" class="form-input-menor">
+                                    <button type="button" id="consultar-horarios" class="form-btn-menor"><i class='bi bi bi-search'></i></button> 
+                                </div>
                             </div>
 
                             <!-- Campo Hora -->
                             <div class="form-campo">
                                 <label for="hora" class="form-subtitulo">Hora:</label>
-
-                                <!-- Exibir horas disponíveis do instrutor no dia -->
-
-                                <!-- <input type="time" name="hora" id="hora" class="form-input"> -->
+                                <select name="hora" id="hora" class="form-input"></select>
+                                <div id="div-erro-hora"></div>
                             </div>
 
                             <!-- Campo Obrigatoriedade -->
@@ -107,7 +108,7 @@
                             </div>
 
                             <div class="form-div-btn">
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn"> Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
                             </div>
 
                             <?php
@@ -169,7 +170,21 @@
             // - Acionar a função ao selecionar outra opção de processo
             $('#processo').on('change', verificarCurso);
 
+            // - Acionar a função ao apertar botão
+            $('#consultar-horarios').on('click', function() {
+                // Obter os valores de #data e de #instrutor
+                var data = $('#data').val();
+                var instrutor = $('#instrutor').val();
+
+                $('#hora').empty();
+                $('#div-erro-hora').empty();
+
+                // Chamar a função com os valores obtidos
+                pesquisarHorario(data, instrutor);
+            });
         });
+
+
 
         function pesquisarProcessosPorAluno(pesq){
             $.ajax({
@@ -201,7 +216,7 @@
                 error: function() {
                     var mostrar = "";
 
-                    mostrar += "Erro ao chamar o pesquisar do servidor";
+                    mostrar += "Erro ao chamar o pesquisar do servidor.";
                     $('#div-erro-processo').html(mostrar).show();
                 }
             });
@@ -231,7 +246,7 @@
                     }
                 },
                 error: function() {
-                    mostrar = "Erro ao chamar o pesquisar do servidor";
+                    mostrar = "Erro ao chamar o pesquisar do servidor.";
                     $('#div-erro-instrutor').html(mostrar).show();
                 }
             });
@@ -266,11 +281,68 @@
                     }
                 },
                 error: function() {
-                    mostrar = "Erro ao chamar o pesquisar do servidor";
+                    mostrar = "Erro ao chamar o pesquisar do servidor.";
                     $('#div-erro-veiculo').html(mostrar).show();
                 }
             });
         }
+
+        function pesquisarHorario(data, instrutor){
+            $.ajax({
+                url: '../control/pesquisarHorario_JSON.php',
+                type: 'POST',
+                data: {
+                    data : data,
+                    instrutor : instrutor
+                },
+                dataType: 'json',
+                success: function(data) {
+
+                    var mostrar = "";
+                    if ( data.erro == "" )  {
+                        data.horarios.forEach(function(obj,i) {
+                            mostrar += "<OPTION value='" + obj + "'>" + obj + "</OPTION>";
+                        });
+                        
+                        $('#hora').html(mostrar).show();
+                        
+                    } else {
+                        var mostrar = data.erro;
+                        $('#div-erro-hora').html(mostrar).show();
+                    }
+                },
+                error: function() {
+                    mostrar = "Erro ao chamar o pesquisar do servidor.";
+                    $('#div-erro-hora').html(mostrar).show();
+                }
+            });
+        }
+
+        // =======================================================
+        // Ativar/Desativar botão consultar-horarios
+        $(document).ready(function() {
+            // Desabilitar o botão inicialmente
+            $('#consultar-horarios').prop('disabled', true);
+
+            // Função para verificar se os campos estão preenchidos
+            function verificarInstrutorHora() {
+                const instrutorPreenchido = $('#instrutor').val() !== "";
+                const dataPreenchida = $('#data').val() !== "";
+
+                // Habilitar ou desabilitar o botão com base nos campos preenchidos
+                if (instrutorPreenchido && dataPreenchida) {
+                    $('#consultar-horarios').prop('disabled', false);
+                } else {
+                    $('#consultar-horarios').prop('disabled', true);
+                }
+            }
+
+            // Verificar campos quando eles mudarem
+            $('#instrutor, #data').on('change input', verificarInstrutorHora);
+
+            // Inicializar verificação ao carregar a página
+            verificarInstrutorHora();
+        });
 
     </script>
 

@@ -91,4 +91,15 @@ function pesquisarAulaPorData ($pesq) {
 function pesquisarAulaPorId ($pesq) {
     return  pesquisarAula($pesq,7);
 }
+
+function pesquisarAulaPorInstrutorData($id_instrutor, $data){
+    $conexao = conectarBD();
+
+    $sql = "SELECT * FROM aulapratica WHERE id_instrutor = '$id_instrutor' AND data_aula = '$data'";
+
+    $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+
+    return $res;
+}
+
 ?>
