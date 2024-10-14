@@ -11,6 +11,11 @@
     $dias_semana = "";
 
     // - Checkbox dias da semana:
+    if (isset($_POST["domingo"])){
+        $dias_semana .= "1";
+    } else {
+        $dias_semana .= "0";
+    }
     if (isset($_POST["segunda"])){
         $dias_semana .= "1";
     } else {
@@ -42,12 +47,6 @@
     }
 
     if (isset($_POST["sabado"])){
-        $dias_semana .= "1";
-    } else {
-        $dias_semana .= "0";
-    }
-
-    if (isset($_POST["domingo"])){
         $dias_semana .= "1";
     } else {
         $dias_semana .= "0";

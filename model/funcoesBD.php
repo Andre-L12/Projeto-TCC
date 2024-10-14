@@ -88,13 +88,14 @@ function comboBoxInstrutor() {
 
 // Consultas com JOIN =============================
 
-function pesquisarVeiculoPorCurso($id_curso){
+function pesquisarVeiculoPorProcesso($id_processo){
     $conexao = conectarBD(); 
     $sql = 
     "SELECT V.placa, V.sigla_categoria, V.adaptado, V.marca, V.modelo, V.modelo, V.ano
-    FROM banco_cfc.Veiculo V
-    JOIN banco_cfc.Curso C ON V.sigla_categoria = C.categoria
-    WHERE C.sigla = '$id_curso';";
+    FROM Veiculo V
+    JOIN Curso C ON V.sigla_categoria = C.categoria
+    JOIN Processo P ON C.sigla = P.id_curso
+    WHERE P.id_processo = '$id_processo';";
 
     $resultado = mysqli_query($conexao, $sql );
 

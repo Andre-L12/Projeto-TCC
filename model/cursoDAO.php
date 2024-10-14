@@ -21,7 +21,7 @@
 
     }
 
-    function getDescricaoCurso($sigla){
+    function pegarDescricaoCurso($sigla){
         $conexao = conectarBD();
 
         $sql = "SELECT descricao FROM banco_cfc.curso WHERE sigla='$sigla'";

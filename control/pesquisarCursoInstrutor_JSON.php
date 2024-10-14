@@ -2,12 +2,16 @@
 
     // Esse programa é chamado pelo JSON no front-end
 
-    if (isset($_POST["pesq"])) {
-        $pesq = $_POST["pesq"];
+    require_once "../model/processoDAO.php";
 
-        require_once '../model/instrutorCursoDAO.php';              
+    if (isset($_POST["pesq"])) {
+        $id_processo = $_POST["pesq"];
+        $id_curso = mysqli_fetch_assoc(pesquisarProcessoPorID($id_processo))["id_curso"];
+
+        require_once '../model/instrutorCursoDAO.php';
+        require_once '../model/instrutorDAO.php';           
         
-        $resultado = pesquisarVinculoPorCurso($pesq);
+        $resultado = pesquisarVinculoPorCurso($id_curso);
 
         if (mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados
@@ -22,12 +26,14 @@
                 $id_curso = $row["id_curso"];
                 $id = $row["id"];
                 $id_veiculo = $row["id_veiculo"];
+                $nome_instrutor = mysqli_fetch_assoc(pesquisarInstrutorPorID($id_instrutor))["nome"];
                 
                 $registros["vinculos"][] = array(
                     "id_instrutor" => $id_instrutor,
                     "id_curso" => $id_curso,
                     "id" => $id,
-                    "id_veiculo" => $id_veiculo
+                    "id_veiculo" => $id_veiculo,
+                    "nome_instrutor" => $nome_instrutor
                 );
             }
 

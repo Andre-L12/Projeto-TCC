@@ -133,7 +133,7 @@
             // ===========================================================
             // Para carregar instrutores de curso:
             function verificarCurso() {
-                var id_curso = $('#processo').val();
+                var id_processo = $('#processo').val();
 
                 $('#instrutor').empty();
                 $('#div-erro-instrutor').empty();
@@ -141,9 +141,9 @@
                 $('#veiculo').empty();
                 $('#div-erro-veiculo').empty()
 
-                if (id_curso !== "") {
-                    pesquisarIntrutorPorCurso(id_curso);
-                    pesquisarVeiculoPorCurso(id_curso);
+                if (id_processo !== "") {
+                    pesquisarIntrutorPorProcesso(id_processo); 
+                    pesquisarVeiculoPorProcesso(id_processo); // Corrigir
                 }
             }
 
@@ -198,7 +198,7 @@
 
                     if ( data.erro == "" )  {
                         data.processos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.id_curso + "'>" + obj.id_curso + "</OPTION>";
+                            mostrar += "<OPTION value='" + obj.id_processo + "'>" + obj.desc_curso + "</OPTION>";
                         });
                         
                         $('#processo').html(mostrar).show();
@@ -223,7 +223,7 @@
         }
 
 
-        function pesquisarIntrutorPorCurso(pesq){
+        function pesquisarIntrutorPorProcesso(pesq){
             $.ajax({
                 url: '../control/pesquisarCursoInstrutor_JSON.php',
                 type: 'POST',
@@ -235,7 +235,7 @@
 
                     if ( data.erro == "" )  {
                         data.vinculos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.id_instrutor + "'>" + obj.id_instrutor + "</OPTION>";
+                            mostrar += "<OPTION value='" + obj.id_instrutor + "'>" + obj.nome_instrutor + "</OPTION>";
                         });
                         
                         $('#instrutor').html(mostrar).show();
@@ -252,11 +252,11 @@
             });
         }
 
-        function pesquisarVeiculoPorCurso(pesq_curso){
+        function pesquisarVeiculoPorProcesso(pesq_processo){
             $.ajax({
                 url: '../control/PesquisarVeiculo_JSON.php',
                 type: 'POST',
-                data: { pesq_curso : pesq_curso },
+                data: { pesq_processo : pesq_processo },
                 dataType: 'json',
                 success: function(data) {
 

@@ -72,17 +72,17 @@
                         $dias_semana = str_split($dias_semana); // Transformando String em Array
 
                         $check_dias_semana = array(
+                            "dom" => "",
                             "seg" => "",
                             "ter" => "",
                             "qua" => "",
                             "qui" => "",
                             "sex" => "",
-                            "sab" => "",
-                            "dom" => ""
+                            "sab" => ""
                         );
 
                         // Dias da semana para as chaves array
-                        $dias = ["seg", "ter", "qua", "qui", "sex", "sab", "dom"];
+                        $dias = [ "dom", "seg", "ter", "qua", "qui", "sex", "sab"];
                         
                         foreach ($dias_semana as $index => $valor) {
                             if ($valor == "1") {
@@ -105,13 +105,13 @@
                     $sexoF = "";
 
                     $check_dias_semana = array(
+                        "dom" => "",
                         "seg" => "",
                         "ter" => "",
                         "qua" => "",
                         "qui" => "",
                         "sex" => "",
-                        "sab" => "",
-                        "dom" => ""
+                        "sab" => ""
                     );
 
                     $titulo = "Cadastrar Instrutor";

@@ -5,7 +5,8 @@
     if (isset($_POST["pesq"])) {
         $pesq = $_POST["pesq"];
 
-        require_once '../model/processoDAO.php';              
+        require_once '../model/processoDAO.php';
+        require_once '../model/cursoDAO.php';              
         
         $resultado = pesquisarProcessoPorCPFAluno($pesq);
 
@@ -22,15 +23,15 @@
                 $id_curso = $row["id_curso"];
                 $data_inicio = $row["data_inicio"];
                 $id_processo = $row["id_processo"];
-                // $desc_curso = getDescricaoCurso($id_curso);
+                $desc_curso = pegarDescricaoCurso($id_curso);
                 
                 
                 $registros["processos"][] = array(
                     "id_aluno" => $id_aluno,
                     "id_curso" => $id_curso,
                     "data_inicio" => $data_inicio,
-                    "id_processo" => $id_processo
-                    // "desc_curso" => $desc_curso
+                    "id_processo" => $id_processo,
+                    "desc_curso" => $desc_curso
                     );
 
             }

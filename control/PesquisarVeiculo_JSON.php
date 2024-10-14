@@ -47,13 +47,13 @@
             
        
     } 
-    // Quando a pesquisa é com base no curso: 
-    else if (isset($_POST["pesq_curso"])){
-        $curso = $_POST["pesq_curso"]; 
+    // Quando a pesquisa é com base no processo: 
+    else if (isset($_POST["pesq_processo"])){
+        $id_processo = $_POST["pesq_processo"]; 
 
         require_once '../model/funcoesBD.php';
 
-        $resultado = pesquisarVeiculoPorCurso($curso);
+        $resultado = pesquisarVeiculoPorProcesso($id_processo);
 
         if ( mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados
