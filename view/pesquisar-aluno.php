@@ -20,12 +20,6 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-    <style>
-        .tabelazul{
-            /* background-color:#216EC0 ;
-            color: white; */
-        }
-    </style>
 
 </head>
 <body>
@@ -49,7 +43,6 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
-                <!-- Form Cadastrar Aluno -->
                 <div>
                     <div>
                         <!-- PESQUISAR -->
@@ -102,7 +95,7 @@
                     // Percorre todos os produtos do array "produtos", 
                     //    onde i é o índice e obj são os dados do produto
                     
-                        mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
+                        mostrar +="<table class='table table-bordered responsive-table tabela'>   "
                         mostrar +="<thead>     <tr>    <th>Foto</th><th>Nome</th><th>CPF</th><th>Email</th><th>Celular</th></tr><thead>";
                         mostrar+="<tbody>   ";                  
                     data.alunos.forEach(function(obj,i) {  
