@@ -5,6 +5,7 @@
   --cor-navbar: #216EC0;
   --color-text-body: #08090A;
   --cinza: #E0E0E0;
+  --laranja: #FF9233;
 }
 
 .layout {
@@ -383,6 +384,11 @@ a {
   margin: 0 auto;
   background-color: #162d4a; */
 }
+
+.botao-sair:hover{
+  color: var(--laranja);
+}
+
 .layout .sidebar .footer-box img.react-logo {
   width: 40px;
   height: 40px;

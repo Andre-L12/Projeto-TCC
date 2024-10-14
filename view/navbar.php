@@ -168,7 +168,7 @@
                     </span>
                 </a>
                 <a href="../control/logout.php" >
-                    <span class="footer-box"><i class="bi bi-box-arrow-left"></i></span>
+                    <span class="footer-box botao-sair"><i class="bi bi-box-arrow-left"></i></span>
                 </a>
                 
             </li>
