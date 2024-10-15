@@ -390,6 +390,10 @@ a {
   color: var(--laranja);
 }
 
+.nome-sessao{
+  max-width: 130px;
+}
+
 .layout .sidebar .footer-box img.react-logo {
   width: 40px;
   height: 40px;

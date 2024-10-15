@@ -161,7 +161,7 @@
                     <span class="menu-icon">
                         <i class="bi bi-person-circle"></i>
                     </span>
-                    <span class="menu-title footer-box">
+                    <span class="menu-title footer-box nome-sessao">
                         <?php
                         echo isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não logado';
                         ?>
