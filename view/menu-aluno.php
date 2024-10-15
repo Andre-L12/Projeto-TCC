@@ -242,14 +242,14 @@
   <script>
     <?php
     // Exemplo de array com as datas
-    $datasMarcadas = ["2024-10-01", "2024-12-25", "2024-11-03", "2024-12-01", "2024-01-05", "2024-09-19"]; // Isso deve vir do banco de dados
-
-    // Convertendo o array PHP para um array JavaScript
+    require_once "../model/funcoesBD.php";
+    $datasMarcadas = pesquisarDatas($_SESSION["id_aluno"]);
+    // Convertendo o array PHP para um array JavaScriptm
     echo "const markedDates = " . json_encode($datasMarcadas) . ";";
     ?>
     let currentDate = new Date();
 
-    function renderCalendar() {
+    function renderCalendar() { 
       const monthYearDisplay = document.getElementById("monthYear");
       const calendarBody = document.getElementById("calendarBody");
 
