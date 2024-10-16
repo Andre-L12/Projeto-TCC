@@ -223,7 +223,7 @@
 
   <div class="card" style=" border-radius: 10px; width: 350px;padding: 0.75em;margin-left: 20px; background-color: #fff;border-radius: 1.5em; user-select: none;box-shadow: 0 0.0625em 0.25em rgba(0,20,50,0.2), 0 0.5em 0.5em 0.125em rgba(0,20,50,0.1); ">
     <div class="col-sm-5">
-      <h3 style="border-bottom: 2px solid #000000; padding-bottom: 10px;">Etapa</h3>
+      <h3 style="border-bottom: 2px solid #000000; padding-bottom: 10px;">Etapa <?php echo $_SESSION["id_aluno"] ;?></h3>
       <p><img src="../img/sapo.jpg" alt="" height="auto" width="100%"></p>
     </div>
   </div>

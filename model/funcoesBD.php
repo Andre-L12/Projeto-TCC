@@ -90,14 +90,13 @@ function comboBoxInstrutor()
     return $options;
 }
 function pesquisarDatas($id) {
-    require_once "processoDAO";
+    require_once "processoDAO.php";
     require_once "aulaPraticaDAO.php";
-    $conexao =conectarBD();
     $processo= pegaIDProcesso($id);
     $aulas=pesquisarAulaPorProcesso($processo);
-    $datas="";
+    $datas = array();
     while ($resultado = mysqli_fetch_assoc($aulas)){
-        $data_aula = $resultado['data'];
+        $data_aula = $resultado['data_aula'];
         $datas[] = $data_aula; // Armazena cada data no array
     }
 
@@ -121,9 +120,6 @@ function pesquisarVeiculoPorProcesso($id_processo)
 
     return $resultado;
 }
-<<<<<<< HEAD
-=======
-
 function pesquisarVeiculoPorCurso($id_curso){
     $conexao = conectarBD(); 
     $sql = 
@@ -137,4 +133,3 @@ function pesquisarVeiculoPorCurso($id_curso){
     return $resultado;
 }
 ?>
->>>>>>> 5ec19e75e29e85d4d5163579339dfbf1de5e13ea
