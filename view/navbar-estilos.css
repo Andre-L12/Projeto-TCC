@@ -167,9 +167,12 @@
 .layout .sidebar .menu .menu-item a .menu-icon i {
   display: inline-block;
 }
+
 .layout .sidebar .menu .menu-item a .menu-title {
   font-size: 0.9em;
   overflow: hidden;
+
+  /* Reticencias quando ultrapassa o tamanho */
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-grow: 1;
@@ -183,16 +186,16 @@
   transition: opacity 0.3s;
 }
 .layout .sidebar .menu .menu-item a:hover .menu-title {
-  color: #dee2ec;
+  color: var(--cinza);
 }
 .layout .sidebar .menu .menu-item a:hover .menu-icon {
-  color: #dee2ec;
+  color: var(--cinza);
 }
 .layout .sidebar .menu .menu-item a:hover .menu-icon i {
   animation: swing ease-in-out 0.5s 1 alternate;
 }
 .layout .sidebar .menu .menu-item a:hover::after {
-  border-color: #dee2ec !important;
+  border-color: var(--color-text) !important;
 }
 .layout .sidebar .menu .menu-item.sub-menu {
   position: relative;
@@ -392,6 +395,10 @@ a {
 
 .nome-sessao{
   max-width: 130px;
+
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .layout .sidebar .footer-box img.react-logo {

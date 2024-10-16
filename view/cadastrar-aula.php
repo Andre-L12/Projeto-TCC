@@ -143,7 +143,7 @@
 
                 if (id_processo !== "") {
                     pesquisarIntrutorPorProcesso(id_processo); 
-                    pesquisarVeiculoPorProcesso(id_processo); // Corrigir
+                    pesquisarVeiculoPorProcesso(id_processo);
                 }
             }
 
