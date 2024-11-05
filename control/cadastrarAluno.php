@@ -13,20 +13,20 @@
     $foto = $_FILES["foto"];
 
     // Validação de dados:
-    $msg = validarAluno($nome, $cpf,$email);
+    $msg = validarAluno($nome, $cpf, $email);
 
     // - Validação da imagem:
     // Se for cadastrar, validar.
     if ($acao == "Cadastrar"){
-        $msg = validarImagem($foto);
+        $msg .= validarImagem($foto);
     } else {
         // Se for alterar, validar só se houver imagem.
-        if ($foto['error'] == UPLOAD_ERR_NO_FILE) {
+        if ($foto['error'] == UPLOAD_ERR_NO_FILE) { 
             // Não há imagem.
             $foto = null;
         } else {
             // Há imagem.
-            $msgErro = $msgErro . validarImagem($foto);
+            $msgErro .= validarImagem($foto);
         }
     }
 

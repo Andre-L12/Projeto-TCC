@@ -87,21 +87,35 @@
         return $msgErro;
 
     }
+
     function validarAluno($nome, $cpf, $email){
         $msgErro = "";
-    if ( empty($nome) ) {
-        $msgErro = $msgErro . "Informe o nome.<br>";        
-    }
+        if ( empty($nome) ) {
+            $msgErro = $msgErro . "Informe o nome.<br>";        
+        }
 
-    if (empty($email)){
-        $msgErro = $msgErro . "Informe o Email.<br>";
-    }
+        $msgErro .= validarEmail($email);
     
-    if ( validarCPF2($cpf) == false) {
-        $msgErro = $msgErro . "CPF inválido.<br>";
+        if (validarCPF2($cpf) == false) {
+            $msgErro = $msgErro . "CPF inválido.<br>";
+        }
+
+        return $msgErro;
     }
 
-    return $msgErro;
+    function validarEmail($email) {
+        $msg = "";
+        
+        if (empty($email)){
+            $msg = "Informe um e-mail.<br>";
+        }
+
+        // Verifica se o e-mail está no formato válido
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $msg = "Informe um e-mail válido.<br>";
+        }
+
+        return $msg;
     }
 
 function validarImagem($imagem){
