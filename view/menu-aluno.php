@@ -163,6 +163,44 @@
     margin: 10px 0;
   }
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
 
 </style>
 
@@ -237,7 +275,13 @@
         <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
     
-  
+      <div id="lessonModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Detalhes da Aula</h2>
+      <p id="lessonDetails">Aqui estarão as informações da aula.</p>
+    </div>
+    </div>  
 
   <script>
     <?php
@@ -282,6 +326,32 @@
 
         if (markedDates.includes(dateStr)) {
           span.classList.add("marked-date");
+
+          span.addEventListener("click", function () {
+            openModal(dateStr); // Função para abrir o modal e passar a data
+          });
+                  function openModal(date) {
+          const modal = document.getElementById("lessonModal");
+          const lessonDetails = document.getElementById("lessonDetails");
+
+          // Aqui você pode substituir por uma chamada Ajax para buscar as informações da aula
+          lessonDetails.textContent = "Informações da aula para a data: " + date; 
+
+          modal.style.display = "block";
+        }
+
+        // Fechar o modal ao clicar no X
+        document.querySelector(".close").addEventListener("click", function () {
+          document.getElementById("lessonModal").style.display = "none";
+        });
+
+        // Fechar o modal ao clicar fora dele
+        window.addEventListener("click", function (event) {
+          const modal = document.getElementById("lessonModal");
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        })
         }
 
         cell.appendChild(span);
