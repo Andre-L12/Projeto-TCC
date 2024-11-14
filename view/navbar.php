@@ -1,4 +1,5 @@
 
+<!-- <link rel="icon" href="../img/AutoCFC.svg" type="image/x-icon"> -->
 <aside id='sidebar' class='sidebar break-point-sm has-bg-image'>
     <a id='btn-collapse' class='sidebar-collapser'>
         <i class='ri-arrow-left-s-line'></i>
