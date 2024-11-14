@@ -6,6 +6,9 @@
     <title>Login - Auto CFC</title>
 
     <link rel="stylesheet" href="estilos.css">
+
+    <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
+    
 </head>
 <body class="fundo-azul-claro">
     <div class="login">
