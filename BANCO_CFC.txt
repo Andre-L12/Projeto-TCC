@@ -176,6 +176,13 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+use banco_cfc;
+CREATE TABLE IF NOT EXISTS `BANCO_CFC`.`avisos` (
+titulo varchar(100),
+ conteudo varchar(500) not null,
+ data_aviso date not null,
+ id_aviso int auto_increment primary key);
+
 
 /* Inserindo Cursos */
 INSERT INTO `BANCO_CFC`.`curso` (`sigla`, `descricao`, `categoria`) VALUES ('PHA', 'Primeira Habilitação A', 'A');

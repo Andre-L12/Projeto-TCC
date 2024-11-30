@@ -20,6 +20,63 @@
     <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
 
 </head>
+<style>
+    .modal {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        display: none; /* Inicialmente escondido */
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-btn {
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form-btn:hover {
+        background-color: #184E8C;
+    }
+</style>
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
@@ -45,16 +102,71 @@
 
                 <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
                         <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Adicionar aviso</button>
-                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir aviso</button>
                     </div>
                     </div>
             </main>
             <div class="overlay"></div>
+            <!-- Modal para adicionar aviso -->
+            <div id="modalAviso" class="modal" style="display:none;">
+                <div class="modal-content" style="border-radius: 15px";>
+                    <span id="closeModal" class="close">&times;</span>
+                    <h2>Adicionar Aviso</h2>
+                    <form id="formAviso">
+                    <label for="avisoTexto">Título:</label>
+                        <input type="text" id="tituloAviso" name="tituloAviso" required >
+                        <label for="avisoTexto">Aviso:</label>
+                        <input type="text" id="avisoTexto" name="avisoTexto" required style="height: 100px;" >
+                        <button type="submit" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Salvar Aviso</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
         <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
+    <script>// Get modal and buttons
+var modal = document.getElementById("modalAviso");
+var btnAlterar = document.getElementById("btnAlterar"); // Corrigido para o ID correto
+var span = document.getElementById("closeModal");
+
+// When the user clicks the button, open the modal
+btnAlterar.onclick = function() { // Corrigido para usar btnAlterar
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Form submission logic for saving the aviso
+document.getElementById("formAviso").onsubmit = function(event) {
+    event.preventDefault();
+    var tituloAviso= document.get
+    var avisoTexto = document.getElementById("avisoTexto").value;
+    
+    // Lógica para adicionar o aviso (exemplo: salvar no banco ou localStorage)
+    if (avisoTexto) {
+        alert("Aviso adicionado: " + avisoTexto);  // Aqui você pode substituir com sua lógica de envio
+    
+        // Fechar o modal
+        modal.style.display = "none";
+        
+        // Limpar o campo de texto
+        document.getElementById("avisoTexto").value = "";
+    } else {
+        alert("Por favor, insira um aviso.");
+    }
+}
+</script>
 </body>
 
 </html>

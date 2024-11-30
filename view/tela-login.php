@@ -20,8 +20,9 @@
                 <h1 class="titulo-formulario">ENTRAR</h1>
                 <div class="campos-login">
                     <div class="campo-login-1">
-                        <p class="titulo-campo">CPF: </p>
-                        <input class="input-campo" type="text" placeholder="Digite seu CPF" name="cpf" id="cpf">
+                        <p class="titulo-campo">Login: </p>
+                        <input class="input-campo" type="text" placeholder="Digite seu login" name="cpf" id="cpf"><!--alterar id e name
+    -->
                     </div>
                     <div class="campo-login-1">
                         <p class="titulo-campo">Senha: </p>
