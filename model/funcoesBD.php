@@ -20,8 +20,7 @@ function comboBoxCurso()
 
     return $options;
 }
-function comboBoxAluno()
-{
+function comboBoxAluno() {
     $sql = "SELECT * FROM aluno";
     $conexao = conectarBD();
     $resultado = mysqli_query($conexao, $sql);

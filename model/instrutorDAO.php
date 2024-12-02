@@ -87,9 +87,6 @@
         return pesquisarInstrutor($pesq,1);
     }
     
-    //function pesquisarClientePorEstado ($pesq) {
-       // return pesquisar($pesq,2);}
-    
     function pesquisarInstrutorPorCPF ($pesq) {
         return pesquisarInstrutor($pesq,2);
     }
@@ -104,6 +101,14 @@
     // function alterarInstutor{
 
     // }
+
+    function pesquisarTodosInstrutores() {
+        $sql = "SELECT * FROM instrutor";
+        $conexao = conectarBD();
+        $resultado = mysqli_query($conexao, $sql)or die ( mysqli_error($conexao) );
+    
+        return $resultado;
+    }
 
 
 ?>

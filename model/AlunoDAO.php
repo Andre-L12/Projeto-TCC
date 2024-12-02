@@ -112,6 +112,14 @@ function pesquisarAlunoPorID ($pesq) {
     return pesquisar($pesq,3);
 }
 
+function pesquisarTodosAlunos() {
+    $sql = "SELECT * FROM aluno";
+    $conexao = conectarBD();
+    $resultado = mysqli_query($conexao, $sql)or die ( mysqli_error($conexao) );
+
+    return $resultado;
+}
+
 /*
 function exibirAluno($cpf){
     $conect=conectarBD();

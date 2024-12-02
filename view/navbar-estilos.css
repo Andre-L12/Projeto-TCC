@@ -734,5 +734,7 @@ li::marker {
   }
 }
 
-
-
+/* Calendário */
+.campo-pesquisa{
+  padding-bottom: 12px;
+}
