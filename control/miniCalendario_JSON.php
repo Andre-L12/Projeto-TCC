@@ -18,7 +18,7 @@ require_once "../model/funcoesBD.php"; // Certifique-se de que o caminho está c
             // Cria um array para armazenar todos os resultados
             $registros = array(
                 "erro" => "",
-                "alunos" => array()  
+                "aula" => array()  
             );
 
             // Percorre todos os resultados e os adiciona ao array

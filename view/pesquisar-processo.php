@@ -55,6 +55,13 @@
                     <div>
                         <!-- PESQUISAR -->
                         <form method="POST" >
+                            <label for="tipo">Selecione o tipo:</label>
+                            <select name="tipo" class="form-input">
+                                <OPTION value='0'></OPTION>
+                                <OPTION value='2'>Id Curso</OPTION>
+                                <OPTION value='3'>Id Processo</OPTION>
+                                <OPTION value='4'>Id Aluno</OPTION>
+                            </select>
                             <input type="text" id="txtPesquisa" name="txtPesquisa" class="form-input" >
                             <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
                         </form>
@@ -95,17 +102,17 @@
             <!-- Quando clicar no botão Pesquisar -->
             $('#btnPesq').click(function(e){
                 
-                var pesq = $('#txtPesquisa').val();     // Pegar campo texto da pesquisa
-                
-            pesquisar(pesq);
+                var pesq = $('#txtPesquisa').val();     // Campo texto da pesquisa
+                var tipo = $('select[name="tipo"]').val(); // Pega o valor do tipo
+                 pesquisar(pesq, tipo);
             });
         });
-        function pesquisar(pesq) {
+        function pesquisar(pesq,tipo) {
             // Chamar o PHP do servidor com AJAX
             $.ajax({
             url: '../control/pesquisarProcesso_JSON.php',
             type: 'POST',
-            data: { pesq: pesq },       // Envio do texto de pesquisa
+            data: { pesq: pesq,tipo: tipo},       // Envio do texto de pesquisa
             dataType: 'json',
             success: function(data) {
                 // data == dados de retorno no formato JSON

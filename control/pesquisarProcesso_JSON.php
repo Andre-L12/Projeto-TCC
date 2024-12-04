@@ -2,13 +2,14 @@
 
     // Esse programa é chamado pelo JSON no front-end
 
-    if (isset($_POST["pesq"])) {
+    if (isset($_POST["tipo"])) {
         $pesq = $_POST["pesq"];
+        $tipo = $_POST["tipo"];
 
         require_once '../model/processoDAO.php';
         require_once '../model/cursoDAO.php';              
         
-        $resultado = pesquisarProcessoPorCPFAluno($pesq);
+        $resultado = pesquisarProcessos($pesq,$tipo);
 
         if ( mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados

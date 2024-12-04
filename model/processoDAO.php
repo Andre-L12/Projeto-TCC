@@ -74,6 +74,9 @@ function pesquisarProcessos($pesq, $tipo) {
 
     $sql = "SELECT * FROM processo WHERE ";
     switch ($tipo) {
+        case 0:
+            $sql ="SELECT * FROM processo";
+            break;
         case 1: // Por CPF aluno
                 $sql = 
                 "SELECT p.*
