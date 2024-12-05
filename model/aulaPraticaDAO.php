@@ -61,6 +61,25 @@ function pesquisarAula($pesq, $tipo) {
                 break;
         case 7: // Por ID
                 $sql = $sql . "id = '$pesq' ";
+                break;
+        case 8: // Por ID Aluno
+                $sql = "SELECT ap.*, p.id_processo, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+                FROM `BANCO_CFC`.`AulaPratica` ap
+                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                WHERE a.id_aluno = '$pesq';";
+                break;
+        case 9: // Por ID Instrutor
+            $sql = "SELECT ap.*, p.id_processo, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+                FROM `BANCO_CFC`.`AulaPratica` ap
+                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                WHERE ap.id_instrutor = '$pesq';";
+
     }
 
     $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
@@ -90,6 +109,13 @@ function pesquisarAulaPorData ($pesq) {
 }
 function pesquisarAulaPorId ($pesq) {
     return  pesquisarAula($pesq,7);
+}
+
+function pesquisarAulaPorIDAluno ($pesq) {
+    return  pesquisarAula($pesq,8);
+}
+function pesquisarAulaPorIDInstrutor ($pesq) {
+    return  pesquisarAula($pesq,9);
 }
 
 function pesquisarAulaPorInstrutorData($id_instrutor, $data){
