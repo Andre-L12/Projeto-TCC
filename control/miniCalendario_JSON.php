@@ -1,57 +1,44 @@
 <?php
 require_once "../model/funcoesBD.php"; // Certifique-se de que o caminho está correto
 
-        if (isset($_GET['data'])) {
-            $data = $_GET['data'];
-            
-            // Função que busca as informações da aula no banco de dados para a data especificada
-            $aulaInfo = pesquisarAulaPorData($data); // Nome da função que você já deve ter ou criar
+if (isset($_GET['data']) && isset($_GET['id'])) {
+    $data = $_GET['data'];
+    $id = $_GET['id'];
 
-            if ($aulaInfo) {
-                echo json_encode($aulaInfo); // Retorna os dados em JSON
-            } else {
-                echo json_encode(["erro" => "Nenhuma aula encontrada para essa data."]);
-            }
-    
+    // Função que busca as informações da aula no banco de dados para a data especificada
+    $resultado = pesquisarAulaPorIdData($id, $data); // Nome da função que você já deve ter ou criar
 
-        if ( mysqli_num_rows($resultado) > 0) {
-            // Cria um array para armazenar todos os resultados
-            $registros = array(
-                "erro" => "",
-                "aula" => array()  
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        // Cria um array para armazenar todos os resultados
+        $registros = array(
+            "erro" => "",
+            "aula" => array()
+        );  
+
+        // Percorre todos os resultados e os adiciona ao array
+        while ($row = mysqli_fetch_assoc($resultado)) {
+            $registros["aula"][] = array(
+                "id_aula" => $row["id_aulaPratica"],
+                "data" => $row["data_aula"],
+                "hora" => $row["hora_aula"],
+                "obrigatoria" => $row["obrigatoria"],
+                "placa" => $row["id_veiculo"],
+                "instrutor" => $row["nome_instrutor"],
+                "marca" => $row["marca_veiculo"],
+                "modelo" => $row["modelo_veiculo"],
+                "processo" => $row["id_processo"]
             );
-
-            // Percorre todos os resultados e os adiciona ao array
-            while ( $row = mysqli_fetch_assoc($resultado) ) {
-                $id = $row["id_aluno"];
-                $nome = $row["nome"];
-                $cpf = $row["cpf"];
-                $email = $row["email"];
-                $celular = $row["celular"];
-                $foto = $row["foto"];
-                $imageBase64 = base64_encode($foto);      // Converter a imagem em binário para Base64
-                
-                $registros["alunos"][] = array(
-                        "id_aluno" => $id,
-                        "nome" => $nome,
-                        "cpf" => $cpf,
-                        "email" => $email,
-                        "celular" => $celular,
-                        "foto" => $imageBase64
-                        );
-
-            }
-
-            // Envia os dados como JSON (uma lista de produtos)
-            header('Content-Type: application/json');
-            echo json_encode($registros);
-        } else {
-            // Produto não encontrado
-            echo json_encode(['erro' => 'Aluno não encontrado.']);
         }
-    
 
+        // Envia os dados como JSON
+        header('Content-Type: application/json');
+        echo json_encode($registros);
+    } else {
+        // Nenhum registro encontrado
+        echo json_encode(['erro' => 'Nenhuma aula encontrada para essa data.']);
+    }
 } else {
-echo json_encode(['erro' => 'ERRO ao pesquisar Alunos.']);
+    // Parâmetros não fornecidos corretamente
+    echo json_encode(['erro' => 'Parâmetros inválidos.']);
 }
 ?>

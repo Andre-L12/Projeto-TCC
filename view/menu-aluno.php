@@ -281,7 +281,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Detalhes da Aula</h2>
-      <p id="lessonDetails">Aqui estarão as informações da aula.</p>
+      <p id="lessonDetails"></p>
     </div>
     </div>  
 
@@ -337,7 +337,7 @@
           const lessonDetails = document.getElementById("lessonDetails");
 
           // Aqui você pode substituir por uma chamada Ajax para buscar as informações da aula
-          lessonDetails.textContent = "Informações da aula para a data: " + date; 
+          
 
           modal.style.display = "block";
         }
