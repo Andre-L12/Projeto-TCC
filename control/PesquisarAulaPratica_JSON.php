@@ -34,6 +34,9 @@
                 $id_veiculo = $row["id_veiculo"];
                 $id_instrutor = $row["id_instrutor"];
                 $id_processo = $row["id_processo"];
+
+                // $categoria = $row["c.categoria"];
+                // $nome_intrutor = $row["nome_instrutor"];
                 
                 $registros["aulas"][] = array(
                         "id" => $id,
@@ -45,6 +48,8 @@
                         "id_veiculo" => $id_veiculo,
                         "id_instrutor" => $id_instrutor,
                         "id_processo" => $id_processo
+                        // "categoria" => $categoria
+                        // "nome_instrutor" => $nome_instrutor
                         );
 
             }
@@ -86,9 +91,6 @@
                 $id_instrutor = $row["id_instrutor"];
                 $id_processo = $row["id_processo"];
 
-                $categoria = $row["categoria"];
-                $nome_intrutor = $row["nome_intrutor"];
-                
                 $registros["aulas"][] = array(
                         "id" => $id,
                         "data" => $data,
@@ -98,9 +100,7 @@
                         "status_aula" => $status_aula,
                         "id_veiculo" => $id_veiculo,
                         "id_instrutor" => $id_instrutor,
-                        "id_processo" => $id_processo,
-                        "categoria" => $categoria,
-                        "nome_intrutor" => $nome_intrutor
+                        "id_processo" => $id_processo
                         );
 
             }

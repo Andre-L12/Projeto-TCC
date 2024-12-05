@@ -63,7 +63,7 @@ function pesquisarAula($pesq, $tipo) {
                 $sql = $sql . "id = '$pesq' ";
                 break;
         case 8: // Por ID Aluno
-                $sql = "SELECT ap.*, p.id_processo, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+                $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
                 FROM `BANCO_CFC`.`AulaPratica` ap
                 JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
                 JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
@@ -72,7 +72,7 @@ function pesquisarAula($pesq, $tipo) {
                 WHERE a.id_aluno = '$pesq';";
                 break;
         case 9: // Por ID Instrutor
-            $sql = "SELECT ap.*, p.id_processo, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+            $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
                 FROM `BANCO_CFC`.`AulaPratica` ap
                 JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
                 JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
