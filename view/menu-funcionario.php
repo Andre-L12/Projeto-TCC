@@ -1,12 +1,13 @@
 <!-- Toda página que puxar Navbar terá que ter essa base -->
 <?php
-    require_once "../control/validarUsuario.php";
- ?>
+require_once "../control/validarUsuario.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
 
@@ -29,9 +30,10 @@
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0,0.4);
-        display: none; /* Inicialmente escondido */
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        display: none;
+        /* Inicialmente escondido */
     }
 
     .modal-content {
@@ -77,6 +79,7 @@
         background-color: #184E8C;
     }
 </style>
+
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
@@ -84,15 +87,22 @@
         ?>
 
         <div class="layout">
-        <header>
-            <div>
-                <span class="header-icon">
-                    <i class="bi bi-grid-fill"></i>
-                </span>
-                <span class="header-title">MENU</span>
-            </div>
-        </header>
+            <header>
+                <div>
+                    <span class="header-icon">
+                        <i class="bi bi-grid-fill"></i>
+                    </span>
+                    <span class="header-title">MENU</span>
+                </div>
+            </header>
             <main class="content">
+                <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: #f7f7f7; padding: 20px; border-radius: 15px; margin: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <img src="../img/AutoCFCicon.png" alt="Logo Auto CFC" style="width: 150px; height: auto; margin-bottom: 15px;">
+                    <h1 style="font-family: 'Poppins', sans-serif; color: #216EC0; margin: 0;">Boas-vindas ao Sistema da Auto CFC!</h1>
+                    <p style="font-family: 'Poppins', sans-serif; color: #555; text-align: center; max-width: 400px; margin-top: 10px;">
+                        Estamos felizes em ter você aqui. Utilize o menu ao lado para navegar pelo sistema. Caso precise de ajuda, clique em "Adicionar Aviso" para registrar sua solicitação.
+                    </p>
+                </div>
                 <div>
                     <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
                         <i class="ri-menu-line ri-xl"></i>
@@ -100,22 +110,22 @@
                 </div>
                 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #ffffff;">
 
-                <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start" ><br>
+                    <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start"><br>
                         <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Adicionar aviso</button>
                     </div>
-                    </div>
+                </div>
             </main>
             <div class="overlay"></div>
             <!-- Modal para adicionar aviso -->
             <div id="modalAviso" class="modal" style="display:none;">
-                <div class="modal-content" style="border-radius: 15px";>
+                <div class="modal-content" style="border-radius: 15px" ;>
                     <span id="closeModal" class="close">&times;</span>
                     <h2>Adicionar Aviso</h2>
                     <form id="formAviso">
-                    <label for="avisoTexto">Título:</label>
-                        <input type="text" id="tituloAviso" name="tituloAviso" required >
+                        <label for="avisoTexto">Título:</label>
+                        <input type="text" id="tituloAviso" name="tituloAviso" required>
                         <label for="avisoTexto">Aviso:</label>
-                        <input type="text" id="avisoTexto" name="avisoTexto" required style="height: 100px;" >
+                        <input type="text" id="avisoTexto" name="avisoTexto" required style="height: 100px;">
                         <button type="submit" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Salvar Aviso</button>
                     </form>
                 </div>
@@ -123,50 +133,51 @@
         </div>
     </div>
 
-        <script src='https://unpkg.com/@popperjs/core@2'></script>
+    <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
-    <script>// Get modal and buttons
-var modal = document.getElementById("modalAviso");
-var btnAlterar = document.getElementById("btnAlterar"); // Corrigido para o ID correto
-var span = document.getElementById("closeModal");
+    <script>
+        // Get modal and buttons
+        var modal = document.getElementById("modalAviso");
+        var btnAlterar = document.getElementById("btnAlterar"); // Corrigido para o ID correto
+        var span = document.getElementById("closeModal");
 
-// When the user clicks the button, open the modal
-btnAlterar.onclick = function() { // Corrigido para usar btnAlterar
-    modal.style.display = "block";
-}
+        // When the user clicks the button, open the modal
+        btnAlterar.onclick = function() { // Corrigido para usar btnAlterar
+            modal.style.display = "block";
+        }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-// Form submission logic for saving the aviso
-document.getElementById("formAviso").onsubmit = function(event) {
-    event.preventDefault();
-    var tituloAviso= document.get
-    var avisoTexto = document.getElementById("avisoTexto").value;
-    
-    // Lógica para adicionar o aviso (exemplo: salvar no banco ou localStorage)
-    if (avisoTexto) {
-        alert("Aviso adicionado: " + avisoTexto);  // Aqui você pode substituir com sua lógica de envio
-    
-        // Fechar o modal
-        modal.style.display = "none";
-        
-        // Limpar o campo de texto
-        document.getElementById("avisoTexto").value = "";
-    } else {
-        alert("Por favor, insira um aviso.");
-    }
-}
-</script>
+        // Form submission logic for saving the aviso
+        document.getElementById("formAviso").onsubmit = function(event) {
+            event.preventDefault();
+            var tituloAviso = document.get
+            var avisoTexto = document.getElementById("avisoTexto").value;
+
+            // Lógica para adicionar o aviso (exemplo: salvar no banco ou localStorage)
+            if (avisoTexto) {
+                alert("Aviso adicionado: " + avisoTexto); // Aqui você pode substituir com sua lógica de envio
+
+                // Fechar o modal
+                modal.style.display = "none";
+
+                // Limpar o campo de texto
+                document.getElementById("avisoTexto").value = "";
+            } else {
+                alert("Por favor, insira um aviso.");
+            }
+        }
+    </script>
 </body>
 
 </html>

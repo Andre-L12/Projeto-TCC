@@ -1,9 +1,9 @@
 <?php
 require_once "../model/funcoesBD.php"; // Certifique-se de que o caminho está correto
 
-if (isset($_GET['data']) && isset($_GET['id'])) {
-    $data = $_GET['data'];
-    $id = $_GET['id'];
+if (isset($_POST['data']) && isset($_POST['id'])) {
+    $data = $_POST['data'];
+    $id = $_POST['id'];
 
     // Função que busca as informações da aula no banco de dados para a data especificada
     $resultado = pesquisarAulaPorIdData($id, $data); // Nome da função que você já deve ter ou criar
