@@ -65,60 +65,79 @@ function pesquisarAula($pesq, $tipo)
             $sql = $sql . "data_aula = '$pesq' ";
             break;
         case 7: // Por ID
-            $sql = $sql . "id = '$pesq' ";
-            break;
-        case 8: // por nome de aluno
-            $sql = "SELECT 
-                    a.nome AS nome_aluno,
-                    a.cpf AS cpf_aluno,
-                    p.data_inicio AS data_inicio_processo,
-                    ap.data_aula AS data_aula,
-                    ap.hora_aula AS hora_aula,
-                    ap.status_aula AS status_aula,
-                    v.placa AS placa_veiculo,
-                    v.marca AS marca_veiculo,
-                    v.modelo AS modelo_veiculo,
-                    i.nome AS nome_instrutor
-                FROM 
-                    AulaPratica ap
-                INNER JOIN 
-                    Processo p ON ap.id_processo = p.id_processo
-                INNER JOIN 
-                    Aluno a ON p.id_aluno = a.id_aluno
-                INNER JOIN 
-                    Veiculo v ON ap.id_veiculo = v.placa
-                INNER JOIN 
-                    Instrutor i ON ap.id_instrutor = i.id_instrutor
-                WHERE 
-                    a.nome LIKE '%'$pesq'%'; 
-                ";
-            break;
-        case 9: // Por nome de instrutor
-            $sql = "SELECT 
-                i.nome AS nome_instrutor,
-                ap.data_aula AS data_aula,
-                ap.hora_aula AS hora_aula,
-                ap.status_aula AS status_aula,
-                v.placa AS placa_veiculo,
-                v.marca AS marca_veiculo,
-                v.modelo AS modelo_veiculo,
-                a.nome AS nome_aluno,
-                a.cpf AS cpf_aluno
-            FROM 
-                AulaPratica ap
-            INNER JOIN 
-                Instrutor i ON ap.id_instrutor = i.id_instrutor
-            INNER JOIN 
-                Processo p ON ap.id_processo = p.id_processo
-            INNER JOIN 
-                Aluno a ON p.id_aluno = a.id_aluno
-            INNER JOIN 
-                Veiculo v ON ap.id_veiculo = v.placa
-            WHERE 
-                i.nome LIKE '%'$pesq'%' 
-            ORDER BY 
-                ap.data_aula ASC, ap.hora_aula ASC;
-            ";
+                $sql = $sql . "id = '$pesq' ";
+                break;
+        case 8: // Por ID Aluno
+                $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+                FROM `BANCO_CFC`.`AulaPratica` ap
+                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                WHERE a.id_aluno = '$pesq';";
+                break;
+        case 9: // Por ID Instrutor
+            $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
+                FROM `BANCO_CFC`.`AulaPratica` ap
+                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                WHERE ap.id_instrutor = '$pesq';";
+                break;
+        case 10: // por nome de aluno
+                    $sql = "SELECT 
+                            a.nome AS nome_aluno,
+                            a.cpf AS cpf_aluno,
+                            p.data_inicio AS data_inicio_processo,
+                            ap.data_aula AS data_aula,
+                            ap.hora_aula AS hora_aula,
+                            ap.status_aula AS status_aula,
+                            v.placa AS placa_veiculo,
+                            v.marca AS marca_veiculo,
+                            v.modelo AS modelo_veiculo,
+                            i.nome AS nome_instrutor
+                        FROM 
+                            AulaPratica ap
+                        INNER JOIN 
+                            Processo p ON ap.id_processo = p.id_processo
+                        INNER JOIN 
+                            Aluno a ON p.id_aluno = a.id_aluno
+                        INNER JOIN 
+                            Veiculo v ON ap.id_veiculo = v.placa
+                        INNER JOIN 
+                            Instrutor i ON ap.id_instrutor = i.id_instrutor
+                        WHERE 
+                            a.nome LIKE '%'$pesq'%'; 
+                        ";
+                    break;
+        case 11: // Por nome de instrutor
+                    $sql = "SELECT 
+                        i.nome AS nome_instrutor,
+                        ap.data_aula AS data_aula,
+                        ap.hora_aula AS hora_aula,
+                        ap.status_aula AS status_aula,
+                        v.placa AS placa_veiculo,
+                        v.marca AS marca_veiculo,
+                        v.modelo AS modelo_veiculo,
+                        a.nome AS nome_aluno,
+                        a.cpf AS cpf_aluno
+                    FROM 
+                        AulaPratica ap
+                    INNER JOIN 
+                        Instrutor i ON ap.id_instrutor = i.id_instrutor
+                    INNER JOIN 
+                        Processo p ON ap.id_processo = p.id_processo
+                    INNER JOIN 
+                        Aluno a ON p.id_aluno = a.id_aluno
+                    INNER JOIN 
+                        Veiculo v ON ap.id_veiculo = v.placa
+                    WHERE 
+                        i.nome LIKE '%'$pesq'%' 
+                    ORDER BY 
+                        ap.data_aula ASC, ap.hora_aula ASC;
+                    ";
+
     }
 
     $res = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
@@ -154,6 +173,21 @@ function pesquisarAulaPorData($pesq)
 function pesquisarAulaPorId($pesq)
 {
     return  pesquisarAula($pesq, 7);
+}
+
+function pesquisarAulaPorIDAluno ($pesq) {
+    return  pesquisarAula($pesq,8);
+}
+function pesquisarAulaPorIDInstrutor ($pesq) {
+    return  pesquisarAula($pesq,9);
+}
+
+function pesquisarAulaPorNomeAluno ($pesq) {
+    return  pesquisarAula($pesq,10);
+}
+
+function pesquisarAulaPorNomeInstrutor ($pesq) {
+    return  pesquisarAula($pesq,11);
 }
 
 function pesquisarAulaPorInstrutorData($id_instrutor, $data)
