@@ -108,12 +108,26 @@ require_once "../control/validarUsuario.php";
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #ffffff;">
-
-                    <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start"><br>
-                        <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Adicionar aviso</button>
-                    </div>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 15px; padding: 20px; background-color: #f7f9fc; border: 1px solid #dfe6ed; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <button type="button" id="btnAlterar" name="btnAlterar" class="form-btn"
+                        style="flex: 1; min-width: 100px; padding: 10px; font-size: 16px; background-color: #216EC0; color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                        Adicionar Aviso
+                    </button>
+                    <form method="post" action="../control/excluirAviso.php" style="display: flex; flex: 2; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+                        <select name="id" id="combo-box" required
+                            style="flex: 1; min-width: 100px; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px; background-color: #fff; cursor: pointer;">
+                            <?php
+                            require_once "../model/funcoesBD.php";
+                            echo comboBoxAvisos();
+                            ?>
+                        </select>
+                        <button type="submit"
+                            style="flex: 1; min-width: 100px; padding: 10px; font-size: 16px; background-color: #e74c3c; color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                            Excluir Aviso
+                        </button>
+                    </form>
                 </div>
+
             </main>
             <div class="overlay"></div>
             <!-- Modal para adicionar aviso -->
@@ -121,7 +135,7 @@ require_once "../control/validarUsuario.php";
                 <div class="modal-content" style="border-radius: 15px" ;>
                     <span id="closeModal" class="close">&times;</span>
                     <h2>Adicionar Aviso</h2>
-                    <form id="formAviso">
+                    <form id="formAviso" method="post" nome="formAviso" action="../control/cadastrarAviso.php">
                         <label for="avisoTexto">Título:</label>
                         <input type="text" id="tituloAviso" name="tituloAviso" required>
                         <label for="avisoTexto">Aviso:</label>
@@ -132,6 +146,7 @@ require_once "../control/validarUsuario.php";
             </div>
         </div>
     </div>
+
 
     <script src='https://unpkg.com/@popperjs/core@2'></script>
     <script src="navbar-script.js"></script>
@@ -157,27 +172,13 @@ require_once "../control/validarUsuario.php";
                 modal.style.display = "none";
             }
         }
-
-        // Form submission logic for saving the aviso
-        document.getElementById("formAviso").onsubmit = function(event) {
-            event.preventDefault();
-            var tituloAviso = document.get
-            var avisoTexto = document.getElementById("avisoTexto").value;
-
-            // Lógica para adicionar o aviso (exemplo: salvar no banco ou localStorage)
-            if (avisoTexto) {
-                alert("Aviso adicionado: " + avisoTexto); // Aqui você pode substituir com sua lógica de envio
-
-                // Fechar o modal
-                modal.style.display = "none";
-
-                // Limpar o campo de texto
-                document.getElementById("avisoTexto").value = "";
-            } else {
-                alert("Por favor, insira um aviso.");
-            }
-        }
     </script>
 </body>
 
 </html>
+<?php
+if (isset($_GET["msg"])) {
+    $mensagem = $_GET["msg"];
+    echo "<script>alert('$mensagem');</script>"; // Alerta em JavaScript
+}
+?>

@@ -12,11 +12,11 @@ if (isset($_SESSION["id_aluno"])) {
   $resultado2 = pesquisarInstrutorPorID($idInstrutor);
   $row2 = mysqli_fetch_assoc($resultado2);
   $instrutor = $row2['nome'];
-  if($qtd<=20){
-  $restantes=(20-$qtd);
-  }
-  else{
-    $restantes= 0;
+  $aulasObrigatorias = 20;
+  if ($qtd <= 20) {
+    $restantes = (20 - $qtd);
+  } else {
+    $restantes = 0;
   }
   if ($qtd > 0) {
     $etapa = "Prática";
@@ -25,12 +25,13 @@ if (isset($_SESSION["id_aluno"])) {
     $etapa = "Teórica";
     $imagem = "../img/aula teorica.jpg";
   }
-}else{
-  $qtd ="sem dados";
+} else {
+  $qtd = "#sem dados";
   $instrutor = "#sem dados";
-  $etapa = "Teórica";
-    $imagem = "../img/aula teorica.jpg";
-    $restantes="#sem dados";
+  $etapa = "#modo aluno";
+  $imagem = "../img/modo aluno.jpg";
+  $restantes = "#sem dados";
+  $aulasObrigatorias = "#sem dados";
 }
 ?>
 <!DOCTYPE html>
@@ -314,7 +315,7 @@ if (isset($_SESSION["id_aluno"])) {
                   <strong>Instrutor:</strong><br> <?php echo $instrutor; ?>
                 </p>
                 <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
-                  <strong>Aulas Obrigatórias:</strong><br> 20
+                  <strong>Aulas Obrigatórias:</strong><br> <?php echo $aulasObrigatorias; ?>
                 </p>
                 <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
                   <strong>Aulas Restantes:</strong><br><?php echo $restantes; ?>
@@ -347,7 +348,7 @@ if (isset($_SESSION["id_aluno"])) {
   <div id="lessonModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Detalhes da Aula</h2>
+      <h2 style="color:#216EC0">Detalhes da Aula</h2>
       <p id="lessonDetails"></p>
     </div>
   </div>
@@ -356,10 +357,16 @@ if (isset($_SESSION["id_aluno"])) {
     <?php
     // Exemplo de array com as datas
     require_once "../model/funcoesBD.php";
-    $datasMarcadas = pesquisarDatas($_SESSION["id_aluno"]);
-    // Convertendo o array PHP para um array JavaScriptm
-    echo "const markedDates = " . json_encode($datasMarcadas) . ";";
-    echo "const id = " . json_encode($_SESSION["id_aluno"]) . ";";
+    if (isset($_SESSION["id_aluno"])) {
+      $datasMarcadas = pesquisarDatas($_SESSION["id_aluno"]);
+      // Convertendo o array PHP para um array JavaScriptm
+      echo "const markedDates = " . json_encode($datasMarcadas) . ";";
+      echo "const id = " . json_encode($_SESSION["id_aluno"]) . ";";
+    } else {
+      echo "const markedDates = " . json_encode([2024 - 05 - 05]) . ";";
+      echo "const id = " . json_encode(1) . ";";
+    }
+
     ?>
 
     let currentDate = new Date();
