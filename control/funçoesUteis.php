@@ -160,12 +160,8 @@ function validarAula($id_processo, $id_instrutor, $id_veiculo, $data, $hora, $ob
         $msg .= "Selecione uma data.<br>";
     }
 
-    if (empty($data)){
+    if (empty($hora)){
         $msg .= "Selecione um horário.<br>";
-    }
-
-    if (empty($data)){
-        $msg .= "Informe se a aula é obrigatória ou não.<br>";
     }
 
     return $msg;
@@ -320,5 +316,17 @@ function validarCPF2($cpf) {
         }
         return $msg;
 
+    }
+
+    function converterDataParaPadraoBR($dataBanco){
+        $dataConvertida = DateTime::createFromFormat('Y-m-d', $dataBanco)->format('d/m/Y');
+
+        return $dataConvertida;
+    }
+
+    function converterDataParaPadraoBanco($dataBanco){
+        $dataConvertida = DateTime::createFromFormat('d/m/Y', $dataBanco)->format('Y-m-d');
+
+        return $dataConvertida;
     }
 ?>

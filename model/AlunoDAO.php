@@ -1,6 +1,6 @@
 <?php
-require "conexaoBD.php";
-static $conexão;
+require_once "conexaoBD.php";
+// static $conexão;
 function cadastrarAluno($nome, $cpf, $email, $celular, $foto){
     $conect=conectarBD();
 
@@ -29,8 +29,6 @@ function cadastrarAluno($nome, $cpf, $email, $celular, $foto){
 }
 
 function alterarAluno ($id, $nome, $cpf, $email, $celular, $foto) {
-
-    $conexao = conectarBD();
 
     $conexao = conectarBD();
     

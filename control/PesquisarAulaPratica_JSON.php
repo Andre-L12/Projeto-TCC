@@ -8,6 +8,7 @@
         $idPessoa = $_POST["idPessoa"];
 
         require_once '../model/aulaPraticaDAO.php';
+        require_once 'funçoesUteis.php';
         
         $resultado = "";
         if ($tipoPesq == "aluno"){
@@ -40,7 +41,7 @@
                 
                 $registros["aulas"][] = array(
                         "id" => $id,
-                        "data" => $data,
+                        "data" => converterDataParaPadraoBR($data),
                         "hora" => $hora,
                         "status_detran" => $status_detran,
                         "obrigatoria" => $obrigatoria,
@@ -66,12 +67,14 @@
        
     } 
     
+    // Pesquisar para pesquisar-aulaPratica.php
     else if (isset($_POST["tipo"]) && isset($_POST["pesq"])) {
     // Esse programa é chamado pelo JSON no front-end
         $pesq = $_POST["pesq"];
         $tipo = $_POST["tipo"];
-
-        require_once '../model/aulaPraticaDAO.php';              
+        
+        require_once '../model/aulaPraticaDAO.php';
+        require_once 'funçoesUteis.php';
         
         $resultado = pesquisarAula($pesq,$tipo);
 
@@ -101,8 +104,8 @@
                 
                 $registros["aulas"][] = array(
                         "id" => $id,
-                        "data" => $data,
-                        "hora" => $hora,
+                        "data" => converterDataParaPadraoBR($data),
+                        "hora" => substr($hora, 0, 5),
                         "status_detran" => $status_detran,
                         "obrigatoria" => $obrigatoria,
                         "status_aula" => $status_aula,

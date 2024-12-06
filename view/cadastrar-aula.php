@@ -42,18 +42,110 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
-                <!-- Form Cadastrar Veículo -->
+
+                <?php
+                if (isset($_GET['id'])) {
+                    // ALTERAR
+                    require "../model/aulaPraticaDAO.php";
+                    require "../model/processoDAO.php";
+
+                    $id_aula = $_GET['id'];
+
+                    $resAula = pesquisarAulaPorId($id_aula);
+                    if ($resAula != null) {
+                        $registro = mysqli_fetch_assoc($resAula);
+
+                        $data = $registro["data_aula"];
+
+                        $hora = $registro["hora_aula"];
+                        $hora = substr($hora, 0, 5);
+
+                        $status_detran = $registro["status_detran"];
+                        $obrigatoria = $registro["obrigatoria"];
+
+                        if ($obrigatoria == '1') {
+                            $obrSIM = "checked";
+                            $obrNAO = "";
+                        } else {
+                            $obrSIM = "";
+                            $obrNAO = "checked";
+                        }
+
+                        $status_aula = $registro["status_aula"];
+                        $id_veiculo = $registro["id_veiculo"];
+                        $id_instrutor = $registro["id_instrutor"];
+                        $id_processo = $registro["id_processo"];
+
+                        // Pegando dados do processo
+                        $resultado_processo = pesquisarProcessoPorID($id_processo);
+                        $row_processo = mysqli_fetch_assoc($resultado_processo);
+                
+                        $id_aluno = $row_processo['id_aluno'];
+                        // $id_curso = $row_processo['id_curso'];
+
+                        if ($obrigatoria == '1'){
+                            $campo_statusDetran = "<div class='form-campo'>
+                                <label for='statusDetran' class='form-subtitulo'>Status Detran:</label>
+                                <select name='statusDetran' id='statusDetran' class='form-input'>";
+
+                            if ($status_detran == 0) {
+                                $campo_statusDetran .= "<OPTION value='0' checked>Não atualizada no sistema</OPTION>
+                                        <OPTION value='1'>Atualizada no sistema</OPTION>";
+                            } else {
+                                $campo_statusDetran .= "<OPTION value='0'>Não atualizada no sistema</OPTION>
+                                        <OPTION value='1' checked>Atualizada no sistema</OPTION>";
+                            }
+
+                            $campo_statusDetran .= "</select>
+                                    <div id='div-erro-statusDetran'></div>
+                                </div>";
+
+                        } else {
+                            $campo_statusDetran = "";
+                        }
+
+                        $titulo = "Alterar Aula Prática";
+                        $botao = "Alterar";
+                    }
+                } else {
+                    // INSERIR
+
+                    $id_aula = "";
+                    $data = "";
+                    $hora = "";
+                    $status_detran = "";
+
+                    $obrSIM = "";
+                    $obrNAO = "";
+
+                    $status_aula = "";
+                    $id_veiculo = "";
+                    $id_instrutor = "";
+                    $id_processo = "";
+
+                    $id_aluno = "";
+
+                    $titulo = "Agendar Aula Prática";
+                    $botao = "Agendar";
+
+                    $campo_statusDetran = "";
+                }
+                ?>
+
+                <!-- Form Cadastrar Aula -->
                 <div class="form-container">
-                    <h1 class="form-titulo">Agendar Aula Prática</h1>
-                    <form action="../control/cadastrarAulaPratica.php" method="POST" name="formCadastroAulaPratica">
+                    <h1 class="form-titulo"><?php echo $titulo?></h1>
+                    <form action="../control/cadastrarAulaPratica.php?" method="POST" name="formCadastroAulaPratica">
                         <div>
+                            <input type="hidden" name="id" value="<?php echo $id_aula ?>" >
+
                             <!-- Campo Aluno -->
                             <div class="form-campo">
                                 <label for="aluno" class="form-subtitulo">Aluno:</label>
                                 <select name="aluno" id="aluno" class="form-input">
                                     <?php
                                     require_once "../model/funcoesBD.php";
-                                    $options = comboBoxAlunoCPF();
+                                    $options = comboBoxAluno($id_aluno);
                                     echo $options;
                                     ?>
                                 </select>
@@ -84,8 +176,8 @@
                             <div class="form-campo">
                                 <label for="data" class="form-subtitulo">Data:</label>
                                 <div class="form-campo-input-btn">
-                                    <input type="date" name="data" id="data" class="form-input-menor">
-                                    <button type="button" id="consultar-horarios" class="form-btn-menor"><i class='bi bi bi-search'></i></button> 
+                                    <input type="date" name="data" id="data" class="form-input" value="<?php echo $data?>" >
+                                    <!-- <button type="button" id="consultar-horarios" class="form-btn-menor"><i class='bi bi bi-search'></i></button> -->
                                 </div>
                             </div>
 
@@ -100,17 +192,20 @@
                             <div class="form-campo">
                                 <label for="obrigatoria" class="form-subtitulo">Obrigatoria:</label>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="obrigatoria" value="1" id="sim">
+                                    <input type="radio" name="obrigatoria" value="1" id="sim" <?php echo $obrSIM ?>>
                                     <label for="sim">Sim</label>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" name="obrigatoria" value="0" id="não">
+                                    <input type="radio" name="obrigatoria" value="0" id="não" <?php echo $obrNAO ?>>
                                     <label for="não">Não</label>
                                 </div>
                             </div>
 
+                            <!-- Campo Status Detran -->
+                            <?php echo $campo_statusDetran ?>
+
                             <div class="form-div-btn">
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn">Cadastrar</button>
+                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn" value="<?php echo $botao ?>" ><?php echo $botao ?></button>
                             </div>
 
                             <?php
@@ -131,7 +226,6 @@
 
     <script>
         $(document).ready(function() {
-
             // ===========================================================
             // Para carregar instrutores de curso:
             function verificarCurso() {
@@ -152,13 +246,13 @@
             // ===========================================================
             // Para carregar processos de aluno:
             function verificarAluno() {
-                var cpf_aluno = $('#aluno').val();
+                var id_aluno = $('#aluno').val();
 
                 $('#processo').empty();
                 $('#div-erro-processo').empty();
 
-                if (cpf_aluno !== "") {
-                    pesquisarProcessosPorAluno(cpf_aluno);
+                if (id_aluno !== "") {
+                    pesquisarProcessosPorAluno(id_aluno);
                 }
             }
 
@@ -172,8 +266,35 @@
             // - Acionar a função ao selecionar outra opção de processo
             $('#processo').on('change', verificarCurso);
 
-            // - Acionar a função ao apertar botão
-            $('#consultar-horarios').on('click', function() {
+            // ===========================================================
+            // - Verificador horário/data (importante para alterar)
+            
+            // Passando o valor PHP para o JavaScript
+            let dataPhp = "<?php echo $data; ?>";  // O valor de $data
+            let horaPhp = "<?php echo $hora; ?>";  // O valor de $hora
+            let hora_data = "";  // Variável que será ajustada
+
+            // Função para verificar o valor da data e atribuir valor à hora_data
+            document.getElementById('data').addEventListener('change', function() {
+                let dataSelecionada = this.value;  // Valor da data do input
+
+                if (dataSelecionada !== dataPhp && dataPhp !== "") {
+                    hora_data = "";  // Se a data for diferente de $data, hora_data será ""
+                } else {
+                    hora_data = horaPhp;  // Caso contrário, hora_data receberá o valor de $hora
+                }
+
+            });
+            
+            // Carregar horários na página Alterar
+            if ('<?php echo $botao ?>' === "Alterar") {
+                
+                hora_data = horaPhp;
+                pesquisarHorario(dataPhp, '<?php echo $id_instrutor ?>', hora_data);
+
+            }
+
+            $('#data').on('change', function() {
                 // Obter os valores de #data e de #instrutor
                 var data = $('#data').val();
                 var instrutor = $('#instrutor').val();
@@ -182,11 +303,13 @@
                 $('#div-erro-hora').empty();
 
                 // Chamar a função com os valores obtidos
-                pesquisarHorario(data, instrutor);
+                pesquisarHorario(data, instrutor, hora_data);
             });
         });
 
-
+        function definindoHora_data(){
+            
+        }
 
         function pesquisarProcessosPorAluno(pesq_aluno){
             $.ajax({
@@ -200,13 +323,18 @@
 
                     if ( data.erro == "" )  {
                         data.processos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.id_processo + "'>" + obj.desc_curso + "</OPTION>";
+                            if (obj.id_processo == '<?php echo $id_processo ?>') {
+                                mostrar += "<OPTION value='" + obj.id_processo + "' selected>" + obj.desc_curso + "</OPTION>";
+                            } else {
+                                mostrar += "<OPTION value='" + obj.id_processo + "'>" + obj.desc_curso + "</OPTION>";
+                            }
+                            
                         });
                         
                         $('#processo').html(mostrar).show();
 
                         // Forçar a seleção do primeiro processo carregado
-                        $('#processo').val($('#processo option:first').val());
+                        // $('#processo').val($('#processo option:first').val());
 
                         // Disparar o evento 'change' manualmente após a alteração
                         $('#processo').trigger('change');
@@ -238,7 +366,12 @@
 
                     if ( data.erro == "" )  {
                         data.vinculos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.id_instrutor + "'>" + obj.nome_instrutor + "</OPTION>";
+                            if (obj.id_processo == '<?php echo $id_instrutor ?>') {
+                                mostrar += "<OPTION value='" + obj.id_instrutor + "' selected>" + obj.nome_instrutor + "</OPTION>";
+                            } else {
+                                mostrar += "<OPTION value='" + obj.id_instrutor + "'>" + obj.nome_instrutor + "</OPTION>";
+                            }
+                            
                         });
                         
                         $('#instrutor').html(mostrar).show();
@@ -269,7 +402,12 @@
                         data.veiculos.forEach(function(obj,i) {
                             var iconeAdaptado = obj.adaptado == 1 ? " - ♿" : "";
 
-                            mostrar += "<OPTION value='" + obj.placa + "'>" + obj.marca + " " + obj.modelo + " - " + obj.placa + iconeAdaptado + "</OPTION>";
+                            if (obj.id_processo == '<?php echo $id_instrutor ?>') {
+                                mostrar += "<OPTION value='" + obj.placa + "' selected>" + obj.marca + " " + obj.modelo + " - " + obj.placa + iconeAdaptado + "</OPTION>";
+                            } else {
+                                mostrar += "<OPTION value='" + obj.placa + "'>" + obj.marca + " " + obj.modelo + " - " + obj.placa + iconeAdaptado + "</OPTION>";
+                            }
+
                         });
                         
                         $('#veiculo').html(mostrar).show();
@@ -290,7 +428,8 @@
             });
         }
 
-        function pesquisarHorario(data, instrutor){
+        function pesquisarHorario(data, instrutor, hora_data){
+
             $.ajax({
                 url: '../control/pesquisarHorario_JSON.php',
                 type: 'POST',
@@ -307,10 +446,16 @@
                         //     mostrar += "<OPTION value='" + obj + "'>" + obj + "</OPTION>";
                         // });
 
+                        if (hora_data != ""){
+                            mostrar += "<OPTION value='" + '<?php echo $hora?>' + " selected'>" + '<?php echo $hora?>' + "</OPTION>"
+                        }
+
                         for (var key in data.horarios) {
                             if (data.horarios.hasOwnProperty(key)) {
                                 var horario = data.horarios[key];
+                                
                                 mostrar += "<OPTION value='" + horario + "'>" + horario + "</OPTION>";
+
                             }
                         }
                         
