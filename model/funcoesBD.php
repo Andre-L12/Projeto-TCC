@@ -20,7 +20,7 @@ function comboBoxCurso()
 
     return $options;
 }
-function comboBoxAluno() {
+function comboBoxAluno($id_selecionado = null) {
     $sql = "SELECT * FROM aluno";
     $conexao = conectarBD();
     $resultado = mysqli_query($conexao, $sql);
@@ -31,13 +31,16 @@ function comboBoxAluno() {
         $id = $registro["id_aluno"];
         $nome = $registro["nome"];
 
-        $options = $options . "<OPTION value='$id'>$nome</OPTION>";
+        if ($id == $id_selecionado){
+            $options = $options . "<OPTION value='$id' selected>$nome</OPTION>";
+        } else {
+            $options = $options . "<OPTION value='$id'>$nome</OPTION>";
+        }
     }
     return $options;
 }
 
-function comboBoxAlunoCPF()
-{
+function comboBoxAlunoCPF(){
     $sql = "SELECT * FROM aluno";
     $conexao = conectarBD();
     $resultado = mysqli_query($conexao, $sql);

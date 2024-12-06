@@ -54,7 +54,7 @@
         require_once '../model/processoDAO.php';
         require_once '../model/cursoDAO.php';
 
-        $resultado = pesquisarProcessoPorCPFAluno($pesq);
+        $resultado = pesquisarProcessoPorIDAluno($pesq);
 
         if ( mysqli_num_rows($resultado) > 0) {
             // Cria um array para armazenar todos os resultados

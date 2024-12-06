@@ -32,6 +32,39 @@ function cadastrarAulaPratica($id_processo, $id_instrutor, $id_veiculo, $data, $
 
     return $mensagem;
 }
+
+function alterarAulaPratica($id, $id_processo, $id_instrutor, $id_veiculo, $data, $hora, $obrigatoria, $status_detran){
+    $conexao = conectarBD();
+
+    if ($obrigatoria == 0) {
+        $status_detran = 0;
+    } else {
+        $status_detran = 1;
+    }
+
+    $sql = "UPDATE aulapratica SET "
+        . "data_aula = '$data', "
+        . "hora_aula = '$hora', "
+        . "status_detran = '$status_detran', "
+        . "obrigatoria = '$obrigatoria', "
+        . "id_veiculo = '$id_veiculo', "
+        . "id_instrutor = '$id_instrutor', "
+        . "id_processo = '$id_processo' "
+        . "WHERE id_aulaPratica = $id";
+
+        mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+
+        return $id;
+
+}
+
+function excluirAulaPratica($id){
+    $sql = "DELETE FROM aulapratica WHERE id_aulaPratica = $id";
+
+    $conexao = conectarBD();  
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+}
+
 function pesquisarAula($pesq, $tipo)
 {
 
@@ -40,7 +73,23 @@ function pesquisarAula($pesq, $tipo)
     $sql = "SELECT * FROM aulapratica WHERE ";
     switch ($tipo) {
         case 0:
-            $sql = "SELECT * FROM AulaPratica";
+            $sql = "SELECT ap.*,
+                            a.nome,
+                            p.id_processo,
+                            v.placa,
+                            v.marca,
+                            v.modelo,
+                            i.nome AS nome_instrutor
+                    FROM 
+                            `BANCO_CFC`.`AulaPratica` ap
+                        INNER JOIN 
+                            `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                        INNER JOIN 
+                            `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                        INNER JOIN 
+                            `BANCO_CFC`.`Veiculo` v ON ap.id_veiculo = v.placa
+                        INNER JOIN 
+                            `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor";
             break;
         case 1: // Por CPF aluno
             $sql = "SELECT ap.*
@@ -98,7 +147,7 @@ function pesquisarAula($pesq, $tipo)
                     WHERE data_aula = '$pesq'";
             break;
         case 7: // Por ID
-                $sql = $sql . "id = '$pesq' ";
+                $sql = $sql . "id_aulaPratica = '$pesq' ";
                 break;
         case 8: // Por ID Aluno
                 $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
@@ -259,3 +308,4 @@ WHERE
 
     return $res;
 }
+

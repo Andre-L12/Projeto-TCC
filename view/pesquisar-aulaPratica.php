@@ -41,7 +41,7 @@
         <header>
             <div>
                 <span class="header-icon">
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-cone-striped"></i>
                 </span>
                 <span class="header-title">AULAS PRÁTICAS</span>
             </div>
@@ -130,29 +130,32 @@
                     mostrar+="<tbody>   ";                  
                     data.aulas.forEach(function(obj,i) {                  
                         
-                        if(obj.obrigatoria==0){
-                            var x="não";
-                        }
-                        else{
-                            var x ="sim";
-                        }
-                        if(obj.status_detran==0){
-                            var y="Não registrada";
-                        }
-                        else{
-                            var y ="Registrada";
-                        }
+                        var obrigatoriaTXT;
+                        var statusDetranTXT;
 
+                        if(obj.obrigatoria == 0){
+                            obrigatoriaTXT = "Não";
+                            statusDetranTXT = "-"
+                        } else{
+                            obrigatoriaTXT = "Sim";
+                            if(obj.status_detran == 0){
+                                statusDetranTXT = "<FONT color=red>Não atualizada no sistema</FONT>";
+                            } else {
+                                statusDetranTXT = "Atualizada no sistema";
+                            }
 
-                        mostrar += "<tr><td data-label='ID'>" + obj.id + "</td>";
+                        }
+                        
+
+                        mostrar += "<tr><td data-label='ID'><a href='consultar-aulaPratica.php?id=" + obj.id + "'>" + obj.id + "</a></td>"; 
                         mostrar += "<td data-label='Aluno'>" + obj.nome_aluno + "</td>";
                         mostrar += "<td data-label='Instrutor'>" + obj.nome_instrutor + "</td>";
                         mostrar += "<td data-label='ID Processo'>" + obj.id_processo + "</td>";
-                        mostrar += "<td data-label='Veículo'>" + obj.placa + obj.marca + obj.modelo + "</td>";
-                        mostrar += "<td data-label='Data'>" + obj.data+ "</td>";
-                        mostrar += "<td data-label='Hora'>" + obj.hora+ "</td>";
-                        mostrar += "<td data-label='Status Detran'>" + y + "</td>"; 
-                        mostrar += "<td data-label='Obrigatoria'>" + x + "</td></tr>";
+                        mostrar += "<td data-label='Placa veículo'>" + obj.placa + "</td>";
+                        mostrar += "<td data-label='Data'>" + obj.data + "</td>";
+                        mostrar += "<td data-label='Hora'>" +  obj.hora + "</td>";
+                        mostrar += "<td data-label='Status Detran'>" + statusDetranTXT + "</td>"; 
+                        mostrar += "<td data-label='Obrigatoria'>" + obrigatoriaTXT + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                     });
                     mostrar += "</tbody></table>";

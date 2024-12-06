@@ -69,7 +69,7 @@
         </div>
         <div class="menu sidebar-footer">
             <li class="menu-item menu-sessao">
-                <a href="#">
+                <a href="paginaMeusDados.php">
                     <span class="menu-icon">
                         <i class="bi bi-person-circle"></i>
                     </span>

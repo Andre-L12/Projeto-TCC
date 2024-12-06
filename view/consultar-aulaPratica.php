@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Aluno</title>
+    <title>Consultar Aula Prática</title>
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
@@ -29,36 +29,58 @@
         
         <!--Buscando os dados com php-->
         <?php
-            require_once "../model/AlunoDAO.php";
             require_once "../model/aulaPraticaDAO.php";
             require_once "../model/processoDAO.php";
-            if(isset($_GET["id"])){
-            $id = $_GET["id"];
-            $resultado = pesquisarAlunoPorID($id);
-            $row = mysqli_fetch_assoc($resultado);
-            $nome = $row['nome'];
-            $cpf = $row["cpf"];
-            $id = $row["id_aluno"];
-            $email = $row["email"];
-            $celular = $row["celular"];
-            $foto = $row["foto"];
-            $imageBase64 = base64_encode($foto);
-            $resultado2 = pesquisarAulaPorCPFAluno($cpf);
-             $aulas = mysqli_num_rows($resultado2);
-             $row2=mysqli_fetch_assoc($resultado2);
-             $idInstrutor = $row2['id_instrutor'];
-            require_once "../model/instrutorDAO.php";
-            $resultado4= pesquisarInstrutorPorID($idInstrutor);
-            $row3 = mysqli_fetch_assoc($resultado4);
-            $instrutor = $row3['nome'];
-            $aulasObrigatorias="20 cada processo";
-             
+            require_once "../model/instrutorDAO.php";   
+            require_once "../model/cursoDAO.php";
+            require_once "../model/AlunoDAO.php";
+            require_once "../control/funçoesUteis.php";
 
-            //buscando processos
-            $resultado3 = pesquisarProcessoPorIDAluno($id);
-            $qtd_processos = mysqli_num_rows($resultado3);
-            $processos = comboBoxProcessoAluno($cpf);
-            
+            if(isset($_GET["id"])){
+                $id = $_GET["id"];
+
+                // Pegando dados da aula
+                $resultado = pesquisarAulaPorId($id);
+                $row = mysqli_fetch_assoc($resultado);
+
+                $data = $row['data_aula'];
+                
+                $dataConvertida = converterDataParaPadraoBR($data);
+
+                $hora = $row['hora_aula'];
+                $status_detran = $row['status_detran'];
+                $obrigatoria = $row['obrigatoria'];
+                $status_aula = $row['status_aula'];
+                $id_veiculo = $row['id_veiculo'];
+                $id_instrutor = $row['id_instrutor'];
+                $id_processo = $row['id_processo'];
+
+                // Pegando dados do processo
+                $resultado_processo = pesquisarProcessoPorID($id_processo);
+                $row_processo = mysqli_fetch_assoc($resultado_processo);
+                
+                $id_aluno = $row_processo['id_aluno'];
+                $id_curso = $row_processo['id_curso'];
+
+                // Pegando dados do aluno
+                $resultado_aluno = pesquisarAlunoPorID($id_aluno);
+                $row_aluno = mysqli_fetch_assoc($resultado_aluno);
+
+                $nome_aluno = $row_aluno['nome'];
+
+                // Pegando dados do instrutor
+                $resultado_instrutor = pesquisarInstrutorPorID($id_instrutor);
+                $row_intrutor = mysqli_fetch_assoc($resultado_instrutor);
+
+                $nome_instrutor = $row_intrutor['nome'];
+
+                // Pegando dados do curso
+                $resultado_curso = pesquisarCursoPorSigla($id_curso);
+                $row_curso = mysqli_fetch_assoc($resultado_curso);
+
+                $descricao_curso = $row_curso['descricao'];
+
+
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
             // $resultado2 = pesquisarAulaPorCPFAluno($cpf);
@@ -77,9 +99,9 @@
         <header>
             <div>
                 <span class="header-icon">
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-cone-striped"></i>
                 </span>
-                <span class="header-title">ALUNOS > <?php echo $nome; ?></span>
+                <span class="header-title">AULAS PRÁTICAS</span>
             </div>
         </header>
             <main class="content">
@@ -89,30 +111,18 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Aluno -->
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #f4f4f4; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #f4f4f4;   border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class="col-sm-5" style="font-family: Arial, sans-serif; color: #333; width: 500px"><!--display:flex; flex-direction:column; justify-content:space-between;-->
                         <!--<div >-->
-                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados Pessoais</h3>
-                            <p><strong>Foto:</strong><br><img src='data:image/jpeg;base64,<?php echo $imageBase64; ?>' height='100' width='100' style="border-radius: 50%; object-fit: cover;"></p>
-                            <p><strong>Nome:</strong> <?php echo $nome; ?></p>
-                            <p><strong>CPF:</strong> <?php echo $cpf; ?></p>
-                            <p><strong>Email:</strong> <?php echo $email; ?></p>
-                            <p><strong>Celular:</strong> <?php echo $celular; ?></p>
-                        <!--</div>-->
-                        <!--<div >-->
-                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Processos</h3>
-                            <p><strong>Quantidade de Processos:</strong> <?php echo $qtd_processos; ?></p>
-                            <p><?php echo $processos; ?></p>
-                        <!--</div>-->
-                        <!--<div >-->
-                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                            <p><strong>Quantidade de Aulas:</strong>
-                                <?php echo $aulas; ?>
-                            </p>
-                            <p><strong>Instrutor:</strong><?php echo $instrutor; ?></p>
-                            <p><strong>Aulas Obrigatórias:</strong> <?php echo $aulasObrigatorias=20;?></p>
-                            <br>
-                       <!-- </div>-->
+                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados de Aula Prática</h3>
+                            <p><strong>Aluno:</strong><a href='consultar-aluno.php?id=<?php echo $id_aluno?>'> <?php echo $nome_aluno; ?></a></p>
+                            <p><strong>Instrutor:</strong> <?php echo $nome_instrutor; ?></p>
+                            <p><strong>Curso:</strong> <?php echo $descricao_curso; ?></p>
+                            <p><strong>Data:</strong> <?php echo $dataConvertida; ?></p>
+                            <p><strong>Hora:</strong> <?php echo substr($hora, 0, 5); ?></p>
+                            <p><strong>Obrigatória:</strong> <?php echo $obrigatoria == 1 ? "Sim" : "Não"; ?></p>
+                            <p><strong>Status Detran:</strong> <?php echo $obrigatoria == 1 ? ($status_detran == 1 ? "Atualizada no sistema" : "<FONT color=red>Não atualizada no sistema</FONT>") : "-"; ?></p>
+                            <p><strong>Status da aula:</strong> <?php echo $status_aula; ?></p>
 
                     </div>
 
@@ -133,7 +143,7 @@
         document.getElementById('btnAlterar').addEventListener('click', function() {
             var id = "<?php echo $id; ?>";
             
-            window.location.href = 'cadastrar-aluno.php?id=' + id;
+            window.location.href = 'cadastrar-aula.php?id=' + id;
         });
 
         document.getElementById('btnExcluir').addEventListener('click', function() {
@@ -143,7 +153,7 @@
             var confirmacao = confirm("Você tem certeza de que deseja excluir este aluno?");
             
             if (confirmacao) {
-                window.location.href = '../control/excluirAluno.php?id=' + id;
+                window.location.href = '../control/excluirAula.php?id=' + id; 
             }
             
         });

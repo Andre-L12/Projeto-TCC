@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Dados</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> -->
     
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
@@ -17,9 +17,9 @@
     <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'> -->
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
     <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
 </head>
@@ -51,15 +51,18 @@
             
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
-             $resultado2 = pesquisarAulaPorCPFAluno($cpf);
-             $aulas = mysqli_num_rows($resultado2);
-             $row2=mysqli_fetch_assoc($resultado2);
-             $idInstrutor = $row2['id_instrutor'];
-            require_once "../model/instrutorDAO.php";
-            $resultado4= pesquisarInstrutorPorID($idInstrutor);
-            $row3 = mysqli_fetch_assoc($resultado4);
-            $instrutor = $row3['nome'];
+            $resultado2 = pesquisarAulaPorCPFAluno($cpf);
+            $aulas = mysqli_num_rows($resultado2);
+            $row2 = mysqli_fetch_assoc($resultado2);
+            $instrutor = "Nenhuma aula marcada.";
+            if ($aulas > 0){
+                $idInstrutor = $row2['id_instrutor'];
+                require_once "../model/instrutorDAO.php";
+                $resultado4 = pesquisarInstrutorPorID($idInstrutor);
+                $row3 = mysqli_fetch_assoc($resultado4);
+                $instrutor = $row3['nome'];
              
+            }
 
             //busca veículo
             //busca cursos
@@ -100,25 +103,24 @@
                         <i class="ri-menu-line ri-xl"></i>
                     </a>
                 </div>
-                <!-- Form Cadastrar Aluno -->
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #ffffff;   border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);max-width: 500px; margin-bottom: 20px;">
-                    <div class="col-sm-10" style="font-family: Arial, sans-serif; color: #333;"><!--display:flex; flex-direction:column; justify-content:space-between;-->
+                <!-- Card Informações Aluno -->
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);max-width: 500px; ">
+                    <div class="col-sm-10" style="font-family: Arial, sans-serif; color: #333; width: 90%"><!--display:flex; flex-direction:column; justify-content:space-between;-->
                         <!--<div >-->
-                            <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados Pessoais</h3>
+                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados Pessoais</h2>
                             <p><strong>Foto:</strong><br><img src='data:image/jpeg;base64,<?php echo $imageBase64; ?>' height='100' width='100' style="border-radius: 50%; object-fit: cover;"></p>
                             <p><strong>Nome:</strong> <?php echo $nome; ?></p>
                             <p><strong>CPF:</strong> <?php echo $cpf; ?></p>
                             <p><strong>Email:</strong> <?php echo $email; ?></p>
-                            <p><strong>Celular:</strong> <?php echo $celular; ?></p>
-                            <br>
+                            <p><strong>Celular:</strong> <?php echo $celular; ?></p> 
                         <!--</div>-->
                         <!--<div >-->
-                            <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Processos</h3>
+                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Processos</h2>
                             <p><strong>Quantidade de Processos:</strong> <?php echo $qtd_processos; ?></p>
                             <p><?php echo $processos; ?></p>
                         <!--</div>-->
                         <!--<div >-->
-                            <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
+                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h2>
                             <p><strong>Quantidade de Aulas:</strong>
                                 <?php echo $aulas; ?>
                             </p>
