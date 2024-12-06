@@ -60,8 +60,8 @@
                         <label for="tipo">Selecione o tipo:</label>
                             <select name="tipo" class="form-input">
                                 <OPTION value='0'></OPTION>
-                                <OPTION value='8'>Nome aluno</OPTION>
-                                <OPTION value='9'>Nome Instrutor</OPTION>
+                                <OPTION value='10'>Nome aluno</OPTION>
+                                <OPTION value='11'>Nome Instrutor</OPTION>
                                 <OPTION value='6'>Data da aula</OPTION>
                                 <OPTION value='3'>Número do processo</OPTION>
                             </select>
@@ -101,7 +101,10 @@
             $.ajax({
             url: '../control/PesquisarAulaPratica_JSON.php',
             type: 'POST',
-            data: { pesq: pesq,tipo: tipo},         // Envio do texto de pesquisa
+            data: { // Envio do texto de pesquisa
+                pesq: pesq,
+                tipo: tipo
+            },         
             dataType: 'json',
             success: function(data) {
                 // data == dados de retorno no formato JSON
@@ -123,7 +126,7 @@
                     //    onde i é o índice e obj são os dados do produto
                     
                     mostrar +="<table class='table table-bordered responsive-table tabelazul'>   "
-                    mostrar +="<thead>     <tr>    <th>Aluno</th><th>Instrutor</th><th>ID Processo</th><th>Placa Veículo</th><th>Data</th><th>Hora</th><th>Id</th><th>Status Detran</th><th>Obrigatoria</th></tr><thead>";
+                    mostrar +="<thead>     <tr>    <th>ID</th><th>Aluno</th><th>Instrutor</th><th>ID Processo</th><th>Placa Veículo</th><th>Data</th><th>Hora</th><th>Status Detran</th><th>Obrigatoria</th></tr><thead>";
                     mostrar+="<tbody>   ";                  
                     data.aulas.forEach(function(obj,i) {                  
                         
@@ -141,13 +144,13 @@
                         }
 
 
-                        mostrar += "<tr>    <td data-label='Aluno'>"+obj.cpf_aluno+"</td>";
-                        mostrar += "<td data-label='Instrutor'>" + obj.cpf_instrutor + "</td>";
+                        mostrar += "<tr><td data-label='ID'>" + obj.id + "</td>";
+                        mostrar += "<td data-label='Aluno'>" + obj.nome_aluno + "</td>";
+                        mostrar += "<td data-label='Instrutor'>" + obj.nome_instrutor + "</td>";
                         mostrar += "<td data-label='ID Processo'>" + obj.id_processo + "</td>";
-                        mostrar += "<td data-label='Placa Veículo'>" + obj.placa + "</td>";
+                        mostrar += "<td data-label='Veículo'>" + obj.placa + obj.marca + obj.modelo + "</td>";
                         mostrar += "<td data-label='Data'>" + obj.data+ "</td>";
                         mostrar += "<td data-label='Hora'>" + obj.hora+ "</td>";
-                        mostrar += "<td data-label='Id'>" + obj.id + "</td>";
                         mostrar += "<td data-label='Status Detran'>" + y + "</td>"; 
                         mostrar += "<td data-label='Obrigatoria'>" + x + "</td></tr>";
                         // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";

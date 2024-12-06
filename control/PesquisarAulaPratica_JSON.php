@@ -66,7 +66,7 @@
        
     } 
     
-    else if (isset($_POST["tipo"])) {
+    else if (isset($_POST["tipo"]) && isset($_POST["pesq"])) {
     // Esse programa é chamado pelo JSON no front-end
         $pesq = $_POST["pesq"];
         $tipo = $_POST["tipo"];
@@ -84,27 +84,36 @@
 
             // Percorre todos os resultados e os adiciona ao array
             while ($row = mysqli_fetch_assoc($resultado)) {
-                $id = $row["id"];
-                $cpf_aluno = $row["cpf_aluno"];
-                $cpf_instrutor = $row["cpf_instrutor"];
-                $placa = $row["placa"];
-                $id_processo = $row["id_processo"];
+                $id = $row["id_aulaPratica"];
+                $data = $row["data_aula"];
+                $hora = $row["hora_aula"];
                 $status_detran = $row["status_detran"];
                 $obrigatoria = $row["obrigatoria"];
-                $data = $row["data_aula"];
-                $hora = $row["hora"];
-                
+                $status_aula = $row["status_aula"];
+                $placa = $row["placa"];
+                $id_processo = $row["id_processo"];
+
+                $marca = $row["marca"];
+                $modelo = $row["modelo"];
+
+                $nome_aluno = $row["nome"];
+                $nome_instrutor = $row["nome_instrutor"];
                 
                 $registros["aulas"][] = array(
                         "id" => $id,
-                        "cpf_aluno" => $cpf_aluno,
-                        "cpf_instrutor" => $cpf_instrutor,
+                        "data" => $data,
+                        "hora" => $hora,
+                        "status_detran" => $status_detran,
+                        "obrigatoria" => $obrigatoria,
+                        "status_aula" => $status_aula,
                         "placa" => $placa,
                         "id_processo" => $id_processo,
-                        "status" => $status_detran,
-                        "obrigatoria" => $obrigatoria,
-                        "hora" => $hora,
-                        "data" => $data
+
+                        "marca" => $marca,
+                        "modelo" => $modelo,
+
+                        "nome_aluno" => $nome_aluno,
+                        "nome_instrutor" => $nome_instrutor
 
                         );
 
