@@ -24,6 +24,70 @@
 
         return $mensagem; 
     }
+    function selecionarCursoPorIdInstrutor($id) {
+        $conexao = conectarBD();
+    
+        // Previne SQL Injection
+        $id = mysqli_real_escape_string($conexao, $id);
+    
+        $sql = "
+            SELECT 
+                c.descricao AS descricao_curso
+            FROM 
+                Curso_Instrutor ci
+            JOIN 
+                Curso c ON ci.id_curso = c.sigla
+            WHERE 
+                ci.id_instrutor = '$id';
+        ";
+    
+        $select = mysqli_query($conexao, $sql);
+    
+        if (!$select) {
+            die("Erro ao executar consulta: " . mysqli_error($conexao));
+        }
+    
+        $cursos = [];
+        while ($registro = mysqli_fetch_assoc($select)) {
+            $cursos[] = $registro["descricao_curso"];
+        }
+    
+        return implode(", ", $cursos); // Retorna uma string separada por vírgulas
+    }
+    
+    function selecionarVeiculoPorIdInstrutor($id) {
+        $conexao = conectarBD();
+    
+        // Previne SQL Injection
+        $id = mysqli_real_escape_string($conexao, $id);
+    
+        $sql = "
+            SELECT 
+                v.marca AS marca_veiculo,
+                v.modelo AS modelo_veiculo,
+                v.placa AS placa_veiculo
+            FROM 
+                Curso_Instrutor ci
+            JOIN 
+                Veiculo v ON ci.id_veiculo = v.placa
+            WHERE 
+                ci.id_instrutor = '$id';
+        ";
+    
+        $select = mysqli_query($conexao, $sql);
+    
+        if (!$select) {
+            die("Erro ao executar consulta: " . mysqli_error($conexao));
+        }
+    
+        $veiculos = [];
+        while ($registro = mysqli_fetch_assoc($select)) {
+            $veiculos[] = "Modelo: {$registro["marca_veiculo"]} {$registro["modelo_veiculo"]} - Placa: {$registro["placa_veiculo"]}";
+        }
+    
+        return implode("<br>", $veiculos); // Retorna uma string formatada com quebras de linha
+    }
+        
 
     function instrutorExiste($cpf){
         $conexao = conectarBD();

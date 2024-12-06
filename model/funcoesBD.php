@@ -55,6 +55,67 @@ function comboBoxAlunoCPF(){
     }
     return $options;
 }
+function comboBoxCardAvisos()
+{
+    $sql = "SELECT * FROM avisos ORDER BY data_aviso DESC";
+    $conexao = conectarBD();
+    $resultado = mysqli_query($conexao, $sql);
+
+    $cards = "";
+    while ($registro = mysqli_fetch_assoc($resultado)) {
+        // Pegar os campos do REGISTRO
+        $titulo = $registro["titulo"];
+        $conteudo = $registro["conteudo"];
+        $data = $registro["data_aviso"];
+        $id = $registro["id_aviso"];
+
+        $cards = $cards . "<div class='card'>
+                        <div class='card-title'> $titulo</div>
+                        <div class='card-body'> $conteudo</div>
+                        <div class='card-footer'>Publicado em:  $data </div>
+                      </div>;";
+    }
+    return $cards;
+}
+function comboBoxAvisos()
+{
+    $sql = "SELECT * FROM avisos ORDER BY data_aviso DESC";
+    $conexao = conectarBD();
+    $resultado = mysqli_query($conexao, $sql);
+
+    $options = "";
+    while ($registro = mysqli_fetch_assoc($resultado)) {
+        // Pegar os campos do REGISTRO
+        $titulo = $registro["titulo"];
+        $id = $registro["id_aviso"];
+
+        $options = $options . "<OPTION value='$id'>$titulo</OPTION>";
+    }
+    return $options;
+}
+function excluirAviso($id){
+    $sql = "DELETE FROM avisos WHERE id_aviso = $id";
+
+    $conexao = conectarBD();  
+    mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
+}
+function criarAviso($titulo,$conteudo,$data){
+    $conexao = conectarBD();
+
+        
+            $sql = "INSERT INTO avisos (titulo, conteudo, data_aviso) VALUES ('$titulo', '$conteudo', '$data')";
+            $select2 = mysqli_query($conexao,$sql);
+            $id = mysqli_insert_id($conexao);  
+            
+            if($select2){
+                $mensagem = "aviso $id inserido com sucesso.";
+            }
+            else{
+                $mensagem = "Não foi possível realizar o cadastro.";
+            }
+
+        return $mensagem; 
+}
 
 function comboBoxVeiculo()
 {

@@ -45,31 +45,39 @@
 
             //buscando processos
             $resultado3 = pesquisarProcessoPorIDAluno($id);
+            $aulasObrigatorias=20;
             $qtd_processos = mysqli_num_rows($resultado3);
             $processos = comboBoxProcessoAluno($cpf);
             
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
-            // $resultado2 = pesquisarAulaPorCPFAluno($cpf);
-            // $aulas = mysqli_num_rows($resultado2);
+             $resultado2 = pesquisarAulaPorCPFAluno($cpf);
+             $aulas = mysqli_num_rows($resultado2);
+             $row2=mysqli_fetch_assoc($resultado2);
+             $idInstrutor = $row2['id_instrutor'];
+            require_once "../model/instrutorDAO.php";
+            $resultado4= pesquisarInstrutorPorID($idInstrutor);
+            $row3 = mysqli_fetch_assoc($resultado4);
+            $instrutor = $row3['nome'];
+             
 
             //busca veículo
             //busca cursos
             }
             else{
-                $id = "#";
-                $nome = "sem dados de aluno";
-                $cpf = "#";
-                $id = "#";
-                $email = "#";
-                $celular = "#";
-                $foto = "#";
+                $id = $_SESSION["matricula"];
+                $nome = $_SESSION["nome"];
+                $cpf = "#sem dados";
+                $email = "#sem dados";
+                $celular = "#sem dados";
+                $foto = $_SESSION["foto"];;
                 $imageBase64 = base64_encode($foto);
-
+                $instrutor = "sem dados";
+                $aulasObrigatorias="#";
+                $aulas="sem dados";
                 //buscando processos
-                $resultado3 = pesquisarProcessoPorIDAluno($id);
                 $qtd_processos = "#";
-                $processos = comboBoxProcessoAluno($cpf);
+               
             }
         ?>
         
@@ -112,10 +120,12 @@
                         <!--<div >-->
                             <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
                             <p><strong>Quantidade de Aulas:</strong>
-                                <?php // echo $aulas; ?>
+                                <?php echo $aulas; ?>
                             </p>
-                            <p><strong>Instrutor:</strong> #<br></p>
-                            <p><strong>Aulas Obrigatórias:</strong> #<br> </p>
+                            <p><strong>Instrutor:</strong>
+                            <?php echo $instrutor; ?></p>
+                            <p><strong>Aulas Obrigatórias:</strong>
+                            <?php echo $aulasObrigatorias; ?> </p>
                             <br>
                        <!-- </div>-->
 
