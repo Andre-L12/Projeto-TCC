@@ -188,11 +188,11 @@
 
 
 
-        function pesquisarProcessosPorAluno(pesq){
+        function pesquisarProcessosPorAluno(pesq_aluno){
             $.ajax({
                 url: '../control/pesquisarProcesso_JSON.php',
                 type: 'POST',
-                data: { pesq : pesq },
+                data: { pesq_aluno : pesq_aluno },
                 dataType: 'json',
                 success: function(data) {
 
@@ -212,6 +212,7 @@
                         $('#processo').trigger('change');
                     } else {
                         mostrar += "Esse aluno não possui nenhum processo.";
+                        console.log(data.erro);
                         $('#div-erro-processo').html(mostrar).show();
                     }
                 },
