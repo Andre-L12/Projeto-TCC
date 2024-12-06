@@ -3,15 +3,35 @@
 <?php
 require_once "../control/validarUsuario.php";
 require_once  "../model/aulaPraticaDAO.php";
-$resultado = pesquisarAulaPorIDAluno($_SESSION["id_aluno"]);
-$row = mysqli_fetch_assoc($resultado);
-$qtd = mysqli_num_rows($resultado);
-$idInstrutor = $row['id_instrutor'];
-require_once "../model/instrutorDAO.php";
-$resultado2 = pesquisarInstrutorPorID($idInstrutor);
-$row2 = mysqli_fetch_assoc($resultado2);
-$instrutor = $row2['nome'];
-
+if (isset($_SESSION["id_aluno"])) {
+  $resultado = pesquisarAulaPorIDAluno($_SESSION["id_aluno"]);
+  $row = mysqli_fetch_assoc($resultado);
+  $qtd = mysqli_num_rows($resultado);
+  $idInstrutor = $row['id_instrutor'];
+  require_once "../model/instrutorDAO.php";
+  $resultado2 = pesquisarInstrutorPorID($idInstrutor);
+  $row2 = mysqli_fetch_assoc($resultado2);
+  $instrutor = $row2['nome'];
+  if($qtd<=20){
+  $restantes=(20-$qtd);
+  }
+  else{
+    $restantes= 0;
+  }
+  if ($qtd > 0) {
+    $etapa = "Prática";
+    $imagem = "../img/aula pratica.jpg";
+  } else {
+    $etapa = "Teórica";
+    $imagem = "../img/aula teorica.jpg";
+  }
+}else{
+  $qtd ="sem dados";
+  $instrutor = "#sem dados";
+  $etapa = "Teórica";
+    $imagem = "../img/aula teorica.jpg";
+    $restantes="#sem dados";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -284,32 +304,32 @@ $instrutor = $row2['nome'];
               </div>
             </div>
             <!-- Card Processo -->
-            <div class="card" style="border-radius: 15px; width: 350px; padding: 1em; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+            <div class="card" style="border-radius: 15px; width: 350px; padding: 1em; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
               <div style="text-align: left;">
                 <h3 style="border-bottom: 2px solid #216EC0; color: #216EC0; padding-bottom: 10px; font-family: 'Poppins', sans-serif;">Processo</h3>
-                <p style="margin: 0.5em 0; color: #333; font-size: 1.5em; line-height: 1.6;">
-                  <strong>Quantidade de Aulas:</strong> <?php echo $qtd; ?>
+                <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
+                  <strong>Quantidade de Aulas:</strong><br><?php echo $qtd; ?>
                 </p>
-                <p style="margin: 0.5em 0; color: #333; font-size: 1.5em; line-height: 1.6;">
-                  <strong>Instrutor:</strong> <?php echo $instrutor; ?>
+                <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
+                  <strong>Instrutor:</strong><br> <?php echo $instrutor; ?>
                 </p>
-                <p style="margin: 0.5em 0; color: #333; font-size: 1.5em; line-height: 1.6;">
-                  <strong>Aulas Obrigatórias:</strong> 20
+                <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
+                  <strong>Aulas Obrigatórias:</strong><br> 20
                 </p>
-                <p style="margin: 0.5em 0; color: #333; font-size: 1.5em; line-height: 1.6;">
-                  <strong>Aulas Restantes:</strong> <?php echo (20 - $qtd); ?>
+                <p style="margin: 0.5em 0; color: #333; font-size: 1.25em; line-height: 1.6;">
+                  <strong>Aulas Restantes:</strong><br><?php echo $restantes; ?>
                 </p>
               </div>
             </div>
 
             <!-- Card Etapa -->
-            <div class="card" style="border-radius: 15px; width: 350px; padding: 1em; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+            <div class="card" style="border-radius: 15px; width: 350px; padding: 1em; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
               <div style="text-align: left;">
                 <h3 style="border-bottom: 2px solid #216EC0; color: #216EC0; padding-bottom: 10px; font-family: 'Poppins', sans-serif;">
-                  Etapa <?php echo $_SESSION["id_aluno"]; ?>
+                  Etapa: <?php echo $etapa; ?>
                 </h3>
                 <p>
-                  <img src="../img/aula pratica.jpg" alt="Imagem relacionada à etapa" style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                  <img src="<?php echo $imagem ?>" alt="Imagem relacionada à etapa" style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 </p>
               </div>
             </div>
