@@ -37,14 +37,26 @@
                 $row = mysqli_fetch_assoc($resultado);
                 $nome = $row['nome'];
                 $cpf = $row["cpf"];
-                $matricula = $row["id_instrutor"];
                 $sexo = $row["sexo"];
                 if ($sexo=="M"){
                     $x="Masculino";
                 } else {
                     $x="Feminino";
                 }
-
+                $resultado2=pesquisarAulaPorIDInstrutor($id);
+                $aulas=mysqli_num_rows($resultado2);
+                $resultado3=selecionarCursoPorIdInstrutor($id);
+                if($resultado3!=""){
+                    $cursos=$resultado3;
+                }else{
+                    $cursos="Nenhum curso vinculado";
+                }
+                $resultado4=selecionarVeiculoPorIdInstrutor($id);
+                if($resultado4!=""){
+                    $veiculos=$resultado4;
+                }else{
+                    $veiculos="Nenhum veiculo vinculado";
+                }
                 //busca aula
                 // $resultado2=pesquisarAulaPorInstrutor($cpf);
                 // $aulas=mysqli_num_rows($resultado2);
@@ -83,11 +95,11 @@
                         <p><strong>Nome:</strong> <?php echo $nome; ?></p>
                         <p><strong>CPF:</strong> <?php echo $cpf; ?></p>
                         <p><strong>Sexo:</strong> <?php echo $x; ?></p>
-                        <p><strong>Matrícula:</strong> <?php echo $matricula; ?></p>
+                        <p><strong>ID:</strong> <?php echo $id; ?></p>
                         <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                        <p><strong>Quantidade de Aulas:</strong> <?php //echo $aulas; ?></p>
-                        <p><strong>Cursos:</strong> #tem que colocar ainda #tamofazendo</p>
-                        <p><strong>veiculos:</strong> #tem que colocar ainda #tamofazendo</p>
+                        <p><strong>Quantidade de Aulas:</strong> <?php  echo $aulas; ?></p>
+                        <p><strong>Cursos:</strong> <?php echo $cursos; ?></p>
+                        <p><strong>veiculos:</strong> <?php echo $veiculos; ?></p>
                         
                     </div>
 

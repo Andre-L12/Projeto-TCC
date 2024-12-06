@@ -43,6 +43,16 @@
             $celular = $row["celular"];
             $foto = $row["foto"];
             $imageBase64 = base64_encode($foto);
+            $resultado2 = pesquisarAulaPorCPFAluno($cpf);
+             $aulas = mysqli_num_rows($resultado2);
+             $row2=mysqli_fetch_assoc($resultado2);
+             $idInstrutor = $row2['id_instrutor'];
+            require_once "../model/instrutorDAO.php";
+            $resultado4= pesquisarInstrutorPorID($idInstrutor);
+            $row3 = mysqli_fetch_assoc($resultado4);
+            $instrutor = $row3['nome'];
+            $aulasObrigatorias="20 cada processo";
+             
 
             //buscando processos
             $resultado3 = pesquisarProcessoPorIDAluno($id);
@@ -97,10 +107,10 @@
                         <!--<div >-->
                             <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
                             <p><strong>Quantidade de Aulas:</strong>
-                                <?php // echo $aulas; ?>
+                                <?php echo $aulas; ?>
                             </p>
-                            <p><strong>Instrutor:</strong> #não sei se coloco <br>#tamofazendo</p>
-                            <p><strong>Aulas Obrigatórias:</strong> #não sei se coloco<br> #tamofazendo</p>
+                            <p><strong>Instrutor:</strong><?php echo $instrutor; ?></p>
+                            <p><strong>Aulas Obrigatórias:</strong> <?php echo $aulasObrigatorias=20;?></p>
                             <br>
                        <!-- </div>-->
 
