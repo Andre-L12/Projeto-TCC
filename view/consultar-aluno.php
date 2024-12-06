@@ -89,7 +89,7 @@
                     </a>
                 </div>
                 <!-- Form Cadastrar Aluno -->
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #f4f4f4;   border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px; background-color: #f4f4f4; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class="col-sm-5" style="font-family: Arial, sans-serif; color: #333; width: 500px"><!--display:flex; flex-direction:column; justify-content:space-between;-->
                         <!--<div >-->
                             <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados Pessoais</h3>

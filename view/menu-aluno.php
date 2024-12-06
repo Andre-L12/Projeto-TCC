@@ -7,11 +7,17 @@ if (isset($_SESSION["id_aluno"])) {
   $resultado = pesquisarAulaPorIDAluno($_SESSION["id_aluno"]);
   $row = mysqli_fetch_assoc($resultado);
   $qtd = mysqli_num_rows($resultado);
-  $idInstrutor = $row['id_instrutor'];
-  require_once "../model/instrutorDAO.php";
-  $resultado2 = pesquisarInstrutorPorID($idInstrutor);
-  $row2 = mysqli_fetch_assoc($resultado2);
-  $instrutor = $row2['nome'];
+
+  $instrutor = "Nenhuma aula marcada.";
+  if ($qtd > 0) {
+    require_once "../model/instrutorDAO.php";
+    $idInstrutor = $row['id_instrutor'];
+
+    $resultado2 = pesquisarInstrutorPorID($idInstrutor);
+    $row2 = mysqli_fetch_assoc($resultado2);
+    $instrutor = $row2['nome'];
+  } 
+  
   $aulasObrigatorias = 20;
   if ($qtd <= 20) {
     $restantes = (20 - $qtd);
