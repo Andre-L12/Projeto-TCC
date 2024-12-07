@@ -135,7 +135,13 @@
                 // Atualizar o modal com as informações
                 document.getElementById("event-title").innerText = event.title;
                 document.getElementById("event-id").innerText = props.id_aula;
-                document.getElementById("event-start").innerText = event.start.toISOString();
+
+                // Formatar a data e hora
+                const startDate = new Date(event.start); // Converter para objeto Date
+                const formattedDate = startDate.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                const formattedTime = startDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById("event-start").innerText = `${formattedDate} - ${formattedTime}`;
+
                 document.getElementById("event-instrutor").innerText = props.nome_instrutor;
                 document.getElementById("event-detran-status").innerText = props.status_detran;
                 document.getElementById("event-obrigatoria").innerText = props.obrigatoria ? "Sim" : "Não";
