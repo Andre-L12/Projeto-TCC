@@ -46,11 +46,15 @@
             $resultado2 = pesquisarAulaPorCPFAluno($cpf);
              $aulas = mysqli_num_rows($resultado2);
              $row2=mysqli_fetch_assoc($resultado2);
-             $idInstrutor = $row2['id_instrutor'];
-            require_once "../model/instrutorDAO.php";
-            $resultado4= pesquisarInstrutorPorID($idInstrutor);
-            $row3 = mysqli_fetch_assoc($resultado4);
-            $instrutor = $row3['nome'];
+             $instrutor = "Nenhuma aula marcada.";
+             if ($aulas > 0) {
+               require_once "../model/instrutorDAO.php";
+               $idInstrutor = $row['id_instrutor'];
+           
+               $resultado2 = pesquisarInstrutorPorID($idInstrutor);
+               $row2 = mysqli_fetch_assoc($resultado2);
+               $instrutor = $row2['nome'];
+             } 
             $aulasObrigatorias="20 cada processo";
              
 
