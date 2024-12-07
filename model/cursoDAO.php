@@ -41,7 +41,7 @@
         $sql = "SELECT * FROM curso WHERE ";
         switch ($tipo) {
             case 1: // Por nome
-                    $sql = $sql . "sigla LIKE '$pesq%' ";
+                    $sql = $sql . "sigla = '$pesq' ";
                     break;
             case 2: // Por CPF
                     $sql = $sql . "descricao = '$pesq' ";

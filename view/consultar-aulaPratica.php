@@ -168,7 +168,7 @@
             // CONFIRMAR ANTES DE ALTERAR STATUS DETRAN
             var confirmacao = "";
             if (status_detran == 1){
-                confirmacao = confirm("O Status Detran atual é 'Atualizada no Sistema'. <br> Deseja alterar para 'Não atualizada no sistema'?");
+                confirmacao = confirm("O Status Detran atual é 'Atualizada no Sistema'. Deseja alterar para 'Não atualizada no sistema'?");
                 if (confirmacao) {
                     window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 0; 
                 }
