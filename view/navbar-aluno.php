@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li class='menu-item'>
-                        <a href='#'>
+                        <a href='calendario-aluno.php'>
                             <span class='menu-icon'>
                                 <i class='ri-calendar-fill'></i>
                             </span>
