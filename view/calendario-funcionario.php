@@ -103,9 +103,9 @@
                         <p><strong>Processo:</strong> <span id="event-processo"></span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Consultar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Excluir</button>
+                        <button type="button" class="btn btn-secondary" id="editarBtn">Editar</button>
+                        <button type="button" class="btn btn-secondary" id="consultarBtn">Consultar</button>
+                        <button type="button" class="btn btn-secondary" id="excluirBtn">Excluir</button>
                     </div>
                 </div>
             </div>
@@ -330,6 +330,10 @@
             }
             
         }
+
+        document.getElementById('editarBtn').addEventListener('click', function () {
+            window.location.href = 'cadastrar-aula.php?id=';
+        });
         
     </script>
 
