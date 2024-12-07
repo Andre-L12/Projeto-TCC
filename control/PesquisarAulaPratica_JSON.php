@@ -41,7 +41,7 @@
                 
                 $registros["aulas"][] = array(
                         "id" => $id,
-                        "data" => converterDataParaPadraoBR($data),
+                        "data" => $data,
                         "hora" => $hora,
                         "status_detran" => $status_detran,
                         "obrigatoria" => $obrigatoria,
