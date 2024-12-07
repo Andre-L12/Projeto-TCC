@@ -1,5 +1,6 @@
 <?php
 require_once "../model/funcoesBD.php"; // Certifique-se de que o caminho está correto
+require_once "../model/aulaPraticaDAO.php";
 
 if (isset($_POST['data']) && isset($_POST['id'])) {
     $data = $_POST['data'];
