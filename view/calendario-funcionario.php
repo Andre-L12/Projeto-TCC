@@ -23,13 +23,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery.mask@1.14.16/jquery.mask.min.js"></script> -->
 
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+
     <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
+
+    <style>
+        /* #eventModal {
+            display: none !important;
+        } */
+    </style>
 
 </head>
 
@@ -39,7 +46,7 @@
         require_once "navbar.php";
         ?>
 
-<div class="layout">
+    <div class="layout">
             <header>
                 <div>
                     <span class="header-icon">
@@ -68,13 +75,40 @@
                 </div>
 
                 <!-- Calendário-->
-                <div style="widht: 800px" >
+                <div>
                     <div id='calendar'></div>
                 </div>
             </main>
             <div class="overlay"></div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" id="eventModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel">Detalhes do Evento</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Título:</strong> <span id="event-title"></span></p>
+                        <p><strong>Data e Hora:</strong> <span id="event-start"></span></p>
+                        <p><strong>Instrutor:</strong> <span id="event-instrutor"></span></p>
+                        <p><strong>Status Detran:</strong> <span id="event-detran-status"></span></p>
+                        <p><strong>Aula Obrigatória:</strong> <span id="event-obrigatoria"></span></p>
+                        <p><strong>Status da Aula:</strong> <span id="event-status"></span></p>
+                        <p><strong>Veículo:</strong> <span id="event-veiculo"></span></p>
+                        <p><strong>Processo:</strong> <span id="event-processo"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Consultar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script>
 
@@ -91,17 +125,26 @@
             center: 'title',         // Título no centro
             right: 'dayGridMonth,timeGridWeek,timeGridDay' // Botões à direita
             },
-            events: [
-            // { 
-            //     title: 'Aula Prática Categoria B',
-            //     start: '2024-12-05',
-            //     extendedProps: {
-            //         instrutor: 'Adilson'
-            //     },
-            // },
-            // { title: 'Evento 2', start: '2024-12-07', end: '2024-12-10' },
-            ]
-            
+            events: [],
+            eventClick: function(info) {
+                // Obter informações do evento
+                const event = info.event;
+                const props = event.extendedProps;
+
+                // Atualizar o modal com as informações
+                document.getElementById("event-title").innerText = event.title;
+                document.getElementById("event-start").innerText = event.start.toISOString();
+                document.getElementById("event-instrutor").innerText = props.nome_instrutor;
+                document.getElementById("event-detran-status").innerText = props.status_detran;
+                document.getElementById("event-obrigatoria").innerText = props.obrigatoria ? "Sim" : "Não";
+                document.getElementById("event-status").innerText = props.status_aula;
+                document.getElementById("event-veiculo").innerText = props.id_veiculo;
+                document.getElementById("event-processo").innerText = props.id_processo;
+
+                // Exibir o modal
+                const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+                modal.show();
+            }               
         });        
 
         calendar.render();
@@ -161,7 +204,6 @@
                                 calendar.addEvent({
                                     title: "Aula Prática Categoria " + obj.categoria,
                                     start: obj.data + "T" + obj.hora,
-                                    // end: obj.data + "T" + obj.hora,
                                     extendedProps: {
                                         id_instrutor: obj.id_instrutor,
                                         nome_instrutor: obj.nome_instrutor,
