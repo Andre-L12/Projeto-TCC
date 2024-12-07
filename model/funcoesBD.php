@@ -174,9 +174,9 @@ function pesquisarVeiculoPorProcesso($id_processo)
     $conexao = conectarBD();
     $sql =
         "SELECT V.placa, V.sigla_categoria, V.adaptado, V.marca, V.modelo, V.modelo, V.ano
-    FROM Veiculo V
-    JOIN Curso C ON V.sigla_categoria = C.categoria
-    JOIN Processo P ON C.sigla = P.id_curso
+    FROM veiculo V
+    JOIN curso C ON V.sigla_categoria = C.categoria
+    JOIN processo P ON C.sigla = P.id_curso
     WHERE P.id_processo = '$id_processo';";
 
     $resultado = mysqli_query($conexao, $sql);
@@ -187,8 +187,8 @@ function pesquisarVeiculoPorCurso($id_curso){
     $conexao = conectarBD(); 
     $sql = 
     "SELECT V.placa, V.sigla_categoria, V.adaptado, V.marca, V.modelo, V.modelo, V.ano
-    FROM Veiculo V
-    JOIN Curso C ON V.sigla_categoria = C.categoria
+    FROM veiculo V
+    JOIN curso C ON V.sigla_categoria = C.categoria
     WHERE C.sigla = '$id_curso';";
 
     $resultado = mysqli_query($conexao, $sql );

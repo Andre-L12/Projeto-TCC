@@ -12,7 +12,7 @@ function cadastrarAluno($nome, $cpf, $email, $celular, $foto){
     $select1=mysqli_query($conect,$query1);  
     $qtd=mysqli_num_rows($select1);
     if($qtd == 0){
-        $query2="INSERT INTO `banco_cfc`.`aluno` (`nome`, `cpf`, `celular`, `email`, `foto`) VALUES ('$nome', '$cpf', '$celular', '$email', '$midia');";
+        $query2="INSERT INTO `BANCO_CFC`.`aluno` (`nome`, `cpf`, `celular`, `email`, `foto`) VALUES ('$nome', '$cpf', '$celular', '$email', '$midia');";
         $select2=mysqli_query($conect,$query2);
         $id = mysqli_insert_id($conect);  
         if($select2){
@@ -73,7 +73,7 @@ function excluirAluno ( $id ) {
 }
 function pesquisarAluno($pesq) {
     $conexao = conectarBD(); 
-    $sql = "SELECT * FROM Aluno WHERE nome LIKE '%$pesq%' ";
+    $sql = "SELECT * FROM aluno WHERE nome LIKE '%$pesq%' ";
     $res = mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
     return $res;
     

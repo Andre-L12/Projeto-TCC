@@ -24,7 +24,7 @@
     function pegarDescricaoCurso($sigla){
         $conexao = conectarBD();
 
-        $sql = "SELECT descricao FROM banco_cfc.curso WHERE sigla='$sigla'";
+        $sql = "SELECT descricao FROM BANCO_CFC.curso WHERE sigla='$sigla'";
 
         $res = mysqli_query($conexao, $sql) or die (mysqli_error($conexao)); 
         $registro = mysqli_fetch_assoc($res);

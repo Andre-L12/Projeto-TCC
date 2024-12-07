@@ -50,9 +50,9 @@
             i.sexo AS sexo_instrutor,
             i.dias_semana AS dias_disponiveis
         FROM 
-            Curso_Instrutor ci
+            curso_instrutor ci
         JOIN 
-            Instrutor i ON ci.id_instrutor = i.id_instrutor
+            instrutor i ON ci.id_instrutor = i.id_instrutor
         WHERE 
             ci.id_veiculo = '$placa'; 
         ";

@@ -8,13 +8,13 @@ function cadastrarAulaPratica($id_processo, $id_instrutor, $id_veiculo, $data, $
     $conect = conectarBD();
 
     // Verificar se já existe uma aula com os mesmos parâmetros
-    $query1 = "SELECT * FROM aulapratica WHERE id_processo='$id_processo' AND hora_aula='$hora' AND data_aula='$data';";
+    $query1 = "SELECT * FROM aulaPratica WHERE id_processo='$id_processo' AND hora_aula='$hora' AND data_aula='$data';";
     $select1 = mysqli_query($conect, $query1);
     $qtd = mysqli_num_rows($select1);
 
     if ($qtd == 0) {
         // Inserir a nova aula prática
-        $query2 = "INSERT INTO `banco_cfc`.`aulapratica` 
+        $query2 = "INSERT INTO `BANCO_CFC`.`aulaPratica` 
                    (`data_aula`, `hora_aula`, `status_detran`, `obrigatoria`, `status_aula`, `id_veiculo`, `id_instrutor`, `id_processo`) 
                    VALUES ('$data', '$hora', 0, '$obrigatoria', 'Marcada', '$id_veiculo', '$id_instrutor', '$id_processo');";
 
@@ -42,7 +42,7 @@ function alterarAulaPratica($id, $id_processo, $id_instrutor, $id_veiculo, $data
         $status_detran = 1;
     }
 
-    $sql = "UPDATE aulapratica SET "
+    $sql = "UPDATE aulaPratica SET "
         . "data_aula = '$data', "
         . "hora_aula = '$hora', "
         . "status_detran = '$status_detran', "
@@ -59,7 +59,7 @@ function alterarAulaPratica($id, $id_processo, $id_instrutor, $id_veiculo, $data
 }
 
 function excluirAulaPratica($id){
-    $sql = "DELETE FROM aulapratica WHERE id_aulaPratica = $id";
+    $sql = "DELETE FROM aulaPratica WHERE id_aulaPratica = $id";
 
     $conexao = conectarBD();  
     mysqli_query($conexao, $sql) or die ( mysqli_error($conexao) );
@@ -70,7 +70,7 @@ function pesquisarAula($pesq, $tipo)
 
     $conexao = conectarBD();
 
-    $sql = "SELECT * FROM aulapratica WHERE ";
+    $sql = "SELECT * FROM aulaPratica WHERE ";
     switch ($tipo) {
         case 0:
             $sql = "SELECT ap.*,
@@ -81,21 +81,21 @@ function pesquisarAula($pesq, $tipo)
                             v.modelo,
                             i.nome AS nome_instrutor
                     FROM 
-                            `BANCO_CFC`.`AulaPratica` ap
+                            `BANCO_CFC`.`aulaPratica` ap
                         INNER JOIN 
-                            `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                            `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
                         INNER JOIN 
-                            `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                            `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
                         INNER JOIN 
-                            `BANCO_CFC`.`Veiculo` v ON ap.id_veiculo = v.placa
+                            `BANCO_CFC`.`veiculo` v ON ap.id_veiculo = v.placa
                         INNER JOIN 
-                            `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor";
+                            `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor";
             break;
         case 1: // Por CPF aluno
             $sql = "SELECT ap.*
-                FROM `BANCO_CFC`.`AulaPratica` ap
-                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
-                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                FROM `BANCO_CFC`.`aulaPratica` ap
+                JOIN `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
                 WHERE a.cpf = '$pesq';";
             break;
         case 2: // Por cpf instrutor
@@ -110,15 +110,15 @@ function pesquisarAula($pesq, $tipo)
                             v.modelo,
                             i.nome AS nome_instrutor
                     FROM 
-                            `BANCO_CFC`.`AulaPratica` ap
+                            `BANCO_CFC`.`aulaPratica` ap
                         INNER JOIN 
-                            `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                            `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
                         INNER JOIN 
-                            `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                            `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
                         INNER JOIN 
-                            `BANCO_CFC`.`Veiculo` v ON ap.id_veiculo = v.placa
+                            `BANCO_CFC`.`veiculo` v ON ap.id_veiculo = v.placa
                         INNER JOIN 
-                            `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                            `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor
                     WHERE ap.id_processo = '$pesq' ";
             break;
         case 4: // Por placa
@@ -135,15 +135,15 @@ function pesquisarAula($pesq, $tipo)
                             v.marca,
                             v.modelo,
                             i.nome AS nome_instrutor
-                    FROM `BANCO_CFC`.`AulaPratica` ap
+                    FROM `BANCO_CFC`.`aulaPratica` ap
                     INNER JOIN 
-                            `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                            `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
                     INNER JOIN 
-                            `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                            `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
                     INNER JOIN 
-                            `BANCO_CFC`.`Veiculo` v ON ap.id_veiculo = v.placa
+                            `BANCO_CFC`.`veiculo` v ON ap.id_veiculo = v.placa
                     INNER JOIN 
-                            `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                            `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor
                     WHERE data_aula = '$pesq'";
             break;
         case 7: // Por ID
@@ -151,20 +151,20 @@ function pesquisarAula($pesq, $tipo)
                 break;
         case 8: // Por ID Aluno
                 $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
-                FROM `BANCO_CFC`.`AulaPratica` ap
-                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
-                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
-                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
-                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                FROM `BANCO_CFC`.`aulaPratica` ap
+                JOIN `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor
                 WHERE a.id_aluno = '$pesq';";
                 break;
         case 9: // Por ID Instrutor
             $sql = "SELECT ap.*, a.id_aluno, a.nome, c.categoria, i.nome AS nome_instrutor
-                FROM `BANCO_CFC`.`AulaPratica` ap
-                JOIN `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
-                JOIN `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
-                JOIN `BANCO_CFC`.`Curso` c ON p.id_curso = c.sigla
-                JOIN `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                FROM `BANCO_CFC`.`aulaPratica` ap
+                JOIN `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
+                JOIN `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
+                JOIN `BANCO_CFC`.`curso` c ON p.id_curso = c.sigla
+                JOIN `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor
                 WHERE ap.id_instrutor = '$pesq';";
                 break;
         case 10: // por nome de aluno
@@ -176,15 +176,15 @@ function pesquisarAula($pesq, $tipo)
                             v.modelo,
                             i.nome AS nome_instrutor
                         FROM 
-                            `BANCO_CFC`.`AulaPratica` ap
+                            `BANCO_CFC`.`aulaPratica` ap
                         INNER JOIN 
-                            `BANCO_CFC`.`Processo` p ON ap.id_processo = p.id_processo
+                            `BANCO_CFC`.`processo` p ON ap.id_processo = p.id_processo
                         INNER JOIN 
-                            `BANCO_CFC`.`Aluno` a ON p.id_aluno = a.id_aluno
+                            `BANCO_CFC`.`aluno` a ON p.id_aluno = a.id_aluno
                         INNER JOIN 
-                            `BANCO_CFC`.`Veiculo` v ON ap.id_veiculo = v.placa
+                            `BANCO_CFC`.`veiculo` v ON ap.id_veiculo = v.placa
                         INNER JOIN 
-                            `BANCO_CFC`.`Instrutor` i ON ap.id_instrutor = i.id_instrutor
+                            `BANCO_CFC`.`instrutor` i ON ap.id_instrutor = i.id_instrutor
                         WHERE 
                             a.nome LIKE '%$pesq%'
                 ";
@@ -198,15 +198,15 @@ function pesquisarAula($pesq, $tipo)
                             v.modelo,
                             i.nome AS nome_instrutor
                     FROM 
-                        AulaPratica ap
+                        aulaPratica ap
                     INNER JOIN 
-                        Instrutor i ON ap.id_instrutor = i.id_instrutor
+                        instrutor i ON ap.id_instrutor = i.id_instrutor
                     INNER JOIN 
-                        Processo p ON ap.id_processo = p.id_processo
+                        processo p ON ap.id_processo = p.id_processo
                     INNER JOIN 
-                        Aluno a ON p.id_aluno = a.id_aluno
+                        aluno a ON p.id_aluno = a.id_aluno
                     INNER JOIN 
-                        Veiculo v ON ap.id_veiculo = v.placa
+                        veiculo v ON ap.id_veiculo = v.placa
                     WHERE 
                         i.nome LIKE '%$pesq%' 
                     ORDER BY 
@@ -269,7 +269,7 @@ function pesquisarAulaPorInstrutorData($id_instrutor, $data)
 {
     $conexao = conectarBD();
 
-    $sql = "SELECT * FROM aulapratica WHERE id_instrutor = '$id_instrutor' AND data_aula = '$data'";
+    $sql = "SELECT * FROM aulaPratica WHERE id_instrutor = '$id_instrutor' AND data_aula = '$data'";
 
     $res = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 
@@ -291,15 +291,15 @@ function pesquisarAulaPorIdData($id, $data)
     v.modelo AS modelo_veiculo,
     i.nome AS nome_instrutor
 FROM 
-    AulaPratica ap
+    aulaPratica ap
 INNER JOIN 
-    Processo p ON ap.id_processo = p.id_processo
+    processo p ON ap.id_processo = p.id_processo
 INNER JOIN 
-    Aluno a ON p.id_aluno = a.id_aluno
+    aluno a ON p.id_aluno = a.id_aluno
 INNER JOIN 
-    Veiculo v ON ap.id_veiculo = v.placa
+    veiculo v ON ap.id_veiculo = v.placa
 INNER JOIN 
-    Instrutor i ON ap.id_instrutor = i.id_instrutor
+    instrutor i ON ap.id_instrutor = i.id_instrutor
 WHERE 
     a.id_aluno = '$id' -- Substitua pelo ID do aluno
     AND ap.data_aula = '$data'; -- Substitua pela data desejada";

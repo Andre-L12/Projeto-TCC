@@ -34,9 +34,9 @@
             SELECT 
                 c.descricao AS descricao_curso
             FROM 
-                Curso_Instrutor ci
+                curso_instrutor ci
             JOIN 
-                Curso c ON ci.id_curso = c.sigla
+                curso c ON ci.id_curso = c.sigla
             WHERE 
                 ci.id_instrutor = '$id';
         ";
@@ -67,9 +67,9 @@
                 v.modelo AS modelo_veiculo,
                 v.placa AS placa_veiculo
             FROM 
-                Curso_Instrutor ci
+                curso_instrutor ci
             JOIN 
-                Veiculo v ON ci.id_veiculo = v.placa
+                veiculo v ON ci.id_veiculo = v.placa
             WHERE 
                 ci.id_instrutor = '$id';
         ";

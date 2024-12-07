@@ -9,7 +9,7 @@ function iniciarProcesso($curso,$aluno,$data_inicio){
     $qtd = mysqli_num_rows($select1);
 
     if ($qtd == 0){
-        $query2="INSERT INTO `banco_cfc`.`processo` (`data_inicio`, `id_aluno`, `id_curso`) VALUES ('$data_inicio', '$aluno', '$curso');";
+        $query2="INSERT INTO `BANCO_CFC`.`processo` (`data_inicio`, `id_aluno`, `id_curso`) VALUES ('$data_inicio', '$aluno', '$curso');";
 
         $select2 = mysqli_query($conect,$query2);
         $id = mysqli_insert_id($conect);
@@ -80,8 +80,8 @@ function pesquisarProcessos($pesq, $tipo) {
         case 1: // Por CPF aluno
                 $sql = 
                 "SELECT p.*
-                FROM `Processo` p
-                JOIN `Aluno` a ON p.id_aluno = a.id_aluno
+                FROM `processo` p
+                JOIN `aluno` a ON p.id_aluno = a.id_aluno
                 WHERE a.cpf = '$pesq';";
                 break;
         case 2: // Por curso
