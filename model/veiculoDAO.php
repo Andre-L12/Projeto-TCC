@@ -42,6 +42,32 @@
             return false;
         }
     }
+    function pesquisarInstrutorVinculadoPorPlaca($placa){
+        $sql="SELECT 
+            i.id_instrutor,
+            i.nome AS nome_instrutor,
+            i.cpf AS cpf_instrutor,
+            i.sexo AS sexo_instrutor,
+            i.dias_semana AS dias_disponiveis
+        FROM 
+            Curso_Instrutor ci
+        JOIN 
+            Instrutor i ON ci.id_instrutor = i.id_instrutor
+        WHERE 
+            ci.id_veiculo = '$placa'; 
+        ";
+        $conexao = conectarBD();
+        $resultado = mysqli_query($conexao, $sql);
+    
+        $instrutor = "";
+        while ($registro = mysqli_fetch_assoc($resultado)) {
+            // Pegar os campos do REGISTRO
+            $nome_instrutor= $registro["nome_instrutor"];
+    
+            $instrutor = $instrutor . " $nome_instrutor";
+        }
+        return $instrutor;
+    }
     function alterarVeiculo ($sigla_categoria,$adaptado,$placa,$marca,$modelo,$ano) {
 
         $conexao = conectarBD();   

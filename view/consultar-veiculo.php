@@ -46,6 +46,15 @@
             else{
                 $x = "Sim";
             }
+            $resultado2=pesquisarInstrutorVinculadoPorPlaca($id);
+            if($resultado2 ==""){
+                $instrutor="Não há instrutor vinculado";
+            }
+            else{
+                $instrutor=$resultado2;
+            }
+            $resultado3=pesquisarAulaPorPlaca($id);
+            $aulas=mysqli_num_rows($resultado3);
                 
             //busca informações de aula
             // $resultado2=pesquisarAulaPorPlaca($id);
@@ -87,8 +96,8 @@
                         <p><strong>Adaptado:</strong> <?php echo $x; ?></p>
 
                         <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                        <p><strong>Quantidade de Aulas com o veículo:</strong> <?php //echo $aulas; ?></p>
-                        <p><strong>Instrutor Vinculado:</strong>#pegar no banco veiculo-instrutor<br>#tamofazendo</p>
+                        <p><strong>Quantidade de Aulas com o veículo:</strong> <?php echo $aulas; ?></p>
+                        <p><strong>Instrutor Vinculado:</strong><?php echo $instrutor; ?></p>
                     
                         
                         
