@@ -205,7 +205,7 @@
                             <?php echo $campo_statusDetran ?>
 
                             <div class="form-div-btn">
-                                <button type="submit" name="btnCadastrar" value="Cadastrar" class="form-btn" value="<?php echo $botao ?>" ><?php echo $botao ?></button>
+                                <button type="submit" name="btnCadastrar" class="form-btn" value="<?php echo $botao ?>" ><?php echo $botao ?></button>
                             </div>
 
                             <?php

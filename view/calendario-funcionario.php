@@ -147,15 +147,15 @@
                 const modal = new bootstrap.Modal(document.getElementById('eventModal'));
                 modal.show();
 
-                document.getElementById('editarBtn').addEventListener('click', function () {
-                    window.location.href = 'cadastrar-aula.php?id=' + props.id;
-                });
-                document.getElementById('consultarBtn').addEventListener('click', function () {
-                    window.location.href = 'consultar-aulaPratica.php?id=' + props.id;
-                });
-                document.getElementById('excluirBtn').addEventListener('click', function () {
-                    window.location.href = '../control/excluirAula.php?id=' + props.id;
-                });
+                // document.getElementById('editarBtn').addEventListener('click', function () {
+                //     window.location.href = 'cadastrar-aula.php?id=' + props.id;
+                // });
+                // document.getElementById('consultarBtn').addEventListener('click', function () {
+                //     window.location.href = 'consultar-aulaPratica.php?id=' + props.id;
+                // });
+                // document.getElementById('excluirBtn').addEventListener('click', function () {
+                //     window.location.href = '../control/excluirAula.php?id=' + props.id;
+                // });
 
             }               
         });        
