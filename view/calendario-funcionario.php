@@ -88,11 +88,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="eventModalLabel">Detalhes do Evento</h5>
+                        <h5 class="modal-title" id="eventModalLabel">Detalhes da aula</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p><strong>Título:</strong> <span id="event-title"></span></p>
+                        <p><strong>ID:</strong> <span id="event-id"></span></p>
                         <p><strong>Data e Hora:</strong> <span id="event-start"></span></p>
                         <p><strong>Instrutor:</strong> <span id="event-instrutor"></span></p>
                         <p><strong>Status Detran:</strong> <span id="event-detran-status"></span></p>
@@ -133,6 +134,7 @@
 
                 // Atualizar o modal com as informações
                 document.getElementById("event-title").innerText = event.title;
+                ocument.getElementById("event-id").innerText = props.id;
                 document.getElementById("event-start").innerText = event.start.toISOString();
                 document.getElementById("event-instrutor").innerText = props.nome_instrutor;
                 document.getElementById("event-detran-status").innerText = props.status_detran;
@@ -205,6 +207,7 @@
                                     title: "Aula Prática Categoria " + obj.categoria,
                                     start: obj.data + "T" + obj.hora,
                                     extendedProps: {
+                                        id_aula: obj.id,
                                         id_instrutor: obj.id_instrutor,
                                         nome_instrutor: obj.nome_instrutor,
                                         status_detran: obj.status_detran,

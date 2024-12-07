@@ -49,8 +49,8 @@
                         "id_veiculo" => $id_veiculo,
                         "id_instrutor" => $id_instrutor,
                         "id_processo" => $id_processo,
+                        
                         "categoria" => $categoria,
-
                         "nome_instrutor" => $nome_instrutor
                         );
 
