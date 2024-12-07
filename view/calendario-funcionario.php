@@ -103,9 +103,9 @@
                         <p><strong>Processo:</strong> <span id="event-processo"></span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Consultar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Excluir</button>
+                        <button type="button" class="btn btn-secondary" id="editarBtn">Editar</button>
+                        <button type="button" class="btn btn-secondary" id="consultarBtn">Consultar</button>
+                        <button type="button" class="btn btn-secondary" id="excluirBtn">Excluir</button>
                     </div>
                 </div>
             </div>
@@ -146,6 +146,17 @@
                 // Exibir o modal
                 const modal = new bootstrap.Modal(document.getElementById('eventModal'));
                 modal.show();
+
+                document.getElementById('editarBtn').addEventListener('click', function () {
+                    window.location.href = 'cadastrar-aula.php?id=' + props.id;
+                });
+                document.getElementById('consultarBtn').addEventListener('click', function () {
+                    window.location.href = 'consultar-aulaPratica.php?id=' + props.id;
+                });
+                document.getElementById('excluirBtn').addEventListener('click', function () {
+                    window.location.href = '../control/excluirAula.php?id=' + props.id;
+                });
+
             }               
         });        
 
@@ -248,6 +259,7 @@
                                     start: obj.data + "T" + obj.hora,
                                     // end: obj.data + "T" + obj.hora,
                                     extendedProps: {
+                                        id_aula: obj.id,
                                         id_instrutor: obj.id_instrutor,
                                         nome_instrutor: obj.nome_instrutor,
                                         status_detran: obj.status_detran,
