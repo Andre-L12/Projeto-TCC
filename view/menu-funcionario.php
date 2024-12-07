@@ -17,8 +17,8 @@ require_once "../control/validarUsuario.php";
     <link rel="stylesheet" href="./navbar-estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-
     <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <style>
@@ -100,7 +100,7 @@ require_once "../control/validarUsuario.php";
                     <img src="../img/AutoCFCicon.png" alt="Logo Auto CFC" style="width: 150px; height: auto; margin-bottom: 15px;">
                     <h1 style="font-family: 'Poppins', sans-serif; color: #216EC0; margin: 0;">Boas-vindas ao Sistema da Auto CFC!</h1>
                     <p style="font-family: 'Poppins', sans-serif; color: #555; text-align: center; max-width: 400px; margin-top: 10px;">
-                        Estamos felizes em ter você aqui. Utilize o menu ao lado para navegar pelo sistema. 
+                        Estamos felizes em ter você aqui. Utilize o menu ao lado para navegar pelo sistema.
                     </p>
                 </div>
                 <div>
@@ -126,6 +126,12 @@ require_once "../control/validarUsuario.php";
                             Excluir Aviso
                         </button>
                     </form>
+                </div>
+                <div id="resultado">
+
+                    <!-- O resultado do JSON vai ficar aqui -->
+                    <!-- A chamada do JSON está no final do arquivo -->
+
                 </div>
 
             </main>
@@ -172,7 +178,117 @@ require_once "../control/validarUsuario.php";
                 modal.style.display = "none";
             }
         }
+
+        $(document).ready(function() {
+
+
+            var pesq = "0"; // Pegar campo texto da pesquisa
+            var tipo = "5";
+            pesquisar(pesq, tipo);
+
+
+
+        });
+
+        function pesquisar(pesq, tipo) {
+            // Chamar o PHP do servidor com AJAX
+
+            $.ajax({
+                url: '../control/PesquisarAulaPratica_JSON.php',
+                type: 'POST',
+                data: { // Envio do texto de pesquisa
+                    pesq: pesq,
+                    tipo: tipo
+                },
+                dataType: 'json',
+                success: function(data) {
+                    // data == dados de retorno no formato JSON
+                    // O JSON foi criado com dois campos "erro" e "alunos", onde "produtos" é um array de dados
+
+                    // Montar o HTML/DIV com os dados de retorno
+                    var mostrar = '';
+
+                    if (data.erro == "") {
+                        // Se NÃO tiver erros
+
+                        if (data.aulas.length == 1) {
+                            mostrar += `
+                            <div style="padding: 10px; border: 1px solid #007bff; background-color: #e9f5ff; border-radius: 5px; text-align: center;">
+                                <h4 style="color: #007bff; font-weight: bold;">📋 Há 1 aula pendente para registro no Detran.</h4>
+                            </div><br>`;
+                        } else {
+                            mostrar += `
+                            <div style="padding: 10px; border: 1px solid #007bff; background-color: #e9f5ff; border-radius: 5px; text-align: center;">
+                                <h4 style="color: #007bff; font-weight: bold;">📋 Foram encontradas ${data.aulas.length} aulas pendentes para registro no Detran.</h4>
+                            </div><br>`;
+                        }
+
+                        // Percorre todos os produtos do array "produtos", 
+                        //    onde i é o índice e obj são os dados do produto
+
+                        mostrar += "<table class='table table-bordered responsive-table tabelazul'>   "
+                        mostrar += "<thead>     <tr>    <th>ID</th><th>ID Processo</th><th>Placa Veículo</th><th>Data</th><th>Hora</th><th>Status Detran</th><th>Alteração</th></tr><thead>";
+                        mostrar += "<tbody>   ";
+                        data.aulas.forEach(function(obj, i) {
+
+                            var obrigatoriaTXT;
+                            var statusDetranTXT;
+
+                            if (obj.obrigatoria == 0) {
+                                obrigatoriaTXT = "Não";
+                                statusDetranTXT = "-"
+                            } else {
+                                obrigatoriaTXT = "Sim";
+                                if (obj.status_detran == 0) {
+                                    statusDetranTXT = "<FONT color=red>Não atualizada no sistema</FONT>";
+                                } else {
+                                    statusDetranTXT = "Atualizada no sistema";
+                                }
+
+                            }
+
+
+                            mostrar += "<tr><td data-label='ID'><a href='consultar-aulaPratica.php?id=" + obj.id + "'>" + obj.id + "</a></td>";
+                            mostrar += "<td data-label='Aluno'>" + obj.nome_aluno + "</td>";
+                            mostrar += "<td data-label='Instrutor'>" + obj.nome_instrutor + "</td>";
+                            mostrar += "<td data-label='Data'>" + obj.data + "</td>";
+                            mostrar += "<td data-label='Hora'>" + obj.hora + "</td>";
+                            mostrar += "<td data-label='Status Detran'>" + statusDetranTXT + "</td>";
+                            mostrar += "<td data-label='Alteração'> </td>";
+                            
+                            // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
+                        });
+                        mostrar += "</tbody></table>";
+
+                    } else {
+                        // Sem registros no banco
+                        if(data.erro="null"){
+                            mostrar += `
+                            <div style="padding: 10px; border: 1px solid #007bff; background-color: #e9f5ff; border-radius: 5px; text-align: center;">
+                                <h4 style="color: #007bff; font-weight: bold;">✅ Não há aulas pendentes para registro no Detran.</h4>
+                            </div><br>`;
+                        }
+                        else{
+                            mostrar += "<h4 class='margin'>" + data.erro + "</h4>";
+                        }
+                        
+                    }
+
+                    // Colocar no DIV "resultado" acima
+                    $('#resultado').html(mostrar).show();
+                },
+                error: function() {
+                    // ERRO ao pesquisar
+                    var mostrar = "";
+                    mostrar += "<h4 class='margin'>Erro ao chamar o pesquisar do servidor.</h4>";
+                    $('#resultado').html(mostrar).show();
+                }
+            });
+
+        }
     </script>
+
+
 </body>
 
 </html>

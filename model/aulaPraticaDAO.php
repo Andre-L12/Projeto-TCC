@@ -125,7 +125,31 @@ function pesquisarAula($pesq, $tipo)
             $sql = $sql . "id_veiculo = '$pesq' ";
             break;
         case 5: // Por status no detran
-            $sql = $sql . "status_detran = '$pesq' ";
+            $sql = "SELECT  
+                ap.id_aulaPratica,
+                ap.data_aula,
+                ap.hora_aula,
+                ap.status_detran,
+                ap.obrigatoria,
+                ap.status_aula,
+                p.id_processo,
+                a.nome AS nome_aluno,
+                i.nome AS nome_instrutor,
+                v.marca AS marca_veiculo,
+                v.modelo AS modelo_veiculo,
+                v.placa AS placa_veiculo
+            FROM 
+                aulaPratica ap
+            JOIN 
+                processo p ON ap.id_processo = p.id_processo
+            JOIN 
+                aluno a ON p.id_aluno = a.id_aluno
+            JOIN 
+                instrutor i ON ap.id_instrutor = i.id_instrutor
+            JOIN 
+                veiculo v ON ap.id_veiculo = v.placa
+            WHERE 
+                ap.status_detran = '$pesq';" ;
             break;
         case 6: // Por data
             $sql = "SELECT ap.*,
