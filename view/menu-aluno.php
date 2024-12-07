@@ -16,8 +16,8 @@ if (isset($_SESSION["id_aluno"])) {
     $resultado2 = pesquisarInstrutorPorID($idInstrutor);
     $row2 = mysqli_fetch_assoc($resultado2);
     $instrutor = $row2['nome'];
-  } 
-  
+  }
+
   $aulasObrigatorias = 20;
   if ($qtd <= 20) {
     $restantes = (20 - $qtd);
@@ -56,10 +56,37 @@ if (isset($_SESSION["id_aluno"])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
   <link rel="icon" href="../img/AutoCFCicon.png" type="image/x-icon">
 
 </head>
 <style>
+  .botao-flutuante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF9233;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    z-index: 1000;
+  }
+
+  .botao-flutuante:hover {
+    background-color: #0056b3;
+  }
+
   /* Estilos do calendário encapsulados */
   .custom-calendar * {
     padding: 0;
@@ -341,7 +368,11 @@ if (isset($_SESSION["id_aluno"])) {
               </div>
             </div>
           </div>
-
+          <?php
+          if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
+            echo "<a href='menu-funcionario.php' class='botao-flutuante' title='Voltar'>Voltar</a>";
+          }
+          ?>
 
       </main>
       <div class="overlay"></div>
@@ -459,9 +490,9 @@ if (isset($_SESSION["id_aluno"])) {
       const modal = document.getElementById("lessonModal");
       const lessonDetails = document.getElementById("lessonDetails");
 
-      lessonDetails.textContent = `<p>` + date + ` - ` + id + `</p>`;
-      modal.style.display = "block"; // Exibe o modal
-      return;
+      // lessonDetails.textContent = date + ' id: ' + id;
+      // modal.style.display = "block"; // Exibe o modal
+      // return;
 
       $.ajax({
         url: '../control/miniCalendario_JSON.php', // URL para o script PHP
@@ -472,31 +503,42 @@ if (isset($_SESSION["id_aluno"])) {
         }, // Dados enviados para o servidor
         dataType: 'json', // Especifica que o retorno será JSON
         success: function(data) {
-          if (data.erro) {
-            lessonDetails.textContent = `<p>` + data.erro + `</p>`;
+          if (data.erro != "") {
+            lessonDetails.innerHTML = `<p>` + data.erro + `</p>`;
           } else {
-            data.aula.forEach(function(obj, i) {
-              lessonDetails.textContent = `
-                    <p><strong>ID Aula:</strong>` + obj.id_aula + `</p>
-                    <p><strong>Data:</strong> ` + obj.data + `</p>
-                    <p><strong>Hora:</strong> ` + obj.hora + `</p>
-                    <p><strong>Instrutor:</strong>` + obj.instrutor + `</p>
-                    <p><strong>Placa:</strong> ` + obj.placa + `</p>
-                    <p><strong>Marca:</strong> ` + obj.marca + `</p>
-                    <p><strong>Modelo:</strong> ` + obj.modelo + `</p>
-                    <p><strong>ID Processo:</strong> ` + obj.processo + `</p>
-                    <p><strong>Obrigatória:</strong> ` + obj.obrigatoria + `</p>`;
-            });
+            let content = ""; // Variável para acumular o conteúdo HTML
+            data.aula.forEach(function(obj) {
+              // Formatar a data no formato DD/MM/YYYY
+              let formattedDate = new Date(obj.data);
+              let formattedDateStr = formattedDate.toLocaleDateString('pt-BR');
 
+              // Formatar a hora no formato HH:MM
+              let formattedTime = obj.hora.split(':'); // Divide a hora para pegar apenas a parte da hora e minutos
+              let formattedTimeStr = `${formattedTime[0]}:${formattedTime[1]}`;
+
+              content += `
+                        <p><strong>ID Aula:</strong> ${obj.id_aula}</p>
+                        <p><strong>Data:</strong> ${formattedDateStr}</p>
+                        <p><strong>Hora:</strong> ${formattedTimeStr}</p>
+                        <p><strong>Instrutor:</strong> ${obj.instrutor}</p>
+                        <p><strong>Placa:</strong> ${obj.placa}</p>
+                        <p><strong>Marca:</strong> ${obj.marca}</p>
+                        <p><strong>Modelo:</strong> ${obj.modelo}</p>
+                        <p><strong>ID Processo:</strong> ${obj.processo}</p>
+                        <p><strong>Obrigatória:</strong> ${obj.obrigatoria}</p>`;
+            });
+            lessonDetails.innerHTML = content; // Define o conteúdo HTML
           }
 
           modal.style.display = "block"; // Exibe o modal
         },
         error: function() {
-          lessonDetails.textContent = "<p>Erro ao carregar os dados. Tente novamente mais tarde.</p>";
+          lessonDetails.innerHTML = "<p>Erro ao carregar os dados. Tente novamente mais tarde.</p>";
           modal.style.display = "block"; // Exibe o modal mesmo em caso de erro
         }
-      })
+      });
+
+
     }
   </script>
 </body>

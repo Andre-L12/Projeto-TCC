@@ -288,13 +288,10 @@ function pesquisarAulaPorIdData($id, $data)
 {
     $conexao = conectarBD();
 
-    $sql = "SELECT 
+    $sql = "SELECT ap.*,
     a.nome AS nome_aluno,
     a.cpf AS cpf_aluno,
     p.data_inicio AS data_inicio_processo,
-    ap.data_aula AS data_aula,
-    ap.hora_aula AS hora_aula,
-    ap.status_aula AS status_aula,
     v.placa AS placa_veiculo,
     v.marca AS marca_veiculo,
     v.modelo AS modelo_veiculo,
