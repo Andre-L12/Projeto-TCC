@@ -80,6 +80,8 @@
 
                 $descricao_curso = $row_curso['descricao'];
 
+                $botao_statusDetran = "<button type='button' id='btnStatusDetran' name='btnStatusDetran' value='Excluir' class='form-btn' style='background-color: #FF9233; border-color:#216EC0;'>Mudar Status Detran</button>";
+
 
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
@@ -116,10 +118,11 @@
                         <!--<div >-->
                             <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Dados de Aula Prática</h3>
                             <p><strong>Aluno:</strong><a href='consultar-aluno.php?id=<?php echo $id_aluno?>'> <?php echo $nome_aluno; ?></a></p>
-                            <p><strong>Instrutor:</strong> <?php echo $nome_instrutor; ?></p>
+                            <p><strong>Instrutor:</strong><a href='consultar-instrutor.php?id=<?php echo $id_instrutor?>'> <?php echo $nome_instrutor; ?></a></p>
                             <p><strong>Curso:</strong> <?php echo $descricao_curso; ?></p>
                             <p><strong>Data:</strong> <?php echo $dataConvertida; ?></p>
                             <p><strong>Hora:</strong> <?php echo substr($hora, 0, 5); ?></p>
+                            <p><strong>Veículo:</strong> <a href='consultar-veiculo.php?id=<?php echo $id_veiculo?>'> <?php echo $id_veiculo; ?></a></p>
                             <p><strong>Obrigatória:</strong> <?php echo $obrigatoria == 1 ? "Sim" : "Não"; ?></p>
                             <p><strong>Status Detran:</strong> <?php echo $obrigatoria == 1 ? ($status_detran == 1 ? "Atualizada no sistema" : "<FONT color=red>Não atualizada no sistema</FONT>") : "-"; ?></p>
                             <p><strong>Status da aula:</strong> <?php echo $status_aula; ?></p>
@@ -130,7 +133,8 @@
                     
                     <div class="col-sm-2" style="display:flex;flex-direction:column;align-content:flex-start; width: 250px" ><br>
                         <button type="button" id="btnAlterar" name="btnAlterar" value="Alterar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Alterar</button>
-                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Excluir</button>
+                        <button type="button" id="btnExcluir" name="btnExcluir" value="Excluir" class="form-btn" style="background-color: #216EC0; border-color:#216EC0; margin-bottom: 15px;">Excluir</button>
+                        <?php echo $obrigatoria == 1 ? $botao_statusDetran : "";?>
                     </div>
                   
                 </div>
@@ -155,6 +159,28 @@
             if (confirmacao) {
                 window.location.href = '../control/excluirAula.php?id=' + id; 
             }
+            
+        });
+        document.getElementById('btnStatusDetran').addEventListener('click', function() {
+            var id = "<?php echo $id; ?>";
+            var status_detran = "<?php echo $status_detran; ?>";
+
+            // CONFIRMAR ANTES DE ALTERAR STATUS DETRAN
+            var confirmacao = "";
+            if (status_detran == 1){
+                confirmacao = confirm("O Status Detran atual é 'Atualizada no Sistema'. <br> Deseja alterar para 'Não atualizada no sistema'?");
+                if (confirmacao) {
+                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 0; 
+                }
+
+            } else {
+                confirmacao = confirm("O Status Detran atual é 'Não atualizada no Sistema'. Deseja alterar para 'Atualizada no sistema'?");
+                if (confirmacao) {
+                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 1; 
+                }
+            }
+            
+            
             
         });
     </script>
