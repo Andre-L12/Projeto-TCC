@@ -100,7 +100,7 @@ require_once "../control/validarUsuario.php";
                     <img src="../img/AutoCFCicon.png" alt="Logo Auto CFC" style="width: 150px; height: auto; margin-bottom: 15px;">
                     <h1 style="font-family: 'Poppins', sans-serif; color: #216EC0; margin: 0;">Boas-vindas ao Sistema da Auto CFC!</h1>
                     <p style="font-family: 'Poppins', sans-serif; color: #555; text-align: center; max-width: 400px; margin-top: 10px;">
-                        Estamos felizes em ter você aqui. Utilize o menu ao lado para navegar pelo sistema. Caso precise de ajuda, clique em "Adicionar Aviso" para registrar sua solicitação.
+                        Estamos felizes em ter você aqui. Utilize o menu ao lado para navegar pelo sistema. 
                     </p>
                 </div>
                 <div>
