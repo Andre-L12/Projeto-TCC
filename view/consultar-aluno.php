@@ -32,6 +32,9 @@
             require_once "../model/AlunoDAO.php";
             require_once "../model/aulaPraticaDAO.php";
             require_once "../model/processoDAO.php";
+            require_once "../model/cursoDAO.php";
+            require_once "../control/funçoesUteis.php";
+
             if(isset($_GET["id"])){
             $id = $_GET["id"];
             $resultado = pesquisarAlunoPorID($id);
@@ -49,7 +52,7 @@
              $instrutor = "Nenhuma aula marcada.";
              if ($aulas > 0) {
                require_once "../model/instrutorDAO.php";
-               $idInstrutor = $row['id_instrutor'];
+               $idInstrutor = $row2['id_instrutor'];
            
                $resultado2 = pesquisarInstrutorPorID($idInstrutor);
                $row2 = mysqli_fetch_assoc($resultado2);
@@ -59,9 +62,24 @@
              
 
             //buscando processos
-            $resultado3 = pesquisarProcessoPorIDAluno($id);
-            $qtd_processos = mysqli_num_rows($resultado3);
-            $processos = comboBoxProcessoAluno($cpf);
+            $resultado_processo = pesquisarProcessoPorIDAluno($id);
+            $qtd_processos = mysqli_num_rows($resultado_processo);
+            $cursos = [];
+            if($qtd_processos > 0){
+                while ($registro = mysqli_fetch_assoc($resultado_processo)){
+                    $id_curso = $registro["id_curso"];
+                    $descricao_curso = mysqli_fetch_array(pesquisarCursoPorSigla($id_curso))["descricao"];
+                    $cursos[] = [$descricao_curso, $registro["id_processo"], $registro["data_inicio"]];
+                }
+            }
+
+            while ($registro = mysqli_fetch_assoc($resultado)) {
+                // Pegar os campos do REGISTRO
+                $id = $registro["id_instrutor"];
+                $nome = $registro["nome"];
+        
+                $options = $options . "<OPTION value='$id'>$nome</OPTION>";
+            }
             
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
@@ -106,16 +124,34 @@
                         <!--<div >-->
                             <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Processos</h3>
                             <p><strong>Quantidade de Processos:</strong> <?php echo $qtd_processos; ?></p>
-                            <p><?php echo $processos; ?></p>
                         <!--</div>-->
                         <!--<div >-->
-                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
-                            <p><strong>Quantidade de Aulas:</strong>
+                            <?php 
+                                foreach ($cursos as $curso) {
+                                    echo "<h3 style=\"border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;\">$curso[0]</h3>";
+                                    echo "<p><strong>Data Início: </strong>" . converterDataParaPadraoBR($curso[2]) . "</p>";
+
+                                    $resultado_aulas = pesquisarAulaPorProcesso($curso[1]);
+                                    $qtd_aulas = mysqli_num_rows($resultado_aulas);
+
+                                    if ($qtd_aulas == 1) {
+                                        echo "<p><strong>Andamento: </strong>$qtd_aulas aula realizada de 20.</p>";
+                                    } else {
+                                        echo "<p><strong>Andamento: </strong>$qtd_aulas aulas realizadas de 20.</p>";
+                                    }
+
+                                    
+                                    
+                                }
+                            ?>
+                            <!-- <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;"></h3> -->
+                            <!-- <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h2> -->
+                            <!-- <p><strong>Quantidade de Aulas:</strong>
                                 <?php echo $aulas; ?>
                             </p>
-                            <p><strong>Instrutor:</strong><?php echo $instrutor; ?></p>
+                            <p><strong>Instrutor: </strong><?php echo $instrutor; ?></p>
                             <p><strong>Aulas Obrigatórias:</strong> <?php echo $aulasObrigatorias=20;?></p>
-                            <br>
+                            <br> -->
                        <!-- </div>-->
 
                     </div>

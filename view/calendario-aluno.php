@@ -43,7 +43,7 @@
 <body>
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <?php
-        require_once "navbar.php";
+        require_once "navbar-aluno.php";
         ?>
 
     <div class="layout">
@@ -63,14 +63,6 @@
                 </div>
 
                 <div class="campo-pesquisa">
-                    <form method="POST">
-                        <select name="tipoPesq" id="tipoPesq" class="form-input" style="width: 100px">
-                            <option value="aluno">Aluno</option>
-                            <option value="instrutor">Instrutor</option>
-                        </select>
-                        <select name="opcoesPesq" id="opcoesPesq" class="form-input"></select>
-                        <input type="button" id="btnPesq" name="btnPesq" value="Pesquisar" class="form-btn" style="background-color: #216EC0; border-color:#216EC0 ;">
-                    </form>
                     <div id="div-erro-pesq"></div>
                 </div>
 
@@ -103,9 +95,9 @@
                         <p><strong>Processo:</strong> <span id="event-processo"></span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="editarBtn" data-bs-dismiss="modal">Editar</button>
+                        <!-- <button type="button" class="btn btn-secondary" id="editarBtn" data-bs-dismiss="modal">Editar</button>
                         <button type="button" class="btn btn-secondary" id="consultarBtn" data-bs-dismiss="modal">Consultar</button>
-                        <button type="button" class="btn btn-secondary" id="excluirBtn" data-bs-dismiss="modal">Excluir</button>
+                        <button type="button" class="btn btn-secondary" id="excluirBtn" data-bs-dismiss="modal">Excluir</button> -->
                     </div>
                 </div>
             </div>
@@ -153,15 +145,15 @@
                 const modal = new bootstrap.Modal(document.getElementById('eventModal'));
                 modal.show();
 
-                document.getElementById('editarBtn').addEventListener('click', function () {
-                    window.location.href = 'cadastrar-aula.php?id=' + props.id_aula;
-                });
-                document.getElementById('consultarBtn').addEventListener('click', function () {
-                    window.location.href = 'consultar-aulaPratica.php?id=' + props.id_aula;
-                });
-                document.getElementById('excluirBtn').addEventListener('click', function () {
-                    window.location.href = '../control/excluirAula.php?id=' + props.id_aula;
-                });
+                // document.getElementById('editarBtn').addEventListener('click', function () {
+                //     window.location.href = 'cadastrar-aula.php?id=' + props.id_aula;
+                // });
+                // document.getElementById('consultarBtn').addEventListener('click', function () {
+                //     window.location.href = 'consultar-aulaPratica.php?id=' + props.id_aula;
+                // });
+                // document.getElementById('excluirBtn').addEventListener('click', function () {
+                //     window.location.href = '../control/excluirAula.php?id=' + props.id_aula;
+                // });
 
             }               
         });        
@@ -170,38 +162,15 @@
         });
 
         $(document).ready(function() {
-
-            function verificarTipoPesq() {
-                var tipoPesq = $('#tipoPesq').val();
-
-                $('#div-erro-pesq').empty();
-
-                $('#opcoesPesq').empty();
-
-                if (tipoPesq !== "") {
-                    pesquisarOpcoes(tipoPesq);
-                }
-            }
-
-            function limparErro(){
-                $('#div-erro-pesq').empty();
-            }
-
-            verificarTipoPesq();
-            $('#tipoPesq').on('change', verificarTipoPesq);
-            $('#opcoesPesq').on('change', limparErro);
             
-            $('#btnPesq').on('click', function() {
-                // Obter os valores de #tipoPesq e de #opcoesPesq
-                var tipoPesq = $('#tipoPesq').val();
-                var idPessoa = $('#opcoesPesq').val();
+            var tipoPesq = "aluno";
+            var idPessoa = <?php echo $_SESSION["id_aluno"] ?>;
 
-                // Remove fontes antigas para evitar duplicação
-                calendar.removeAllEvents();
+            // Remove fontes antigas para evitar duplicação
+            calendar.removeAllEvents();
 
-                // Chamar a função com os valores obtidos
-                pesquisarAulas(tipoPesq, idPessoa);
-            });
+            // Chamar a função com os valores obtidos
+            pesquisarAulas(tipoPesq, idPessoa);
         });
 
         function pesquisarAulas(tipoPesq, idPessoa){
@@ -249,106 +218,7 @@
                     }
                 });
 
-            } else {
-                $.ajax({
-                    url: '../control/pesquisarAulaPratica_JSON.php',
-                    type: 'POST',
-                    data: {
-                        tipoPesq: tipoPesq,
-                        idPessoa: idPessoa
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-
-                        // Verifica se não há erro e se há dados válidos
-                        if (data.erro === "" && Array.isArray(data.aulas)) {
-                            data.aulas.forEach(function (obj) {
-                                calendar.addEvent({
-                                    title: "Aula Prática Categoria " + obj.categoria,
-                                    start: obj.data + "T" + obj.hora,
-                                    // end: obj.data + "T" + obj.hora,
-                                    extendedProps: {
-                                        id_aula: obj.id,
-                                        id_instrutor: obj.id_instrutor,
-                                        nome_instrutor: obj.nome_instrutor,
-                                        status_detran: obj.status_detran,
-                                        obrigatoria: obj.obrigatoria,
-                                        status_aula: obj.status_aula,
-                                        id_veiculo: obj.id_veiculo,
-                                        id_processo: obj.id_processo
-                                    }
-                                });
-                            });
-
-                        } else {
-                            // console.error(data.erro || "Nenhuma aula encontrada.");
-                            $('#div-erro-pesq').html("Nenhuma aula encontrada.").show();
-                        }
-                    },
-                    error: function () {
-                        console.error("Erro ao chamar o pesquisar do servidor.");
-                    }
-                });
-            }
-        }
-
-        function pesquisarOpcoes(tipoPesq){
-            var pesq_todos = 1;
-            if (tipoPesq == "aluno"){
-                $.ajax({
-                url: '../control/PesquisarAluno_JSON.php',
-                type: 'POST',
-                data: { pesq_todos : pesq_todos },
-                dataType: 'json',
-                success: function(data) {
-                    var mostrar = "";
-
-                    if ( data.erro == "" )  {
-                        data.alunos.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.id_aluno + "'>" + obj.nome + " - " +  obj.cpf + "</OPTION>";
-                        });
-                        
-                        $('#opcoesPesq').html(mostrar).show();
-
-                    } else {
-                        var mostrar = data.erro;
-                        $('#div-erro-pesq').html(mostrar).show();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    mostrar = "Erro ao chamar o pesquisar do servidor";
-                    $('#div-erro-pesq').html(mostrar).show();
-                }
-                });
-            } else {
-                $.ajax({
-                url: '../control/PesquisarInstrutor_JSON.php',
-                type: 'POST',
-                data: { pesq_todos : pesq_todos },
-                dataType: 'json',
-                success: function(data) {
-                    var mostrar = "";
-
-                    if ( data.erro == "" )  {
-                        data.instrutores.forEach(function(obj,i) {
-                            mostrar += "<OPTION value='" + obj.matricula + "'>" + obj.nome + "</OPTION>";
-                        });
-                        
-                        $('#opcoesPesq').html(mostrar).show();
-
-
-                    } else {
-                        var mostrar = data.erro;
-                        $('#div-erro-pesq').html(mostrar).show();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    mostrar = "Erro ao chamar o pesquisar do servidor";
-                    $('#div-erro-pesq').html(mostrar).show();
-                }
-                });
-            }
-            
+            } 
         }
         
     </script>
