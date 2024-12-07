@@ -103,9 +103,9 @@
                         <p><strong>Processo:</strong> <span id="event-processo"></span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="editarBtn">Editar</button>
-                        <button type="button" class="btn btn-secondary" id="consultarBtn">Consultar</button>
-                        <button type="button" class="btn btn-secondary" id="excluirBtn">Excluir</button>
+                        <button type="button" class="btn btn-secondary" id="editarBtn" data-bs-dismiss="modal">Editar</button>
+                        <button type="button" class="btn btn-secondary" id="consultarBtn" data-bs-dismiss="modal">Consultar</button>
+                        <button type="button" class="btn btn-secondary" id="excluirBtn" data-bs-dismiss="modal">Excluir</button>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
 
                 // Atualizar o modal com as informações
                 document.getElementById("event-title").innerText = event.title;
-                ocument.getElementById("event-id").innerText = props.id;
+                document.getElementById("event-id").innerText = props.id_aula;
                 document.getElementById("event-start").innerText = event.start.toISOString();
                 document.getElementById("event-instrutor").innerText = props.nome_instrutor;
                 document.getElementById("event-detran-status").innerText = props.status_detran;
@@ -147,15 +147,15 @@
                 const modal = new bootstrap.Modal(document.getElementById('eventModal'));
                 modal.show();
 
-                // document.getElementById('editarBtn').addEventListener('click', function () {
-                //     window.location.href = 'cadastrar-aula.php?id=' + props.id;
-                // });
-                // document.getElementById('consultarBtn').addEventListener('click', function () {
-                //     window.location.href = 'consultar-aulaPratica.php?id=' + props.id;
-                // });
-                // document.getElementById('excluirBtn').addEventListener('click', function () {
-                //     window.location.href = '../control/excluirAula.php?id=' + props.id;
-                // });
+                document.getElementById('editarBtn').addEventListener('click', function () {
+                    window.location.href = 'cadastrar-aula.php?id=' + props.id_aula;
+                });
+                document.getElementById('consultarBtn').addEventListener('click', function () {
+                    window.location.href = 'consultar-aulaPratica.php?id=' + props.id_aula;
+                });
+                document.getElementById('excluirBtn').addEventListener('click', function () {
+                    window.location.href = '../control/excluirAula.php?id=' + props.id_aula;
+                });
 
             }               
         });        
@@ -213,7 +213,9 @@
 
                         // Verifica se não há erro e se há dados válidos
                         if (data.erro === "" && Array.isArray(data.aulas)) {
+                            
                             data.aulas.forEach(function (obj) {
+                                // console.log("ID aula: " + obj.id);
                                 calendar.addEvent({
                                     title: "Aula Prática Categoria " + obj.categoria,
                                     start: obj.data + "T" + obj.hora,
@@ -227,6 +229,7 @@
                                         id_veiculo: obj.id_veiculo,
                                         id_processo: obj.id_processo
                                     }
+                                    
                                 });
                             });
 
@@ -300,7 +303,6 @@
                         });
                         
                         $('#opcoesPesq').html(mostrar).show();
-
 
                     } else {
                         var mostrar = data.erro;
