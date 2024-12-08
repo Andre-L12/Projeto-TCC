@@ -58,6 +58,15 @@ function alterarAulaPratica($id, $id_processo, $id_instrutor, $id_veiculo, $data
 
 }
 
+function alterarStatusAula($id, $status){
+    $conexao = conectarBD();
+    
+    $sql = "UPDATE `BANCO_CFC`.`aulaPratica` SET `status_detran` = '$status' WHERE (`id_aulaPratica` = '$id')";
+    mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
+
+    return $id;
+}
+
 function excluirAulaPratica($id){
     $sql = "DELETE FROM aulaPratica WHERE id_aulaPratica = $id";
 

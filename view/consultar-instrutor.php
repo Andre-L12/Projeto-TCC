@@ -99,7 +99,7 @@
                         <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h3>
                         <p><strong>Quantidade de Aulas:</strong> <?php  echo $aulas; ?></p>
                         <p><strong>Cursos:</strong> <?php echo $cursos; ?></p>
-                        <p><strong>veiculos:</strong> <?php echo $veiculos; ?></p>
+                        <p><strong>Veículos:</strong> <?php echo $veiculos; ?></p>
                         
                     </div>
 
