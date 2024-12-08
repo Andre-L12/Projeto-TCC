@@ -101,7 +101,7 @@
                 <span class="header-icon">
                     <i class="bi bi-cone-striped"></i>
                 </span>
-                <span class="header-title">AULAS PRÁTICAS</span>
+                <span class="header-title"><a href="pesquisar-aulaPratica.php" style="color:inherit"> AULA PRÁTICA </a></span>
             </div>
         </header>
             <main class="content">

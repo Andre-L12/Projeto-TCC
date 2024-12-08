@@ -145,7 +145,7 @@ require_once "../control/validarUsuario.php";
                         <label for="avisoTexto">Título:</label>
                         <input type="text" id="tituloAviso" name="tituloAviso" required>
                         <label for="avisoTexto">Aviso:</label>
-                        <input type="text" id="avisoTexto" name="avisoTexto" required style="height: 100px;">
+                        <textarea id="avisoTexto" name="avisoTexto" required style="height: 100px; width: 100%; padding: 5px; box-sizing: border-box;"></textarea>
                         <button type="submit" class="form-btn" style="background-color: #216EC0; border-color:#216EC0;">Salvar Aviso</button>
                     </form>
                 </div>
@@ -227,7 +227,7 @@ require_once "../control/validarUsuario.php";
                         //    onde i é o índice e obj são os dados do produto
 
                         mostrar += "<table class='table table-bordered responsive-table tabelazul'>   "
-                        mostrar += "<thead>     <tr>    <th>ID</th><th>ID Processo</th><th>Placa Veículo</th><th>Data</th><th>Hora</th><th>Status Detran</th><th>Alteração</th></tr><thead>";
+                        mostrar += "<thead>     <tr>    <th>ID</th><th>Aluno</th><th>Instrutor</th><th>Data</th><th>Hora</th><th>Status Detran</th><th>Alteração</th></tr><thead>";
                         mostrar += "<tbody>   ";
                         data.aulas.forEach(function(obj, i) {
 
@@ -254,24 +254,23 @@ require_once "../control/validarUsuario.php";
                             mostrar += "<td data-label='Data'>" + obj.data + "</td>";
                             mostrar += "<td data-label='Hora'>" + obj.hora + "</td>";
                             mostrar += "<td data-label='Status Detran'>" + statusDetranTXT + "</td>";
-                            mostrar += "<td data-label='Alteração'> </td>";
-                            
+                            mostrar += "<td data-label='Alteração' style='background-color:#ff9233;color:white'>Alterar</td>";
+
                             // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                         });
                         mostrar += "</tbody></table>";
 
                     } else {
                         // Sem registros no banco
-                        if(data.erro="null"){
+                        if (data.erro = "null") {
                             mostrar += `
                             <div style="padding: 10px; border: 1px solid #007bff; background-color: #e9f5ff; border-radius: 5px; text-align: center;">
                                 <h4 style="color: #007bff; font-weight: bold;">✅ Não há aulas pendentes para registro no Detran.</h4>
                             </div><br>`;
-                        }
-                        else{
+                        } else {
                             mostrar += "<h4 class='margin'>" + data.erro + "</h4>";
                         }
-                        
+
                     }
 
                     // Colocar no DIV "resultado" acima

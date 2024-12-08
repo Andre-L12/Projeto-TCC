@@ -101,7 +101,7 @@
                 <span class="header-icon">
                     <i class="bi bi-person-fill"></i>
                 </span>
-                <span class="header-title">ALUNOS > <?php echo $nome; ?></span>
+                <span class="header-title"><a href="pesquisar-aluno.php" style="color:inherit"> ALUNOS </a>> <?php echo $nome; ?></span>
             </div>
         </header>
             <main class="content">
