@@ -28,7 +28,7 @@
 
             if ($acao == "Cadastrar"){
                 // Iniciar Processo
-                $id .= iniciarProcesso($cursoSelecionado,$aluno,$data_inicio) . "<br>";
+                $id = $id . iniciarProcesso($cursoSelecionado,$aluno,$data_inicio) . "<br>";
                 
             } else {
                 // Alterar dados de Processo

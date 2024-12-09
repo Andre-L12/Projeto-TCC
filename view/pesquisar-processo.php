@@ -39,7 +39,7 @@
         <header>
             <div>
                 <span class="header-icon">
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-clipboard2-fill"></i>
                 </span>
                 <span class="header-title">PROCESSOS</span>
             </div>
