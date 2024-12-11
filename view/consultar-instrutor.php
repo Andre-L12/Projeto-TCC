@@ -55,7 +55,7 @@
                 if($resultado4!=""){
                     $veiculos=$resultado4;
                 }else{
-                    $veiculos="Nenhum veiculo vinculado";
+                    $veiculos="Nenhum veículo vinculado";
                 }
                 //busca aula
                 // $resultado2=pesquisarAulaPorInstrutor($cpf);

@@ -170,13 +170,13 @@
             if (status_detran == 1){
                 confirmacao = confirm("O Status Detran atual é 'Atualizada no Sistema'. Deseja alterar para 'Não atualizada no sistema'?");
                 if (confirmacao) {
-                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 0; 
+                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 0 + '&link=../view/consultar-aulaPratica.php'; 
                 }
 
             } else {
                 confirmacao = confirm("O Status Detran atual é 'Não atualizada no Sistema'. Deseja alterar para 'Atualizada no sistema'?");
                 if (confirmacao) {
-                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 1; 
+                    window.location.href = '../control/alterarStatusDetran.php?id=' + id +'&status=' + 1 + '&link=../view/consultar-aulaPratica.php'; 
                 }
             }
             

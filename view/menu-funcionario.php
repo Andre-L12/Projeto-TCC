@@ -96,6 +96,8 @@ require_once "../control/validarUsuario.php";
                 </div>
             </header>
             <main class="content">
+                <!-- <div style="background-color: #FF9233; border-color:#216EC0"><a href="../control/alterarStatusDetran.php?id=1&status=0&link=../view/menu-funcionario.php">Alterar</a></div> -->
+
                 <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: #f7f7f7; padding: 20px; border-radius: 15px; margin: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <img src="../img/AutoCFCicon.png" alt="Logo Auto CFC" style="width: 150px; height: auto; margin-bottom: 15px;">
                     <h1 style="font-family: 'Poppins', sans-serif; color: #216EC0; margin: 0;">Boas-vindas ao Sistema da Auto CFC!</h1>
@@ -254,7 +256,8 @@ require_once "../control/validarUsuario.php";
                             mostrar += "<td data-label='Data'>" + obj.data + "</td>";
                             mostrar += "<td data-label='Hora'>" + obj.hora + "</td>";
                             mostrar += "<td data-label='Status Detran'>" + statusDetranTXT + "</td>";
-                            mostrar += "<td data-label='Alteração' style='background-color:#ff9233;color:white'>Alterar</td>";
+                            // mostrar += "<td data-label='Alteração' style='background-color:#ff9233;color:white'>Alterar</td>";
+                            mostrar += "<td data-label='Alterar Status Detran'><div style='color: #ff9233'><a href='../control/alterarStatusDetran.php?id=" + obj.id + "&status=1&link=../view/menu-funcionario.php' style='color:inherit'>Alterar</a></div></td>";
 
                             // mostrar += "<A href='../controlador/carrinho.php?id=" + obj.id +"'><IMG src='../imagens/add_cart.png' height='30' width='30'></A>";
                         });

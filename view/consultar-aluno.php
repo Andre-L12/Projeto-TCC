@@ -139,8 +139,6 @@
                                     } else {
                                         echo "<p><strong>Andamento: </strong>$qtd_aulas aulas realizadas de 20.</p>";
                                     }
-
-                                    
                                     
                                 }
                             ?>

@@ -31,6 +31,9 @@
             require_once "../model/AlunoDAO.php";
             require_once "../model/aulaPraticaDAO.php";
             require_once "../model/processoDAO.php";
+            require_once "../model/cursoDAO.php";
+            require_once "../control/funçoesUteis.php";
+
             if(isset($_SESSION["id_aluno"])){
             $id = $_SESSION["id_aluno"];
             $resultado = pesquisarAlunoPorID($id);
@@ -48,6 +51,14 @@
             $aulasObrigatorias=20;
             $qtd_processos = mysqli_num_rows($resultado3);
             $processos = comboBoxProcessoAluno($cpf);
+            $cursos = [];
+            if($qtd_processos > 0){
+                while ($registro = mysqli_fetch_assoc($resultado3)){
+                    $id_curso = $registro["id_curso"];
+                    $descricao_curso = mysqli_fetch_array(pesquisarCursoPorSigla($id_curso))["descricao"];
+                    $cursos[] = [$descricao_curso, $registro["id_processo"], $registro["data_inicio"]];
+                }
+            }
             
             //buscando a quantidade de aulas| depois podemos filtrar quantas são obrigatorias e quatas não são
 
@@ -118,17 +129,24 @@
                             <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Processos</h2>
                             <p><strong>Quantidade de Processos:</strong> <?php echo $qtd_processos; ?></p>
                             <p><?php echo $processos; ?></p>
+                            <?php 
+                                foreach ($cursos as $curso) {
+                                    echo "<h3 style=\"border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;\">$curso[0]</h3>";
+                                    echo "<p><strong>Data Início: </strong>" . converterDataParaPadraoBR($curso[2]) . "</p>";
+
+                                    $resultado_aulas = pesquisarAulaPorProcesso($curso[1]);
+                                    $qtd_aulas = mysqli_num_rows($resultado_aulas);
+
+                                    if ($qtd_aulas == 1) {
+                                        echo "<p><strong>Andamento: </strong>$qtd_aulas aula realizada de 20.</p>";
+                                    } else {
+                                        echo "<p><strong>Andamento: </strong>$qtd_aulas aulas realizadas de 20.</p>";
+                                    }
+                                    
+                                }
+                            ?>
                         <!--</div>-->
                         <!--<div >-->
-                            <h2 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #007bff;">Aulas</h2>
-                            <p><strong>Quantidade de Aulas:</strong>
-                                <?php echo $aulas; ?>
-                            </p>
-                            <p><strong>Instrutor:</strong>
-                            <?php echo $instrutor; ?></p>
-                            <p><strong>Aulas Obrigatórias:</strong>
-                            <?php echo $aulasObrigatorias; ?> </p>
-                            <br>
                        <!-- </div>-->
 
                     </div> 

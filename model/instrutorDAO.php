@@ -82,7 +82,7 @@
     
         $veiculos = [];
         while ($registro = mysqli_fetch_assoc($select)) {
-            $veiculos[] = "Modelo: {$registro["marca_veiculo"]} {$registro["modelo_veiculo"]} - Placa: {$registro["placa_veiculo"]}";
+            $veiculos[] = "{$registro["marca_veiculo"]} {$registro["modelo_veiculo"]} - {$registro["placa_veiculo"]}";
         }
     
         return implode("<br>", $veiculos); // Retorna uma string formatada com quebras de linha
