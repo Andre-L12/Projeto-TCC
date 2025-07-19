@@ -50,7 +50,7 @@ Apresentamos a proposta ao proprietário da autoescola, que demonstrou interesse
 
 ## 🧰 Tecnologias Utilizadas
 
-### 🔤 Linguagens:
+###  Linguagens:
 - **PHP**: Regras de negócio e conexão com o banco de dados
 - **HTML**: Estruturação das páginas
 - **CSS**: Estilização dos elementos visuais
