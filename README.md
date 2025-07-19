@@ -40,17 +40,17 @@ Desenvolver um **sistema web para autoescola** que agilize processos administrat
 
 ## 📌 Contexto Real
 
-A ideia surgiu a partir da **experiência pessoal** de alguns integrantes do grupo como alunos em uma autoescola. Ao observar o funcionamento administrativo da empresa, identificamos **problemas que poderiam ser resolvidos com um sistema digital**.
+A ideia surgiu a partir da **experiência pessoal** de alguns integrantes do grupo como alunos em uma autoescola. Ao observar o funcionamento administrativo da empresa, identificamos **problemas que poderiam ser resolvidos com um sistema web**.
 
 Apresentamos a proposta ao proprietário da autoescola, que demonstrou interesse e **nos autorizou a realizar um levantamento de requisitos diretamente com os funcionários**. Assim, mergulhamos no dia a dia da empresa para entender o que precisava ser automatizado ou melhorado.
 
-> O sistema foi projetado e desenvolvido em menos de um ano, e ainda passa por melhorias.
+> O sistema foi projetado e desenvolvido em menos de um ano.
 
 ---
 
 ## 🧰 Tecnologias Utilizadas
 
-###  Linguagens:
+###  Linguagens de programação:
 - **PHP**: Regras de negócio e conexão com o banco de dados
 - **HTML**: Estruturação das páginas
 - **CSS**: Estilização dos elementos visuais
@@ -123,7 +123,7 @@ Final project of the Technical Course in Internet Informatics — IFES Campus Co
 Develop a **web system for driving schools** to streamline administrative processes such as:
 
 - Scheduling and rescheduling classes
-- Recording payments
+- Management of notices and information about the driving school.
 - Managing students, vehicles, instructors, and classes
 
 ---
@@ -140,7 +140,7 @@ We presented the idea to the owner of the driving school, who showed interest an
 
 ## 🧰 Technologies Used
 
-### 🔤 Languages:
+### 🔧 Programming Languages:
 - **PHP**: Business logic and database connection
 - **HTML**: Page structure
 - **CSS**: Styling
