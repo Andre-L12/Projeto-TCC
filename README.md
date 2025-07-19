@@ -33,7 +33,7 @@ Trabalho final do curso Técnico em Informática para Internet — IFES Campus C
 Desenvolver um **sistema web para autoescola** que agilize processos administrativos como:
 
 - Marcações e desmarcações de aulas
-- Registro de pagamentos
+- Gestão de avisos e informações sobre a autoescola.
 - Gestão de alunos, veículos, aulas e instrutores
 
 ---
