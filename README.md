@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="AutoCFC.svg" alt="Logo do Projeto" width="150"/>
+  <img src="AutoCFC.svg" alt="Logo do Projeto" width="200"/>
 </p>
 
 # 🚗 Sistema para Autoescola — Projeto de TCC 💻
@@ -113,7 +113,7 @@ Agradecemos à autoescola parceira pela abertura e colaboração no projeto. Est
 ## 🌍 English Version
 
 <p align="center">
-  <img src="AutoCFC.svg" alt="Project Logo" width="300"/>
+  <img src="AutoCFC.svg" alt="Project Logo" width="200"/>
 </p>
 
 # 🚗 Driving School System — Final Project 💻
