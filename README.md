@@ -9,9 +9,14 @@ Trabalho final do curso Técnico em Informática para Internet — IFES Campus C
 
 ---
 
-[![PHP](https://img.shields.io/badge/Feito%20com-PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)]()
-[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge)]()
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)]()
+[![PHP](https://img.shields.io/badge/PHP-88.3%25-777BB4?style=for-the-badge&logo=php&logoColor=white)]()
+[![CSS](https://img.shields.io/badge/CSS-5.3%25-264de4?style=for-the-badge&logo=css3&logoColor=white)]()
+[![HTML](https://img.shields.io/badge/HTML-2.4%25-e34c26?style=for-the-badge&logo=html5&logoColor=white)]()
+[![JavaScript](https://img.shields.io/badge/JavaScript-1.7%25-f7df1e?style=for-the-badge&logo=javascript&logoColor=black)]()
+[![Hack](https://img.shields.io/badge/Hack-2.3%25-878787?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)]()
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)]()
+
 
 ---
 
