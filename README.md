@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="AutoCFC.svg" alt="Logo do Projeto" width="300"/>
+  <img src="AutoCFC.svg" alt="Logo do Projeto" width="150"/>
 </p>
 
 # 🚗 Sistema para Autoescola — Projeto de TCC 💻
