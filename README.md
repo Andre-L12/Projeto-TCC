@@ -85,11 +85,11 @@ Mesmo com limitações técnicas e de tempo, conseguimos entregar um sistema fun
 
 ---
 
-## 📂 Documentação (Notion)
+## 📂 Documentação
 
 Acesse nossa documentação completa com fluxos, requisitos, prints e outros detalhes:
 
-👉 [Notion — Projeto TCC](https://www.notion.so/n-andre/PROJETO-TCC-1589eadf89af4310b4e836a607c3e728?pvs=4)
+👉 [Docs — Final Project]((https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link))
 
 ---
 
@@ -175,11 +175,11 @@ Despite time and knowledge limitations, we delivered a functional system with **
 
 ---
 
-## 📂 Documentation (Notion)
+## 📂 Documentation
 
 Full project documentation with flows, requirements, screenshots and more:
 
-👉 [Notion — Final Project](https://www.notion.so/n-andre/PROJETO-TCC-1589eadf89af4310b4e836a607c3e728?pvs=4)
+👉 [Docs — Final Project]((https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link))
 
 ---
 
