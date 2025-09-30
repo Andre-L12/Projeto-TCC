@@ -89,7 +89,7 @@ Mesmo com limitações técnicas e de tempo, conseguimos entregar um sistema fun
 
 Acesse nossa documentação completa com fluxos, requisitos, prints e outros detalhes:
 
-👉 [Docs — Final Project]((https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link))
+👉 [Docs — Final Project](https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link)
 
 ---
 
@@ -179,7 +179,8 @@ Despite time and knowledge limitations, we delivered a functional system with **
 
 Full project documentation with flows, requirements, screenshots and more:
 
-👉 [Docs — Final Project]((https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link))
+👉 [Docs — Final Project](https://drive.google.com/drive/folders/1o4nhOOSnUNZlkjMMdv4aOcyAYYSH6nIF?usp=drive_link)
+
 
 ---
 
